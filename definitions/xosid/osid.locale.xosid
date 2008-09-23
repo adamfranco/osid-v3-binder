@@ -1,0 +1,1939 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+
+<!--
+    XOSID for osid.locale generated at 7/14/2008 11:29:46 PM 
+
+    Copyright (C) 2002-2008 Massachusetts Institute of Technology. All
+    Rights Reserved.
+
+    This Work is being provided by the copyright holder(s) subject to the
+    following license. By obtaining, using and/or copying this Work, you
+    agree that you have read, understand, and will comply with the following
+    terms and conditions.
+
+    This Work and the information contained herein is provided on an "AS IS"
+    basis. The Massachusetts Institute of Technology, the Open Knowledge
+    Initiative, and THE AUTHORS DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED,
+    INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+    A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+    OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS
+    IN THE WORK.
+
+    Permission to use, copy and distribute unmodified versions of this Work,
+    for any purpose, without fee or royalty is hereby granted, provided that
+    you include the above copyright notice and the terms of this license on
+    ALL copies of the Work or portions thereof. 
+
+    You may nodify or create Derivatives of this Work only for your internal
+    purposes. You shall not distribute or transfer any such Derivative of
+    this Work to any location or to any third party. For the purposes of
+    this license, Derivative shall mean any derivative of the Work as
+    defined in the United States Copyright Act of 1976, such as a
+    translation or modification.
+
+    The export of software employing encryption technology may require a
+    specific license from the United States Government. It is the
+    responsibility of any person or organization comtemplating export to
+    obtain such a license before exporting this Work.
+-->
+
+<xosid:osid xmlns:xosid="urn:inet:osid.org:schemas/osid/3" xosid:name="osid.locale" xosid:version="3.0.0">
+
+    <xosid:title>
+        Locale Open Service Interface Definitions
+    </xosid:title>
+
+    <xosid:copyright>
+        Copyright <xosid:copyrightSymbol/>2002-2008 Massachusetts
+        Institute of Technology. All Rights Reserved.
+    </xosid:copyright>
+
+    <xosid:license>
+        This Work is being provided by the copyright holder(s) subject
+        to the following license. By obtaining, using and/or copying
+        this Work, you agree that you have read, understand, and will
+        comply with the following terms and conditions.
+
+        <xosid:pbreak/>
+
+        This Work and the information contained herein is provided on
+        an "AS IS" basis. The Massachusetts Institute of Technology,
+        the Open Knowledge Initiative, and THE AUTHORS DISCLAIM ALL
+        WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+        WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+        AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+        HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+        WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+        FROM, OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER
+        DEALINGS IN THE WORK.
+
+        <xosid:pbreak/>
+
+        Permission to use, copy and distribute unmodified versions of
+        this Work, for any purpose, without fee or royalty is hereby
+        granted, provided that you include the above copyright notice
+        and the terms of this license on ALL copies of the Work or
+        portions thereof. 
+
+        <xosid:pbreak/>
+
+        You may nodify or create Derivatives of this Work only for your
+        internal purposes. You shall not distribute or transfer any
+        such Derivative of this Work to any location or to any third
+        party. For the purposes of this license, Derivative shall mean
+        any derivative of the Work as defined in the United States
+        Copyright Act of 1976, such as a translation or modification.
+
+        <xosid:pbreak/>
+
+        The export of software employing encryption technology may
+        require a specific license from the United States Government.
+        It is the responsibility of any person or organization
+        comtemplating export to obtain such a license before exporting
+        this Work.
+    </xosid:license>
+
+    <xosid:description>
+        The Locale OSID provides the service of localizing applications
+        defining interfaces for string translation, measurement unit
+        conversion and currency conversion.
+    </xosid:description>
+
+
+    <xosid:interface xosid:name="osid.locale.LocaleProfile"> 
+        <xosid:implements xosid:interface="osid.OsidProfile"/>
+        <xosid:description>
+            The locale profile describes the interoperability of locale
+            services.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="supportsVisibleFederation">
+            <xosid:description>
+                Tests if visible federation is supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if visible
+                    federation is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsLocale">
+            <xosid:description>
+                Tests if locale is supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if locale is
+                    supported, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsUnitConversion">
+            <xosid:description>
+                Tests if unit conversion is supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if unit conversion
+                    is supported, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsCurrencyConversion">
+            <xosid:description>
+                Tests if currency conversion is supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if currency
+                    conversion is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsCalendarConversion">
+            <xosid:description>
+                Tests if calendar conversion is supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if calendar
+                    conversion is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsLocaleType">
+            <xosid:description>
+                Tests if a given locale type is supported.
+            </xosid:description>
+            <xosid:parameter xosid:name="localeType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of locale
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given locale
+                    type is supported, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsLocaleConversionTypes">
+            <xosid:description>
+                Tests if a given locale translation is supported.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source locale
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="targetType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the target locale
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given source
+                    and target translation is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getLocaleTypesForSource">
+            <xosid:description>
+                Gets the list of target locale types for a given source
+                language type.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source language
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    the list of supported types for the given source
+                    type
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getLocaleTypes">
+            <xosid:description>
+                Gets all the locale types supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    the list of supported locale types
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsUnitType">
+            <xosid:description>
+                Tests if a given unit type is supported.
+            </xosid:description>
+            <xosid:parameter xosid:name="unitType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of unit
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given unit
+                    type is supported, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsUnitTypesForConversion">
+            <xosid:description>
+                Tests if a given measure conversion is supported.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source measure
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="targetType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the target measure
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given source
+                    and target conversion is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getUnitTargetTypesForConversion">
+            <xosid:description>
+                Gets the list of target measure types for a given
+                source measure type.
+            </xosid:description>
+            <xosid:parameter xosid:name="unitType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source measure
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    the list of supported measure types
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getUnitTypes">
+            <xosid:description>
+                Gets all the unit types supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    the list of supported unit types
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsCurrencyType">
+            <xosid:description>
+                Tests if the given currency type is supported.
+            </xosid:description>
+            <xosid:parameter xosid:name="currencyType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source currency
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given
+                    currency type is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsCurrencyTypesForConversion">
+            <xosid:description>
+                Tests if a given currency conversion is supported.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source currency
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="targetType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the target currency
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given source
+                    and target conversion is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getCurrencyTargetTypesForConversion">
+            <xosid:description>
+                Gets the list of target currency types for a given
+                source measure type.
+            </xosid:description>
+            <xosid:parameter xosid:name="currencyType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source currency
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    the list of supported currency types
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getCurrencyTypes">
+            <xosid:description>
+                Gets the list of target measure types for a given
+                source measure type.
+            </xosid:description>
+            <xosid:parameter xosid:name="currencyType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source currency
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    the list of supported currency types
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsCalendarType">
+            <xosid:description>
+                Tests if the given calendar type is supported.
+            </xosid:description>
+            <xosid:parameter xosid:name="calendarType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source calendar
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given
+                    calendar type is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsCalendarTypesForConversion">
+            <xosid:description>
+                Tests if a given calendar conversion is supported.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source calendar
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="targetType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the target calendar
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given source
+                    and target conversion is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getCalendarTargetTypesForConversion">
+            <xosid:description>
+                Gets the list of target calerndar types for a given
+                source measure type.
+            </xosid:description>
+            <xosid:parameter xosid:name="calendarType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source calendar
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    the list of supported calendar types
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getCalendarTypes">
+            <xosid:description>
+                Gets the list of target measure types for a given
+                source measure type.
+            </xosid:description>
+            <xosid:parameter xosid:name="currencyType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source measure
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    the list of supported currency types
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.locale.LocaleManager"> 
+        <xosid:implements xosid:interface="osid.OsidManager"/>
+        <xosid:implements xosid:interface="osid.locale.LocaleProfile"/>
+        <xosid:description>
+            The locale manager provides access to locale sessions and
+            provides interoperability tests for various aspects of this
+            service. The sessions included in this manager are:
+
+            <xosid:pbreak/>
+
+            <xosid:outline>
+                 <xosid:element>
+                    <xosid:token>LocaleSession:</xosid:token> a session
+                    translate strings
+                </xosid:element>
+                 <xosid:element>
+                    <xosid:token>LocaleAdminSession: a</xosid:token>
+                    session to update the string translations for a locale
+                </xosid:element>
+                 <xosid:element>
+                    <xosid:token>UnitConversionSession:</xosid:token> a
+                    session to convert measurement
+                   units <xosid:token></xosid:token>
+                </xosid:element>
+                 <xosid:element>
+                    <xosid:token>CurrencyConversionSession:
+                    </xosid:token>a session to convert currency
+                </xosid:element>
+                 <xosid:element>
+
+                                        <xosid:token>CalendarConversionSession:</xosid:token>
+                    a session to convert dates across calendars
+                </xosid:element>
+            </xosid:outline>
+             
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getLocaleSession">
+            <xosid:description>
+                Gets an <xosid:token>OsidSession</xosid:token>
+                associated with the <xosid:token>Locale</xosid:token>
+                service.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.LocaleSession"/>
+                <xosid:description>
+                    a <xosid:token>LocaleSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsLocale()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsLocale()</xosid:token> is
+                    <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getLocaleSessionForLocales">
+            <xosid:description>
+                Gets an <xosid:token>OsidSession</xosid:token>
+                associated with the
+                <xosid:token>LocaleLookup</xosid:token> service and the
+                given locale types.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source language
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="targetType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the target language
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.LocaleSession"/>
+                <xosid:description>
+                    a <xosid:token>LocaleSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>sourceType</xosid:token> or
+                    <xosid:token>targetType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsLocale()</xosid:token> or
+                   
+                    <xosid:token>supportsVisibleFederation()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>supportsLocaleTypesForConversion(sourceType,
+                    targetType)</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsLocale()</xosid:token> and
+                   
+                    <xosid:token>supportsVisibleFederation()</xosid:token>
+                    are <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getLocaleAdminSession">
+            <xosid:description>
+                Gets a locale administration service for updating a
+                locale dictionary.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.LocaleAdminSession"/>
+                <xosid:description>
+                    a <xosid:token>LocaleAdminSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsLocaleAdmin()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsLocaleAdmin()</xosid:token>
+                    is <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getLocaleAdminSessionForLocales">
+            <xosid:description>
+                Gets a locale administration service for updating a
+                locale dictionary using the given locale types.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source language
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="targetType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the target language
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.LocaleAdminSession"/>
+                <xosid:description>
+                    a <xosid:token>LocaleAdminSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>sourceType</xosid:token> or
+                    <xosid:token>targetType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsLocaleAdmin()</xosid:token> or
+                   
+                    <xosid:token>supportsVisibleFederation()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>supportsLocaleTypesForConversion(sourceType,
+                    targetType)</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsLocaleAdmin()</xosid:token>
+                    and
+                    <xosid:token>supportsVisibleFederation()</xosid:token>
+                    are <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getUnitConversionSession">
+            <xosid:description>
+                Gets a unit conversion session.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.UnitConversionSession"/>
+                <xosid:description>
+                    a <xosid:token>UnitConversionSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>supportsUnitConversion()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                   
+                    <xosid:token>supportsUnitConversion()</xosid:token>
+                    is <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getCurrencyConversionSession">
+            <xosid:description>
+                Gets a currency conversion session.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.CurrencyConversionSession"/>
+                <xosid:description>
+                    a
+                    <xosid:token>CurrencyConversionSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>supportsCurrencyConversion()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                   
+                    <xosid:token>supportsCurrencyConversion()</xosid:token>
+                    is <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getCalendarConversionSession">
+            <xosid:description>
+                Gets a calendar conversion session.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.CalendarConversionSession"/>
+                <xosid:description>
+                    a
+                    <xosid:token>CalendarConversionSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>supportsCalendarConversion()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                   
+                    <xosid:token>supportsCalendarConversion()</xosid:token>
+                    is <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.locale.LocaleProxyManager"> 
+        <xosid:implements xosid:interface="osid.OsidProxyManager"/>
+        <xosid:implements xosid:interface="osid.locale.LocaleProfile"/>
+        <xosid:description>
+            The locale manager provides access to locale sessions and
+            provides interoperability tests for various aspects of this
+            service. Methods in this manager support the passing of an
+            Authentication object for the purposes of proxy
+            authentication. The sessions included in this manager are:
+
+            <xosid:pbreak/>
+
+            <xosid:outline>
+                 <xosid:element>
+                    <xosid:token>LocaleSession:</xosid:token> a session
+                    translate strings
+                </xosid:element>
+                 <xosid:element>
+                    <xosid:token>LocaleAdminSession: a</xosid:token>
+                    session to update the string translations for a locale
+                </xosid:element>
+                 <xosid:element>
+                    <xosid:token>UnitConversionSession:</xosid:token> a
+                    session to convert measurement
+                   units <xosid:token></xosid:token>
+                </xosid:element>
+                 <xosid:element>
+                    <xosid:token>CurrencyConversionSession:
+                    </xosid:token>a session to convert currency
+                </xosid:element>
+                 <xosid:element>
+
+                                        <xosid:token>CalendarConversionSession:</xosid:token>
+                    a session to convert dates across calendars
+                </xosid:element>
+            </xosid:outline>
+             
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getLocaleSession">
+            <xosid:description>
+                Gets an <xosid:token>OsidSession</xosid:token>
+                associated with the <xosid:token>Locale</xosid:token>
+                service.
+            </xosid:description>
+            <xosid:parameter xosid:name="authentication">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    proxy authentication
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.LocaleSession"/>
+                <xosid:description>
+                    a <xosid:token>LocaleSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsLocale()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    the <xosid:token>authentication</xosid:token>
+                    service is not supported
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsLocale()</xosid:token> is
+                    <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getLocaleSessionForLocales">
+            <xosid:description>
+                Gets an <xosid:token>OsidSession</xosid:token>
+                associated with the
+                <xosid:token>LocaleLookup</xosid:token> service and the
+                given locale types.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source language
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="targetType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the target language
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="authentication">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    proxy authentication
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.LocaleSession"/>
+                <xosid:description>
+                    a <xosid:token>LocaleSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authentication,
+                    sourceType</xosid:token> or
+                    <xosid:token>targetType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsLocale()</xosid:token> or
+                   
+                    <xosid:token>supportsVisibleFederation()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>supportsLocaleTypesForConversion(sourceType,
+                    targetType)</xosid:token> is <xosid:token>false or
+                    the authentication service isnot
+                    supported</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsLocale()</xosid:token> and
+                   
+                    <xosid:token>supportsVisibleFederation()</xosid:token>
+                    are <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getLocaleAdminSession">
+            <xosid:description>
+                Gets a locale administration service for updating a
+                locale dictionary.
+            </xosid:description>
+            <xosid:parameter xosid:name="authentication">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    proxy authentication
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.LocaleAdminSession"/>
+                <xosid:description>
+                    a <xosid:token>LocaleAdminSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsLocaleAdmin()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    the <xosid:token>authentication</xosid:token>
+                    service is not supported
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsLocaleAdmin()</xosid:token>
+                    is <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getLocaleAdminSessionForLocales">
+            <xosid:description>
+                Gets a locale administration service for updating a
+                locale dictionary using the given locale types.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the source language
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="targetType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of the target language
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="authentication">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    proxy authentication
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.LocaleAdminSession"/>
+                <xosid:description>
+                    a <xosid:token>LocaleAdminSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authentication,
+                    sourceType</xosid:token> or
+                    <xosid:token>targetType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsLocaleAdmin()</xosid:token> or
+                   
+                    <xosid:token>supportsVisibleFederation()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>supportsLocaleTypesForConversion(sourceType,
+                    targetType)</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsLocaleAdmin()</xosid:token>
+                    and
+                    <xosid:token>supportsVisibleFederation()</xosid:token>
+                    are <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getUnitConversionSession">
+            <xosid:description>
+                Gets a unit conversion session.
+            </xosid:description>
+            <xosid:parameter xosid:name="authentication">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    proxy authentication
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.UnitConversionSession"/>
+                <xosid:description>
+                    a <xosid:token>UnitConversionSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>supportsUnitConversion()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    the <xosid:token>authentication</xosid:token>
+                    service is not supported
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                   
+                    <xosid:token>supportsUnitConversion()</xosid:token>
+                    is <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getCurrencyConversionSession">
+            <xosid:description>
+                Gets a currency conversion session.
+            </xosid:description>
+            <xosid:parameter xosid:name="authentication">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    proxy authentication
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.CurrencyConversionSession"/>
+                <xosid:description>
+                    a
+                    <xosid:token>CurrencyConversionSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>supportsCurrencyConversion()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    the <xosid:token>authentication</xosid:token>
+                    service is not supported
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                   
+                    <xosid:token>supportsCurrencyConversion()</xosid:token>
+                    is <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getCalendarConversionSession">
+            <xosid:description>
+                Gets a calendar conversion session.
+            </xosid:description>
+            <xosid:parameter xosid:name="authentication">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    proxy authentication
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.locale.CalendarConversionSession"/>
+                <xosid:description>
+                    a
+                    <xosid:token>CalendarConversionSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>supportsCalendarConversion()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    the <xosid:token>authentication</xosid:token>
+                    service is not supported
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                   
+                    <xosid:token>supportsCalendarConversion()</xosid:token>
+                    is <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.locale.LocaleSession"> 
+        <xosid:implements xosid:interface="osid.OsidSession"/>
+        <xosid:description>
+            This session defines methods to translate text between a
+            source and target locale.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getSourceLocale">
+            <xosid:description>
+                Gets the source <xosid:token>Locale</xosid:token> used
+                in this session.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the source <xosid:token>Locale</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getTargetLocale">
+            <xosid:description>
+                Gets the target <xosid:token>Locale</xosid:token> used
+                in this session.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the target <xosid:token>Locale</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="canTranslate">
+            <xosid:description>
+                Tests if this user can perform locale translations. A
+                return of true does not guarantee successful
+                authorization. A return of false indicates that it is
+                known all methods in this session will result in a
+                <xosid:token>PERMISSION_DENIED.</xosid:token> This is
+                intended as a hint to an application that may opt not
+                to offer lookup operations.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>false</xosid:token> if translation
+                    methods are not authorized,
+                    <xosid:token>true</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="translateText">
+            <xosid:description>
+                Translates the given string into the current locale.
+            </xosid:description>
+            <xosid:parameter xosid:name="text">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the <xosid:token>string</xosid:token> to translate
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="defaultText">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the default <xosid:token>string</xosid:token> if no
+                    translation available.
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the translated <xosid:token>string </xosid:token>or
+                    the given default value if no translation
+                    available.
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>null </xosid:token>argument provided
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.locale.LocaleAdminSession"> 
+        <xosid:implements xosid:interface="osid.OsidSession"/>
+        <xosid:description>
+            This session defines methods to translate and format text
+            between a source and target locale.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getSourceLocale">
+            <xosid:description>
+                Gets the source <xosid:token>Locale</xosid:token> used
+                in this session.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the source <xosid:token>Locale</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getTargetLocale">
+            <xosid:description>
+                Gets the target <xosid:token>Locale</xosid:token> used
+                in this session.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the target <xosid:token>Locale</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="canUpdateLocale">
+            <xosid:description>
+                Tests if this user can update localization strings. A
+                return of true does not guarantee successful
+                authorization. A return of false indicates that it is
+                known all methods in this session will result in a
+                <xosid:token>PERMISSION_DENIED.</xosid:token> This is
+                intended as a hint to an application that may opt not
+                to offer notification operations.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>false</xosid:token> if changing locale
+                    is not authorized, <xosid:token>true</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="addTranslation">
+            <xosid:description>
+                Adds or updates a string translation.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceText">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the source <xosid:token>string</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="targetText">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the translated string
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="removeTranslation">
+            <xosid:description>
+                Removes a translation.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceText">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the source <xosid:token>string</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.locale.UnitConversionSession"> 
+        <xosid:implements xosid:interface="osid.OsidSession"/>
+        <xosid:description>
+            This session defines methods to convert units across
+            measurement systems.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="canConvertUnits">
+            <xosid:description>
+                Tests if this user can perform unit conversions. A
+                return of true does not guarantee successful
+                authorization. A return of false indicates that it is
+                known all methods in this session will result in a
+                <xosid:token>PERMISSION_DENIED.</xosid:token> This is
+                intended as a hint to an application that may opt not
+                to offer lookup operations.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>false</xosid:token> if conversion
+                    methods are not authorized,
+                    <xosid:token>true</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="convertUnits">
+            <xosid:description>
+                Convert units.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceUnit">
+                <xosid:primitiveType xosid:type="float"/>
+                <xosid:description>
+                    the measure to convert
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="sourceUnitType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of measure specified
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="targetUnitType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of converted measure
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="float"/>
+                <xosid:description>
+                    resulting measure
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>null </xosid:token>argument provided
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>LocaleManager.supportsUnitTypesForConversion(measureType,
+                    conversionType)</xosid:token> is false
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.locale.CurrencyConversionSession"> 
+        <xosid:implements xosid:interface="osid.OsidSession"/>
+        <xosid:description>
+            This session defines methods to convert currency.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="canConvertCurrency">
+            <xosid:description>
+                Tests if this user can perform currency conversions. A
+                return of true does not guarantee successful
+                authorization. A return of false indicates that it is
+                known all methods in this session will result in a
+                <xosid:token>PERMISSION_DENIED.</xosid:token> This is
+                intended as a hint to an application that may opt not
+                to offer lookup operations.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>false</xosid:token> if conversion
+                    methods are not authorized,
+                    <xosid:token>true</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="convertCurrency">
+            <xosid:description>
+                Converts currency.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceCurrencyUnits">
+                <xosid:primitiveType xosid:type="cardinal"/>
+                <xosid:description>
+                    the currency units to convert
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="sourceCurrencyType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type of currency
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="targetCurrencyType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the target currency units
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="cardinal"/>
+                <xosid:description>
+                    resulting currency units
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>null </xosid:token>argument provided
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>LocaleManager.supportsCurrencyTypesForConversion(sourceCurrencyType,
+                    targetCurrencyTypeType)</xosid:token> is false
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.locale.CalendarConversionSession"> 
+        <xosid:implements xosid:interface="osid.OsidSession"/>
+        <xosid:description>
+            This session defines methods to convert dates across
+            calendar systems.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="canConvertCalendars">
+            <xosid:description>
+                Tests if this user can perform calendar conversions. A
+                return of true does not guarantee successful
+                authorization. A return of false indicates that it is
+                known all methods in this session will result in a
+                <xosid:token>PERMISSION_DENIED.</xosid:token> This is
+                intended as a hint to an application that may opt not
+                to offer lookup operations.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>false</xosid:token> if conversion
+                    methods are not authorized,
+                    <xosid:token>true</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="convertCalendar">
+            <xosid:description>
+                Converts a date/time from one calendar to another.
+            </xosid:description>
+            <xosid:parameter xosid:name="sourceDateTime">
+                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:description>
+                    the date/time units to convert
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="sourceCalendarType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the calendar type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="targetCalendarType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the resulting calendar type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:description>
+                    the resulting date/time
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>null </xosid:token>argument provided
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>LocaleManager.supportsCalendarTypesForConversion(sourceCalendarType,
+                    targetCalendarTypeType)</xosid:token> is false
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+</xosid:osid>

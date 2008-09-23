@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+
+<!--
+    XOSID for osid.transport generated at 7/14/2008 11:43:54 PM 
+
+    Copyright (C) 2002-2007 Massachusetts Institute of Technology. All
+    Rights Reserved.
+
+    This Work is being provided by the copyright holder(s) subject to the
+    following license. By obtaining, using and/or copying this Work, you
+    agree that you have read, understand, and will comply with the following
+    terms and conditions.
+
+    This Work and the information contained herein is provided on an "AS IS"
+    basis. The Massachusetts Institute of Technology, the Open Knowledge
+    Initiative, and THE AUTHORS DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED,
+    INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+    A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+    OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS
+    IN THE WORK.
+
+    Permission to use, copy and distribute unmodified versions of this Work,
+    for any purpose, without fee or royalty is hereby granted, provided that
+    you include the above copyright notice and the terms of this license on
+    ALL copies of the Work or portions thereof. 
+
+    You may nodify or create Derivatives of this Work only for your internal
+    purposes. You shall not distribute or transfer any such Derivative of
+    this Work to any location or to any third party. For the purposes of
+    this license, Derivative shall mean any derivative of the Work as
+    defined in the United States Copyright Act of 1976, such as a
+    translation or modification.
+
+    The export of software employing encryption technology may require a
+    specific license from the United States Government. It is the
+    responsibility of any person or organization comtemplating export to
+    obtain such a license before exporting this Work.
+-->
+
+<xosid:osid xmlns:xosid="urn:inet:osid.org:schemas/osid/3" xosid:name="osid.transport" xosid:version="3.0.0">
+
+    <xosid:title>
+        Transport Open Service Interface Definitions
+    </xosid:title>
+
+    <xosid:copyright>
+        Copyright <xosid:copyrightSymbol/>2002-2007 Massachusetts
+        Institute of Technology. All Rights Reserved.
+    </xosid:copyright>
+
+    <xosid:license>
+        This Work is being provided by the copyright holder(s) subject
+        to the following license. By obtaining, using and/or copying
+        this Work, you agree that you have read, understand, and will
+        comply with the following terms and conditions.
+
+        <xosid:pbreak/>
+
+        This Work and the information contained herein is provided on
+        an "AS IS" basis. The Massachusetts Institute of Technology,
+        the Open Knowledge Initiative, and THE AUTHORS DISCLAIM ALL
+        WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+        WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+        AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+        HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+        WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+        FROM, OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER
+        DEALINGS IN THE WORK.
+
+        <xosid:pbreak/>
+
+        Permission to use, copy and distribute unmodified versions of
+        this Work, for any purpose, without fee or royalty is hereby
+        granted, provided that you include the above copyright notice
+        and the terms of this license on ALL copies of the Work or
+        portions thereof. 
+
+        <xosid:pbreak/>
+
+        You may nodify or create Derivatives of this Work only for your
+        internal purposes. You shall not distribute or transfer any
+        such Derivative of this Work to any location or to any third
+        party. For the purposes of this license, Derivative shall mean
+        any derivative of the Work as defined in the United States
+        Copyright Act of 1976, such as a translation or modification.
+
+        <xosid:pbreak/>
+
+        The export of software employing encryption technology may
+        require a specific license from the United States Government.
+        It is the responsibility of any person or organization
+        comtemplating export to obtain such a license before exporting
+        this Work.
+    </xosid:license>
+
+    <xosid:description>
+        The transport OSID provides a simple means of moving serialized
+        data to or from the local endpoint. It defines to stream-like
+        inerfaces, the <xosid:token>DataInputStream</xosid:token> and
+        the <xosid:token>DataOutputStream</xosid:token> for reading and
+        writing data.
+
+        <xosid:pbreak/>
+
+        The transport OSID defines an inbound and an outbound service.
+        An outbound transport service is used from a local endpoint to
+        a single remote endpoint. The remote endpoint may represent one
+        or more physical endpoints, such as a multicast network, but
+        presents itself as a single enpoint to the consumer. The
+        inbound service is used to receive and process data from
+        multiple remote endpoints and is implemented using a callback
+        mechanism when a new request for association arrives.
+        An association or connection between two endpoints is
+        represented by the <xosid:token>TransportSession.</xosid:token>
+        Data may be written or read where each read or write is handled
+        by a data stream. Ths transport OSID does not describe the
+        format or sequence of the data which must be agreed upon at
+        both ends. The OSID simply acts as a cover for specific
+        transport or session related APIs, and provides a means for
+        modular handling of service location for the purpose
+        implemengting a redundancy or load balancing scheme. Structures
+        and object-oriented data and presented through other OSIDs
+        where applicable. The transport OSID may be used within another
+        OSID to handle the transport of serialized data that may
+        correspond to a higher level OSID object.
+
+        <xosid:pbreak/>
+
+        The transport OSID can be used as the glue between an
+        authentication OSID and the over-the-wire protocol that will be
+        used to transport or receive a serialized authentication
+        credential. A TransportSession may be instantiated by passing
+        an authentication credential and conversely the authentication
+        credential can be supplied to the transport receiver.
+        The data streams defined in the transport OSID are also used in
+        other OSIDs where a data stream is required such as the filing
+        OSID or an Asset that contains arbitrary serialized data.
+        Outbound example:
+         
+        <xosid:code>
+<![CDATA[
+TransportSession session = manager.getOutboundSession();
+DataOutputStream out = session.sendData();
+String cmd = "<call><command>get_songs</command><params><param>" + album + "</param></params></call>";
+out.write(cmd.length(), cmd);
+out.close();
+
+while(session.hasDataAvailable()) {
+    DataInputStream in = session.receiveData();
+    add_song_to_play_queue(in);
+}
+]]>
+        </xosid:code>
+         
+        Inbound Example:
+         
+        <xosid:code>
+public void dispatch(TransportSession session, Authentication auth) {
+    if (authzSession.isAuthorized(auth.getAgentId, fId, qId)) {
+        String argv = parse_command_from_stream(session.receiverData());
+        if (argv[0].equals("get_songs")) {
+            Song songs = get_songs_from_album(argv[1]);
+            for (song: songs) {
+                DataOutputStream out = session.sendData();
+                out.write(song.data(), song.size());
+            }
+        }
+    }
+}
+        </xosid:code>
+         
+    </xosid:description>
+
+
+    <xosid:interface xosid:name="osid.transport.TransportProfile"> 
+        <xosid:implements xosid:interface="osid.OsidProfile"/>
+        <xosid:description>
+            The <xosid:token>TransportProfile</xosid:token> defines the
+            interoperability of the transport OSID.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="supportsOutbound">
+            <xosid:description>
+                Tests if outbound transport is supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if outbound
+                    transport is supported<xosid:token>,</xosid:token>
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsInbound">
+            <xosid:description>
+                Tests if inbound transport is supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if incoming
+                    transport is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsAuthentication">
+            <xosid:description>
+                Tests if authentication is supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if authentication
+                    is supported, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.transport.TransportManager"> 
+        <xosid:implements xosid:interface="osid.OsidManager"/>
+        <xosid:implements xosid:interface="osid.transport.TransportProfile"/>
+        <xosid:description>
+            This manager provides access to the sessions defined in
+            this service. The outbound session is used to connect to a
+            remote endpoint and the inbound callback is used to receive
+            incoming connections.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getOutboundSession">
+            <xosid:description>
+                Gets the <xosid:token>OsidSession</xosid:token>
+                associated with the
+                <xosid:token>TransportOutbound</xosid:token> service.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.transport.TransportSession"/>
+                <xosid:description>
+                    the new
+                    <xosid:token>TransportOutboundSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsOutbound()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsOutbound()</xosid:token> is
+                    <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getOutboundSessionWithAuthentication">
+            <xosid:description>
+                Gets the <xosid:token>OsidSession</xosid:token>
+                associated with the
+                <xosid:token>TransportOutbound</xosid:token> service
+                using the supplied
+                <xosid:token>Authentication.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="authentication">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    proxy authentication
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.transport.TransportSession"/>
+                <xosid:description>
+                    the new
+                    <xosid:token>TransportOutboundSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    <xosid:token>unable to complete
+                    request</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    the given <xosid:token>authentication</xosid:token>
+                    is invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    a transport outbound session is not available
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    the authentication service is not supported
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsOutbound()</xosid:token> and
+                   
+                    <xosid:token>supportsAuthentication()</xosid:token>
+                    are <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="setInboundReceiver">
+            <xosid:description>
+                Sets the callback proc for incoming data.
+            </xosid:description>
+            <xosid:parameter xosid:name="receiver">
+                <xosid:interfaceType xosid:type="osid.transport.TransportReceiver"/>
+                <xosid:description>
+                    the callback receiver
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>receiver</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsInbound()</xosid:token> is
+                    false
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsInbound()</xosid:token> is
+                    <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.transport.TransportSession"> 
+        <xosid:implements xosid:interface="osid.OsidSession"/>
+        <xosid:description>
+            The transport session is used to send and receive arbitrary
+            data to and from a remote end point. The methods accept for
+            return a data stream. Some protocols may send or receive
+            all data within a single stream while others may use the
+            streams as channels or frames of data. 
+
+            <xosid:pbreak/>
+
+            A stream may be available for reading before all the data
+            as arrived and as such multiple streams may be processed
+            simultaneously.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="sendData">
+            <xosid:description>
+                Sends data to the remote transport endpoint.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.transport.DataOutputStream"/>
+                <xosid:description>
+                    the output stream in which to send data
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="hasDataAvailable">
+            <xosid:description>
+                Tests to see if another input stream is available for
+                retrieval.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if a stream is
+                    available for reading,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="receiveData">
+            <xosid:description>
+                Receives data from the remote transport endpoint.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.transport.DataInputStream"/>
+                <xosid:description>
+                    the input stream containing the received data
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>hasDataAvailable()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.transport.TransportReceiver"> 
+        <xosid:implements xosid:interface="osid.OsidReceiver"/>
+        <xosid:description>
+            The TransportReceive is used to receive incoming
+            connections. The receiver is provided to the service via
+            the TransportManager and invoked by the transport provider
+            when a new association is created. The transport session
+            and authentication is porvided. The authentication object
+            may contain information pertaining to the connection.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="dispatch">
+            <xosid:description>
+                Invoked by the transport provider when a new connection
+                request or datagram is received.
+            </xosid:description>
+            <xosid:parameter xosid:name="session">
+                <xosid:interfaceType xosid:type="osid.transport.TransportSession"/>
+                <xosid:description>
+                    the new transport session
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="credential">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    the authentication credential retrieved from the
+                    transport or <xosid:token>null</xosid:token> if
+                   
+                    <xosid:token>TransportManager.supportsPAuthenticationForProxy()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.transport.DataInputStream"> 
+        <xosid:implements xosid:interface=""/>
+        <xosid:description>
+            The data input stream provides a means for reading data
+            from a stream.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="available">
+            <xosid:description>
+                Gets the number of <xosid:token>bytes</xosid:token>
+                available for retrieval. The number returned by this
+                method may be less than or equal to the total number of
+                <xosid:token>bytes</xosid:token> in this stream.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="cardinal" xosid:array="true"/>
+                <xosid:description>
+                    the number of <xosid:token>bytes</xosid:token>
+                    available for retrieval
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this stream has been closed
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="skip">
+            <xosid:description>
+                Skips a specified number of
+                <xosid:token>bytes</xosid:token> in the stream.
+            </xosid:description>
+            <xosid:parameter xosid:name="n">
+                <xosid:primitiveType xosid:type="cardinal" xosid:array="true"/>
+                <xosid:description>
+                    the number of <xosid:token>bytes</xosid:token> to
+                    skip
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="cardinal"/>
+                <xosid:description>
+                    the actual number of
+                    <xosid:token>bytes</xosid:token> skipped
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this stream has been closed
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="read">
+            <xosid:description>
+                Reads a specified number of
+                <xosid:token>bytes</xosid:token> from this stream.
+            </xosid:description>
+            <xosid:parameter xosid:name="buf">
+                <xosid:primitiveType xosid:type="byte" xosid:array="true"/>
+                <xosid:description>
+                    the buffer in which the data is read
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="n">
+                <xosid:primitiveType xosid:type="cardinal"/>
+                <xosid:description>
+                    the number of <xosid:token>bytes</xosid:token> to
+                    read
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="integer"/>
+                <xosid:description>
+                    the actual number of
+                    <xosid:token>bytes</xosid:token> readm or
+                    <xosid:token>-1</xosid:token> if the end of the
+                    stream has been reached
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this stream has been closed
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    the size of <xosid:token>buf</xosid:token> is less
+                    than <xosid:token>n</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>buf</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="close">
+            <xosid:description>
+                Closes this stream and frees up any allocated
+                resources. Methods in this object may not be invoked
+                after this method is called.
+            </xosid:description>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this stream has been closed
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.transport.DataOutputStream"> 
+        <xosid:implements xosid:interface=""/>
+        <xosid:description>
+            The data output stream provides a means in which data can
+            be written to a stream.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="write">
+            <xosid:description>
+                Writes <xosid:token>n</xosid:token> bytes to this
+                stream.
+            </xosid:description>
+            <xosid:parameter xosid:name="buf">
+                <xosid:primitiveType xosid:type="byte" xosid:array="true"/>
+                <xosid:description>
+                    the buffer containing the data to write
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="n">
+                <xosid:primitiveType xosid:type="cardinal"/>
+                <xosid:description>
+                    the number of <xosid:token>bytes</xosid:token> to
+                    write
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this stream has been closed
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>buf</xosid:token> does not contain
+                    <xosid:token>n bytes</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>buf</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="close">
+            <xosid:description>
+                Flushes the output, closes this stream and frees up any
+                allocated resources. Methods in this object may not be
+                invoked after this method is called.
+            </xosid:description>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this stream has been closed
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+</xosid:osid>

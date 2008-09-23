@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+
+<!--
+    XOSID for osid.id generated at 7/14/2008 6:48:58 PM 
+
+    Copyright (C) 2002-2008 Massachusetts Institute of Technology. All
+    Rights Reserved.
+
+    This Work is being provided by the copyright holder(s) subject to the
+    following license. By obtaining, using and/or copying this Work, you
+    agree that you have read, understand, and will comply with the following
+    terms and conditions.
+
+    This Work and the information contained herein is provided on an "AS IS"
+    basis. The Massachusetts Institute of Technology, the Open Knowledge
+    Initiative, and THE AUTHORS DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED,
+    INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+    A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+    OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS
+    IN THE WORK.
+
+    Permission to use, copy and distribute unmodified versions of this Work,
+    for any purpose, without fee or royalty is hereby granted, provided that
+    you include the above copyright notice and the terms of this license on
+    ALL copies of the Work or portions thereof. 
+
+    You may nodify or create Derivatives of this Work only for your internal
+    purposes. You shall not distribute or transfer any such Derivative of
+    this Work to any location or to any third party. For the purposes of
+    this license, Derivative shall mean any derivative of the Work as
+    defined in the United States Copyright Act of 1976, such as a
+    translation or modification.
+
+    The export of software employing encryption technology may require a
+    specific license from the United States Government. It is the
+    responsibility of any person or organization comtemplating export to
+    obtain such a license before exporting this Work.
+-->
+
+<xosid:osid xmlns:xosid="urn:inet:osid.org:schemas/osid/3" xosid:name="osid.id" xosid:version="3.0.0">
+
+    <xosid:title>
+        Id Open Service Interface Definitions
+    </xosid:title>
+
+    <xosid:copyright>
+        Copyright <xosid:copyrightSymbol/>2002-2008 Massachusetts
+        Institute of Technology. All Rights Reserved.
+    </xosid:copyright>
+
+    <xosid:license>
+        This Work is being provided by the copyright holder(s) subject
+        to the following license. By obtaining, using and/or copying
+        this Work, you agree that you have read, understand, and will
+        comply with the following terms and conditions.
+
+        <xosid:pbreak/>
+
+        This Work and the information contained herein is provided on
+        an "AS IS" basis. The Massachusetts Institute of Technology,
+        the Open Knowledge Initiative, and THE AUTHORS DISCLAIM ALL
+        WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+        WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+        AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+        HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+        WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+        FROM, OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER
+        DEALINGS IN THE WORK.
+
+        <xosid:pbreak/>
+
+        Permission to use, copy and distribute unmodified versions of
+        this Work, for any purpose, without fee or royalty is hereby
+        granted, provided that you include the above copyright notice
+        and the terms of this license on ALL copies of the Work or
+        portions thereof. 
+
+        <xosid:pbreak/>
+
+        You may nodify or create Derivatives of this Work only for your
+        internal purposes. You shall not distribute or transfer any
+        such Derivative of this Work to any location or to any third
+        party. For the purposes of this license, Derivative shall mean
+        any derivative of the Work as defined in the United States
+        Copyright Act of 1976, such as a translation or modification.
+
+        <xosid:pbreak/>
+
+        The export of software employing encryption technology may
+        require a specific license from the United States Government.
+        It is the responsibility of any person or organization
+        comtemplating export to obtain such a license before exporting
+        this Work.
+    </xosid:license>
+
+    <xosid:description>
+        The Id OSID provides the means for creating and mapping
+        identifiers. All OSID objects are identified by a unique and
+        immutable <xosid:token>Id.</xosid:token> The
+        <xosid:token>Id</xosid:token> OSID can be used to generate new
+        <xosid:token>Ids</xosid:token> when creating new objects. 
+
+        <xosid:pbreak/>
+
+        Consumers wishing to persist an OSID object should instead
+        persist the reference to the object by serializing the
+        <xosid:token>Id.</xosid:token>
+
+        <xosid:pbreak/>
+
+        The <xosid:token>Id</xosid:token> service can also be used as a
+        means to map one identifier to another when an object is known
+        by multiple identifiers. Mapping identifier spaces is often a
+        critical part of interoperability and the Id service can be
+        used as a shim to bridge different systems.
+
+        <xosid:pbreak/>
+
+        Id mapping example:
+         
+        <xosid:code>
+public Asset getAsset(assetId) {
+    Id id = idSession.getId(assetId);
+    return (other_impl.getAsset(assetId));
+}
+        </xosid:code>
+         
+    </xosid:description>
+
+
+    <xosid:interface xosid:name="osid.id.IdProfile"> 
+        <xosid:implements xosid:interface="osid.OsidProfile"/>
+        <xosid:description>
+            The <xosid:token>IdProfile</xosid:token> describes the
+            interoperability among id services.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="supportsIdLookup">
+            <xosid:description>
+                Tests if <xosid:token>Id</xosid:token> lookup is
+                supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if
+                    <xosid:token>Id</xosid:token> lookup is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsIdAdmin">
+            <xosid:description>
+                Tests if an <xosid:token>Id
+                </xosid:token>administrative service is supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if
+                    <xosid:token>Id</xosid:token> administration is
+                    supported, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.id.IdManager"> 
+        <xosid:implements xosid:interface="osid.OsidManager"/>
+        <xosid:implements xosid:interface="osid.id.IdProfile"/>
+        <xosid:description>
+            This manager provides access to the available sessions of
+            the Id service. <xosid:token>Ids</xosid:token> are created
+            through the <xosid:token>IdAdminSession</xosid:token> which
+            provides the means for creating a unique identifier. 
+
+            <xosid:pbreak/>
+
+            The <xosid:token>IdLookupSession</xosid:token> can be used
+            for mapping one <xosid:token>Id</xosid:token> to another in
+            addition to getting a list of the assigned identifiers.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getIdLookupSession">
+            <xosid:description>
+                Gets the session associated with the id lookup service.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.id.IdLookupSession"/>
+                <xosid:description>
+                    an <xosid:token>IdLookupSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsIdLookup()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsIdLookup()</xosid:token> is
+                    <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getIdAdminSession">
+            <xosid:description>
+                Gets the session associated with the id admin service.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.id.IdAdminSession"/>
+                <xosid:description>
+                    the new <xosid:token>IdAdminSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsIdAdmin()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsIdAdmin()</xosid:token> is
+                    <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.id.IdProxyManager"> 
+        <xosid:implements xosid:interface="osid.OsidProxyManager"/>
+        <xosid:implements xosid:interface="osid.id.IdProfile"/>
+        <xosid:description>
+            This manager provides access to the available sessions of
+            the Id service. Methods in this manager support the passing
+            of an <xosid:token>Authentication</xosid:token> object for
+            the purpose of proxy authentication.
+
+            <xosid:pbreak/>
+
+            <xosid:token>Ids</xosid:token> are created through the
+            <xosid:token>IdAdminSession</xosid:token> which provides
+            the means for creating a unique identifier. The
+            <xosid:token>IdBrowserSession</xosid:token> can be used
+            for mapping one <xosid:token>Id</xosid:token> to another in
+            addition to getting a list of the assigned identifiers.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getIdLookupSession">
+            <xosid:description>
+                Gets the session associated with the id lookup service
+                using the supplied
+                <xosid:token>Authentication.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="authentication">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    proxy authentication
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.id.IdLookupSession"/>
+                <xosid:description>
+                    an <xosid:token>IdLookupSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsIdLookup()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    the authentication service is not supported
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsIdLookup()</xosid:token> is
+                    <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getIdAdminSession">
+            <xosid:description>
+                Gets the session associated with the id administrative
+                service.
+            </xosid:description>
+            <xosid:parameter xosid:name="authentication">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    proxy authentication
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.id.IdAdminSession"/>
+                <xosid:description>
+                    a <xosid:token>IdAdminSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    <xosid:token>unable to complete
+                    request</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsIdAdmin()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    the authentication service is not supported
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsIdAdmin()</xosid:token> is
+                    <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.id.IdLookupSession"> 
+        <xosid:implements xosid:interface="osid.OsidSession"/>
+        <xosid:description>
+            This session is for retrieving
+            <xosid:token>Id</xosid:token> objects.
+            <xosid:token>getIds()</xosid:token> retrieves all known
+            <xosid:token>Ids.</xosid:token> The existence of a single
+            identifier can be confirmed through the
+            <xosid:token>getId()</xosid:token> method, or it can be
+            used as a means of <xosid:token>Id</xosid:token>
+            translation.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="canLookupIds">
+            <xosid:description>
+                Tests if this user can perform
+                <xosid:token>Id</xosid:token> lookups. A return of true
+                does not guarantee successful authorization. A return
+                of false indicates that it is known all methods in this
+                session will result in a
+                <xosid:token>PERMISSION_DENIED.</xosid:token> This is
+                intended as a hint to an application that may opt not
+                to offer lookup operations.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>false</xosid:token> if lookup methods
+                    are not authorized, <xosid:token>true</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getId">
+            <xosid:description>
+                Gets an Id.
+            </xosid:description>
+            <xosid:parameter xosid:name="id">
+                <xosid:interfaceType xosid:type="osid.id.Id"/>
+                <xosid:description>
+                    an <xosid:token>Id</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.id.Id"/>
+                <xosid:description>
+                    the <xosid:token>Id</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>id</xosid:token> is not found
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>id</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getIds">
+            <xosid:description>
+                Gets all <xosid:token>Ids.</xosid:token>
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.id.IdList"/>
+                <xosid:description>
+                    the list of all <xosid:token>Ids</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.id.IdAdminSession"> 
+        <xosid:implements xosid:interface="osid.OsidSession"/>
+        <xosid:description>
+            This session is used to create a new
+            <xosid:token>Id.</xosid:token>
+        </xosid:description>
+
+
+        <xosid:method xosid:name="canAdministerIds">
+            <xosid:description>
+                Tests if this user can perform administer
+                <xosid:token>ids.</xosid:token> A return of true does
+                not guarantee successful authorization. A return of
+                false indicates that it is known all methods in this
+                session will result in a
+                <xosid:token>PERMISSION_DENIED.</xosid:token> This is
+                intended as a hint to an application that may opt not
+                to offer lookup operations.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>false</xosid:token> if administrative
+                    methods are not authorized,
+                    <xosid:token>true</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="createId">
+            <xosid:description>
+                Creates a new <xosid:token>Id</xosid:token>.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.id.Id"/>
+                <xosid:description>
+                    the created <xosid:token>Id</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="addId">
+            <xosid:description>
+                Adds a new <xosid:token>Id</xosid:token>.
+            </xosid:description>
+            <xosid:parameter xosid:name="id">
+                <xosid:interfaceType xosid:type="osid.id.Id"/>
+                <xosid:description>
+                    a new <xosid:token>Id</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>id</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="makeEquivalent">
+            <xosid:description>
+                Makes two <xosid:token>Ids</xosid:token> equivalent.
+                Calls to
+                <xosid:token>IdLookupSession.getId(id)</xosid:token>
+                return the <xosid:token>realId.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="primaryId">
+                <xosid:interfaceType xosid:type="osid.id.Id"/>
+                <xosid:description>
+                    the primary <xosid:token>Id</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="equivalentId">
+                <xosid:interfaceType xosid:type="osid.id.Id"/>
+                <xosid:description>
+                    an <xosid:token>Id</xosid:token> to be made
+                    equivalent
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>realId</xosid:token> or
+                    <xosid:token>id</xosid:token> is not found
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>realId</xosid:token> or
+                    <xosid:token>id</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.id.Id"> 
+        <xosid:implements xosid:interface=""/>
+        <xosid:description>
+            Id represents an identifier object. Ids are designated by
+            the following elements:
+
+            <xosid:pbreak/>
+
+            <xosid:outline>
+                 <xosid:element>
+                    <xosid:token>identifier:</xosid:token> a unique key
+                    or guid 
+                </xosid:element>
+                 <xosid:element>
+                    <xosid:token>namespace:</xosid:token> the namespace
+                    of the identifier
+                </xosid:element>
+                 <xosid:element>
+                    <xosid:token>authority:</xosid:token> the issuer of
+                    the identifier
+                </xosid:element>
+            </xosid:outline>
+            Two Ids are equal if their namespace, identifier and
+            authority strings are equal. Only the identifier is
+            case-sensitive. Persisting an <xosid:token>Id</xosid:token>
+            means persisting the above components.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getAuthority">
+            <xosid:description>
+                Gets the authority of this
+                <xosid:token>Id.</xosid:token> The authority is a
+                string used to ensure the uniqueness of this
+                <xosid:token>Id</xosid:token> when using a
+                non-federated identifier space. Generally, it is a
+                domain name identifying the party responsible for this
+                <xosid:token>Id. </xosid:token>This method is used to
+                compare one <xosid:token>Id</xosid:token> to anoher.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the authority of this <xosid:token>Id</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getIdentifierNamespace">
+            <xosid:description>
+                Gets the namespace of the identifier. This method is
+                used to compare one <xosid:token>Id</xosid:token> to
+                another.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the authority of this <xosid:token>Id</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getIdentifier">
+            <xosid:description>
+                Gets the identifier of this <xosid:token>Id.
+                </xosid:token>This method is used to compare one
+                <xosid:token>Id</xosid:token> to another.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the identifier of this
+                    <xosid:token>Id</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="isEqual">
+            <xosid:description>
+                Determines if the given <xosid:token>Id</xosid:token>
+                is equal to this one. Two Ids are equal if the
+                namespace, authority and identifier components are
+                equal. The identifier is case sensitive while the
+                namespace and authority strings are not case sensitive.
+            </xosid:description>
+            <xosid:parameter xosid:name="id">
+                <xosid:interfaceType xosid:type="osid.id.Id"/>
+                <xosid:description>
+                    the <xosid:token>Id</xosid:token> to compare
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given
+                    <xosid:token>Id</xosid:token> is equal to this
+                    one, <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.id.IdList"> 
+        <xosid:implements xosid:interface="osid.OsidList"/>
+        <xosid:description>
+            Like all <xosid:token>OsidLists,</xosid:token>
+           Id <xosid:token>List</xosid:token> provides a means for
+            accessing <xosid:token>Id</xosid:token> elements
+            sequentially either one at a time or many at a time. Examples:
+
+            <xosid:pbreak/>
+
+             <xosid:code>
+while (il.hasNext()) {
+     Id id = il.getNextId();
+}
+
+
+            </xosid:code>
+             or
+            <xosid:code>
+
+
+while (il.hasNext()) {
+     Id[] ids = il.getNextIds(il.available());
+}
+            </xosid:code>
+             
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getNextId">
+            <xosid:description>
+                Gets the next <xosid:token>Id</xosid:token> in this
+                list.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.id.Id"/>
+                <xosid:description>
+                    the next <xosid:token>Id</xosid:token> in this
+                    list. The <xosid:token>hasNext()</xosid:token>
+                    method should be used to test that a next
+                    <xosid:token>Id</xosid:token> is available before
+                    calling this method.
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    no more elements available in this list
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getNextIds">
+            <xosid:description>
+                Gets the next set of <xosid:token>Ids</xosid:token> in
+                this list. The specified amount must be less than or
+                equal to the return from
+                <xosid:token>available().</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="n">
+                <xosid:primitiveType xosid:type="cardinal"/>
+                <xosid:description>
+                    the number of <xosid:token>Id
+                    </xosid:token>elements requested which must be less
+                    than or equal to
+                    <xosid:token>available()</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.id.Id" xosid:array="true"/>
+                <xosid:description>
+                    an array of <xosid:token>Id
+                   </xosid:token>elements. <xosid:token>
+                    </xosid:token>The length of the array is less than
+                    or equal to the number specified.
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    no more elements available in this list
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+</xosid:osid>

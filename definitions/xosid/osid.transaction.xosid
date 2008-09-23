@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+
+<!--
+    XOSID for osid.transaction generated at 7/14/2008 11:35:13 PM 
+
+    Copyright (C) 2002-2008 Massachusetts Institute of Technology. All
+    Rights Reserved.
+
+    This Work is being provided by the copyright holder(s) subject to the
+    following license. By obtaining, using and/or copying this Work, you
+    agree that you have read, understand, and will comply with the following
+    terms and conditions.
+
+    This Work and the information contained herein is provided on an "AS IS"
+    basis. The Massachusetts Institute of Technology, the Open Knowledge
+    Initiative, and THE AUTHORS DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED,
+    INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+    A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+    OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS
+    IN THE WORK.
+
+    Permission to use, copy and distribute unmodified versions of this Work,
+    for any purpose, without fee or royalty is hereby granted, provided that
+    you include the above copyright notice and the terms of this license on
+    ALL copies of the Work or portions thereof. 
+
+    You may nodify or create Derivatives of this Work only for your internal
+    purposes. You shall not distribute or transfer any such Derivative of
+    this Work to any location or to any third party. For the purposes of
+    this license, Derivative shall mean any derivative of the Work as
+    defined in the United States Copyright Act of 1976, such as a
+    translation or modification.
+
+    The export of software employing encryption technology may require a
+    specific license from the United States Government. It is the
+    responsibility of any person or organization comtemplating export to
+    obtain such a license before exporting this Work.
+-->
+
+<xosid:osid xmlns:xosid="urn:inet:osid.org:schemas/osid/3" xosid:name="osid.transaction" xosid:version="3.0.0">
+
+    <xosid:title>
+        Transaction Open Service Interface Definitions
+    </xosid:title>
+
+    <xosid:copyright>
+        Copyright <xosid:copyrightSymbol/>2002-2008 Massachusetts
+        Institute of Technology. All Rights Reserved.
+    </xosid:copyright>
+
+    <xosid:license>
+        This Work is being provided by the copyright holder(s) subject
+        to the following license. By obtaining, using and/or copying
+        this Work, you agree that you have read, understand, and will
+        comply with the following terms and conditions.
+
+        <xosid:pbreak/>
+
+        This Work and the information contained herein is provided on
+        an "AS IS" basis. The Massachusetts Institute of Technology,
+        the Open Knowledge Initiative, and THE AUTHORS DISCLAIM ALL
+        WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+        WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+        AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+        HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+        WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+        FROM, OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER
+        DEALINGS IN THE WORK.
+
+        <xosid:pbreak/>
+
+        Permission to use, copy and distribute unmodified versions of
+        this Work, for any purpose, without fee or royalty is hereby
+        granted, provided that you include the above copyright notice
+        and the terms of this license on ALL copies of the Work or
+        portions thereof. 
+
+        <xosid:pbreak/>
+
+        You may nodify or create Derivatives of this Work only for your
+        internal purposes. You shall not distribute or transfer any
+        such Derivative of this Work to any location or to any third
+        party. For the purposes of this license, Derivative shall mean
+        any derivative of the Work as defined in the United States
+        Copyright Act of 1976, such as a translation or modification.
+
+        <xosid:pbreak/>
+
+        The export of software employing encryption technology may
+        require a specific license from the United States Government.
+        It is the responsibility of any person or organization
+        comtemplating export to obtain such a license before exporting
+        this Work.
+    </xosid:license>
+
+    <xosid:description>
+        The transaction OSID provides the means in which multiple OSID
+        sessions can be coordinated. An
+        <xosid:token>OsidSession</xosid:token> supports transactions by
+        supporting the <xosid:token>Transaction</xosid:token>
+        interface. The <xosid:token>TransactionSession</xosid:token> is
+        the way multiple <xosid:token>Transaction</xosid:token> objects
+        can be managed. 
+
+        <xosid:pbreak/>
+
+        An ideal transaction is one that supports Atomicity,
+        Consistency, Isolation and Durability (ACID). This is difficult
+        to achieve and impossible without the cooperation of the
+        underlying system. The transaction interface, however, is a
+        useful vehicle for supporting multiple operations or a sequence
+        of operations. Since the ACID characteristics of a transaction,
+        like all issues of data persistence, are in the purvue of the
+        provider, they are not addressed in the interface definition
+        leaving a given provider to determine the nature of the
+        transactions it wants to support. 
+        <xosid:code>
+
+
+
+        </xosid:code>
+        An example:
+        <xosid:code>
+
+
+Transaction agentTransaction = agentAdminSession.createTransaction();
+Transaction msgTransaction = messagingSession.createTransaction();
+
+TransactionSession transactions = manager.createSession();
+transactions.add(agentTransaction);
+transactions.add(msgTransaction);
+
+agentAdminSession.updateAgent(agentId, agentForm);
+messagingSession.send(agentId, "I changed your name.");
+
+transactions.commit();
+        </xosid:code>
+         
+    </xosid:description>
+
+
+    <xosid:interface xosid:name="osid.transaction.TransactionProfile"> 
+        <xosid:implements xosid:interface="osid.OsidProfile"/>
+        <xosid:description>
+            The <xosid:token>TransactionProfile</xosid:token> describes
+            the interoperability amonf transaction services.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="supportsTransactions">
+            <xosid:description>
+                Tests if transactions are supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if transactions are
+                    supported, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.transaction.TransactionManager"> 
+        <xosid:implements xosid:interface="osid.OsidManager"/>
+        <xosid:implements xosid:interface="osid.transaction.TransactionProfile"/>
+        <xosid:description>
+            Gets the <xosid:token>OsidSession</xosid:token> associated
+            with the transaction service.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getTransactionSession">
+            <xosid:description>
+                Gets the <xosid:token>OsidSession</xosid:token>
+                associated with the transaction service.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.transaction.TransactionSession"/>
+                <xosid:description>
+                    a transaction session
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsTransactions()</xosid:token>
+                    is false
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.transaction.TransactionProxyManager"> 
+        <xosid:implements xosid:interface="osid.OsidProxyManager"/>
+        <xosid:implements xosid:interface="osid.transaction.TransactionProfile"/>
+        <xosid:description>
+            Gets the <xosid:token>OsidSession</xosid:token> associated
+            with the transaction service.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getTransactionSession">
+            <xosid:description>
+                Gets the <xosid:token>OsidSession</xosid:token>
+                associated with the transaction service.
+            </xosid:description>
+            <xosid:parameter xosid:name="authentication">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    proxy authentication
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.transaction.TransactionSession"/>
+                <xosid:description>
+                    a transaction session
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    <xosid:token>unable to complete
+                    request</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsTransactions()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    a<xosid:token>uthentication</xosid:token> is not
+                    supported
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.transaction.TransactionSession"> 
+        <xosid:implements xosid:interface="osid.OsidSession"/>
+        <xosid:description>
+            The transaction session is coordinate transactions. A
+            transaction session allows for <xosid:token>Transactions
+            </xosid:token>to be added to the list of transactions it is
+            managing. Upon a <xosid:token>commit(),</xosid:token> all
+            registered transactions receive a
+            <xosid:token>prepare()</xosid:token> and a
+            <xosid:token>commit().</xosid:token> Upon an
+            <xosid:token>abort()</xosid:token> all registered
+            transactions receive an <xosid:token>abort().
+           </xosid:token>A <xosid:token> TransactionSession
+            </xosid:token>itself may implement transactions (as it is
+            an <xosid:token>OsidSession</xosid:token>) as a means of
+            enabling a form of federated transaction management.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="add">
+            <xosid:description>
+                Adds a Transaction to be managed by this transaction
+                service.
+            </xosid:description>
+            <xosid:parameter xosid:name="transaction">
+                <xosid:interfaceType xosid:type="osid.transaction.Transaction"/>
+                <xosid:description>
+                    the transaction to add
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="ALREADY_EXISTS" xosid:category="User">
+                <xosid:description>
+                    transaction already added
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this transaction has ended
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    the session doesn't support transactions
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    a <xosid:token>null</xosid:token> argument provided
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="commit">
+            <xosid:description>
+                Commits the transaction and makes the state change(s)
+                visible. This transaction is effectively closed and the
+                only valid method that may be invoked is
+                <xosid:token>getState().</xosid:token>
+            </xosid:description>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this transaction has been committed or aborted
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+            <xosid:implNotes>
+                <xosid:token>prepare()</xosid:token> should be invoked
+                on all regstered transactions and iff all are
+                successful should <xosid:token>commit()</xosid:token>
+                be invoked on all registered transactions. In case of
+                error on any <xosid:token>prepare(),</xosid:token> all
+                transactions should be aborted. If an error occurs on a
+                <xosid:token>commit()</xosid:token> after a
+                transaction reported success on a
+                <xosid:token>prepare()</xosid:token> after one or more
+                transactions were already committed, then it is not
+                ACID compliant and success should be assumed by
+                committing the rest of the transactions. If a
+                <xosid:token>commit()</xosid:token> error occurs when
+                no transactions have been committed, then this
+                operation should not proceed.
+            </xosid:implNotes>
+        </xosid:method>
+
+        <xosid:method xosid:name="abort">
+            <xosid:description>
+                Cancels this transaction, rolling back the queue of
+                operations since the start of this transaction. This
+                transaction is effectively closed and the only valid
+                method that may be invoked is
+                <xosid:token>getState().</xosid:token>
+            </xosid:description>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this transaction has been committed or aborted
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+            <xosid:implNotes>
+                Invokes <xosid:token>abort()</xosid:token> on all
+                registered transactions().
+            </xosid:implNotes>
+        </xosid:method>
+
+        <xosid:method xosid:name="getState">
+            <xosid:description>
+                Gets the current state of this transaction.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.transaction.TransactionState"/>
+                <xosid:description>
+                    the current state of this transaction
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this transaction has been committed or aborted
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.transaction.Transaction"> 
+        <xosid:implements xosid:interface=""/>
+        <xosid:description>
+            <xosid:token>OsidTransaction </xosid:token>is used by an
+            <xosid:token>OsidSession</xosid:token> to provide
+            transactions across its methods. Transactions are performed
+            within a session. Coordination of transactions across OSIDS
+            of there sessions requires the availability of a
+            transaction manager.
+
+            <xosid:pbreak/>
+
+            A trsnaction is started upon creation of an
+            <xosid:token>OsidTransaction.</xosid:token> Actions within
+            a session are queued until the transaction is committed or
+            aborted.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="prepare">
+            <xosid:description>
+                Prepares for a <xosid:token>commit</xosid:token>. No
+                further operations are permitted in the associated
+                manager until this transaction is committed or aborted.
+            </xosid:description>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this transaction has been committed or aborted
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="TRANSACTION_FAILURE" xosid:category="Operational">
+                <xosid:description>
+                    this transaction cannot proceed due to a bad
+                    transaction element
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+            <xosid:implNotes>
+                The provider must verify this transaction such that a
+                <xosid:token>commit</xosid:token> will succeed and
+                reliably record the state changes resulting from this
+                transaction before returning.
+            </xosid:implNotes>
+        </xosid:method>
+
+        <xosid:method xosid:name="commit">
+            <xosid:description>
+                Commits the transaction and makes the state change(s)
+                visible. This transaction is effectively closed and the
+                only valid method that may be invoked is
+                <xosid:token>getState().</xosid:token>
+            </xosid:description>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this transaction has been committed or aborted
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+            <xosid:implNotes>
+                Any resources allocated for this transaction can be
+                released.
+            </xosid:implNotes>
+        </xosid:method>
+
+        <xosid:method xosid:name="abort">
+            <xosid:description>
+                Cancels this transaction, rolling back the queue of
+                operations since the start of this transaction. This
+                transaction is effectively closed and the only valid
+                method that may be invoked is
+                <xosid:token>getState().</xosid:token>
+            </xosid:description>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this transaction has been committed or aborted
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+            <xosid:implNotes>
+                Any resources allocated for this transaction can be
+                released.
+            </xosid:implNotes>
+        </xosid:method>
+
+        <xosid:method xosid:name="getState">
+            <xosid:description>
+                Gets the current state of this transaction.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.transaction.TransactionState"/>
+                <xosid:description>
+                    the current state of this transaction
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:enumeration xosid:name="osid.transaction.TransactionState"> 
+        <xosid:description>
+            This enumeration contains the possible state values of an
+            <xosid:token>OsidTransaction.</xosid:token>
+        </xosid:description>
+
+        <xosid:item xosid:name="START">
+            <xosid:description>
+                transaction has started and operations may be recorded
+            </xosid:description>
+        </xosid:item>
+
+        <xosid:item xosid:name="COMMIT_READY">
+            <xosid:description>
+                <xosid:token>prepare()</xosid:token> was successful and
+                ready for a <xosid:token>commit()</xosid:token> or an
+                <xosid:token>abort()</xosid:token>
+            </xosid:description>
+        </xosid:item>
+
+        <xosid:item xosid:name="COMMITTED">
+            <xosid:description>
+                the transaction committed successfully
+            </xosid:description>
+        </xosid:item>
+
+        <xosid:item xosid:name="ABORTED">
+            <xosid:description>
+                the transaction has been aborted. The implementation
+                may set an <xosid:token>ABORTED</xosid:token> state if
+                an error in processing the transaction has occurred.
+            </xosid:description>
+        </xosid:item>
+    </xosid:enumeration>
+
+</xosid:osid>

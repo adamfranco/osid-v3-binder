@@ -1,0 +1,1701 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+
+<!--
+    XOSID for osid.type generated at 7/14/2008 11:49:52 PM 
+
+    Copyright (C) 2002-2007 Massachusetts Institute of Technology. All
+    Rights Reserved.
+
+    This Work is being provided by the copyright holder(s) subject to the
+    following license. By obtaining, using and/or copying this Work, you
+    agree that you have read, understand, and will comply with the following
+    terms and conditions.
+
+    This Work and the information contained herein is provided on an "AS IS"
+    basis. The Massachusetts Institute of Technology, the Open Knowledge
+    Initiative, and THE AUTHORS DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED,
+    INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+    A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+    OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS
+    IN THE WORK.
+
+    Permission to use, copy and distribute unmodified versions of this Work,
+    for any purpose, without fee or royalty is hereby granted, provided that
+    you include the above copyright notice and the terms of this license on
+    ALL copies of the Work or portions thereof. 
+
+    You may nodify or create Derivatives of this Work only for your internal
+    purposes. You shall not distribute or transfer any such Derivative of
+    this Work to any location or to any third party. For the purposes of
+    this license, Derivative shall mean any derivative of the Work as
+    defined in the United States Copyright Act of 1976, such as a
+    translation or modification.
+
+    The export of software employing encryption technology may require a
+    specific license from the United States Government. It is the
+    responsibility of any person or organization comtemplating export to
+    obtain such a license before exporting this Work.
+-->
+
+<xosid:osid xmlns:xosid="urn:inet:osid.org:schemas/osid/3" xosid:name="osid.type" xosid:version="3.0.0">
+
+    <xosid:title>
+        Type Open Service Interface Definitions
+    </xosid:title>
+
+    <xosid:copyright>
+        Copyright <xosid:copyrightSymbol/>2002-2007 Massachusetts
+        Institute of Technology. All Rights Reserved.
+    </xosid:copyright>
+
+    <xosid:license>
+        This Work is being provided by the copyright holder(s) subject
+        to the following license. By obtaining, using and/or copying
+        this Work, you agree that you have read, understand, and will
+        comply with the following terms and conditions.
+
+        <xosid:pbreak/>
+
+        This Work and the information contained herein is provided on
+        an "AS IS" basis. The Massachusetts Institute of Technology,
+        the Open Knowledge Initiative, and THE AUTHORS DISCLAIM ALL
+        WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+        WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+        AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+        HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+        WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+        FROM, OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER
+        DEALINGS IN THE WORK.
+
+        <xosid:pbreak/>
+
+        Permission to use, copy and distribute unmodified versions of
+        this Work, for any purpose, without fee or royalty is hereby
+        granted, provided that you include the above copyright notice
+        and the terms of this license on ALL copies of the Work or
+        portions thereof. 
+
+        <xosid:pbreak/>
+
+        You may nodify or create Derivatives of this Work only for your
+        internal purposes. You shall not distribute or transfer any
+        such Derivative of this Work to any location or to any third
+        party. For the purposes of this license, Derivative shall mean
+        any derivative of the Work as defined in the United States
+        Copyright Act of 1976, such as a translation or modification.
+
+        <xosid:pbreak/>
+
+        The export of software employing encryption technology may
+        require a specific license from the United States Government.
+        It is the responsibility of any person or organization
+        comtemplating export to obtain such a license before exporting
+        this Work.
+    </xosid:license>
+
+    <xosid:description>
+        The type package defines a set of interfaces for managing
+        <xosid:token>Type</xosid:token> definitions.
+        <xosid:token>Types</xosid:token> are used as an identifier
+        primarily for identification of interface extensions throughout
+        the OSIDs and occasionally used as an extensible enumeration.
+        An agreement between a consumer and a provider means they
+        support the same <xosid:token>Type.</xosid:token>
+
+        <xosid:pbreak/>
+
+        A <xosid:token>Type</xosid:token> is similar to an Id but
+        includes other data for display and organization. The
+        identification portion of the Type is globally unique and contains:
+
+        <xosid:pbreak/>
+
+        <xosid:outline>
+             <xosid:element>
+                authority: the name of the entity or organization
+                responsible for the type. Using a domain name is a
+                reasonable convention.
+            </xosid:element>
+             <xosid:element>
+                identifier: a string serving as an id. The identifier
+                may be a urn, guid, oid or some other means of
+                identification. Since all of the identification
+                elements including the domain and authority create an
+                overall unique Type, the identifier may even be a
+                sequence number defined within a particular domain.
+            </xosid:element>
+             <xosid:element>
+                namespace: a string identifying the namespace of the
+                identifier, such as "urn" or "oid".
+            </xosid:element>
+             <xosid:element>
+                domain: indicates the scope of this Type in the context
+                of the OSIDs. Often, this may be a particular OSID
+                object, such as "asset", or an OSID mechanism such as "search".
+            </xosid:element>
+        </xosid:outline>
+         
+        Lookup example:
+
+        <xosid:pbreak/>
+
+         <xosid:code>
+Type type = lookupSession.getType("asset", "uri",         
+                                  "http://harvestroad.com/osidTypes/image",
+                                  "harvestroad.com");
+print type.getDisplayName();
+        </xosid:code>
+         
+        <xosid:pbreak/>
+
+        The sessions in this OSID offer the capabilities of a
+        <xosid:token>Type</xosid:token> registry to centrally manage
+        definitions and localized display strings and descriptions.
+        Applications may opt to construct their own
+        <xosid:token>Types</xosid:token> directly and bypass this
+        service.
+        Types are part of an internal hierarchy. The type hierarchy
+        generally parallels the interface hierarchy in an OSID object.
+        For example, an Asset may offer an interface extension for a
+        jpeg image whose definition extends a more generic image
+        interface. The type hierarchy may look like assetType ->
+        assetImageType -> assetJPEGType. Note that the root of the
+        hierarchy is the core object interface. Since the types are
+        part of a specification in itself, the Type contains knowledge
+        if its own hierarchy.
+
+        <xosid:pbreak/>
+
+        It is possible to bypass the Type OSID entirely and simply
+        construct the type classes directly. This has the feature of
+        being expedient and contains the type definitions with their
+        consuming code. This may get cumbersome for managing larger
+        numbers of types especially when they come in the form of hierarchies.
+
+        <xosid:pbreak/>
+
+        Unless an application will display a type, it can simply
+        construct a type based on the identification components and not
+        use this service. OSID implementations benefit more by using
+        this service since the type hierarchy is necessary in order to
+        respond to interoperability tests and it also provides a place
+        to perform mappings across different type definitions.
+    </xosid:description>
+
+
+    <xosid:interface xosid:name="osid.type.TypeProfile"> 
+        <xosid:implements xosid:interface="osid.OsidProfile"/>
+        <xosid:description>
+            The <xosid:token>TypeProfile</xosid:token> describes the
+            interoperability among type services.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="supportsTypeLookup">
+            <xosid:description>
+                Tests if <xosid:token>Type</xosid:token> lookup is
+                supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if
+                    <xosid:token>Type</xosid:token> lookup is
+                    supported, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsTypeAdmin">
+            <xosid:description>
+                Tests if a <xosid:token>Type
+                </xosid:token>administrative service is supported.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if
+                    <xosid:token>Type</xosid:token> administration is
+                    supported, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.type.TypeManager"> 
+        <xosid:implements xosid:interface="osid.OsidManager"/>
+        <xosid:implements xosid:interface="osid.type.TypeProfile"/>
+        <xosid:description>
+            This manager provides access to the available sessions of
+            the type service. The
+            <xosid:token>TypeLookupSession</xosid:token> is used for
+            looking up <xosid:token>Types</xosid:token> and the
+            <xosid:token>TypeAdminSession</xosid:token> is used for
+            managing and registering new Types.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getTypeLookupSession">
+            <xosid:description>
+                Gets the <xosid:token>OsidSession</xosid:token>
+                associated with the type lookup service.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeAdminSession"/>
+                <xosid:description>
+                    a <xosid:token>TypeLookupSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsTypeLookup()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsTypeLookup()</xosid:token> is
+                    <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getTypeAdminSession">
+            <xosid:description>
+                Gets the <xosid:token>OsidSession</xosid:token>
+                associated with the type admin service.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeAdminSession"/>
+                <xosid:description>
+                    a <xosid:token>TypeAdminSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsTypeAdmin()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsTypeAdmin()</xosid:token> is
+                    <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.type.TypeProxyManager"> 
+        <xosid:implements xosid:interface="osid.OsidProxyManager"/>
+        <xosid:implements xosid:interface="osid.type.TypeProfile"/>
+        <xosid:description>
+            This manager provides access to the available sessions of
+            the type service. Methods in this manager support the
+            passing of an <xosid:token>Authentication</xosid:token>
+            object for the purpose of proxy authentication. The
+            <xosid:token>TypeLookupSession</xosid:token> is used for
+            looking up <xosid:token>Types</xosid:token> and the
+            <xosid:token>TypeAdminSession</xosid:token> is used for
+            managing and registering new Types.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getTypeLookupSession">
+            <xosid:description>
+                Gets the <xosid:token>OsidSession</xosid:token>
+                associated with the
+                <xosid:token>TypeBrowser</xosid:token> service using
+                the supplied <xosid:token>Authentication.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="authentication">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    proxy authentication
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeAdminSession"/>
+                <xosid:description>
+                    a <xosid:token>TypeLookupSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    <xosid:token>unable to complete
+                    request</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsTypeLookup()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    the authentication service is not supported
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsTypeLookup()</xosid:token> is
+                    <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getTypeAdminSession">
+            <xosid:description>
+                Gets the <xosid:token>OsidSession</xosid:token>
+                associated with the
+                <xosid:token>TypeAdmin</xosid:token> service and
+                supplied <xosid:token>Authentication.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="authentication">
+                <xosid:interfaceType xosid:type="osid.authentication.Authentication"/>
+                <xosid:description>
+                    proxy authentication
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeAdminSession"/>
+                <xosid:description>
+                    the new <xosid:token>TypeAdminSession</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    <xosid:token>unable to complete
+                    request</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>authentication</xosid:token> is
+                    invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsTypeAdmin()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    the authentication service is not supported
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsTypeAdmin()</xosid:token> is
+                    <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.type.TypeLookupSession"> 
+        <xosid:implements xosid:interface="osid.OsidSession"/>
+        <xosid:description>
+            This session retrieves Types. A single Type can be
+            retrieved using <xosid:token>getType()</xosid:token> and
+            all types known to this service can be accessed via
+            <xosid:token>getTypes()</xosid:token>.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="canLookupTypes">
+            <xosid:description>
+                Tests if this user can perform
+                <xosid:token>Type</xosid:token> lookups. A return of
+                true does not guarantee successful authorization. A
+                return of false indicates that it is known all methods
+                in this session will result in a
+                <xosid:token>PERMISSION_DENIED.</xosid:token> This is
+                intended as a hint to an application that may opt not
+                to offer lookup operations.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>false</xosid:token> if lookup methods
+                    are not authorized, <xosid:token>true</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getType">
+            <xosid:description>
+                Gets a <xosid:token>Type</xosid:token> by its string
+                representation which is a combination of the domain,
+                authority and identifier. This method only returns the
+                <xosid:token>Type</xosid:token> if it is known by the
+                given identification components.
+            </xosid:description>
+            <xosid:parameter xosid:name="domain">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the domain
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="namespace">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the identifier namespace
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="identifier">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the identifier
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="authority">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the authority
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the <xosid:token>Type</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
+                <xosid:description>
+                    the type is not found
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>null</xosid:token> argument provided
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="hasType">
+            <xosid:description>
+                Tests if the given <xosid:token>Type </xosid:token>is
+                known.
+            </xosid:description>
+            <xosid:parameter xosid:name="type">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the <xosid:token>Type</xosid:token> to look for
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given
+                    <xosid:token>Type</xosid:token> is known,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>type</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getTypesByDomain">
+            <xosid:description>
+                Gets all the known Types by domain.
+            </xosid:description>
+            <xosid:parameter xosid:name="domain">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the domain
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    the list of <xosid:token>Types </xosid:token>with
+                    the given domain
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>domain</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getTypesByAuthority">
+            <xosid:description>
+                Gets all the known Types by authority.
+            </xosid:description>
+            <xosid:parameter xosid:name="authority">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the authority
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    the list of <xosid:token>Types </xosid:token>with
+                    the given authority
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>authority</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    respect my authoritay
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getTypesByDomainAndAuthority">
+            <xosid:description>
+                Gets all the known Types by domain and authority
+            </xosid:description>
+            <xosid:parameter xosid:name="domain">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the domain
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="authority">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the authority
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    the list of <xosid:token>Types </xosid:token>with
+                    the given domain and authority
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>domain</xosid:token> or
+                    <xosid:token>authority</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getTypes">
+            <xosid:description>
+                Gets all the known Types.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    the list of all known
+                    <xosid:token>Types</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.type.TypeAdminSession"> 
+        <xosid:implements xosid:interface="osid.OsidSession"/>
+        <xosid:description>
+            This session is used to create, update and delete
+            <xosid:token>Types</xosid:token> in the registry.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="canCreateTypes">
+            <xosid:description>
+                Tests if this user can create
+                <xosid:token>Types.</xosid:token> A return of true does
+                not guarantee successful authorization. A return of
+                false indicates that it is known creating a
+                <xosid:token>Type</xosid:token> will result in a
+                <xosid:token>PERMISSION_DENIED.</xosid:token> This is
+                intended as a hint to an application that may opt not
+                to offer create operations to an unauthorized user.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>false</xosid:token> if
+                    <xosid:token>Type</xosid:token> creation is not
+                    authorized, <xosid:token>true</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getTypeForm">
+            <xosid:description>
+                Gets the type form for creating new types. A new form
+                should be requested for each create transaction.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeForm"/>
+                <xosid:description>
+                    the type form
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="createType">
+            <xosid:description>
+                Creates a new <xosid:token>Type.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="domain">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the domain
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="authority">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the authority
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="identifierNS">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the namespace of the identifier
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="identifier">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the identifier
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="typeForm">
+                <xosid:interfaceType xosid:type="osid.type.TypeForm"/>
+                <xosid:description>
+                    the type form
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the created <xosid:token>Type</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    one or more of the arguments is invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    one or more of the arguments is null
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="canUpdateTypes">
+            <xosid:description>
+                Tests if this user can update types. A return of true
+                does not guarantee successful authorization. A return
+                of false indicates that it is known updating a
+                <xosid:token>Type</xosid:token> will result in a
+                <xosid:token>PERMISSION_DENIED.</xosid:token> This is
+                intended as a hint to an application that may opt not
+                to offer update operations to an unauthorized user.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>false</xosid:token> if type
+                    modification is not authorized,
+                    <xosid:token>true</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="updateType">
+            <xosid:description>
+                Updates a display name.
+            </xosid:description>
+            <xosid:parameter xosid:name="type">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the <xosid:token>Type</xosid:token> to be updated
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="typeForm">
+                <xosid:interfaceType xosid:type="osid.type.TypeForm"/>
+                <xosid:description>
+                    the type form
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>displayName
+                   </xosid:token>or <xosid:token>
+                    displayLabel</xosid:token> is not valid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>type</xosid:token> is not found
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>type, displayName
+                   </xosid:token>or <xosid:token>
+                    displayLabel</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="canDeleteTypes">
+            <xosid:description>
+                Tests if this user can delete
+                <xosid:token>Types</xosid:token> from this
+                <xosid:token>ItemBank.</xosid:token> A return of true
+                does not guarantee successful authorization. A return
+                of false indicates that it is known deleting a
+                <xosid:token>Type</xosid:token> will result in a
+                <xosid:token>PERMISSION_DENIED.</xosid:token> This is
+                intended as a hint to an application that may opt not
+                to offer delete operations to an unauthorized user.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>false</xosid:token> if
+                    <xosid:token>Item</xosid:token> deletion is not
+                    authorized, <xosid:token>true</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="deleteType">
+            <xosid:description>
+                Removes a <xosid:token>Type.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="type">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the <xosid:token>Type</xosid:token> to remove
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>type</xosid:token> is not found
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>type</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="addChild">
+            <xosid:description>
+                Adds a type as a child to another.
+            </xosid:description>
+            <xosid:parameter xosid:name="parentType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the parent <xosid:token>Type</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="type">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type to add to
+                    <xosid:token>parentType</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="ALREADY_EXISTS" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>type</xosid:token> is already a child
+                    of <xosid:token>parentType</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>type</xosid:token> or
+                    <xosid:token>parentType</xosid:token> is not found
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>type</xosid:token> or
+                    <xosid:token>parentType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="removeChild">
+            <xosid:description>
+                Removes a child from a type. This method removes the
+                child but does not delete the type.
+            </xosid:description>
+            <xosid:parameter xosid:name="parentType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the parent <xosid:token>Type</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="type">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the type to to remove
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>type</xosid:token> or
+                    <xosid:token>parentType</xosid:token> is not found
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>type</xosid:token> or
+                    <xosid:token>parentType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.type.Type"> 
+        <xosid:implements xosid:interface=""/>
+        <xosid:description>
+            The Type is a form of identifier that is primarily used to
+            identify interface specifications. The
+            <xosid:token>Type</xosid:token> differs from
+            <xosid:token>Id</xosid:token> in that it offers display
+            information and <xosid:token>Types</xosid:token> may be
+            arranged in hierarchies to indicate an extended interface.
+            Semantically, an <xosid:token>Id</xosid:token> identifies
+            any OSID object while the <xosid:token>Type</xosid:token>
+            identifies a specification.
+
+            <xosid:pbreak/>
+
+            The components of the Type that make up its identification are:
+
+            <xosid:pbreak/>
+
+            <xosid:outline>
+                 <xosid:element>
+                    identifier: a unique key or guid
+                </xosid:element>
+                 <xosid:element>
+                    namespace: the namespace of the identifier
+                </xosid:element>
+                 <xosid:element>
+                    domain: the OSID domain of the type
+                </xosid:element>
+                 <xosid:element>
+                    authority: the isuer of the identifier
+                </xosid:element>
+            </xosid:outline>
+            Persisting a type reference means to persist the above
+            identification elements.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDisplayName">
+            <xosid:description>
+                Gets the full display name of this
+                <xosid:token>Type.</xosid:token>
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the display name of this
+                    <xosid:token>Type</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getDisplayLabel">
+            <xosid:description>
+                Gets the shorter display label for this
+                <xosid:token>Type</xosid:token>. Where a display name
+                of a <xosid:token>Type </xosid:token>might
+               be <xosid:token> "</xosid:token>Critical Logging
+                Priority Type", the display label could be "critical".
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the display label for this <xosid:token>Type.
+                    </xosid:token>The display name is returned when
+                    there is no metadata availavle for this
+                    <xosid:token>Type.</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getDescription">
+            <xosid:description>
+                Gets a description of this
+                <xosid:token>Type.</xosid:token>
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the description of this <xosid:token>Type.
+                    </xosid:token>An empty string is returned when no
+                    description is available for this
+                    <xosid:token>Type.</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getDomain">
+            <xosid:description>
+                Gets the domain. The domain identifies application
+                space of this Type. This method is used to compare one
+                <xosid:token>Type</xosid:token> to another.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the domain of this <xosid:token>Type</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getAuthority">
+            <xosid:description>
+                Gets the authority of this
+                <xosid:token>Type.</xosid:token> The authority is a
+                string used to ensure the uniqueness of this
+                <xosid:token>Type</xosid:token> when using a
+                non-federated identifier space. Generally, it is a
+                domain name identifying the party responsible for this
+                <xosid:token>Type. </xosid:token>This method is used
+                to compare one <xosid:token>Type</xosid:token> to
+                another.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the authority of this
+                    <xosid:token>Type</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getIdentifierNamespace">
+            <xosid:description>
+                Gets the namespace of the identifier. This method is
+                used to compare one <xosid:token>Type</xosid:token> to
+                another.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the authority of this
+                    <xosid:token>Type</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getIdentifier">
+            <xosid:description>
+                Gets the identifier of this <xosid:token>Type.
+                </xosid:token>This method is used to compare one
+                <xosid:token>Type</xosid:token> to another.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the identifier of this
+                    <xosid:token>Type</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="isEqual">
+            <xosid:description>
+                Determines if the given <xosid:token>Type</xosid:token>
+                is equal to this one. Two Types are equal if the
+                domain, authority, namespace and identifier components
+                are equal. The identifier is case sensitive while the
+                domain and authority strings are not case sensitive.
+            </xosid:description>
+            <xosid:parameter xosid:name="type">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the <xosid:token>Type</xosid:token> to compare
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given
+                    <xosid:token>Type</xosid:token> is equal to this
+                    one, <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="isParent">
+            <xosid:description>
+                Tests if the given type is a parent of this type.
+            </xosid:description>
+            <xosid:parameter xosid:name="type">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the <xosid:token>Type</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if
+                    <xosid:token>type</xosid:token> is a parent of
+                    this type, <xosid:token>false
+                    </xosid:token>otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>type</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="isAncestor">
+            <xosid:description>
+                Tests if the given type is an ancestor of this type.
+            </xosid:description>
+            <xosid:parameter xosid:name="type">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the <xosid:token>Type</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if
+                    <xosid:token>type</xosid:token> is an ancestor of
+                    this type, <xosid:token>false
+                    </xosid:token>otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>type</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getParents">
+            <xosid:description>
+                Gets the parents of this type.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    the parents of this type
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.type.TypeForm"> 
+        <xosid:implements xosid:interface=""/>
+        <xosid:description>
+            This form provides a means of updating various fields in
+            the <xosid:token>Type.</xosid:token> Note that the domain,
+            authority and identifier are part of the
+            <xosid:token>Type</xosid:token> identification, and as
+            such not modifiable.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDisplayNameMetadata">
+            <xosid:description>
+                Gets the metadata for the display name.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.Metadata"/>
+                <xosid:description>
+                    metadata for the display name
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="setDisplayName">
+            <xosid:description>
+                Sets a display name. A display name is required and if
+                not set will be set by the provider.
+            </xosid:description>
+            <xosid:parameter xosid:name="displayName">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the new display name
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>displayName</xosid:token> is invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NO_ACCESS" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>displayName</xosid:token> cannot be
+                    modified
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>displayName</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getDisplayLabelMetadata">
+            <xosid:description>
+                Gets the metadata for the display label.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.Metadata"/>
+                <xosid:description>
+                    metadata for the display label
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="setDisplayLabel">
+            <xosid:description>
+                Seta a display label.
+            </xosid:description>
+            <xosid:parameter xosid:name="displayLabel">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the new display label
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>displayLabel</xosid:token> is invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NO_ACCESS" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>displayLabel</xosid:token> cannot be
+                    modified
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>displayLabel</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getDescriptionMetadata">
+            <xosid:description>
+                Gets the metadata for the description.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.Metadata"/>
+                <xosid:description>
+                    metadata for the description
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="setDescription">
+            <xosid:description>
+                Sets a description.
+            </xosid:description>
+            <xosid:parameter xosid:name="description">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the new description
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>description</xosid:token> is invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NO_ACCESS" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>description</xosid:token> cannot be
+                    modified
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>description</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="clearDescription">
+            <xosid:description>
+                Clears the description.
+            </xosid:description>
+            <xosid:error xosid:type="NO_ACCESS" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>description</xosid:token> cannot be
+                    modified
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.type.TypeList"> 
+        <xosid:implements xosid:interface="osid.OsidList"/>
+        <xosid:description>
+            Like all <xosid:token>OsidLists,</xosid:token>
+            <xosid:token>TypeList</xosid:token> provides a means for
+            accessing <xosid:token>Type</xosid:token> elements
+            sequentially either one at a time or many at a time. Examples:
+
+            <xosid:pbreak/>
+
+             <xosid:code>
+while (tl.hasNext()) {
+     Type type = tl.getNextType();
+}
+
+
+            </xosid:code>
+             or
+            <xosid:code>
+
+
+while (tl.hasNext()) {
+     Type[] types = tl.getNextTypes(tl.available());
+}
+            </xosid:code>
+             
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getNextType">
+            <xosid:description>
+                Gets the next <xosid:token>Type</xosid:token> in this
+                list.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the next <xosid:token>Type</xosid:token> in this
+                    list. The <xosid:token>hasNext()</xosid:token>
+                    method should be used to test that a next
+                    <xosid:token>Type</xosid:token> is available
+                    before calling this method.
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    no more elements available in this list
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getNextTypes">
+            <xosid:description>
+                Gets the next set of <xosid:token>Types</xosid:token>
+                in this list. The specified amount must be less than or
+                equal to the return from
+                <xosid:token>available().</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="n">
+                <xosid:primitiveType xosid:type="cardinal"/>
+                <xosid:description>
+                    the number of <xosid:token>Type
+                    </xosid:token>elements requested which must be less
+                    than or equal to
+                    <xosid:token>available()</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.Type" xosid:array="true"/>
+                <xosid:description>
+                    an array of <xosid:token>Type
+                   </xosid:token>elements. <xosid:token>
+                    </xosid:token>The length of the array is less than
+                    or equal to the number specified.
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    no more elements available in this list
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+</xosid:osid>
