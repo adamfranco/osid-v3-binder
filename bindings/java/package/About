@@ -1,0 +1,11 @@
+ 
+Package: 	OSID 3 Java Bindings
+Version:     	1.0
+
+
+Description: 	Converts XOSID into language binding.
+
+
+Creator:  	Tom Coppeto
+		OnTapSolutions
+		19-may-2006
