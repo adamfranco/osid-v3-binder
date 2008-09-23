@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!--
+    build-pkg.xml
+   
+        Package-specific build.xml file.
+
+
+    Tom Coppeto
+    OnTapSolutions
+    21 July 2005
+
+
+    Copyright (c) 2005 Massachusetts Institute of Technology
+        Permission is hereby granted, free of charge, to any person
+        obtaining a copy of this software and associated documentation
+        files (the "Software"), to deal in the Software without
+        restriction, including without limitation the rights to use,
+        copy, modify, merge, publish, distribute, sublicesne, and/or
+        sell copies of the Software, and to permit the persons to whom the
+        Software is furnished to do so, subject the following conditions:
+
+        The above copyright notice and this permission notice shall be
+        included in all copies or substantial portions of the Software.
+  
+        The Software is provided "AS IS", WITHOUT WARRANTY OF ANY KIND,
+        EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+        OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+        NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+        HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+        WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+        DEALINGS IN THE SOFTWARE.
+
+
+    $Id: build-pkg.xml,v 1.7 2006/04/27 23:04:50 tom Exp $
+-->
+
+
+
+<!-- ============================= Project ================================ -->
+
+<project name="OsidBinder">
+
+
+
+<!-- ============================ Classpath =============================== -->
+
+<!--
+    Specify CLASSPATH here.
+-->
+    <path id="classpath">
+    </path>
+    
+    <property name="jarClasspath" value="./" />
+
+<!-- ============================= Targets ================================ -->
+
+<!--
+    Include special clean instructions here.
+-->
+    <target name="clean-pkg">
+
+    </target>
+
+
+<!--
+    Include special prepare instructions here.
+-->
+    <target name="prepare-pkg">
+
+    </target>
+
+
+<!--
+    Include special validate instructions here.
+-->
+    <target name="validate-pkg">
+
+    </target>
+
+
+<!--
+    Include special compile instructions here.
+-->
+    <target name="compile-pkg">
+
+    </target>
+
+
+<!--
+    Include special dist instructions here.
+-->
+    <target name="dist-pkg">
+
+    </target>
+
+
+<!--
+    Include special test instructions here.
+-->
+    <target name="test-pkg">
+
+    </target>
+
+
+<!--
+    Include special release instructions here.
+-->
+    <target name="rel-pkg">
+
+    </target>
+
+</project>
