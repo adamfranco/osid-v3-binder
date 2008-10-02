@@ -141,7 +141,7 @@ public class Interface
 
 	out.println("/**");
 	out.println(" *  An abstract class to use as a version management assembly for");
-	out.println(" *  @link{" + getPackageName() + "}");
+	out.println(" *  {@link " + getPackageName() + "." + getClassName() + "}");
 	out.println(" */");
         out.println();
 

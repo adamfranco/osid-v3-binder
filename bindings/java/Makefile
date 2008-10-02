@@ -35,6 +35,8 @@
 #
 
 BUILD=package/build
+BINDER=../../binder/dist/lib/OsidBinder.jar
+export CLASSPATH=${BINDER}
 
 all:
 	ant -f ${BUILD}/build.xml -Drel.home=${DESTDIR} compile
@@ -54,4 +56,4 @@ world:
 
 bindings:
 	rm -rf src
-	java -cp ../../binder/dist/lib/OsidBinder.jar org.osid.binder.java.OsidBinder ../../definitions/xosid src
+	java -cp ${BINDER} org.osid.binder.java.OsidBinder ../../definitions/xosid src

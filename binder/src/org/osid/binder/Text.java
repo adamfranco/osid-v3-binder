@@ -163,7 +163,7 @@ public class Text
 
     
     private String chop(String s) {
-	return (s.replaceAll("\n", "").replaceAll("\t", " ").trim());
+	return (s.replaceAll("\n", "").replaceAll("\t", " ").replaceAll("\\b\\s{2,}\\b", " ").trim());
     }
 
 
