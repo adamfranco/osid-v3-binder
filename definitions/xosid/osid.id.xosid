@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.id generated at 7/14/2008 6:48:58 PM 
+    XOSID for osid.id generated at 10/2/2008 12:49:27 PM 
 
     Copyright (C) 2002-2008 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -100,13 +100,24 @@
         identifiers. All OSID objects are identified by a unique and
         immutable <xosid:token>Id.</xosid:token> The
         <xosid:token>Id</xosid:token> OSID can be used to generate new
-        <xosid:token>Ids</xosid:token> when creating new objects. 
+        <xosid:token>Ids</xosid:token> when creating new obje_ts. 
 
         <xosid:pbreak/>
 
         Consumers wishing to persist an OSID object should instead
         persist the reference to the object by serializing the
         <xosid:token>Id.</xosid:token>
+
+        <xosid:pbreak/>
+
+        <xosid:token></xosid:token>Most OSID interfaces are used to
+        encapsulate implementation-specific objects from provider to
+        consumer. The <xosid:token>Id</xosid:token> interface is
+        bi-directional and as such cannot be used to encapsulate
+        implementation-specific data other than what is defined
+        explicitly in the <xosid:token>Id.</xosid:token> A provider
+        must respect any <xosid:token>Id</xosid:token> based on its
+        interface alone.
 
         <xosid:pbreak/>
 

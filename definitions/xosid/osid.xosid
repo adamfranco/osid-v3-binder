@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid generated at 9/22/2008 8:45:41 AM 
+    XOSID for osid generated at 10/2/2008 12:16:43 PM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -369,7 +369,7 @@
                 Gets the date this service implementation was released.
             </xosid:description>
             <xosid:return>
-                <xosid:primitiveType xosid:type="timestamp"/>
+                <xosid:interfaceType xosid:type="osid.DateTime"/>
                 <xosid:description>
                     the release date
                 </xosid:description>
@@ -501,7 +501,7 @@
 
         <xosid:method xosid:name="supportsJournaling">
             <xosid:description>
-                Test for support of a jounraling service.
+                Test for support of a journaling service.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="boolean"/>
@@ -2588,26 +2588,7 @@ ObjectList list = results.getObjectList();
         </xosid:description>
 
 
-        <xosid:method xosid:name="getType">
-            <xosid:description>
-                Gets the Type that identifies this record. Tests for
-                interoperability should make use of
-                <xosid:token>implementsType().</xosid:token>
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the record type
-                </xosid:description>
-            </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="implementsType">
+        <xosid:method xosid:name="implementsRecordType">
             <xosid:description>
                 Tests if the given type is implemented by this record.
                 Other types than that directly indicated by
@@ -3078,10 +3059,10 @@ OsidList pickles = results.getObjectList();
                 attempts retrieval in which case the provider must
                 return a positive integer for this method so the
                 consumer can continue execution to receive the error.
-                In all other circumstances, the provider must not return
-                a number greater than the number of elements known
-                since this number will be fed as a parameter to the
-                bulk retrieval method.
+                In all other circumstances, the provider must not
+                return a number greater than the number of elements
+                known since this number will be fed as a parameter to
+                the bulk retrieval method.
             </xosid:implNotes>
         </xosid:method>
 
@@ -3785,7 +3766,7 @@ OsidList pickles = results.getObjectList();
 
     <xosid:enumeration xosid:name="osid.OSID"> 
         <xosid:description>
-            This enumeration contains the list of OSIDs
+            This enumeration contains the list of OSIDs.
         </xosid:description>
 
         <xosid:item xosid:name="ASSESSMENT">
@@ -4316,7 +4297,7 @@ OsidList pickles = results.getObjectList();
             <xosid:return>
                 <xosid:primitiveType xosid:type="integer"/>
                 <xosid:description>
-                    the maximum float
+                    the maximum value
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
@@ -4658,6 +4639,26 @@ getUncertaintyPlus == 120
             </xosid:compliance>
         </xosid:method>
 
+        <xosid:method xosid:name="fitsInTimestamp">
+            <xosid:description>
+                Tests if this date/time fits inside a
+                <xosid:token>timestamp</xosid:token> without
+                overflowing. In other words, if the return from
+                <xosid:token>getTimestamp()</xosid:token> is valid.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="timestamp"/>
+                <xosid:description>
+                    <xosid:token>timestamp</xosid:token> approximation
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
         <xosid:method xosid:name="getAeon">
             <xosid:description>
                 Gets the aeon on the Gregorian calendar, the first aeon
@@ -4699,7 +4700,7 @@ getUncertaintyPlus == 120
             <xosid:description>
                 Gets the millenium on the Gregorian calendar, the first
                 millenium beginning on January 1, 1. 0 is an invalid
-                millenium.
+                millenium. A millenium is 1,000 years.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="integer"/>
@@ -4837,9 +4838,10 @@ getUncertaintyPlus == 120
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getMillisecond">
+        <xosid:method xosid:name="getMilliseconds">
             <xosid:description>
-                Gets the number of milliseconds in this second 0-999.
+                Gets the number of milliseconds in this second 0-999. A
+                millisecond is one thousandth of a second.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="cardinal"/>
@@ -4854,9 +4856,10 @@ getUncertaintyPlus == 120
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getMicrosecond">
+        <xosid:method xosid:name="getMicroseconds">
             <xosid:description>
-                Gets the number of microseconds of the second 0-999.
+                Gets the number of microseconds of the second 0-999. A
+                microsecond is one millionth of a second.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="cardinal"/>
@@ -4871,10 +4874,10 @@ getUncertaintyPlus == 120
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getNanosecond">
+        <xosid:method xosid:name="getNanoseconds">
             <xosid:description>
                 Gets the number of nanoseconds of the microsecond
-                0-999.
+                0-999. A nanosecond is one billionth of a second.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="cardinal"/>
@@ -4889,9 +4892,10 @@ getUncertaintyPlus == 120
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getPicosecond">
+        <xosid:method xosid:name="getPicoseconds">
             <xosid:description>
                 Gets the number of picoseconds of the nanosecond 0-999.
+                A picosecond is one trillionth of a second.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="cardinal"/>
@@ -4906,14 +4910,15 @@ getUncertaintyPlus == 120
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getAttosecond">
+        <xosid:method xosid:name="getFemtoseconds">
             <xosid:description>
-                Gets the number of attoseconds of the picosecond 0-999.
+                Gets the number of femtoseconds of the picosecond
+                0-999. A femtosecond is one quadrillionth of a second.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="cardinal"/>
                 <xosid:description>
-                    the attoseconds of the picosecond
+                    the femtoseconds of the picosecond
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -4923,10 +4928,28 @@ getUncertaintyPlus == 120
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getZeptosecond">
+        <xosid:method xosid:name="getAttoseconds">
+            <xosid:description>
+                Gets the number of attoseconds of the femtoseconds
+                0-999. An attosecond is one quintillionth of a second.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="cardinal"/>
+                <xosid:description>
+                    the attoseconds of the femtosecond
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getZeptoseconds">
             <xosid:description>
                 Gets the number of zeptoseconds of the attosecond
-                0-999.
+                0-999. A zeptosecond is one sextillionth of a second.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="cardinal"/>
@@ -4941,15 +4964,107 @@ getUncertaintyPlus == 120
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getYoctosecond">
+        <xosid:method xosid:name="getYoctoseconds">
             <xosid:description>
                 Gets the number of yoctoseconds of the picosecond
-                0-999.
+                0-999. A yoctosecond is one septillionth of a second.
+                This is getting quite small.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="cardinal"/>
+                <xosid:description>
+                    the yoctoseconds of the yoctosecond
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getXoxxoseconds">
+            <xosid:description>
+                Gets the number of xoxxoseconds of the yoctosecond
+                0-999. A xoxxosecond is one octillionth of a second.
+                We're going with Rudy Rucker here.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="cardinal"/>
+                <xosid:description>
+                    the xoxxoseconds of the yoctosecond
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getWeebleseconds">
+            <xosid:description>
+                Gets the number of weebleseconds of the xoxxosecond
+                0-999. A weeblesecond is one nonillionth of a second.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="cardinal"/>
+                <xosid:description>
+                    the weebleseconds of the xoxxoseconds
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getVatoseconds">
+            <xosid:description>
+                Gets the number of vatoseconds of the xoxxosecond
+                0-999. A vatosecond is one decillionth of a second.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="cardinal"/>
+                <xosid:description>
+                    the vatoseconds of the weeblesecond
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getUndaseconds">
+            <xosid:description>
+                Gets the number of undaseconds of the vatosecond 0-999.
+                An undasecond is one unadecillionth of a second.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="cardinal"/>
+                <xosid:description>
+                    the undaseconds of the vatosecond
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getPlanckSeconds">
+            <xosid:description>
+                Gets the number of Plancks of the vatoseconds. A Planck
+                is 10 quattuordecillionths of a second.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="float"/>
                 <xosid:description>
-                    the yoctoseconds of the yoctosecond
+                    the plancks of the undasecond
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -5244,45 +5359,81 @@ getUncertaintyPlus == 120
             resolutions.
         </xosid:description>
 
+        <xosid:item xosid:name="PLANCKSECOND">
+            <xosid:description>
+                ten quattuordecillionth second resolution
+            </xosid:description>
+        </xosid:item>
+
+        <xosid:item xosid:name="UNDASECOND">
+            <xosid:description>
+                one unadecillionth second resolution
+            </xosid:description>
+        </xosid:item>
+
+        <xosid:item xosid:name="VATOSECOND">
+            <xosid:description>
+                one decillionth second resolution
+            </xosid:description>
+        </xosid:item>
+
+        <xosid:item xosid:name="WEEBLESECOND">
+            <xosid:description>
+                one nonillionth second resolution
+            </xosid:description>
+        </xosid:item>
+
+        <xosid:item xosid:name="XOXXOOSECOND">
+            <xosid:description>
+                one octillionth second resolution
+            </xosid:description>
+        </xosid:item>
+
         <xosid:item xosid:name="YOCTOSECOND">
             <xosid:description>
-                yoctosecond resolution
+                one septllionth second resolution
             </xosid:description>
         </xosid:item>
 
         <xosid:item xosid:name="ZEPTOSECOND">
             <xosid:description>
-                zeptosecond resolution
+                one sextillionth second second resolution
             </xosid:description>
         </xosid:item>
 
         <xosid:item xosid:name="ATTOSECOND">
             <xosid:description>
-                attosecond resolution
+                one quintillionth second resolution
+            </xosid:description>
+        </xosid:item>
+
+        <xosid:item xosid:name="FEMTOSECOND">
+            <xosid:description>
+                one quadrillionth second resolution
             </xosid:description>
         </xosid:item>
 
         <xosid:item xosid:name="PICOSECOND">
             <xosid:description>
-                picosecond resolution
+                one trillionth second resolution
             </xosid:description>
         </xosid:item>
 
         <xosid:item xosid:name="NANOSECOND">
             <xosid:description>
-                nanosecond resolution
+                one billionth second resolution
             </xosid:description>
         </xosid:item>
 
         <xosid:item xosid:name="MICROSECOND">
             <xosid:description>
-                microecond resolution
+                one millionth second resolution
             </xosid:description>
         </xosid:item>
 
         <xosid:item xosid:name="MILLISECOND">
             <xosid:description>
-                millisecond resolution
+                one thousandth second resolution
             </xosid:description>
         </xosid:item>
 
@@ -5322,12 +5473,6 @@ getUncertaintyPlus == 120
             </xosid:description>
         </xosid:item>
 
-        <xosid:item xosid:name="WEEKDAY">
-            <xosid:description>
-                weekday resolution
-            </xosid:description>
-        </xosid:item>
-
         <xosid:item xosid:name="WEEK">
             <xosid:description>
                 week resolution
@@ -5358,6 +5503,12 @@ getUncertaintyPlus == 120
             </xosid:description>
         </xosid:item>
 
+        <xosid:item xosid:name="BLUEMOON">
+            <xosid:description>
+                once in a blue moon
+            </xosid:description>
+        </xosid:item>
+
         <xosid:item xosid:name="DECADE">
             <xosid:description>
                 decade resolution
@@ -5378,19 +5529,19 @@ getUncertaintyPlus == 120
 
         <xosid:item xosid:name="GLACIAL">
             <xosid:description>
-                100K years
+                100K years resolution
             </xosid:description>
         </xosid:item>
 
         <xosid:item xosid:name="EPOCH">
             <xosid:description>
-                1M years
+                1M years resolution
             </xosid:description>
         </xosid:item>
 
         <xosid:item xosid:name="AEON">
             <xosid:description>
-                1B years
+                1B years resolution
             </xosid:description>
         </xosid:item>
 
@@ -6248,26 +6399,6 @@ while (sul.hasNext()) {
                 <xosid:primitiveType xosid:type="string"/>
                 <xosid:description>
                     the description
-                </xosid:description>
-            </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getIndex">
-            <xosid:description>
-                Gets the index of this value. A property name may have
-                multiple associated values which are numbered starting
-                at 1. If a single value exists for this property name,
-                the index is zero.
-            </xosid:description>
-            <xosid:return>
-                <xosid:primitiveType xosid:type="cardinal"/>
-                <xosid:description>
-                    the index
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">

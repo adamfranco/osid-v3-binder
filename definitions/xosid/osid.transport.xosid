@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.transport generated at 7/14/2008 11:43:54 PM 
+    XOSID for osid.transport generated at 10/2/2008 12:25:22 PM 
 
     Copyright (C) 2002-2007 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -143,7 +143,7 @@
 <![CDATA[
 TransportSession session = manager.getOutboundSession();
 DataOutputStream out = session.sendData();
-String cmd = "<call><command>get_songs</command><params><param>" + album + "</param></params></call>";
+String cmd = "<call><command>get_songs</command><params><param>" + album + "</param></call>";
 out.write(cmd.length(), cmd);
 out.close();
 
@@ -522,6 +522,33 @@ public void dispatch(TransportSession session, Authentication auth) {
         </xosid:description>
 
 
+        <xosid:method xosid:name="atEndOfStream">
+            <xosid:description>
+                Tests if the end of this stream has been reached. This
+                may not be a permanent condition as more data may be
+                available at a later time as in the case of tailing a
+                file.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the end of this
+                    stream has been reached,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    this stream has been closed
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
         <xosid:method xosid:name="available">
             <xosid:description>
                 Gets the number of <xosid:token>bytes</xosid:token>
@@ -530,7 +557,7 @@ public void dispatch(TransportSession session, Authentication auth) {
                 <xosid:token>bytes</xosid:token> in this stream.
             </xosid:description>
             <xosid:return>
-                <xosid:primitiveType xosid:type="cardinal" xosid:array="true"/>
+                <xosid:primitiveType xosid:type="cardinal"/>
                 <xosid:description>
                     the number of <xosid:token>bytes</xosid:token>
                     available for retrieval
@@ -554,7 +581,7 @@ public void dispatch(TransportSession session, Authentication auth) {
                 <xosid:token>bytes</xosid:token> in the stream.
             </xosid:description>
             <xosid:parameter xosid:name="n">
-                <xosid:primitiveType xosid:type="cardinal" xosid:array="true"/>
+                <xosid:primitiveType xosid:type="cardinal"/>
                 <xosid:description>
                     the number of <xosid:token>bytes</xosid:token> to
                     skip
@@ -569,7 +596,9 @@ public void dispatch(TransportSession session, Authentication auth) {
             </xosid:return>
             <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
                 <xosid:description>
-                    this stream has been closed
+                    this stream has been closed or
+                    <xosid:token>atEndOfStream()</xosid:token> is
+                    <xosid:token>true</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -601,14 +630,14 @@ public void dispatch(TransportSession session, Authentication auth) {
                 <xosid:primitiveType xosid:type="integer"/>
                 <xosid:description>
                     the actual number of
-                    <xosid:token>bytes</xosid:token> readm or
-                    <xosid:token>-1</xosid:token> if the end of the
-                    stream has been reached
+                    <xosid:token>bytes</xosid:token> read
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
                 <xosid:description>
-                    this stream has been closed
+                    this stream has been closed or
+                    <xosid:token>atEndOfStream()</xosid:token> is
+                    <xosid:token>true</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">

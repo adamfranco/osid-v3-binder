@@ -38,7 +38,6 @@ all:
 	(cd bindings/java; make install)
 
 binders:
-	echo hello
 	(cd binder; make install)
 
 clean:

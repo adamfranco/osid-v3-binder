@@ -75,7 +75,7 @@ public class Interface
 	out.println("//");
 	out.println();
 
-	out.println("package " + getPackageName(getName()) + ";");
+	out.println("package " + getPackageName() + ";");
 	out.println();
 	out.println();
 
@@ -88,7 +88,7 @@ public class Interface
 	out.println(" */");
         out.println();
 
-	out.print("public interface " + getClassName(getName()));
+	out.print("public interface " + getClassName());
 	boolean first = true;
 	for (String s: getInheritedInterfaces()) {
 	    if (!first) {
@@ -116,6 +116,43 @@ public class Interface
 	printClose(out, getName());
 
 	out.println("}");
+	return;
+    }
+
+
+    void printAssembly(PrintStream out) {
+
+	out.println("//");
+	out.println("// " + getName());
+	out.println("//");
+	out.println("//     Defines an assembly for " + getName() + ".");
+	out.println("//");
+	getCopyright().printPlain(out, "// ");
+	out.println();
+	out.println("//");
+	getLicense().printPlain(out, "//     ");
+	out.println();
+	out.println("//");
+	out.println();
+
+	out.println("package " + getAssemblyName() + ";");
+	out.println();
+	out.println();
+
+	out.println("/**");
+	out.println(" *  An abstract class to use as a version management assembly for");
+	out.println(" *  @link{" + getPackageName() + "}");
+	out.println(" */");
+        out.println();
+
+	out.println("public abstract class " + getClassName() + " {");
+	out.println();
+	out.println("    /*");
+	out.println("     * Space reserved for future use.");
+	out.println("     */");
+	out.println();
+	out.println("}");
+
 	return;
     }
 
@@ -151,19 +188,36 @@ public class Interface
 
     void printClose(PrintStream out, String interfaceName) {
 
-	if (!interfaceName.endsWith("Manager") && !interfaceName.endsWith("Session") 
-	    && !interfaceName.endsWith("List")) {
-	    return;
+	if (interfaceName.equals("osid.OsidManager")) {
+	    out.println();
+	    out.println();
+	    out.println("    /**");
+	    out.println("     *  Shuts down this <code>" + interfaceName + "</code>");
+	    out.println("     */");
+	    out.println();
+	    out.println("    public void shutdown();");
 	}
 
-	out.println();
-	out.println();
-	out.println("    /**");
-	out.println("     *  Closes this <code>" + interfaceName + "</code>");
-	out.println("     */");
-	out.println();
-	out.println("    public void close();");
-	
+	if (interfaceName.equals("osid.OsidSession")) {
+	    out.println();
+	    out.println();
+	    out.println("    /**");
+	    out.println("     *  Closes this <code>" + interfaceName + "</code>");
+	    out.println("     */");
+	    out.println();
+	    out.println("    public void close();");
+	}
+
+	if (interfaceName.equals("osid.OsidList")) {
+	    out.println();
+	    out.println();
+	    out.println("    /**");
+	    out.println("     *  Closes down this <code>" + interfaceName + "</code>");
+	    out.println("     */");
+	    out.println();
+	    out.println("    public void done();");
+	}
+
 	return;
     }
 
@@ -179,15 +233,21 @@ public class Interface
     }
 
 
-    private String getClassName(String path) {
-	int pos = path.lastIndexOf(".");
-	return (path.substring(pos + 1));
+    protected String getClassName() {
+	int pos = getName().lastIndexOf(".");
+	return (getName().substring(pos + 1));
     }
 
 
-    private String getPackageName(String path) {
-	int pos = path.lastIndexOf(".");
-	return ("org." + path.substring(0, pos));
+    protected String getPackageName() {
+	int pos = getName().lastIndexOf(".");
+	return ("org." + getName().substring(0, pos));
+    }
+
+
+    protected String getAssemblyName() {
+	String[] parts = getName().split("\\.");
+	return ("org." + parts[0] + ".assembly." + parts[1]);
     }
 }
 	

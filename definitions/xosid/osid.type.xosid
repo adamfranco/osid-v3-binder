@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.type generated at 7/14/2008 11:49:52 PM 
+    XOSID for osid.type generated at 10/2/2008 12:55:37 PM 
 
     Copyright (C) 2002-2007 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -130,11 +130,6 @@
                 namespace: a string identifying the namespace of the
                 identifier, such as "urn" or "oid".
             </xosid:element>
-             <xosid:element>
-                domain: indicates the scope of this Type in the context
-                of the OSIDs. Often, this may be a particular OSID
-                object, such as "asset", or an OSID mechanism such as "search".
-            </xosid:element>
         </xosid:outline>
          
         Lookup example:
@@ -172,16 +167,26 @@ print type.getDisplayName();
         construct the type classes directly. This has the feature of
         being expedient and contains the type definitions with their
         consuming code. This may get cumbersome for managing larger
-        numbers of types especially when they come in the form of hierarchies.
-
-        <xosid:pbreak/>
-
+        numbers of types especially when they come in the form of
+        hierarchies.
         Unless an application will display a type, it can simply
         construct a type based on the identification components and not
         use this service. OSID implementations benefit more by using
         this service since the type hierarchy is necessary in order to
-        respond to interoperability tests and it also provides a place
-        to perform mappings across different type definitions.
+        respond to interoperability tests and it, provides a place to
+        perform mappings across different type definitions, and
+        provides displayable metadata to its consumers.
+
+        <xosid:pbreak/>
+
+        Most OSID interfaces are used to encapsulate
+        implementation-specific objects from provider to consumer. The
+        <xosid:token>Type</xosid:token> interface is bi-directional
+        and as such cannot be used to encapsulate
+        implementation-specific data other than what is defined
+        explicitly in the <xosid:token>Type.</xosid:token> A provider
+        must respect any <xosid:token>Type</xosid:token> based on its
+        interface alone.
     </xosid:description>
 
 
@@ -484,17 +489,11 @@ print type.getDisplayName();
         <xosid:method xosid:name="getType">
             <xosid:description>
                 Gets a <xosid:token>Type</xosid:token> by its string
-                representation which is a combination of the domain,
-                authority and identifier. This method only returns the
+                representation which is a combination of the authority
+                and identifier. This method only returns the
                 <xosid:token>Type</xosid:token> if it is known by the
                 given identification components.
             </xosid:description>
-            <xosid:parameter xosid:name="domain">
-                <xosid:primitiveType xosid:type="string"/>
-                <xosid:description>
-                    the domain
-                </xosid:description>
-            </xosid:parameter>
             <xosid:parameter xosid:name="namespace">
                 <xosid:primitiveType xosid:type="string"/>
                 <xosid:description>
@@ -802,12 +801,6 @@ print type.getDisplayName();
             <xosid:description>
                 Creates a new <xosid:token>Type.</xosid:token>
             </xosid:description>
-            <xosid:parameter xosid:name="domain">
-                <xosid:primitiveType xosid:type="string"/>
-                <xosid:description>
-                    the domain
-                </xosid:description>
-            </xosid:parameter>
             <xosid:parameter xosid:name="authority">
                 <xosid:primitiveType xosid:type="string"/>
                 <xosid:description>
@@ -1138,14 +1131,14 @@ print type.getDisplayName();
                     namespace: the namespace of the identifier
                 </xosid:element>
                  <xosid:element>
-                    domain: the OSID domain of the type
-                </xosid:element>
-                 <xosid:element>
                     authority: the isuer of the identifier
                 </xosid:element>
             </xosid:outline>
             Persisting a type reference means to persist the above
-            identification elements.
+            identification elements. In addition to these identifier
+            components, A <xosid:token>Type</xosid:token> mai also
+            provide some additional metadata such as a name,
+            description and domain.
         </xosid:description>
 
 
@@ -1215,9 +1208,8 @@ print type.getDisplayName();
 
         <xosid:method xosid:name="getDomain">
             <xosid:description>
-                Gets the domain. The domain identifies application
-                space of this Type. This method is used to compare one
-                <xosid:token>Type</xosid:token> to another.
+                Gets the domain. The domain can provide an information
+                label about ths application space of this Type.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="string"/>
@@ -1302,9 +1294,9 @@ print type.getDisplayName();
             <xosid:description>
                 Determines if the given <xosid:token>Type</xosid:token>
                 is equal to this one. Two Types are equal if the
-                domain, authority, namespace and identifier components
-                are equal. The identifier is case sensitive while the
-                domain and authority strings are not case sensitive.
+                authority, namespace and identifier components are
+                equal. The identifier is case sensitive while the
+                authority strings are not case sensitive.
             </xosid:description>
             <xosid:parameter xosid:name="type">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
@@ -1582,6 +1574,74 @@ print type.getDisplayName();
             <xosid:error xosid:type="NO_ACCESS" xosid:category="Programming">
                 <xosid:description>
                     <xosid:token>description</xosid:token> cannot be
+                    modified
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getDomainMetadata">
+            <xosid:description>
+                Gets the metadata for the domain.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.Metadata"/>
+                <xosid:description>
+                    metadata for the domain
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="setDomain">
+            <xosid:description>
+                Sets a domain.
+            </xosid:description>
+            <xosid:parameter xosid:name="domain">
+                <xosid:primitiveType xosid:type="string"/>
+                <xosid:description>
+                    the new domain
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>domain</xosid:token> is invalid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NO_ACCESS" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>domain</xosid:token> cannot be
+                    modified
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>domain</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="clearDomain">
+            <xosid:description>
+                Clears the domain.
+            </xosid:description>
+            <xosid:error xosid:type="NO_ACCESS" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>domain</xosid:token> cannot be
                     modified
                 </xosid:description>
             </xosid:error>

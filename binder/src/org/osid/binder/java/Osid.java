@@ -125,6 +125,40 @@ public class Osid
     }
 
 
+    protected void printAssembly(String directory) {
+
+	File dir = new File(directory);
+	if (dir.exists() == false) {
+	    System.err.println("unable to find " + directory);
+	    return;
+	}
+
+	PrintStream out;
+	for (org.osid.binder.Interface intraface: getInterfaces()) {
+
+	    if (((Interface) intraface).getPackageName().equals("org.osid")) {
+		continue;
+	    }
+
+	    if (((Interface) intraface).getName().endsWith("Profile")) {
+		continue;
+	    }
+
+	    try {
+		out = new PrintStream(new FileOutputStream(new File(dir, getClassName(intraface.getName()) + ".java")));
+	    } catch (FileNotFoundException fnfe) {
+		System.err.println("cannot open " + dir.getPath() + "/" + getClassName(intraface.getName()));
+		return;
+	    }
+
+	    ((Interface) intraface).printAssembly(out);
+	    out.close();
+	}
+
+	return;
+    }
+
+
     protected String qualifyOsidName(String name) {
 	
 	return ("org." + name);

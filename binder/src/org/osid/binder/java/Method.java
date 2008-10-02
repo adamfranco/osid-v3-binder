@@ -179,18 +179,25 @@ public class Method
     private void addClose() {
 	org.osid.binder.Error ise = null;
 
-	for (org.osid.binder.Error error: getErrors()) {
-	    if (error.getType().equals("IllegalState")) {
-		ise = error;
-		break;
-	    }
-	}
+	String type;
+	String action;
 
-	if (ise != null) {
-	    ise.addDescription("Or this <code>" + this.interfaceName + "</code> has been closed.");
+	if (this.interfaceName.endsWith("Manager") || 
+	    this.interfaceName.endsWith("Profile")) {
+	    type = "manager";
+	    action = "shut down";
+	} else if (this.interfaceName.endsWith("Session")) {
+	    type = "session";
+	    action = "closed";
+	} else if (this.interfaceName.endsWith("List")) {
+	    type = "list";
+	    action = "closed";
 	} else {
-	    addError("ILLEGAL_STATE", "programming", "This <code>" + this.interfaceName + "</code> has been closed.");
+	    type = "thing";
+	    action = "";
 	}
+	
+	addError("ILLEGAL_STATE", "Programming", "this " + type + " has been " + action);
 
 	return;
     }
@@ -200,7 +207,7 @@ public class Method
 	
 	String category = error.getCategory();
 
-	if (category.equals("programming") || category.equals("integration")) {
+	if (category.equals("Programming") || category.equals("Integration")) {
 	    return (false);
 	}
 

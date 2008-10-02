@@ -95,7 +95,7 @@ public class OsidBinder
 		    }
 		    boolean add_null = true;
 		    for (org.osid.binder.Error error: method.getErrors()) {
-			if (error.getType() == "NULL_ARGUMENT") {
+			if (error.getType().equals("NULL_ARGUMENT")) {
 			    add_null = false;
 			}
 		    }
@@ -109,8 +109,10 @@ public class OsidBinder
     }
 
 
-    public void print(String directory) 
+    public void outputInterfaces(String directory) 
 	throws org.osid.binder.OsidBinderException {
+
+	directory = directory + "/org/osid";
 
 	File dir = new File(directory);
 	if (!dir.exists()) {
@@ -136,7 +138,39 @@ public class OsidBinder
 	    ((Osid) osid).print(osidDir.getPath());
 	}
 
-	printErrors(directory);
+	outputErrors(directory);
+	return;
+    }
+
+
+    public void outputAssemblies(String directory) 
+	throws org.osid.binder.OsidBinderException {
+
+	directory = directory + "/org/osid/assemblies";
+
+	File dir = new File(directory);
+	if (!dir.exists()) {
+	    dir.mkdirs();
+	} else if (!dir.isDirectory()) {
+	    throw new org.osid.binder.OsidBinderException(directory + ": not a typewriter");
+	}
+
+	for (org.osid.binder.Osid osid: getOsids()) {
+	    String sub = osid.getName();
+	    if (sub.equals("osid")) {
+		sub = "";
+	    }
+
+	    File osidDir = new File(dir, sub);
+	    if (!osidDir.exists()) {
+		osidDir.mkdirs();
+	    } else if (!osidDir.isDirectory()) {
+		throw new org.osid.binder.OsidBinderException(sub + ": not a directory");
+	    }
+
+	    ((Osid) osid).printAssembly(osidDir.getPath());
+	}
+
 	return;
     }
 
@@ -152,7 +186,7 @@ public class OsidBinder
     }
 
 
-    private void printErrors(String directory)
+    private void outputErrors(String directory)
 	throws org.osid.binder.OsidBinderException {
 
 	File dir = new File(directory);
@@ -256,7 +290,8 @@ public class OsidBinder
 
 	try {
 	    binder.parse(args[0]);
-	    binder.print(args[1]);
+	    binder.outputInterfaces(args[1]);
+	    binder.outputAssemblies(args[1]);
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}

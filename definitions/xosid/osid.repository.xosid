@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.repository generated at 9/22/2008 7:20:11 AM 
+    XOSID for osid.repository generated at 10/2/2008 11:47:29 AM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -13212,6 +13212,7 @@ Asset newAsset = session.createAsset(form);
             <xosid:pbreak/>
 
              <xosid:code>
+<![CDATA[
 String newDescription = "hello, world!";
 if (!session.canUpdateSubject(subjectId)) {
     return "cannot update subject";
@@ -13227,8 +13228,8 @@ if (metadata.getSyntax() != MetadtaSyntax.STRING) {
     return "subject description is the wrong type";
 }
 
-if ((metadata.getMinStringSize() &gt; newDescription.length()) or
-    (metadata.getMaxStringSize() &lt; newDescription.length())) {
+if ((metadata.getMinStringSize() > newDescription.length()) or
+    (metadata.getMaxStringSize() < newDescription.length())) {
     return "subject description too long or too short";
 }
 
@@ -13239,6 +13240,7 @@ if (!form.isValid()) {
 
 session.updateSubject(subjectId, subjectForm);
 return "subject updated";
+]]>
             </xosid:code>
              
         </xosid:description>
@@ -20368,6 +20370,13 @@ return "subject updated";
                     be <xosid:token>true.</xosid:token>
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+
+                                        <xosid:token>isCopyrightStatusKnown()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -20391,6 +20400,13 @@ return "subject updated";
                     is not protected by copyright.
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+
+                                        <xosid:token>isCopyrightStatusKnown()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -20419,7 +20435,10 @@ return "subject updated";
 
         <xosid:method xosid:name="getLicense">
             <xosid:description>
-                Gets the terms of usage for this asset.
+                Gets the terms of usage for this asset. If
+                <xosid:token>isCopyrightStatusKnown()</xosid:token> is
+                <xosid:token>false</xosid:token> a statement about the
+                suspected copyright status may also be included.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="string"/>
@@ -20458,6 +20477,13 @@ return "subject updated";
                     <xosid:token>false</xosid:token> otherwise.
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+
+                                        <xosid:token>isCopyrightStatusKnown()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -20494,6 +20520,13 @@ return "subject updated";
                     must also be <xosid:token>true.</xosid:token>
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+
+                                        <xosid:token>isCopyrightStatusKnown()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -20530,6 +20563,13 @@ return "subject updated";
                     must also be <xosid:token>true.</xosid:token>
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+
+                                        <xosid:token>isCopyrightStatusKnown()</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -23809,6 +23849,12 @@ while (al.hasNext()) {
                     the url for this data
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>hasURL()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -23816,44 +23862,37 @@ while (al.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getAssetContentInterface">
+        <xosid:method xosid:name="getAssetContentRecord">
             <xosid:description>
-                Gets the <xosid:token>AssetContent</xosid:token>
-                interface corresponding to the given
-                <xosid:token>AssetContent</xosid:token> interface
-                <xosid:token>Type. </xosid:token>An
-                <xosid:token>AssetContent</xosid:token> returned from
-                another method is only required to implement the root
-                <xosid:token>AssetContent</xosid:token> interface and
-                this method must be used to retrieve an asset content
-                implementing the requested interface along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>AssetContent</xosid:token> interface. The
-                <xosid:token>assetContentInterfaceType</xosid:token>
-                may be the <xosid:token>Type</xosid:token> returned by
-                <xosid:token>getInterfaceType()</xosid:token> or any
-                parent of <xosid:token>getInterfaceType()</xosid:token>
-                in the <xosid:token>Type</xosid:token> hierarchy where
-               
-                <xosid:token>implementsInterfaceType(assetContentInterfaceType)</xosid:token>
+                Gets the record corresponding to the given
+                <xosid:token>AssetContent</xosid:token> record
+                <xosid:token>Type. </xosid:token>This method must be
+                used to retrieve an object implementing the requested
+                record interface along with all of its ancestor
+                interfaces. The
+                <xosid:token>assetRecordType</xosid:token> may be the
+                <xosid:token>Type</xosid:token> returned in
+                <xosid:token>getRecordTypes()</xosid:token> or any of
+                its parents in a <xosid:token>Type</xosid:token>
+                hierarchy where
+                <xosid:token>hasRecordType(assetRecordType)</xosid:token>
                 is <xosid:token>true</xosid:token>.
             </xosid:description>
             <xosid:parameter xosid:name="assetContentContentInterfaceType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the type of the interface to retrieve
+                    the type of the record to retrieve
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.repository.AssetContent"/>
+                <xosid:interfaceType xosid:type="osid.repository.AssetContentRecord"/>
                 <xosid:description>
-                    the asset content with the specified interface
+                    the asset content record
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-
-                                        <xosid:token>assetContentInterfaceType</xosid:token>
+                    <xosid:token>assetContentRecordType</xosid:token>
                     is <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -23870,7 +23909,7 @@ while (al.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementsInterfaceType(assetContentInterfaceType)</xosid:token>
+                                        <xosid:token>hasRecordType(assetContentRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>

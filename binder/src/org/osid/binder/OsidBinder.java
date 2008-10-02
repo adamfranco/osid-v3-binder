@@ -148,7 +148,7 @@ public abstract class OsidBinder
      *  @throws OsidBinderException if something went wrong
      */
 
-    public abstract void print(String directory)
+    public abstract void outputInterfaces(String directory)
 	throws OsidBinderException;
 
 

@@ -54,5 +54,4 @@ world:
 
 bindings:
 	rm -rf src
-#	mkdir -p src/org/osid
-	java -cp ../../binder/dist/lib/OsidBinder.jar org.osid.binder.java.OsidBinder ../../definitions/xosid src/org/osid
+	java -cp ../../binder/dist/lib/OsidBinder.jar org.osid.binder.java.OsidBinder ../../definitions/xosid src

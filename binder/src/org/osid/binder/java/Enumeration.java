@@ -120,9 +120,21 @@ public class Enumeration
 	    out.print("    " + item.getBinderName());
 
 	    if (getName().equals("osid.OSID")) {
-		out.print("(\"" + getManagerName(item.getBinderName()) + 
+		out.print("(\"" + getServiceName(item.getBinderName()) + 
+			  "\", \"org.osid." +
+			  getServiceName(item.getBinderName()) + 
 			  "\", \"" +
-			  getProxyManagerName(item.getBinderName()) + "\")");
+			  getManagerName(item.getBinderName()) + 
+			  "\", \"" +
+			  getProxyManagerName(item.getBinderName()) +
+			  "\", \"" + 
+			  item.getDescription().getText() +
+			  "\")");
+	    } else {
+		out.print("(\"" + item.getBinderName().toLowerCase() + 
+			  "\", \"" +
+			  item.getDescription().getText() + 
+			  "\")");
 	    }
 	}
 
@@ -131,14 +143,27 @@ public class Enumeration
 	if (getName().equals("osid.OSID")) {
 	    out.println();
 	    out.println();
+	    out.println("    private final String service;");
+	    out.println("    private final String package;");
 	    out.println("    private final String manager;");
 	    out.println("    private final String proxyManager;");
+	    out.println("    private final String description;");
 	    out.println();
-	    out.println("    OSID(String manager, String proxyManager) {");
+	    out.println("    OSID(String service, String package, String manager, String proxyManager, String description) {");
+	    out.println("        this.service      = service;");
+	    out.println("        this.package      = package;");
 	    out.println("        this.manager      = manager;");
 	    out.println("        this.proxyManager = proxyManager;");
+	    out.println("        this.description  = description;");
 	    out.println("    }");
 	    out.println();
+	    out.println("    public String service() {");
+	    out.println("        return (this.service);");
+	    out.println("    }");
+	    out.println();
+	    out.println("    public String package() {");
+	    out.println("        return (this.package);");
+	    out.println("    }");
 	    out.println();
 	    out.println("    public String manager() {");
 	    out.println("        return (this.manager);");
@@ -146,6 +171,28 @@ public class Enumeration
 	    out.println();
 	    out.println("    public String proxyManager() {");
 	    out.println("        return (this.proxyManager);");
+	    out.println("    }");
+	    out.println();
+	    out.println("    public String description() {");
+	    out.println("        return (this.description);");
+	    out.println("    }");
+	} else {
+	    out.println();
+	    out.println();
+	    out.println("    private final String name;");
+	    out.println("    private final String description;");
+	    out.println();
+	    out.println("    OSID(String name, String description) {");
+	    out.println("        this.name        = name;");
+	    out.println("        this.description = description;");
+	    out.println("    }");
+	    out.println();
+	    out.println("    public String name() {");
+	    out.println("        return (this.name);");
+	    out.println("    }");
+	    out.println();
+	    out.println("    public String description() {");
+	    out.println("        return (this.description);");
 	    out.println("    }");
 	}
 
@@ -162,22 +209,26 @@ public class Enumeration
 
 
     private String getPackageName(final String path) {
-	
 	int pos = path.lastIndexOf(".");
 	return ("org." + path.substring(0, pos));
     }
 
 
+    private String getServiceName(final String osid) {
+	return (osid.toLowerCase());
+    }
+
+
     private String getManagerName(final String osid) {
 
-	return ("org.osid." + osid.toLowerCase() + 
+	return ("org.osid." + osid.toLowerCase() + "." +
 		capitalize(osid.toLowerCase()) + "Manager");
     }
 
 
     private String getProxyManagerName(final String osid) {
 
-	return ("org.osid." + osid.toLowerCase() + 
+	return ("org.osid." + osid.toLowerCase() + "," + 
 		capitalize(osid.toLowerCase()) + "ProxyManager");
     }
 

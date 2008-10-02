@@ -138,6 +138,36 @@ public class Text
 
 
     /**
+     *  Gets text with no formatting for use within a string.
+     */
+
+    public String getText() {
+	return (getText(this.text, ""));
+    }
+
+    private String getText(Element element, String s) {
+	NodeList nl = element.getChildNodes();
+	for (int i = 0; i < nl.getLength(); i++) {
+	    if ((s.length() > 0) && !s.endsWith(" ")) {
+		s = s + " ";
+	    }
+	    if (nl.item(i).getNodeType() == Node.TEXT_NODE) {
+		s = s + chop(nl.item(i).getNodeValue());
+	    } else if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
+		s = s + getText((Element) nl.item(i), s);
+	    }
+	}
+
+	return (s);
+    }
+
+    
+    private String chop(String s) {
+	return (s.replaceAll("\n", "").replaceAll("\t", " ").trim());
+    }
+
+
+    /**
      *  Outputs this text using the specified margin.
      *
      *  @param out the output stream
@@ -278,7 +308,7 @@ public class Text
 
 	while(st.hasMoreTokens()) {
 	    String s = st.nextToken();
-	    if ((s.length() + col) > 78) {
+	    if ((col >= 0) && ((s.length() + col) > 78)) {
 		out.println();
 		out.print(margin);
 		col = margin.length();

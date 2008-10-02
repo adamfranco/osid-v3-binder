@@ -153,10 +153,17 @@ public abstract class Method
      */
 
     public void addError(String type, String category, String description) {
+	for (Error error : this.errors) {
+	    if (error.getType().equals(type)) {
+		error.getDescription().addText(" or " + description);
+		return;
+	    }
+	}
+
 	Error error = getOsidBinderFactory().createError();
 	error.setType(type);
 	error.setCategory(category);
-	error.setDescription(doc, description);
+	error.setDescription(this.doc, description);
 	
 	this.errors.add(error);
 	return;	
