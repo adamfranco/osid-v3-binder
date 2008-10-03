@@ -37,7 +37,7 @@
 
 
 <!DOCTYPE project [
-    <!ENTITY javadoc SYSTEM "file:./build-jdoc.xml">
+    <!ENTITY javadoc SYSTEM "./build-jdoc.xml">
 ]>
 
 
