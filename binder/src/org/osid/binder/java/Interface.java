@@ -54,9 +54,13 @@ public class Interface
     private OsidBinderFactory factory = new OsidBinderFactory();
 
 
-    Interface() {
+    /**
+     *  Constructs a new <code>Interface</code>
+     */
 
+    Interface() {
 	super();
+	return;
     }
 
 

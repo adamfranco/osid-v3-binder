@@ -35,9 +35,7 @@ package org.osid.binder.java;
 
 
 /**
- *  <p>
  *  Converts OSID primitive Types into Java types.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -45,8 +43,8 @@ package org.osid.binder.java;
 
 public class PrimitiveTranslator {
 
-    static String translate(String primitive) {
 
+    static String translate(String primitive) {
 	if (primitive.equals("boolean")) {
 	    return ("boolean");
 	}

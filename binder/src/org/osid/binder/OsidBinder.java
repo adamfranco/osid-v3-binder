@@ -46,9 +46,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 
 /**
- *  <p>
- *  Thrown to indicate a problem in translating the passwd xosid..
- *  </p>
+ *  Parses an XOSID.
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -68,6 +66,7 @@ public abstract class OsidBinder
     
     public OsidBinder() {
 	super();
+	return;
     }
 
 
@@ -135,7 +134,6 @@ public abstract class OsidBinder
      */
 
     public Osid[] getOsids() {
-
 	return (this.osids.values().toArray(new Osid[this.osids.size()]));
     }
 

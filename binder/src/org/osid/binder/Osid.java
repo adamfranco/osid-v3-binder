@@ -44,9 +44,7 @@ import org.w3c.dom.NodeList;
 
 
 /**
- *  <p>
  *  Defines an OSID.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -72,6 +70,7 @@ public abstract class Osid
 
     protected Osid() {
 	super();
+	return;
     }
 
 

@@ -41,9 +41,7 @@ import org.w3c.dom.NodeList;
 
 
 /**
- *  <p>
- *  Thrown to indicate a problem in translating the passwd xosid..
- *  </p>
+ *  Defins an OSID interface.
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -67,6 +65,7 @@ public abstract class Interface
     
     protected Interface() {
 	super();
+	return;
     }
 
 

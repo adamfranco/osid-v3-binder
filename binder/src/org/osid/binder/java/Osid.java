@@ -44,9 +44,7 @@ import org.w3c.dom.NodeList;
 
 
 /**
- *  <p>
  *  Outputs the Java binding for an OSID.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -58,14 +56,17 @@ public class Osid
     private OsidBinderFactory factory = new OsidBinderFactory();
 
 
-    Osid() {
+    /**
+     *  Constructs a new <code>Osid</code>
+     */
 
+    Osid() {
 	super();
+	return;
     }
 
     
     protected void print(String directory) {
-
 	File dir = new File(directory);
 	if (dir.exists() == false) {
 	    System.err.println("unable to find " + directory);
@@ -126,7 +127,6 @@ public class Osid
 
 
     protected void printAssembly(String directory) {
-
 	File dir = new File(directory);
 	if (dir.exists() == false) {
 	    System.err.println("unable to find " + directory);
@@ -160,13 +160,11 @@ public class Osid
 
 
     protected String qualifyOsidName(String name) {
-	
 	return ("org." + name);
     }
 
 	
     private String getClassName(String path) {
-	
 	int pos = path.lastIndexOf(".");
 	return (path.substring(pos + 1));
     }
@@ -184,7 +182,6 @@ public class Osid
 
 
     private void printPackageInfo(PrintStream out) {
-
 	out.println("/**");
 	out.println(" * <center><strong>" + getName() + " " + getVersion() + "</strong></center>");
 	out.println(" * ");
@@ -200,6 +197,7 @@ public class Osid
 	getLicense().printHtmlParagraph(out, " * ");
 	out.println();
 	out.println(" * ");
+
 	if (getName().equals("org.osid") == false) {
 	    out.println(" * @see org.osid");
 	}

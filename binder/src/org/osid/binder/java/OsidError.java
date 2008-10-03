@@ -41,9 +41,7 @@ import org.w3c.dom.Element;
 
 
 /**
- *  <p>
- *     Represents the OSID exception all other exceptions extend.
- *  </p>
+ *  Represents the OSID exception all other exceptions extend.
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -55,7 +53,13 @@ public class OsidError
     private OsidBinderFactory factory = new OsidBinderFactory();
     private org.osid.binder.Text description;
     
-    
+   
+    /**
+     *  Constructs a new <code>OsidError</code>.
+     *
+     *  @throws org.osid.binder.OsidBinderException
+     */
+
     OsidError()
 	throws org.osid.binder.OsidBinderException {
 
@@ -96,7 +100,6 @@ public class OsidError
      */
  
     public String getCategory() {
-	
 	return ("");
     }
 
@@ -108,7 +111,6 @@ public class OsidError
      */
 
     public String getType() {
-	
 	return ("osid.OsidError");
     }
 
@@ -120,7 +122,6 @@ public class OsidError
      */
 
     public org.osid.binder.Text getDescription() {
-
 	return (this.description);
     }
 

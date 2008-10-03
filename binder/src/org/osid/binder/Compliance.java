@@ -41,9 +41,7 @@ import org.w3c.dom.NodeList;
 
 
 /**
- *  <p>
- *  Defines a compliance statement.
- *  </p>
+ *  Defines an OSID compliance statement.
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -61,8 +59,8 @@ public abstract class Compliance
      */
 
     protected Compliance() {
-
 	super();
+	return;
     }
 
 
@@ -99,7 +97,6 @@ public abstract class Compliance
      */
 
     public String getType() {
-
 	return (this.type);
     }
 
@@ -111,7 +108,6 @@ public abstract class Compliance
      */
 
     public void setType(String type) {
-	
 	this.type = type;
 	return;
     }
@@ -124,7 +120,6 @@ public abstract class Compliance
      */
     
     public Text getDescription() {
-
 	return (this.description);
     }
 

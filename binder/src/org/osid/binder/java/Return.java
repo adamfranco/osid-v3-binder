@@ -38,8 +38,6 @@ import java.io.PrintStream;
 
 /**
  *  <p>
- *  Produces the Java binding for a return statement.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -51,9 +49,13 @@ public class Return
     private OsidBinderFactory factory = new OsidBinderFactory();
 
 
-    Return() {
+    /**
+     *  Constructs a new <code>Return</code>
+     */
 
+    Return() {
 	super();
+	return;
     }
 
 
@@ -64,7 +66,6 @@ public class Return
      */
 
     public String getBinderType() {
-
 	String ret;
 
 	if (isPrimitiveType()) {

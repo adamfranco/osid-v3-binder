@@ -43,9 +43,7 @@ import org.w3c.dom.NodeList;
 
 
 /**
- *  <p>
  *  Defines a text element and methods to format output.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -66,6 +64,7 @@ public class Text
 
     public Text() {
 	super();
+	return;
     }
 
 

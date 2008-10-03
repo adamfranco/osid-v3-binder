@@ -35,9 +35,7 @@ package org.osid.binder;
 
 
 /**
- *  <p>
- *  Thrown to indicate a problem in translating the passwd xosid..
- *  </p>
+ *  Thrown to indicate a problem in translating the passwd xosid.
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -54,6 +52,7 @@ public class OsidBinderException
 
     public OsidBinderException() {
 	super();
+	return;
     }
 
 
@@ -68,6 +67,7 @@ public class OsidBinderException
 
     public OsidBinderException(String msg) {
 	super(msg);
+	return;
     }
 
 
@@ -83,6 +83,7 @@ public class OsidBinderException
 
     public OsidBinderException(String msg, Throwable t) {
 	super(msg, t);
+	return;
     }
 
 
@@ -97,6 +98,7 @@ public class OsidBinderException
 
     public OsidBinderException(Throwable t) {
 	super(t);
+	return;
     }
 }
 

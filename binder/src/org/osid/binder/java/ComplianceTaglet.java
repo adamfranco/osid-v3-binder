@@ -37,9 +37,7 @@ import java.util.Map;
 
 
 /**
- *  <p>
  *  Defines the javadoc @compliance taglet.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -59,7 +57,6 @@ public class ComplianceTaglet
      */
     
     public String getName() {
-
 	return (this.name);
     }
 
@@ -71,7 +68,6 @@ public class ComplianceTaglet
      */
     
     protected String getHeader() {
-
 	return (this.header);
     }
 
@@ -83,7 +79,6 @@ public class ComplianceTaglet
      */
 
     public static void register(Map<String, com.sun.tools.doclets.Taglet> tagletMap) {
-
 	com.sun.tools.doclets.Taglet tag = new ComplianceTaglet();
 	tagletMap.put(tag.getName(), tag);
 	return;
