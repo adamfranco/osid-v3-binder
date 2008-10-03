@@ -261,7 +261,7 @@ print type.getDisplayName();
                 associated with the type lookup service.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeAdminSession"/>
+                <xosid:interfaceType xosid:type="osid.type.TypeLookupSession"/>
                 <xosid:description>
                     a <xosid:token>TypeLookupSession</xosid:token>
                 </xosid:description>
@@ -348,7 +348,7 @@ print type.getDisplayName();
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeAdminSession"/>
+                <xosid:interfaceType xosid:type="osid.type.TypeLookupSession"/>
                 <xosid:description>
                     a <xosid:token>TypeLookupSession</xosid:token>
                 </xosid:description>
