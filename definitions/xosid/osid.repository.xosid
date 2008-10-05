@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.repository generated at 10/2/2008 11:47:29 AM 
+    XOSID for osid.repository generated at 10/4/2008 11:46:12 PM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -7451,10 +7451,9 @@
             <xosid:token>useIsolatedRepositoryView()</xosid:token>
             behave as a radio group and one should be selected before
             invoking any lookup methods.
-            Assets may have an additional interface indicated by their
-            respective types. The interface extension is accessed via
-            the <xosid:token>Asset.</xosid:token> The returns may not
-            be cast directly from the returns in the lookup methods.
+            Assets may have an additional records indicated by their
+            respective record types. The record may not be accessed
+            through a cast of the <xosid:token>Asset.</xosid:token>
         </xosid:description>
 
 
@@ -7796,22 +7795,20 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getAssetsByInterfaceType">
+        <xosid:method xosid:name="getAssetsByRecordType">
             <xosid:description>
-                Gets an <xosid:token>AssetList</xosid:token>
-                corresponding to the given asset interface
-                <xosid:token>Type. </xosid:token>The set of assets
-                implementing the given interface type is returned. In
-                plenary mode, the returned list contains all known
+                Gets an <xosid:token>AssetList</xosid:token> containing
+                the given assst record <xosid:token>Type.</xosid:token>
+                In plenary mode, the returned list contains all known
                 assets or an error results. Otherwise, the returned
                 list may contain only those assets that are accessible
                 through this session. In both cases, the order of the
                 set is not specified.
             </xosid:description>
-            <xosid:parameter xosid:name="assetInterfaceType">
+            <xosid:parameter xosid:name="assetRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    an asset interface type
+                    an asset record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -8219,7 +8216,8 @@
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 
 if (!session.canCreateAssets()) {
     return "asset creation not permitted";
@@ -8250,7 +8248,7 @@ if (!form.isValid()) {
     return form.getValidationMessage();
 }
 
-Asset newAsset = session.createAsset(form);
+Asset newAsset = session.createAsset(form);]]>
             </xosid:code>
              
         </xosid:description>
@@ -12435,11 +12433,9 @@ Asset newAsset = session.createAsset(form);
             <xosid:token>useIsolatedSubjectView()</xosid:token> behave
             as a radio group and one should be selected before invoking
             any lookup methods.
-            Subjects may have an additional interface indicated by
-            their respective types. The interface extension is accessed
-            via the <xosid:token>Subject.</xosid:token> The returns may
-            not be cast directly from the returns in the lookup
-            methods.
+            Subjects may have an additional records indicated by their
+            respective record types. The record may not be accessed
+            through a cast of the <xosid:token>Subject.</xosid:token>
         </xosid:description>
 
 
@@ -12785,22 +12781,21 @@ Asset newAsset = session.createAsset(form);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getSubjectsByInterfaceType">
+        <xosid:method xosid:name="getSubjectsByRecordType">
             <xosid:description>
                 Gets a <xosid:token>SubjectList</xosid:token>
-                corresponding to the given subject interface
-                <xosid:token>Type. </xosid:token>The set of subjects
-                implementing the given interface type is returned. In
-                plenary mode, the returned list contains all known
-                subjects or an error results. Otherwise, the returned
-                list may contain only those subjects that are
-                accessible through this session. In both cases, the
-                order of the set is not specified.
+                containing the given subject record
+                <xosid:token>Type. </xosid:token>In plenary mode, the
+                returned list contains all known subjects or an error
+                results. Otherwise, the returned list may contain only
+                those subjects that are accessible through this
+                session. In both cases, the order of the set is not
+                specified.
             </xosid:description>
-            <xosid:parameter xosid:name="subjectInterfaceType">
+            <xosid:parameter xosid:name="subjectRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    a subject interface type
+                    a subject record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -12812,7 +12807,7 @@ Asset newAsset = session.createAsset(form);
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>subjectInterfaceType</xosid:token> is
+                    <xosid:token>subjectRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -13211,7 +13206,7 @@ Asset newAsset = session.createAsset(form);
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
 <![CDATA[
 String newDescription = "hello, world!";
 if (!session.canUpdateSubject(subjectId)) {
@@ -13239,8 +13234,7 @@ if (!form.isValid()) {
 }
 
 session.updateSubject(subjectId, subjectForm);
-return "subject updated";
-]]>
+return "subject updated";]]>
             </xosid:code>
              
         </xosid:description>
@@ -13326,7 +13320,7 @@ return "subject updated";
             <xosid:description>
                 Tests if this user can create a single
                 <xosid:token>Subject </xosid:token>using the desired
-                record interface types. While
+                record types. While
                 <xosid:token>RepositoryManager.getSubjectRecordTypes()</xosid:token>
                 can be used to examine which record interfaces are
                 supported, this method tests which record interface(s)
@@ -15114,11 +15108,10 @@ return "subject updated";
             application may require all
             <xosid:token>Repository</xosid:token> elements to be
             available.
-            Repositories may have an additional interface indicated by
-            their respective types. The interface extension is accessed
-            via the <xosid:token>Repository.</xosid:token> The returns
-            may not be cast directly from the returns in the lookup
-            methods.
+            Repositories may have an additional records indicated by
+            their respective record types. The record may not be
+            accessed through a cast of the
+            <xosid:token>Repository</xosid:token>
         </xosid:description>
 
 
@@ -15388,22 +15381,21 @@ return "subject updated";
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getRepositoriesByInterfaceType">
+        <xosid:method xosid:name="getRepositoriesByRecordType">
             <xosid:description>
                 Gets a <xosid:token>RepositoryList</xosid:token>
-                corresponding to the given repository interface
-                <xosid:token>Type. </xosid:token>The set of
-                repositories implementing the given interface type is
-                returned. In plenary mode, the returned list contains
-                all known repositories or an error results. Otherwise,
-                the returned list may contain only those repositories
-                that are accessible through this session. In both
-                cases, the order of the set is not specified.
+                containing the given repository record
+                <xosid:token>Type.</xosid:token>In plenary mode, the
+                returned list contains all known repositories or an
+                error results. Otherwise, the returned list may contain
+                only those repositories that are accessible through
+                this session. In both cases, the order of the set is
+                not specified.
             </xosid:description>
-            <xosid:parameter xosid:name="repositoryInterfaceType">
+            <xosid:parameter xosid:name="repositoryRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    a repository interface type
+                    a repository record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -15415,8 +15407,8 @@ return "subject updated";
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>repositoryInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
+                    <xosid:token>repositoryRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
@@ -15503,8 +15495,8 @@ return "subject updated";
             <xosid:pbreak/>
 
             Repositories may have a record query interface indicated by
-            their respective record interface types. The record query
-            interface is accessed via the
+            their respective record types. The record query interface
+            is accessed via the
             <xosid:token>RepositoryQuery.</xosid:token>
         </xosid:description>
 
@@ -15617,11 +15609,11 @@ return "subject updated";
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getAssetSearchOrder">
+        <xosid:method xosid:name="getRepositorySearchOrder">
             <xosid:description>
                 Gets a repository search order interface. The
                 <xosid:token>RepositorySearchOrder</xosid:token> is
-                supplied to an
+                supplied to a
                 <xosid:token>RepositorySearch</xosid:token> to specify
                 the ordering of results.
             </xosid:description>
@@ -15781,31 +15773,12 @@ return "subject updated";
             <xosid:description>
                 Gets the repository form for creating new repositories.
             </xosid:description>
-            <xosid:parameter xosid:name="repositoryInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    a repository interface type
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.RepositoryForm"/>
                 <xosid:description>
                     the repository form
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>repositoryInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>canCreateRepositoryWithInterfaceTypes(repositoryInterfaceType)</xosid:token>
-                    is <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -16326,7 +16299,7 @@ return "subject updated";
         <xosid:method xosid:name="registerForNewRepositoryDescendants">
             <xosid:description>
                 Registers for notification if a descendant is added to
-                fthe specified repository in the repository hierarchy.
+                the specified repository in the repository hierarchy.
                
                 <xosid:token>RepositoryReceiver.newRepositoryDescendant()</xosid:token>
                 is invoked when the specified repository experiences an
@@ -16963,11 +16936,10 @@ return "subject updated";
             application may require a complete set of
             <xosid:token>Composition</xosid:token> objects to be
             returned.
-            Compositions may have an additional interface indicated by
-            their respective types. The interface extension is accessed
-            via the <xosid:token>Composition.</xosid:token> The returns
-            may not be cast directly from the returns in the lookup
-            methods.
+            Compositions may have an additional records indicated by
+            their respective record types. The record may not be
+            accessed through a cast of the
+            <xosid:token>Composition.</xosid:token>
         </xosid:description>
 
 
@@ -17313,22 +17285,21 @@ return "subject updated";
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getCompositionsByInterfaceType">
+        <xosid:method xosid:name="getCompositionsByRecordType">
             <xosid:description>
                 Gets a <xosid:token>CompositionList</xosid:token>
-                corresponding to the given composition interface
-                <xosid:token>Type. </xosid:token>The set of
-                compositions implementing the given interface type is
-                returned. In plenary mode, the returned list contains
-                all known compositions or an error results. Otherwise,
-                the returned list may contain only those compositions
-                that are accessible through this session. In both
-                cases, the order of the set is not specified.
+                containing the given composition record
+                <xosid:token>Type. </xosid:token>In plenary mode, the
+                returned list contains all known compositions or an
+                error results. Otherwise, the returned list may contain
+                only those compositions that are accessible through
+                this session. In both cases, the order of the set is
+                not specified.
             </xosid:description>
-            <xosid:parameter xosid:name="compositionInterfaceType">
+            <xosid:parameter xosid:name="compositionRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    a composition interface type
+                    a composition record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -17340,9 +17311,8 @@ return "subject updated";
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-
-                                        <xosid:token>compositionInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
+                    <xosid:token>compositionRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
@@ -21851,7 +21821,7 @@ return "subject updated";
 
         <xosid:method xosid:name="supportsRepositoryQuery">
             <xosid:description>
-                Tests if a <xosid:token>RepositoiryQuery</xosid:token>
+                Tests if a <xosid:token>RepositoryQuery</xosid:token>
                 is available.
             </xosid:description>
             <xosid:return>
@@ -23009,15 +22979,15 @@ return "subject updated";
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsProviderSearch">
+        <xosid:method xosid:name="supportsProviderSearchOrder">
             <xosid:description>
-                Tests if a provider search interface is available.
+                Tests if a provider order interface is available.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
-                    <xosid:token>true</xosid:token> if a provider
-                    search interface is available,
+                    <xosid:token>true</xosid:token> if a provider order
+                    interface is available,
                     <xosid:token>false</xosid:token> otherwise
                 </xosid:description>
             </xosid:return>
@@ -23028,19 +22998,20 @@ return "subject updated";
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getProviderSearch">
+        <xosid:method xosid:name="getProviderSearchOrder">
             <xosid:description>
-                Gets the provider search interface.
+                Gets the provider order interface.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.resource.ResourceSearch"/>
+                <xosid:interfaceType xosid:type="osid.resource.ResourceSearchOrder"/>
                 <xosid:description>
-                    the resource search interface for the provider
+                    the resource search order interface for the
+                    provider
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
                 <xosid:description>
-                    <xosid:token>supportsProviderSearch()
+                    <xosid:token>supportsProviderSearchOrder()
                    </xosid:token>is <xosid:token> false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -23048,7 +23019,7 @@ return "subject updated";
                 <xosid:description>
                     This method must be implemented if
                    
-                    <xosid:token>supportsProviderSearch()</xosid:token>
+                    <xosid:token>supportsProviderSearchOrder()</xosid:token>
                     is <xosid:token>true.</xosid:token>
                 </xosid:description>
             </xosid:compliance>
@@ -23066,14 +23037,14 @@ return "subject updated";
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsSourceSearch">
+        <xosid:method xosid:name="supportsSourceSearchOrder">
             <xosid:description>
-                Tests if a source search interface is available.
+                Tests if a source order interface is available.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
-                    <xosid:token>true</xosid:token> if a source search
+                    <xosid:token>true</xosid:token> if a source order
                     interface is available,
                     <xosid:token>false</xosid:token> otherwise
                 </xosid:description>
@@ -23085,26 +23056,27 @@ return "subject updated";
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getSourceSearch">
+        <xosid:method xosid:name="getSourceSearchOrder">
             <xosid:description>
-                Gets the source search interface.
+                Gets the source order interface.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.resource.ResourceSearch"/>
+                <xosid:interfaceType xosid:type="osid.resource.ResourceSearchOrder"/>
                 <xosid:description>
-                    the resource search interface for the source
+                    the resource search order interface for the source
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
                 <xosid:description>
-                    <xosid:token>supportsSourceSearch()
+                    <xosid:token>supportsSourceSearchOrder()
                    </xosid:token>is <xosid:token> false</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="optional">
                 <xosid:description>
                     This method must be implemented if
-                    <xosid:token>supportsSourceSearch()</xosid:token>
+                   
+                    <xosid:token>supportsSourceSearchOrder()</xosid:token>
                     is <xosid:token>true.</xosid:token>
                 </xosid:description>
             </xosid:compliance>
@@ -23172,7 +23144,7 @@ return "subject updated";
 
         <xosid:method xosid:name="getAssetSearchOrderRecord">
             <xosid:description>
-                Gets the asset sarch record interface corresponding to
+                Gets the asset sarch record interfa_e corresponding to
                 the given asset record <xosid:token>Type.
                 </xosid:token>Multiple retrievals return the same
                 underlying object.
@@ -23293,7 +23265,7 @@ return "subject updated";
             <xosid:parameter xosid:name="assetIds">
                 <xosid:interfaceType xosid:type="osid.id.Id" xosid:array="true"/>
                 <xosid:description>
-                    list of assets
+                    list of asset <xosid:token>Ids</xosid:token>
                 </xosid:description>
             </xosid:parameter>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
@@ -23377,7 +23349,7 @@ return "subject updated";
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>hasSearchRecordTypeType(assetSearchRecordType)</xosid:token>
+                                        <xosid:token>hasSearchRecordType(assetSearchRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -23484,7 +23456,7 @@ return "subject updated";
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>hasSearchRecordTypeType(assetSearchRecordType)</xosid:token>
+                                        <xosid:token>hasSearchRecordType(assetSearchRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -23602,20 +23574,22 @@ return "subject updated";
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (al.hasNext()) {
      Asset asset = al.getNextAsset();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (al.hasNext()) {
      Asset[] assets = al.getNextAssets(al.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -24153,34 +24127,52 @@ while (al.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getAssetContentQueryInterface">
+        <xosid:method xosid:name="getAssetContentQueryRecord">
             <xosid:description>
-                Gets the <xosid:token>AssetContentQuery</xosid:token>
-                interface corresponding to the
-                <xosid:token>AssetContent</xosid:token> interface Type
-                provided in the search session. An
-                <xosid:token>AssetContentQuery</xosid:token> returned
-                from the search session is only required to implement
-                the root <xosid:token>AssetContentQuery</xosid:token>
-                interface. This method must be used to retrieve a query
-                object implementing the interface specified when
-                retrieving this object from the search session along
-                with all of its ancestor interfaces, including the core
-                <xosid:token>AssetContentQuery</xosid:token>
-                interface. Multiple retrievals of this interface may
-                return the same underlying object and do not result in
-                adding terms to the query. 
-
-                <xosid:pbreak/>
-
-                 
+                Gets the record query interface corresponding to the
+                given <xosid:token>AssetContent</xosid:token> record
+                <xosid:token>Type. </xosid:token>Multiple record
+                retrievals of the same type may return the same
+                underlying object and do not result in adding terms to
+                the query. Multiple record retrievals of different
+                types add <xosid:token>AND</xosid:token> terms to the
+                other elements set in this form.
             </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.repository.AssetContentQuery"/>
+            <xosid:parameter xosid:name="assetContentRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the asset content query interface
+                    an asset content record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.repository.AssetContentQueryRecord"/>
+                <xosid:description>
+                    the asset content query record
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>assetContentRecordType</xosid:token>
+                    is <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(assetContentRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -24549,20 +24541,22 @@ while (al.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (acl.hasNext()) {
      AssetContent content = acl.getNextAssetContent();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (acl.hasNext()) {
      AssetContent[] content = acl.getNextAssetContents(acl.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -24973,20 +24967,22 @@ while (acl.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (acl.hasNext()) {
      AssetCredit credit = acl.getNextAssetCredit();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (acl.hasNext()) {
      AssetCredit[] credit = acl.getNextAssetCredits(acl.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -25239,20 +25235,22 @@ while (acl.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (aal.hasNext()) {
      AssetAlternate alt = aal.getNextAssetAlternate();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (aal.hasNext()) {
      AssetAlternate[] alts = aal.getNextAssetAlternates(aal.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -25392,7 +25390,7 @@ while (aal.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementsType(subjectRecordType)</xosid:token>
+                                        <xosid:token>hasRecordType(subjectRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -26096,7 +26094,7 @@ while (aal.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>hasSearchRecordTypeType(subjectSearchRecordType)</xosid:token>
+                                        <xosid:token>hasSearchRecordType(subjectSearchRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -26203,7 +26201,7 @@ while (aal.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>hasSearchRecordTypeType(subjectSearchRecordType)</xosid:token>
+                                        <xosid:token>hasSearchRecordType(subjectSearchRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -26426,20 +26424,22 @@ while (aal.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (sl.hasNext()) {
      Subject subject = sl.getNextSubject();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (sl.hasNext()) {
      Subject[] subjects = sl.getNextSubjects(sl.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -26575,7 +26575,7 @@ while (sl.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementsInterfaceType(repositoryRecordType)</xosid:token>
+                                        <xosid:token>hasRecordType(repositoryRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -26637,7 +26637,7 @@ while (sl.hasNext()) {
             <xosid:parameter xosid:name="assetId">
                 <xosid:interfaceType xosid:type="osid.id.Id"/>
                 <xosid:description>
-                    the asset <xosid:token>Id</xosid:token>
+                    a asset <xosid:token>Id</xosid:token>
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="match">
@@ -27281,7 +27281,7 @@ while (sl.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>hasSearchRecordTypeType(repositorySearchRecordType)</xosid:token>
+                                        <xosid:token>hasSearchRecordType(binSearchRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -27389,7 +27389,7 @@ while (sl.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>hasSearchRecordTypeType(repositorySearchRecordType)</xosid:token>
+                                        <xosid:token>hasSearchRecordType(repositorySearchRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -27613,20 +27613,22 @@ while (sl.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (rl.hasNext()) {
      Repository repository = rl.getNextRepository();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (rl.hasNext()) {
      Repository[] repositories = rl.getNextRepositories(rl.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -27765,7 +27767,7 @@ while (rl.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementsInterfaceType(compositionRecordType)</xosid:token>
+                                        <xosid:token>hasInterfaceType(compositionRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -28265,7 +28267,7 @@ while (rl.hasNext()) {
 
         <xosid:method xosid:name="getRepositorySearchOrderRecord">
             <xosid:description>
-                Gets the composition sarch record interface
+                Gets the composition s_rch record interface
                 corresponding to the given repository record
                 <xosid:token>Type. </xosid:token>Multiple retrievals
                 return the same underlying object.
@@ -28473,7 +28475,7 @@ while (rl.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>hasSearchRecordTypeType(compositionSearchRecordType)</xosid:token>
+                                        <xosid:token>hasSearchRecordType(compositionSearchRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -28582,7 +28584,7 @@ while (rl.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>hasSearchRecordTypeType(compositionSearchRecordType)</xosid:token>
+                                        <xosid:token>hasSearchRecordType(compositionSearchRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -28844,20 +28846,22 @@ while (rl.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (cl.hasNext()) {
      Composition composition = cl.getNextComposition();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (cl.hasNext()) {
      Composition[] compositions = cl.getNextCompositions(cl.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
