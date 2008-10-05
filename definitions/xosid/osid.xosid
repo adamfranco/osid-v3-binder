@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid generated at 10/2/2008 12:16:43 PM 
+    XOSID for osid generated at 10/5/2008 2:55:45 PM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -875,7 +875,7 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getJournalSession">
+        <xosid:method xosid:name="rollbackService">
             <xosid:description>
                 Rolls back this service to a point in time.
             </xosid:description>
@@ -1658,8 +1658,9 @@
 
             <xosid:pbreak/>
 
-             <xosid:code>
-OsidQuery { OsidQuery.matchDisplayName AND (OsidQuery.matchDescription OR OsidQuery.matchDescription)} OR OsidQuery
+<xosid:code>
+<![CDATA[
+OsidQuery { OsidQuery.matchDisplayName AND (OsidQuery.matchDescription OR OsidQuery.matchDescription)} OR OsidQuery]]>
             </xosid:code>
              
             <xosid:pbreak/>
@@ -1697,13 +1698,15 @@ OsidQuery { OsidQuery.matchDisplayName AND (OsidQuery.matchDescription OR OsidQu
 
             <xosid:pbreak/>
 
-             <xosid:code>
-ObjectQuery queries[2];
+<xosid:code>
+<![CDATA[
+ObjectQuery queries[2];]]>
             </xosid:code>
              
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 queries[0] = session.getObjectQueryForInterfaceType(colorType);
 queries[0].addDisplayNameMatch("Fred*", wildcardStringMatchType, true);
 
@@ -1714,7 +1717,7 @@ queries[1].addDescriptionMatch("dinosaur", wordStringMatchType, false);
 ColorQuery recordQuery;
 recordQuery = queries[1].getObjectRecord(colorRecordType);
 recordQuery.matchColor("purple");
-ObjectList list = session.getObjectsByQuery(queries);
+ObjectList list = session.getObjectsByQuery(queries);]]>
             </xosid:code>
              
         </xosid:description>
@@ -2142,12 +2145,13 @@ ObjectList list = session.getObjectsByQuery(queries);
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 ObjectForm form = session.getObjectFormForUpdate(objectId);
 form.setDisplayName("new name");
 ColorForm recordForm = form.getFormRecord(colorRecordType);
 recordForm.setColor("green");
-session.updateObject(objectId, form);
+session.updateObject(objectId, form);]]>
             </xosid:code>
              
         </xosid:description>
@@ -2469,8 +2473,9 @@ session.updateObject(objectId, form);
             <xosid:token>OsidSearchOrder</xosid:token> is available
             from an search session and supplied to an
             <xosid:token>OsidSearch</xosid:token> interface.
-             
+            
             <xosid:code>
+<![CDATA[
 OsidSearch os = session.getObjectSearch();
 os.limitResultSet(1, 25);
 
@@ -2483,7 +2488,7 @@ queries[0] = session.getObjectQuery();
 queries[0].addDescriptionMatch("*food*", wildcardStringMatchType, true);
 
 ObjectSearchResults results = session.getObjectsBySearch(queries, os);
-ObjectList list = results.getObjectList();
+ObjectList list = results.getObjectList();]]>
             </xosid:code>
              
         </xosid:description>
@@ -2644,8 +2649,9 @@ ObjectList list = results.getObjectList();
             <xosid:token></xosid:token>This interface is available from
             a search session.Example us using the search interface to
             retrieve the first 25 results:
-             
+            
             <xosid:code>
+<![CDATA[
 OsidSearch os = session.getObjectSearch();
 os.limitResultSet(1, 25);
 
@@ -2654,7 +2660,7 @@ queries[0] = session.getObjectQuery();
 queries[0].addDescriptionMatch("*food*", wildcardStringMatchType, true);
 
 ObjectSearchResults results = session.getObjectsBySearch(queries, os);
-ObjectList list = results.getObjectList();
+ObjectList list = results.getObjectList();]]>
             </xosid:code>
              
         </xosid:description>
@@ -2740,8 +2746,9 @@ ObjectList list = results.getObjectList();
             search and is used as a vehicle to perform a search within
             a previous result set. An example of searching withina
             result set:
-             
+            
             <xosid:code>
+<![CDATA[
 OsidSearch os = session.getObjectSearch();
 
 OsidQuery queries[1];
@@ -2755,7 +2762,7 @@ os.searchWithinResults(results);
 
 queries[0].addDisplayNameMatch("pickles", wordStringMatchType, true);
 results = session.getObjectsBySearch(queries, os);
-OsidList pickles = results.getObjectList();
+OsidList pickles = results.getObjectList();]]>
             </xosid:code>
              
         </xosid:description>
@@ -2866,25 +2873,6 @@ OsidList pickles = results.getObjectList();
             <xosid:token>Type.</xosid:token>
         </xosid:description>
 
-
-        <xosid:method xosid:name="getType">
-            <xosid:description>
-                Gets the Type that identifies this search record. Tests
-                for interoperability should make use of
-                <xosid:token>implementsType().</xosid:token>
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the search record type
-                </xosid:description>
-            </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
 
         <xosid:method xosid:name="implementsType">
             <xosid:description>
@@ -3382,16 +3370,17 @@ OsidList pickles = results.getObjectList();
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsProviderOrder">
+        <xosid:method xosid:name="supportsProviderSearchOrder">
             <xosid:description>
-                Tests if a <xosid:token>ProviderOrder</xosid:token>
+                Tests if a
+                <xosid:token>ProviderSearchOrder</xosid:token>
                 interface is available.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
-                    <xosid:token>true</xosid:token> if a provider order
-                    interface is available,
+                    <xosid:token>true</xosid:token> if a provider
+                    search order interface is available,
                     <xosid:token>false</xosid:token> otherwise
                 </xosid:description>
             </xosid:return>
@@ -3402,26 +3391,28 @@ OsidList pickles = results.getObjectList();
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getProviderOrder">
+        <xosid:method xosid:name="getProviderSearchOrder">
             <xosid:description>
-                Gets the order interface for a provider
+                Gets the search order interface for a provider
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.resource.ResourceOrder"/>
+                <xosid:interfaceType xosid:type="osid.resource.ResourceSearchOrder"/>
                 <xosid:description>
-                    the provider order interface
+                    the provider search order interface
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
                 <xosid:description>
-                    <xosid:token>supportsProviderOrder()</xosid:token>
+
+                                        <xosid:token>supportsProviderSearchOrder()</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="optional">
                 <xosid:description>
                     This method must be implemented if
-                    <xosid:token>supportsProviderOrder()</xosid:token>
+                   
+                    <xosid:token>supportsProviderSearchOrder()</xosid:token>
                     is <xosid:token>true.</xosid:token>
                 </xosid:description>
             </xosid:compliance>
@@ -4544,20 +4535,22 @@ OsidList pickles = results.getObjectList();
 
             <xosid:pbreak/>
 
-             <xosid:code>
-getMillenium() == 2
+<xosid:code>
+<![CDATA[
+getMillenium() == 2]]>
             </xosid:code>
              
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 getCentury() == 18
 getYear() == 1776
 getMonth() == 7
 getDay() == 4
 getHour() == 0
 getGranularity() == DateTimeResolution.DAY
-definesUncertainty() == false
+definesUncertainty() == false]]>
             </xosid:code>
              
              
@@ -4565,8 +4558,9 @@ definesUncertainty() == false
             <xosid:pbreak/>
 
             Another example showing that the time is probably 1pm but
-            could have been as late as 3pm or early as noon..
+            could have been as late as 3pm or early asnoon..
             <xosid:code>
+<![CDATA[
 
 
 getMillenium() == 3
@@ -4581,7 +4575,7 @@ definesUncertainty() == true
 getUncertaintyGranularity() == DateTimeResolution.HOUR
 getUncertaintyMinus() == 1
 getUncertaintyPlus == 2
-
+]]>
             </xosid:code>
              
             <xosid:pbreak/>
@@ -4594,21 +4588,23 @@ getUncertaintyPlus == 2
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 getEpoch() == -13,730
-getMillenium() == 0
+getMillenium() == 0]]>
             </xosid:code>
              
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 getCentury() == 0
 getYear() == 0
 getGranularity() == TimeResolution.EPOCH
 definesUncertainty() == true
 getUncertaintyGranularity() == DateTimeResolution.EPOCH
 getUncertaintyMinus() == 120
-getUncertaintyPlus == 120
+getUncertaintyPlus == 120]]>
             </xosid:code>
              
             <xosid:pbreak/>
@@ -4617,53 +4613,9 @@ getUncertaintyPlus == 120
         </xosid:description>
 
 
-        <xosid:method xosid:name="getTimestamp">
-            <xosid:description>
-                Gets a <xosid:token>timestamp</xosid:token>
-                representing this point in time. The return may not be
-                accurate since the primitive may have a fixed precision
-                implying more or less granularity than actually exists.
-                This method is intended for simple applications that
-                have little use for more accurate time representations.
-            </xosid:description>
-            <xosid:return>
-                <xosid:primitiveType xosid:type="timestamp"/>
-                <xosid:description>
-                    <xosid:token>timestamp</xosid:token> approximation
-                </xosid:description>
-            </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="fitsInTimestamp">
-            <xosid:description>
-                Tests if this date/time fits inside a
-                <xosid:token>timestamp</xosid:token> without
-                overflowing. In other words, if the return from
-                <xosid:token>getTimestamp()</xosid:token> is valid.
-            </xosid:description>
-            <xosid:return>
-                <xosid:primitiveType xosid:type="timestamp"/>
-                <xosid:description>
-                    <xosid:token>timestamp</xosid:token> approximation
-                </xosid:description>
-            </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
         <xosid:method xosid:name="getAeon">
             <xosid:description>
-                Gets the aeon on the Gregorian calendar, the first aeon
-                beginning on January 1, 1 (essentially now). 0 is an
-                invalid aeon.
+                Gets the aeon starting from 1. 1B years.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="integer"/>
@@ -4680,8 +4632,7 @@ getUncertaintyPlus == 120
 
         <xosid:method xosid:name="getEpoch">
             <xosid:description>
-                Gets the epoch on the Gregorian calendar, the first
-                epoch beginning on January 1, 1. 0 is an invalid epoch.
+                Gets the epoch starting from 1.An epoch is 1M years.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="integer"/>
@@ -4698,9 +4649,8 @@ getUncertaintyPlus == 120
 
         <xosid:method xosid:name="getMillenium">
             <xosid:description>
-                Gets the millenium on the Gregorian calendar, the first
-                millenium beginning on January 1, 1. 0 is an invalid
-                millenium. A millenium is 1,000 years.
+                Gets the millenium starting from 1. A millenium is
+                1,000 years.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="integer"/>
@@ -4717,9 +4667,7 @@ getUncertaintyPlus == 120
 
         <xosid:method xosid:name="getCentury">
             <xosid:description>
-                Gets the century on the Gregorian calendar, the first
-                century beginning on January 1, 1. 0 is an invalid
-                century.
+                Gets the century starting from 1.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="integer"/>
@@ -4736,8 +4684,7 @@ getUncertaintyPlus == 120
 
         <xosid:method xosid:name="getYear">
             <xosid:description>
-                Gets the year on the Gregorian calendar. Negative years
-                are used for BC and 0 is an invalid year.
+                Gets the year starting from 1.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="integer"/>
@@ -4754,7 +4701,7 @@ getUncertaintyPlus == 120
 
         <xosid:method xosid:name="getMonth">
             <xosid:description>
-                Gets the month on the Gregorian calendar from 1-12.
+                Gets the month number starting from 1.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="cardinal"/>
@@ -4771,8 +4718,7 @@ getUncertaintyPlus == 120
 
         <xosid:method xosid:name="getDay">
             <xosid:description>
-                Gets the day of the month on the Gregorian calendar
-                from 1-31.
+                Gets the day of the month starting from 1.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="cardinal"/>
@@ -4789,7 +4735,7 @@ getUncertaintyPlus == 120
 
         <xosid:method xosid:name="getHour">
             <xosid:description>
-                Gets the hour of the day from 0-23 GMT.
+                Gets the hour of the day 0-23.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="cardinal"/>
@@ -4806,7 +4752,7 @@ getUncertaintyPlus == 120
 
         <xosid:method xosid:name="getMinute">
             <xosid:description>
-                Gets the minute of the hour from 0-59 GMT.
+                Gets the minute of the hour 0-59.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="cardinal"/>
@@ -4823,7 +4769,7 @@ getUncertaintyPlus == 120
 
         <xosid:method xosid:name="getSecond">
             <xosid:description>
-                Gets the second of the minute from 0-59.
+                Gets the second of the minute 0-59.
             </xosid:description>
             <xosid:return>
                 <xosid:primitiveType xosid:type="cardinal"/>
@@ -5383,7 +5329,7 @@ getUncertaintyPlus == 120
             </xosid:description>
         </xosid:item>
 
-        <xosid:item xosid:name="XOXXOOSECOND">
+        <xosid:item xosid:name="XOXXOSECOND">
             <xosid:description>
                 one octillionth second resolution
             </xosid:description>
@@ -5563,20 +5509,22 @@ getUncertaintyPlus == 120
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (dtl.hasNext()) {
      DateTime dt = dtl.getNextDateTime();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while dtl.hasNext()) {
      DateTime[] dts =dtl.getNextDateTimes(dtl.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -5882,20 +5830,22 @@ while dtl.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (til.hasNext()) {
      TimeInterval ti = til.getNextTimeInterval();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (til.hasNext()) {
      TimeInterval[] tis = til.getNextTimeIntervals(til.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -6246,20 +6196,22 @@ while (til.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (sull.hasNext()) {
      SpatialUnit su = sul.getNextSpatialUnit();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (sul.hasNext()) {
      SpatialUnit[] sus = sul.getNextSpatialUnit(sul.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -6437,20 +6389,22 @@ while (sul.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (pl.hasNext()) {
      Property property = pl.getNextProperty();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (pl.hasNext()) {
      Property[] properties = pl.getNextProperties(pl.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -6542,7 +6496,8 @@ while (pl.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 MyCallback {
     void up() {
         print "notification service is up";
@@ -6555,15 +6510,16 @@ MyCallback {
     void newMessage(msg) {
         print ("new message received " + msg);
     }
-}
+}]]>
             </xosid:code>
              
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 
 notificationSession = manager.registerForServiceMessages(myCallback);
-
+]]>
             </xosid:code>
              
         </xosid:description>

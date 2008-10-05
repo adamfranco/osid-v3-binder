@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.transport generated at 10/2/2008 12:25:22 PM 
+    XOSID for osid.transport generated at 10/5/2008 2:34:09 PM 
 
     Copyright (C) 2002-2007 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -138,7 +138,7 @@
         other OSIDs where a data stream is required such as the filing
         OSID or an Asset that contains arbitrary serialized data.
         Outbound example:
-         
+        
         <xosid:code>
 <![CDATA[
 TransportSession session = manager.getOutboundSession();
@@ -150,13 +150,13 @@ out.close();
 while(session.hasDataAvailable()) {
     DataInputStream in = session.receiveData();
     add_song_to_play_queue(in);
-}
-]]>
+}]]>
         </xosid:code>
          
         Inbound Example:
-         
+        
         <xosid:code>
+<![CDATA[
 public void dispatch(TransportSession session, Authentication auth) {
     if (authzSession.isAuthorized(auth.getAgentId, fId, qId)) {
         String argv = parse_command_from_stream(session.receiverData());
@@ -168,7 +168,7 @@ public void dispatch(TransportSession session, Authentication auth) {
             }
         }
     }
-}
+}]]>
         </xosid:code>
          
     </xosid:description>
