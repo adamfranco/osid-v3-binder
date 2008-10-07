@@ -23749,7 +23749,7 @@ while (al.hasNext()) {
 
         <xosid:method xosid:name="getDataLength">
             <xosid:description>
-                Gets the binary data associated with this asset
+                Gets the length of the data represented by this
                 content.
             </xosid:description>
             <xosid:return>
@@ -23758,7 +23758,7 @@ while (al.hasNext()) {
                     the length of the data stream
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+            <xosid:error xosid:type="ILLEGAL_STATE" xosid:category="Operational">
                 <xosid:description>
                     <xosid:token>hasDataLength()</xosid:token> is
                     <xosid:token>false</xosid:token>
