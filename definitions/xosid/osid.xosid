@@ -3116,7 +3116,7 @@ OsidList pickles = results.getObjectList();]]>
         <xosid:method xosid:name="getProvider">
             <xosid:description>
                 Gets the <xosid:token>Resource</xosid:token>
-                rep[resenting the provider of this catalog.
+                representing the provider of this catalog.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.resource.Resource"/>
