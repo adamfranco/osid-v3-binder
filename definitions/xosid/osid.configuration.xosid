@@ -14190,7 +14190,7 @@ while (vl.hasNext()) {
 
 
     <xosid:interface xosid:name="osid.configuration.ConfigurationSearch"> 
-        <xosid:implements xosid:interface="osid.OsidCatalogSearch"/>
+        <xosid:implements xosid:interface="osid.OsidSearch"/>
         <xosid:description>
             The search interface to query a configuration.
         </xosid:description>
@@ -14841,7 +14841,7 @@ while (cl.hasNext()) {
 
 
     <xosid:interface xosid:name="osid.configuration.RegistrySearch"> 
-        <xosid:implements xosid:interface="osid.OsidCatalogSearch"/>
+        <xosid:implements xosid:interface="osid.OsidSearch"/>
         <xosid:description>
             The interface to registry search options.
         </xosid:description>
