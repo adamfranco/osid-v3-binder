@@ -4275,7 +4275,7 @@
 
 
     <xosid:interface xosid:name="osid.cataloging.CatalogSearch"> 
-        <xosid:implements xosid:interface="osid.OsidCatalogSearch"/>
+        <xosid:implements xosid:interface="osid.OsidSearch"/>
         <xosid:description>
             The search interface for governing the search query for
             <xosid:token>Catalogs.</xosid:token>

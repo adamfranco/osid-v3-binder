@@ -7242,7 +7242,7 @@ while (lel.hasNext()) {
 
 
     <xosid:interface xosid:name="osid.logging.LogSearch"> 
-        <xosid:implements xosid:interface="osid.OsidCatalogSearch"/>
+        <xosid:implements xosid:interface="osid.OsidSearch"/>
         <xosid:description>
             The search interface for governing log searches.
         </xosid:description>
