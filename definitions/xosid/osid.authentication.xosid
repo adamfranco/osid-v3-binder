@@ -4775,7 +4775,6 @@ AgentList agentList = session.getAgentsByQuery(queries);]]>
 
             <xosid:pbreak/>
 
-            <xosid:token>
             <xosid:code>
 <![CDATA[
 AgentSearch as = session.getAgentSearch();
@@ -4787,7 +4786,8 @@ String kword = "squid";
 queries[0].matchKeywords(kword, true);
 
 AgentSearchResults results = session.getAgentsBySearch(queries, as);
-AgentList list = results.getAgents();</xosid:token>]]>
+AgentList list = results.getAgents();
+]]>
             </xosid:code>
              
         </xosid:description>

@@ -370,7 +370,7 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getLogSearchRecordTypes">
+        <xosid:method xosid:name="getLogEntrySearchRecordTypes">
             <xosid:description>
                 Gets the supported log entry search record types.
             </xosid:description>

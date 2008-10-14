@@ -1660,7 +1660,8 @@
 
 <xosid:code>
 <![CDATA[
-OsidQuery { OsidQuery.matchDisplayName AND (OsidQuery.matchDescription OR OsidQuery.matchDescription)} OR OsidQuery]]>
+OsidQuery { OsidQuery.matchDisplayName AND (OsidQuery.matchDescription OR OsidQuery.matchDescription)} OR OsidQuery
+]]>
             </xosid:code>
              
             <xosid:pbreak/>
@@ -1700,7 +1701,8 @@ OsidQuery { OsidQuery.matchDisplayName AND (OsidQuery.matchDescription OR OsidQu
 
 <xosid:code>
 <![CDATA[
-ObjectQuery queries[2];]]>
+ObjectQuery queries[2];
+]]>
             </xosid:code>
              
             <xosid:pbreak/>
@@ -1717,7 +1719,8 @@ queries[1].addDescriptionMatch("dinosaur", wordStringMatchType, false);
 ColorQuery recordQuery;
 recordQuery = queries[1].getObjectRecord(colorRecordType);
 recordQuery.matchColor("purple");
-ObjectList list = session.getObjectsByQuery(queries);]]>
+ObjectList list = session.getObjectsByQuery(queries);
+]]>
             </xosid:code>
              
         </xosid:description>
@@ -2151,7 +2154,8 @@ ObjectForm form = session.getObjectFormForUpdate(objectId);
 form.setDisplayName("new name");
 ColorForm recordForm = form.getFormRecord(colorRecordType);
 recordForm.setColor("green");
-session.updateObject(objectId, form);]]>
+session.updateObject(objectId, form);
+]]>
             </xosid:code>
              
         </xosid:description>
@@ -2488,7 +2492,8 @@ queries[0] = session.getObjectQuery();
 queries[0].addDescriptionMatch("*food*", wildcardStringMatchType, true);
 
 ObjectSearchResults results = session.getObjectsBySearch(queries, os);
-ObjectList list = results.getObjectList();]]>
+ObjectList list = results.getObjectList();
+]]>
             </xosid:code>
              
         </xosid:description>
@@ -2660,7 +2665,8 @@ queries[0] = session.getObjectQuery();
 queries[0].addDescriptionMatch("*food*", wildcardStringMatchType, true);
 
 ObjectSearchResults results = session.getObjectsBySearch(queries, os);
-ObjectList list = results.getObjectList();]]>
+ObjectList list = results.getObjectList();
+]]>
             </xosid:code>
              
         </xosid:description>
@@ -2762,7 +2768,8 @@ os.searchWithinResults(results);
 
 queries[0].addDisplayNameMatch("pickles", wordStringMatchType, true);
 results = session.getObjectsBySearch(queries, os);
-OsidList pickles = results.getObjectList();]]>
+OsidList pickles = results.getObjectList();
+]]>
             </xosid:code>
              
         </xosid:description>
