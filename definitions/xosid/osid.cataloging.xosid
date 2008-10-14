@@ -2184,7 +2184,7 @@
             <xosid:description>
                 Gets a <xosid:token>CatalogList</xosid:token>
                 corresponding to the given <xosid:token>IdList.
-                </xosid:token>In plenary mode, the returned list
+                </xosid:token> In plenary mode, the returned list
                 contains all of the catalogs specified in the
                 <xosid:token>Id</xosid:token> list, in the order of
                 the list, including duplicates, or an error results if

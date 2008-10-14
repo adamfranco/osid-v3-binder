@@ -2088,7 +2088,7 @@ AgentReceiver receiver {
             <xosid:description>
                 Gets an <xosid:token>AgentList</xosid:token> containing
                 the given repository record
-                <xosid:token>Type.</xosid:token>In plenary mode, the
+                <xosid:token>Type.</xosid:token> In plenary mode, the
                 returned list contains all known agents or an error
                 results. Otherwise, the returned list may contain only
                 those agents that are accessible through this session.
