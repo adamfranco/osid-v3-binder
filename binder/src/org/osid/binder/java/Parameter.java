@@ -37,9 +37,7 @@ import java.io.PrintStream;
 
 
 /**
- *  <p>
  *  Produces the Java binding for a Parameter.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -51,9 +49,13 @@ public class Parameter
     private OsidBinderFactory factory = new OsidBinderFactory();
 
 
-    Parameter() {
+    /**
+     *  Creates a new <code>Parameter</code>.
+     */
 
+    Parameter() {
 	super();
+	return;
     }
 
    

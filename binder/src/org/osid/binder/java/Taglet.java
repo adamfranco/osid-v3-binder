@@ -35,9 +35,7 @@ package org.osid.binder.java;
 
 
 /**
- *  <p>
  *  Defines a generic taglet.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0

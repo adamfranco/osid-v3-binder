@@ -37,9 +37,7 @@ import java.io.PrintStream;
 
 
 /**
- *  <p>
- *  Thrown to indicate a problem in translating the passwd xosid..
- *  </p>
+ *  Produces the Java binding for a Method.
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -52,8 +50,13 @@ public class Method
     private String interfaceName;
 
 
+    /**
+     *  Constructs a new <code>Method</code>
+     */
+
     Method() {
 	super();
+	return;
     }
 
 

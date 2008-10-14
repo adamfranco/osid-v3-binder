@@ -57,8 +57,8 @@ public class EnumerationItem
      */
     
     protected EnumerationItem() {
-
 	super();
+	return;
     }
 
 

@@ -57,3 +57,4 @@ world:
 bindings:
 	rm -rf src
 	java -cp ${BINDER} org.osid.binder.java.OsidBinder ../../definitions/xosid src
+	cp -r stubs/* src/org/osid

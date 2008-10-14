@@ -37,9 +37,7 @@ import java.io.PrintStream;
 
 
 /**
- *  <p>
  *  Produces the Java binding for a Compliance statement.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -51,9 +49,13 @@ public class Compliance
     private OsidBinderFactory factory = new OsidBinderFactory();
     
 
-    Compliance() {
+    /**
+     *  Constructs a new <code>Compliance</code>
+     */
 
+    Compliance() {
 	super();
+	return;
     }
 
 

@@ -35,9 +35,7 @@ package org.osid.binder.java;
 
 
 /**
- *  <p>
  *  The factory for the Java binding.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -46,12 +44,12 @@ package org.osid.binder.java;
 public class OsidBinderFactory
     implements org.osid.binder.OsidBinderFactory {
 
+
     /**
      *  Creates a new <code>Osid</code>.
      */
 
     public org.osid.binder.Osid createOsid() {
-
 	return (new Osid());
     }
 

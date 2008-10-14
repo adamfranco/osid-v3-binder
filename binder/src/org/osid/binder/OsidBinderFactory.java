@@ -35,9 +35,7 @@ package org.osid.binder;
 
 
 /**
- *  <p>
  *  Factory for creating interface components.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0

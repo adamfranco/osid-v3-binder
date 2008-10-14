@@ -37,9 +37,7 @@ import java.io.PrintStream;
 
 
 /**
- *  <p>
  *  The Java binding for an Error element.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -51,9 +49,13 @@ public class Error
     private OsidBinderFactory factory = new OsidBinderFactory();
 
     
-    Error() {
+    /**
+     *  Constructs a new <code>Error</code>
+     */
 
+    Error() {
 	super();
+	return;
     }
 
 

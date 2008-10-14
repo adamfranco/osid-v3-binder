@@ -41,9 +41,7 @@ import org.w3c.dom.NodeList;
 
 
 /**
- *  <p>
- *  Thrown to indicate a problem in translating the passwd xosid..
- *  </p>
+ *  Defines an OSID method.
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -64,6 +62,7 @@ public abstract class Return
     
     protected Return() {
 	super();
+	return;
     }
 
 

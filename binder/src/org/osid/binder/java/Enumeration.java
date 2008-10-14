@@ -37,9 +37,7 @@ import java.io.PrintStream;
 
 
 /**
- *  <p>
  *  Produces the Java binding for an enumeration.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -57,8 +55,8 @@ public class Enumeration
      */
     
     protected Enumeration() {
-
 	super();
+	return;
     }
 
 

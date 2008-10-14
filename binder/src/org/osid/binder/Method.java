@@ -41,9 +41,7 @@ import org.w3c.dom.NodeList;
 
 
 /**
- *  <p>
- *  Defines a method.
- *  </p>
+ *  Defines an OSID method.
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -68,6 +66,7 @@ public abstract class Method
 
     protected Method() {
 	super();
+	return;
     }
 
 

@@ -37,9 +37,7 @@ import java.io.PrintStream;
 
 
 /**
- *  <p>
  *  Captures all interfaces for reference during interface expansion.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0

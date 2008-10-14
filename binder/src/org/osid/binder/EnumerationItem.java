@@ -41,9 +41,7 @@ import org.w3c.dom.NodeList;
 
 
 /**
- *  <p>
  *  Defines an item within an enumeration.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -62,8 +60,8 @@ public abstract class EnumerationItem
      */
     
     protected EnumerationItem() {
-
 	super();
+	return;
     }
 
 
@@ -120,7 +118,6 @@ public abstract class EnumerationItem
      */
 
     public String getName() {
-	
 	return (this.name);
     }
 
@@ -141,7 +138,6 @@ public abstract class EnumerationItem
      */
 
     public Text getDescription() {
-
 	return (this.description);
     }
 

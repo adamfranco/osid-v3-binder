@@ -41,9 +41,7 @@ import org.w3c.dom.NodeList;
 
 
 /**
- *  <p>
- *  Defines an error element.
- *  </p>
+ *  Defines an OSID error.
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -63,6 +61,7 @@ public abstract class Error
 
     protected Error() {
 	super();
+	return;
     }
 
     
@@ -130,7 +129,6 @@ public abstract class Error
      */
 
     public void setDescription(org.w3c.dom.Document doc, String description) {
-
 	if (this.description == null) {
 	    this.description = getOsidBinderFactory().createText();
 	}	    

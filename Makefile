@@ -44,7 +44,7 @@ clean:
 	(cd bindings/java; make clean)	
 	(cd binder; make clean)	
 
-install: binder all
+install: binders all
 
 world: clean install
 

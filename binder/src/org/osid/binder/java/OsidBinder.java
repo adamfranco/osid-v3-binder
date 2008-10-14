@@ -38,9 +38,7 @@ import java.io.PrintStream;
 
 
 /**
- *  <p>
  *  Procuces the Java binding for the OSIDs.
- *  </p>
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -52,11 +50,22 @@ public class OsidBinder
     private OsidBinderFactory factory = new OsidBinderFactory();
 
     
-    OsidBinder() {
+    /**
+     *  Constructs a new <code>OsidBinder</code>.
+     */
 
+    OsidBinder() {
 	super();
+	return;
     }
 
+
+    /**
+     *  Parses XOSIDs in the given directory.
+     *
+     *  @param directory path to xosids
+     *  @throws org.osid.binder.OsidBinderException
+     */
 
     public void parse(String directory)
 	throws org.osid.binder.OsidBinderException {
@@ -209,7 +218,6 @@ public class OsidBinder
 		for (org.osid.binder.Method method: intraface.getMethods()) {
 		    for (org.osid.binder.Error error: method.getErrors()) {
 			String type = error.getBinderType();
-
 			printOsidError(error, directory, osid);
 		    }
 		}
@@ -273,8 +281,58 @@ public class OsidBinder
 	    out.println("    extends OsidRuntimeException {");
 	}
 
-	out.println();/////
-	
+	out.println();
+	out.println();
+
+	out.println("    /**");
+	out.println("     *  Constructs a <code>" + name + "</code> with the specified");
+	out.println("     *  detail message. The error message string <code>msg</code> can");
+	out.println("     *  later be retrieved by the getMessage() method of ");
+	out.println("     *  {@link java.lang.Throwable}.");
+	out.println("     *  ");
+	out.println("     *  @param msg the error message");
+	out.println("     */");
+	out.println();
+	out.println("    public " + name + "(String msg) {");
+	out.println("        super(msg);");
+	out.println("        return;");
+	out.println("    }");
+
+	out.println();
+	out.println();
+
+	out.println("    /**");
+	out.println("     *  Constructs a <code>" + name + "</code> with the specified");
+	out.println("     *  detail message and cause. The error message string <code>msg</code> can");
+	out.println("     *  later be retrieved by the getMessage() method of ");
+	out.println("     *  {@link java.lang.Throwable}.");
+	out.println("     *");
+	out.println("     *  @param msg the error message");
+	out.println("     *  @param t the cause of the exception");
+	out.println("     */");
+	out.println();
+	out.println("    public " + name + "(String msg, Throwable t) {");
+	out.println("        super(msg, t);");
+	out.println("        return;");
+	out.println("    }");
+
+	out.println();
+	out.println();
+
+	out.println("    /**");
+	out.println("     *  Constructs a <code>" + name + "</code> with the specified");
+	out.println("     *  cause and a detail message of <code>");
+	out.println("     *  cause.toString()</code> which typically contains the class and");
+	out.println("     *  detail message of <code>cause</code>.");
+	out.println("     *");
+	out.println("     *  @param t the cause of the exception");
+	out.println("     */");
+	out.println();
+	out.println("    public " + name + "(Throwable t) {");
+	out.println("        super(t);");
+	out.println("        return;");
+	out.println("    }");	
+
 	out.println("}");
 	out.close();
     }
@@ -291,7 +349,6 @@ public class OsidBinder
 	try {
 	    binder.parse(args[0]);
 	    binder.outputInterfaces(args[1]);
-	    binder.outputAssemblies(args[1]);
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
