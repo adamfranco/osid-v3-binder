@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.logging generated at 7/16/2008 11:51:03 AM 
+    XOSID for osid.logging generated at 10/14/2008 10:37:27 AM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -110,8 +110,9 @@
         <xosid:pbreak/>
 
          Example:
-         
+        
         <xosid:code>
+<![CDATA[
 LoggingSession out = manager.getLoggingSession();
 out.log(warningLogEntryPriorityType, "hello world", stringLogEntryContentType);
 
@@ -123,7 +124,7 @@ while (entries.hasNext()) {
         print (entry.getContent(stringLogEntryType));
     }
 }
-    
+    ]]>
         </xosid:code>
          
     </xosid:description>
@@ -350,15 +351,16 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getLogInterfaceTypes">
+        <xosid:method xosid:name="supportsLogHierarchySequencing">
             <xosid:description>
-                Gets the supported <xosid:token>Log</xosid:token>
-                interface types.
+                Tests if the log hierarchy supports node sequencing.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
-                    a list containing the supported interface types
+                    <xosid:token>true</xosid:token> if log hierarchy
+                    node sequencing is supported,
+                    <xosid:token>false</xosid:token> otherwise
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -368,16 +370,34 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsLogInterfaceType">
+        <xosid:method xosid:name="getLogEntrySearchRecordTypes">
             <xosid:description>
-                Tests if the given <xosid:token>Log</xosid:token>
-                interface type is supported.
+                Gets the supported log entry search record types.
             </xosid:description>
-            <xosid:parameter xosid:name="logInterfaceType">
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    a list containing the supported log entry search
+                    record types
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsLogEntrySearchRecordType">
+            <xosid:description>
+                Tests if the given log entry search record type is
+                supported.
+            </xosid:description>
+            <xosid:parameter xosid:name="logEntrySearchRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    a <xosid:token>Type</xosid:token> indicating a
-                    <xosid:token>Log</xosid:token> interface type
+                    a <xosid:token>Type</xosid:token> indicating a log
+                    entry record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -395,15 +415,15 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getLogSearchInterfaceTypes">
+        <xosid:method xosid:name="getLogRecordTypes">
             <xosid:description>
-                Gets the supported log search interface types.
+                Gets the supported <xosid:token>Log</xosid:token>
+                record types.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.type.TypeList"/>
                 <xosid:description>
-                    a list containing the supported log search
-                    interface types
+                    a list containing the supported log record types
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -413,16 +433,60 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsLogSearchInterfaceType">
+        <xosid:method xosid:name="supportsLogRecordType">
             <xosid:description>
-                Tests if the given log search interface type is
-                supported.
+                Tests if the given <xosid:token>Log</xosid:token>
+                record type is supported.
             </xosid:description>
-            <xosid:parameter xosid:name="logSearchInterfaceType">
+            <xosid:parameter xosid:name="logRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a <xosid:token>Type</xosid:token> indicating a
+                    <xosid:token>Log</xosid:token> record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given
+                    <xosid:token>Type</xosid:token> is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getLogSearchRecordTypes">
+            <xosid:description>
+                Gets the supported log search record types.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    a list containing the supported log search record
+                    types
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsLogSearchRecordType">
+            <xosid:description>
+                Tests if the given log search record type is supported.
+            </xosid:description>
+            <xosid:parameter xosid:name="logSearchRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a <xosid:token>Type</xosid:token> indicating a log
-                    interface type
+                    record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -2829,13 +2893,13 @@ while (entries.hasNext()) {
                 specified.
             </xosid:description>
             <xosid:parameter xosid:name="start">
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     a starting time
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="end">
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     a starting time
                 </xosid:description>
@@ -3070,46 +3134,6 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getLogEntryQueryForContentType">
-            <xosid:description>
-                Gets a log entry query interface of the specified
-                interface type. The returned query contains the method
-                to access the query interface corresponding to the
-                specified <xosid:token>Type </xosid:token>but must not
-                be cast directly from this method return.
-            </xosid:description>
-            <xosid:parameter xosid:name="contentType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of content query to retrieve
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.logging.LogEntryQuery"/>
-                <xosid:description>
-                    the entry query interface
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>contentType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>LoggingManager.supportsContentType(contentType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
         <xosid:method xosid:name="getLogEntriesByQuery">
             <xosid:description>
                 Gets a list of log entries matching the given search
@@ -3181,40 +3205,20 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getLogEntrySearchForInterfaceType">
+        <xosid:method xosid:name="getLogEntrySearchOrder">
             <xosid:description>
-                Gets a log entry search interface of the specified
-                type. The returned search interface provides access to
-                the search interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but may not be cast
-                directly from this method return.
+                Gets a log entry search order interface. The
+                <xosid:token>LogEntrySearchOrder</xosid:token> is
+                supplied to an
+                <xosid:token>LogEntrySearch</xosid:token> to specify
+                the ordering of results.
             </xosid:description>
-            <xosid:parameter xosid:name="logEntrySearchInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of search interface to retrieve
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.logging.LogEntrySearch"/>
+                <xosid:interfaceType xosid:type="osid.logging.LogEntrySearchOrder"/>
                 <xosid:description>
-                    the log entry search interface
+                    the log entry search order interface
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-
-                                        <xosid:token>logEntrySearchInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>RLoggingManager.supportsLogEntrySearchInterfaceType(logEntrySearchInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -3487,13 +3491,13 @@ while (entries.hasNext()) {
                 Removes log entries between the supplied dates.
             </xosid:description>
             <xosid:parameter xosid:name="start">
-                <xosid:primitiveType xosid:type="timestamp"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     the start time
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="end">
-                <xosid:primitiveType xosid:type="timestamp"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     the end time
                 </xosid:description>
@@ -3507,6 +3511,66 @@ while (entries.hasNext()) {
             <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
                 <xosid:description>
                     unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>start</xosid:token> or
+                    <xosid:token>end</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="deleteLogEntriesByPriorityAndTimestamp">
+            <xosid:description>
+                Removes log entries between the supplied dates for a
+                given priority type.
+            </xosid:description>
+            <xosid:parameter xosid:name="priorityType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the logging priority
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="start">
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
+                <xosid:description>
+                    the start time
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="end">
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
+                <xosid:description>
+                    the end time
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>start</xosid:token> is
+                   greate <xosid:token>r than end</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>priorityType, start</xosid:token> or
+                    <xosid:token>end</xosid:token> is
+                    <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
@@ -3759,7 +3823,7 @@ while (entries.hasNext()) {
             This session provides methods for retrieving
             <xosid:token>Log</xosid:token> objects. The
             <xosid:token>Log </xosid:token>represents a collection of
-            OSID <xosid:token>Ids.</xosid:token>
+            log entries.
 
             <xosid:pbreak/>
 
@@ -4048,22 +4112,20 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getLogsByInterfaceType">
+        <xosid:method xosid:name="getLogsByRecordType">
             <xosid:description>
-                Gets a <xosid:token>LogList</xosid:token> corresponding
-                to the given log interface <xosid:token>Type
-                </xosid:token>which does not include logs of interface
-                types derived from the specified <xosid:token>Type.
-                </xosid:token>In plenary mode, the returned list
-                contains all known logs or an error results. Otherwise,
-                the returned list may contain only those logs that are
-                accessible through this session. In both cases, the
-                order of the set is not specified.
+                Gets a <xosid:token>LogList</xosid:token> containing
+                the given repository record
+                <xosid:token>Type.</xosid:token>In plenary mode, the
+                returned list contains all known logs or an error
+                results. Otherwise, the returned list may contain only
+                those logs that are accessible through this session. In
+                both cases, the order of the set is not specified.
             </xosid:description>
-            <xosid:parameter xosid:name="logInterfaceType">
+            <xosid:parameter xosid:name="logRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    a log interface type
+                    a log record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -4074,7 +4136,7 @@ while (entries.hasNext()) {
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>logInterfaceType</xosid:token> is
+                    <xosid:token>logRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -4213,46 +4275,6 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getLogQueryForInterfaceType">
-            <xosid:description>
-                Gets a log query interface of the specified type. The
-                returned query contains the method to access the query
-                interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but may be cast
-                directly from this method return.
-            </xosid:description>
-            <xosid:parameter xosid:name="logInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of query to retrieve
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.logging.LogQuery"/>
-                <xosid:description>
-                    the log query
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>logInterfaceType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>LoggingManager.supportsLogInterfaceType(logInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
         <xosid:method xosid:name="getLogsByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Logs</xosid:token> matching
@@ -4324,39 +4346,19 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getLogSearchForInterfaceType">
+        <xosid:method xosid:name="getLogSearchOrder">
             <xosid:description>
-                Gets a log search interface of the specified type. The
-                returned search interface provides access to the search
-                interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but must not be cast
-                directly from this method return.
+                Gets a repository search order interface. The
+                <xosid:token>LogSearchOrder</xosid:token> is supplied
+                to a <xosid:token>LogSearch</xosid:token> to specify
+                the ordering of results.
             </xosid:description>
-            <xosid:parameter xosid:name="logSearchInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of query to retrieve
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.logging.LogSearch"/>
+                <xosid:interfaceType xosid:type="osid.logging.LogSearchOrder"/>
                 <xosid:description>
-                    the log search
+                    the log search order interface
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>logSearchInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>LoggingManager.supportsLogSearchInterfaceType(logSearchInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -4456,22 +4458,20 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="canCreateLogWithInterfaceTypes">
+        <xosid:method xosid:name="canCreateLogWithRecordTypes">
             <xosid:description>
                 Tests if this user can create a single
                 <xosid:token>Log </xosid:token>using the desired
-                interface types. A <xosid:token>Log
-               </xosid:token>interface <xosid:token>
-                Type</xosid:token> may specify the implementation of
-                other more well-known <xosid:token>Types.</xosid:token>
-                A provider may or may not accept the creation of a
-                <xosid:token>Log</xosid:token> using anything other
-                than the <xosid:token>LogForm</xosid:token> of the leaf
-                interface <xosid:token>Type,</xosid:token> or may
-                accept creation using one or more higher level
-                interface <xosid:token>Types.</xosid:token>
+                record interface types. While
+                <xosid:token>LoggingManager.getLogRecordTypes()</xosid:token>
+                can be used to examine which record interfaces are
+                supported, this method tests which record(s) are
+                required for creating a specific
+                <xosid:token>Log.</xosid:token> Providing an empty
+                array tests if a <xosid:token>Log</xosid:token> can be
+                created with no records.
             </xosid:description>
-            <xosid:parameter xosid:name="logInterfaceTypes">
+            <xosid:parameter xosid:name="logRecordTypes">
                 <xosid:interfaceType xosid:type="osid.type.Type" xosid:array="true"/>
                 <xosid:description>
                     array of types
@@ -4482,46 +4482,17 @@ while (entries.hasNext()) {
                 <xosid:description>
                     <xosid:token>true</xosid:token> if
                     <xosid:token>Log</xosid:token> creation using the
-                    specified interface
-                    <xosid:token>Types</xosid:token> is supported,
-                    <xosid:token>false</xosid:token> otherwise
+                    specified record <xosid:token>Types</xosid:token>
+                    is supported, <xosid:token>false</xosid:token>
+                    otherwise
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>logInterfaceTypes</xosid:token> is
+                    <xosid:token>logRecordTypes</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getRequiredLogInterfaceTypesForCreate">
-            <xosid:description>
-                Gets the list of minimum required interface
-                <xosid:token>Types</xosid:token> for creating a new
-                <xosid:token>Log. </xosid:token>A new
-                <xosid:token>Log</xosid:token> can be created using
-                any one of the interface types returned in this list.
-                This may be a series of leaf
-                <xosid:token>Types,</xosid:token> or multiple higher
-                level <xosid:token>Types</xosid:token> if creation
-                requirements are more lenient. An empty list suggests
-                no creates are supported as a root
-                <xosid:token>Log</xosid:token> interface is always
-                identified with its own
-                <xosid:token>Type.</xosid:token>
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
-                <xosid:description>
-                    one or more types
-                </xosid:description>
-            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -4532,37 +4503,14 @@ while (entries.hasNext()) {
         <xosid:method xosid:name="getLogFormForCreate">
             <xosid:description>
                 Gets the log form for creating new logs. A new form
-                should be requested for each create transaction. This
-                method is used for creating new <xosid:token>Log
-                </xosid:token>objects, where only the
-                <xosid:token>Log</xosid:token>
-                <xosid:token>Type</xosid:token> is known.
+                should be requested for each create transaction.
             </xosid:description>
-            <xosid:parameter xosid:name="logInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    log type
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.logging.LogForm"/>
                 <xosid:description>
                     the log form
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>logInterfaceType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>canCreatelogWithInterfaceTypes(logInterfaceType)</xosid:token>
-                    is <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -4574,10 +4522,10 @@ while (entries.hasNext()) {
             <xosid:description>
                 Creates a new <xosid:token>Log.</xosid:token>
             </xosid:description>
-            <xosid:parameter xosid:name="logForms">
-                <xosid:interfaceType xosid:type="osid.logging.LogForm" xosid:array="true"/>
+            <xosid:parameter xosid:name="logForm">
+                <xosid:interfaceType xosid:type="osid.logging.LogForm"/>
                 <xosid:description>
-                    the forms for this <xosid:token>Log</xosid:token>
+                    the form for this <xosid:token>Log</xosid:token>
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -4599,7 +4547,7 @@ while (entries.hasNext()) {
             </xosid:error>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>logForms</xosid:token> is
+                    <xosid:token>logForm</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -4615,8 +4563,8 @@ while (entries.hasNext()) {
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>logForm</xosid:token> is not
-                    supported
+                    <xosid:token>logForm</xosid:token> is not of this
+                    service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -5703,7 +5651,7 @@ while (entries.hasNext()) {
                 Gets the time this entry was logged.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     the time stamp of this entry
                 </xosid:description>
@@ -5786,7 +5734,7 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="implementsContentType">
+        <xosid:method xosid:name="hasContentType">
             <xosid:description>
                 Tests if the content supports the given
                 <xosid:token>Type.</xosid:token> The given type may be
@@ -5858,7 +5806,7 @@ while (entries.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementContentType(contentype)</xosid:token>
+                                        <xosid:token>hasContentType(contentype)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -5879,7 +5827,7 @@ while (entries.hasNext()) {
             <xosid:token>AND</xosid:token> term while multiple
             invocations of a method produces a nested
             <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>LogEntryQuery</xosid:token> subinterface.
+            <xosid:token>LogEntryQuery</xosid:token> record.
         </xosid:description>
 
 
@@ -6047,13 +5995,13 @@ while (entries.hasNext()) {
                 this log entry.
             </xosid:description>
             <xosid:parameter xosid:name="startTime">
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     start time
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="endTime">
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     end time
                 </xosid:description>
@@ -6170,6 +6118,37 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
+        <xosid:method xosid:name="matchContentType">
+            <xosid:description>
+                Matches the content type for this log entry.
+            </xosid:description>
+            <xosid:parameter xosid:name="contentType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    <xosid:token>Type</xosid:token> to match
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if for a positive
+                    match, <xosid:token>false</xosid:token> for
+                    negative match
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>contentType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
         <xosid:method xosid:name="supportsContentQuery">
             <xosid:description>
                 Tests if a content query is available.
@@ -6234,99 +6213,12 @@ while (entries.hasNext()) {
     </xosid:interface>
 
 
-    <xosid:interface xosid:name="osid.logging.LogEntrySearch"> 
-        <xosid:implements xosid:interface=""/>
+    <xosid:interface xosid:name="osid.logging.LogEntrySearchOrder"> 
+        <xosid:implements xosid:interface="osid.OsidSearchOrder"/>
         <xosid:description>
-            The search interface for governing log entry searches.
+            An interface for specifying the ordering of search results.
         </xosid:description>
 
-
-        <xosid:method xosid:name="limitResultSet">
-            <xosid:description>
-                By default, searches return all matching results. This
-                method restricts the number of results by setting the
-                start and end of the result set, starting from 1. The
-                starting and ending results can be used for paging
-                results when a certain ordering is requested. The
-                ending position must be greater than the starting
-                position.
-            </xosid:description>
-            <xosid:parameter xosid:name="start">
-                <xosid:primitiveType xosid:type="cardinal"/>
-                <xosid:description>
-                    the start of the result set
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:parameter xosid:name="end">
-                <xosid:primitiveType xosid:type="cardinal"/>
-                <xosid:description>
-                    the end of the result set
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
-                <xosid:description>
-                    <xosid:token>end </xosid:token>is less than or
-                    equal to <xosid:token>start</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="searchWithinLogEntryResults">
-            <xosid:description>
-                Execute this search using a previous search result.
-            </xosid:description>
-            <xosid:parameter xosid:name="results">
-                <xosid:interfaceType xosid:type="osid.logging.LogEntrySearchResults"/>
-                <xosid:description>
-                    results from a query
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
-                <xosid:description>
-                    <xosid:token>results</xosid:token> is not valid
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>results</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="searchAmongLogEntries">
-            <xosid:description>
-                Execute this search among the given list of log
-                entries.
-            </xosid:description>
-            <xosid:parameter xosid:name="logEntryIds">
-                <xosid:interfaceType xosid:type="osid.id.Id" xosid:array="true"/>
-                <xosid:description>
-                    list of log entries
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>logEntryIds</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
 
         <xosid:method xosid:name="orderByPriorityType">
             <xosid:description>
@@ -6376,25 +6268,215 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getLogEntrySearchInterface">
+        <xosid:method xosid:name="geContentSearchOrder">
             <xosid:description>
-                Gets the <xosid:token>LogEntrySearch</xosid:token>
-                interface corresponding to the log entry search
-                interface <xosid:token>Type</xosid:token> provided in
-                the search session<xosid:token>. </xosid:token>A
-                <xosid:token>LogEntrySearch</xosid:token> returned
-                from the search session is only required to implement
-                the root <xosid:token>LogEntrySearch</xosid:token>
-                interface. This method must be used to retrieve a query
-                object implementing the interface specified when
-                retrieving this object from the search session along
-                with all of its ancestor interfaces, including the core
-                <xosid:token>LogEntrySearch</xosid:token> interface.
+                Gets the composition search order record corresponding
+                to the given repository record Type. Multiple
+                retrievals return the same underlying object.
+            </xosid:description>
+            <xosid:parameter xosid:name="contentType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a content record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="object"/>
+                <xosid:description>
+                    the content search order record interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>contentType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasContentType(contentRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.logging.LogEntrySearch"> 
+        <xosid:implements xosid:interface="osid.OsidSearch"/>
+        <xosid:description>
+            The search interface for governing log entry searches.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="searchWithinLogEntryResults">
+            <xosid:description>
+                Execute this search using a previous search result.
+            </xosid:description>
+            <xosid:parameter xosid:name="results">
+                <xosid:interfaceType xosid:type="osid.logging.LogEntrySearchResults"/>
+                <xosid:description>
+                    results from a query
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>results</xosid:token> is not valid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>results</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="searchAmongLogEntries">
+            <xosid:description>
+                Execute this search among the given list of log
+                entries.
+            </xosid:description>
+            <xosid:parameter xosid:name="logEntryIds">
+                <xosid:interfaceType xosid:type="osid.id.IdList"/>
+                <xosid:description>
+                    list of log entries
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>logEntryIds</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="orderLogEntryResults">
+            <xosid:description>
+                Specify an ordering to the search results.
+            </xosid:description>
+            <xosid:parameter xosid:name="logEntrySearchOrder">
+                <xosid:interfaceType xosid:type="osid.logging.LogEntrySearchOrder"/>
+                <xosid:description>
+                    log entry search order
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>logEntrySearchOrder</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>logEntrySearchOrder</xosid:token> is
+                    not of this service
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getLogEntrySearchRecord">
+            <xosid:description>
+                Gets the record corresponding to the given log entry
+                search record <xosid:token>Type. </xosid:token>This
+                method must be used to retrieve an object implementing
+                the requested record interface along with all of its
+                ancestor interfaces.
+            </xosid:description>
+            <xosid:parameter xosid:name="logEntrySearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a log entry search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.logging.LogEntrySearchRecord"/>
+                <xosid:description>
+                    the log entry search interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+
+                                        <xosid:token>logEntrySearchRecordType</xosid:token>
+                    is <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(logEntrySearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.logging.LogEntrySearchRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>LogEntrySearch.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getLogEntrySearchSearch">
+            <xosid:description>
+                Gets the <xosid:token>LogEntrySearch</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.logging.LogEntrySearch"/>
                 <xosid:description>
-                    the log entry search interface
+                    the log entry search
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -6432,30 +6514,79 @@ while (entries.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getLogEntrySearchResultsInterface">
+        <xosid:method xosid:name="getLogEntrySearchResultsRecord">
             <xosid:description>
-                Gets the log entry search results interface
-                corresponding to the
-                <xosid:token>searchType</xosid:token> used in
-                retrieving the
-                <xosid:token>LogEntrySearch</xosid:token> interface. A
-                <xosid:token>LogEntrySearchResults</xosid:token>
-                returned from the search session is only required to
-                implement the root
-                <xosid:token>LogEntrySearchResults</xosid:token>
-                interface. This method must be used to retrieve a
-                search results object implementing the interface
-                specified when retrieving the
-                <xosid:token>LogEntrySearch</xosid:token> from the
-                search session along with all of its ancestor
-                interfaces, including the core
-                <xosid:token>LogEntrySearchResults</xosid:token>
-                interface.
+                Gets the record corresponding to the given log entry
+                search record <xosid:token>Type. </xosid:token>This
+                method must be used to retrieve an object implementing
+                the requested record interface along with all of its
+                ancestor interfaces.
+            </xosid:description>
+            <xosid:parameter xosid:name="logEntrySearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a log entry search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.logging.LogEntrySearchResultsRecord"/>
+                <xosid:description>
+                    the log entry search interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+
+                                        <xosid:token>logEntrySearchRecordType</xosid:token>
+                    is <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(logEntrySearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.logging.LogEntrySearchResultsRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
+        <xosid:description>
+            A record for a
+            <xosid:token>LogEntrySearchResults.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getLogEntrySearchResults">
+            <xosid:description>
+                Gets the
+                <xosid:token>LogEntrySearchResults</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.logging.LogEntrySearchResults"/>
                 <xosid:description>
-                    the log netry search results
+                    the log entry search results
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -6554,20 +6685,22 @@ while (entries.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (lel.hasNext()) {
      LogEntry entry = lel.getNextLogEntry();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (lel.hasNext()) {
      LogEntry[] entries = lel.getNextLogEntries(lel.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -6655,56 +6788,42 @@ while (lel.hasNext()) {
             A <xosid:token>Log</xosid:token> represents a collection of
             entries. Like all OSID objects, a
             <xosid:token>Log</xosid:token> is identified by its Id and
-            any persisted references should use the Id. 
-
-            <xosid:pbreak/>
-
-            <xosid:token>getLogInterface()</xosid:token> should be used
-            to retrieve the interface corresponding to this
-            <xosid:token>Type.</xosid:token> The existence of the
-            interface must not be assumed until requested at which
-            point it is safe to cast into the interface indicated by
-            the type.
+            any persisted references should use the
+            <xosid:token>Id.</xosid:token>
         </xosid:description>
 
 
-        <xosid:method xosid:name="getLogInterface">
+        <xosid:method xosid:name="getLogRecord">
             <xosid:description>
-                Gets the <xosid:token>Log</xosid:token> interface
-                corresponding to the given
-                <xosid:token>Log</xosid:token> interface
-                <xosid:token>Type. </xosid:token>A
-                <xosid:token>Log</xosid:token> returned from another
-                method is only required to implement the root
-                <xosid:token>Log</xosid:token> interface and this
-                method must be used to retrieve a log object
-                implementing the requested interface along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>Log</xosid:token> interface. The
-                <xosid:token>logInterfaceType</xosid:token> may be the
-                <xosid:token>Type</xosid:token> returned by
-                <xosid:token>getInterfaceType()</xosid:token> or any
-                parent of <xosid:token>getInterfaceType()</xosid:token>
-                in the <xosid:token>Type</xosid:token> hierarchy where
-               
-                <xosid:token>implementsInterfaceType(logInterfaceType)</xosid:token>
+                Gets the record corresponding to the given
+                <xosid:token>Log</xosid:token> record
+                <xosid:token>Type. </xosid:token>This method must be
+                used to retrieve an object implementing the requested
+                record interface along with all of its ancestor
+                interfaces. The
+                <xosid:token>logRecordType</xosid:token> may be the
+                <xosid:token>Type</xosid:token> returned in
+                <xosid:token>getRecordTypes()</xosid:token> or any of
+                its parents in a <xosid:token>Type</xosid:token>
+                hierarchy where
+                <xosid:token>hasRecordType(logRecordType)</xosid:token>
                 is <xosid:token>true</xosid:token>.
             </xosid:description>
-            <xosid:parameter xosid:name="logInterfaceType">
+            <xosid:parameter xosid:name="logRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the type of the interface to retrieve
+                    the type of log record to retrieve
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.logging.Log"/>
                 <xosid:description>
-                    the log with the specified interface
+                    the log record
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>logInterfaceType</xosid:token> is
+                    <xosid:token>logRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -6721,10 +6840,39 @@ while (lel.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementsInterfaceType(logInterfaceType)</xosid:token>
+                                        <xosid:token>hasRecordType(logRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.logging.LogRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>Log.</xosid:token> The methods
+            specified by the record type are available through the
+            underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getLog">
+            <xosid:description>
+                Gets the <xosid:token>Log</xosid:token> from which this
+                record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.logging.Log"/>
+                <xosid:description>
+                    the log
+                </xosid:description>
+            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -6742,7 +6890,7 @@ while (lel.hasNext()) {
             <xosid:token>AND</xosid:token> term while multiple
             invocations of a method produces a nested
             <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>LogQuery</xosid:token> subinterface.
+            <xosid:token>LogQuery</xosid:token> record.
         </xosid:description>
 
 
@@ -6831,82 +6979,257 @@ while (lel.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getLogEntryQueryForInterfaceType">
+        <xosid:method xosid:name="getLogQueryRecord">
             <xosid:description>
-                Gets the log entry query interface for the log entry
-                type. Supported types are defined in the
-                <xosid:token>LoggingManager.</xosid:token>
+                Gets the record query interface corresponding to the
+                given <xosid:token>Log</xosid:token> record
+                <xosid:token>Type. </xosid:token>Multiple record
+                retrievals of the same type may return the same
+                underlying object and do not result in adding terms to
+                the query. Multiple record retrievals of different
+                types add <xosid:token>AND</xosid:token> terms to the
+                other elements set in this query.
             </xosid:description>
-            <xosid:parameter xosid:name="logEntryInterfaceType">
+            <xosid:parameter xosid:name="logRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    a log entry interface type
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
+                    a log record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.logging.LogEntryQuery"/>
+                <xosid:interfaceType xosid:type="osid.logging.LogQueryRecord"/>
                 <xosid:description>
-                    the logentry query
+                    the log query record
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>logEntryInterfaceType</xosid:token> is
+                    <xosid:token>logRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
                 <xosid:description>
-                    <xosid:token>supportsLogEntryQuery()</xosid:token>
-                    is <xosid:token>false</xosid:token>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>LoggingManager.supportsLogEntryInterfaceType(logEntryInterfaceType)</xosid:token>
+                                        <xosid:token>hasRecordType(logRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:compliance xosid:type="optional">
+            <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
-                    This method must be implemented if
-                    <xosid:token>supportsLogEntryQuery()</xosid:token>
-                    is <xosid:token>true.</xosid:token>
+                    This method must be implemented.
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>
+    </xosid:interface>
 
-        <xosid:method xosid:name="getLogQueryInterface">
+
+    <xosid:interface xosid:name="osid.logging.LogQueryRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>LogQuery.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getLogQuery">
             <xosid:description>
-                Gets the <xosid:token>LogQuery</xosid:token> interface
-                corresponding to the <xosid:token>Log</xosid:token>
-                interface <xosid:token>Type</xosid:token> provided in
-                the search session. A
-                <xosid:token>LogQuery</xosid:token> returned from the
-                search session is only required to implement the root
-                <xosid:token>LogQuery</xosid:token> interface. This
-                method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the search session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>LogQuery</xosid:token> interface.
-                Multiple retrievals of this interface may return the
-                same underlying object and do not result in adding
-                terms to the query.
+                Gets the <xosid:token>LogQuery</xosid:token> from which
+                this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.logging.LogQuery"/>
                 <xosid:description>
-                    the log query interface
+                    the log query
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.logging.LogForm"> 
+        <xosid:implements xosid:interface="osid.OsidCatalogForm"/>
+        <xosid:description>
+            This is the form for creating and updating
+            <xosid:token>Logs. </xosid:token>Like all
+            <xosid:token>OsidForm</xosid:token> objects, various data
+            elements may be set here for use in the create and update
+            methods in the <xosid:token>LogAdminSession.</xosid:token>
+            For each data element that may be set, metadata may be
+            examined to provide display hints or data constraints.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getLogFormRecord">
+            <xosid:description>
+                Gets the <xosid:token>LogFormRecord</xosid:token>
+                interface corresponding to the given log record
+                interface <xosid:token>Type.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="logRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the log record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.logging.LogFormRecord"/>
+                <xosid:description>
+                    the record
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>logRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(logRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.logging.LogFormRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>LogForm.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getLogForm">
+            <xosid:description>
+                Gets the <xosid:token>LogForm</xosid:token> from which
+                this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.logging.LogForm"/>
+                <xosid:description>
+                    the log form
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.logging.LogSearchOrder"> 
+        <xosid:implements xosid:interface="osid.OsidCatalogSearchOrder"/>
+        <xosid:description>
+            An interface for specifying the ordering of search results.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getLogSearchOrderRecord">
+            <xosid:description>
+                Gets the log sarch record order corresponding to the
+                given log record Type. Multiple retrievals return the
+                same underlying object.
+            </xosid:description>
+            <xosid:parameter xosid:name="logRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a log record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.logging.LogSearchOrderRecord"/>
+                <xosid:description>
+                    the log search order record interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>logRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(logRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.logging.LogSearchOrderRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>LogSearchOrder.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getLogSearchOrder">
+            <xosid:description>
+                Gets the <xosid:token>LogSearchOrder</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.logging.LogSearchOrder"/>
+                <xosid:description>
+                    the log search order
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -6919,7 +7242,7 @@ while (lel.hasNext()) {
 
 
     <xosid:interface xosid:name="osid.logging.LogSearch"> 
-        <xosid:implements xosid:interface="osid.OsidCatalogSearch"/>
+        <xosid:implements xosid:interface="osid.OsidSearch"/>
         <xosid:description>
             The search interface for governing log searches.
         </xosid:description>
@@ -6958,7 +7281,7 @@ while (lel.hasNext()) {
                 Execute this search among the given list of logs.
             </xosid:description>
             <xosid:parameter xosid:name="logIds">
-                <xosid:interfaceType xosid:type="osid.id.Id" xosid:array="true"/>
+                <xosid:interfaceType xosid:type="osid.id.IdList"/>
                 <xosid:description>
                     list of logs
                 </xosid:description>
@@ -6976,25 +7299,105 @@ while (lel.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getLogSearchInterface">
+        <xosid:method xosid:name="orderLogResults">
             <xosid:description>
-                Gets the <xosid:token>LogSearch</xosid:token> interface
-                corresponding to the log search interface
-                <xosid:token>Type</xosid:token> provided in the search
-               session <xosid:token>. </xosid:token>A
-                <xosid:token>CogSearch</xosid:token> returned from the
-                search session is only required to implement the root
-                <xosid:token>LogSearch</xosid:token> interface. This
-                method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the search session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>LogSearch</xosid:token> interface.
+                Specify an ordering to the search results.
+            </xosid:description>
+            <xosid:parameter xosid:name="logSearchOrder">
+                <xosid:interfaceType xosid:type="osid.logging.LogSearchOrder"/>
+                <xosid:description>
+                    log search order
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>logSearchOrder</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>logSearchOrder</xosid:token> is not of
+                    this service
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getLogSearchRecord">
+            <xosid:description>
+                Gets the record corresponding to the given asset search
+                record <xosid:token>Type. </xosid:token>This method
+                must be used to retrieve an object implementing the
+                requested record interface along with all of its
+                ancestor interfaces.
+            </xosid:description>
+            <xosid:parameter xosid:name="logSearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a log search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.logging.LogSearchRecord"/>
+                <xosid:description>
+                    the log search interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>logSearchRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(logSearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.logging.LogSearchRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>LogSearch.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getLogSearch">
+            <xosid:description>
+                Gets the <xosid:token>LogSearch</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.logging.LogSearch"/>
                 <xosid:description>
-                    the log search interface
+                    the log search
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -7032,29 +7435,48 @@ while (lel.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getLogSearchResultsInterface">
+        <xosid:method xosid:name="getLogSearchResultsRecord">
             <xosid:description>
-                Gets the log search results interface corresponding to
-                the <xosid:token>searchType</xosid:token> used in
-                retrieving the <xosid:token>LogSearch</xosid:token>
-                interface. A
-                <xosid:token>LogSearchResults</xosid:token> returned
-                from the search session is only required to implement
-                the root <xosid:token>LogSearchResults</xosid:token>
-                interface. This method must be used to retrieve a
-                search results object implementing the interface
-                specified when retrieving the
-                <xosid:token>LogSearch</xosid:token> from the search
-                session along with all of its ancestor interfaces,
-                including the core
-                <xosid:token>LogSearchResults</xosid:token> interface.
+                Gets the record corresponding to the given log search
+                record Type. This method must be used to retrieve an
+                object implementing the requested record interface
+                along with all of its ancestor interfaces.
             </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.logging.LogSearchResults"/>
+            <xosid:parameter xosid:name="logSearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the log search results
+                    a log search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.logging.LogSearchResultsRecord"/>
+                <xosid:description>
+                    the log search interface
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>logSearchRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(logSearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -7064,38 +7486,24 @@ while (lel.hasNext()) {
     </xosid:interface>
 
 
-    <xosid:interface xosid:name="osid.logging.LogForm"> 
-        <xosid:implements xosid:interface="osid.OsidCatalogForm"/>
+    <xosid:interface xosid:name="osid.logging.LogSearchResultsRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
         <xosid:description>
-            This is the form for creating and updating
-            <xosid:token>Logs. </xosid:token>Like all
-            <xosid:token>OsidForm</xosid:token> objects, various data
-            elements may be set here for use in the create and update
-            methods in the <xosid:token>LogAdminSession.</xosid:token>
-            For each data element that may be set, metadata may be
-            examined to provide display hints or data constraints.
+            A record for a <xosid:token>LogSearchResults.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
         </xosid:description>
 
 
-        <xosid:method xosid:name="getLogFormInterface">
+        <xosid:method xosid:name="getLogSearchResults">
             <xosid:description>
-                Gets the <xosid:token>LogForm</xosid:token> interface
-                corresponding to the <xosid:token>Log</xosid:token>
-                interface <xosid:token>Type</xosid:token> provided in
-                the admin session<xosid:token>. </xosid:token>A
-                <xosid:token>Log</xosid:token> returned from the admin
-                session is only required to implement the root
-                <xosid:token>Log</xosid:token> interface. This method
-                must be used to retrieve a query object implementing
-                the interface specified when retrieving this object
-                from the admin session along with all of its ancestor
-                interfaces, including the core
-                <xosid:token>LogForm</xosid:token> interface.
+                Gets the <xosid:token>LogSearchResults</xosid:token>
+                from which this record originated.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.logging.LogForm"/>
+                <xosid:interfaceType xosid:type="osid.logging.LogSearchResults"/>
                 <xosid:description>
-                    the log form interface
+                    the log search results
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -7286,20 +7694,22 @@ while (lel.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (ll.hasNext()) {
      Log log = al.getNextLog();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (ll.hasNext()) {
      Loh[] logs = ll.getNextLogs(ll.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>

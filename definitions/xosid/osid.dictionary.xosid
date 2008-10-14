@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.dictionary generated at 7/14/2008 6:40:45 PM 
+    XOSID for osid.dictionary generated at 10/14/2008 4:08:00 PM 
 
     Copyright (C) 2002-2008 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -114,23 +114,25 @@
         a key/value pair. Dictionary objects may be structured in the
         form of a hierarchy to categorize a set of dictionaries or for
         he purpose of inheritance.
-        Basic Example:
+        BasicExample:
         <xosid:code>
+<![CDATA[
 
 
 EntryLookupSession lookupSession = mgr.getEntryLookupSession();
 string definition = (string) lookupSession.getEntry("gambrel", strType, strType);
 
-
+]]>
         </xosid:code>
-        Federated Example:
+        FederatedExample:
         <xosid:code>
+<![CDATA[
 
 
 DictionaryLookupSession dictLookupSession = mgr.getDictionaryLookupSession();
 Dictionary dict = dictLookupSession.getDictionary(dict_id);
 EntryLookupSession lookupSession = mgr.getEntryLookupSessionForDictionary(dict);
-JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
+JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
         </xosid:code>
          
     </xosid:description>
@@ -385,6 +387,26 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
+        <xosid:method xosid:name="supportsDictionaryHierarchySequencing">
+            <xosid:description>
+                Tests if the dictionary hierarchy supports node
+                sequencing.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if dictionary
+                    hierarchy node sequencing is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
         <xosid:method xosid:name="getEntryKeyTypes">
             <xosid:description>
                 Gets the supported <xosid:token>Entry</xosid:token> key
@@ -511,16 +533,16 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getEntrySearchInterfaceTypes">
+        <xosid:method xosid:name="getEntrySearchRecordTypes">
             <xosid:description>
                 Gets the supported <xosid:token>Entry</xosid:token>
-                search interface types.
+                search record types.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.type.TypeList"/>
                 <xosid:description>
                     a list containing the supported
-                    <xosid:token>Entry</xosid:token> search interface
+                    <xosid:token>Entry</xosid:token> search record
                     types
                 </xosid:description>
             </xosid:return>
@@ -531,16 +553,16 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsEntrySearchInterfaceType">
+        <xosid:method xosid:name="supportsEntrySearchRecordType">
             <xosid:description>
                 Tests if the given <xosid:token>Entry</xosid:token>
-                search interface type is supported.
+                search record type is supported.
             </xosid:description>
-            <xosid:parameter xosid:name="entrySearchInterfaceType">
+            <xosid:parameter xosid:name="entrySearchrecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a <xosid:token>Type</xosid:token> indicating a
-                    <xosid:token>Entry</xosid:token> search interface
+                    <xosid:token>Entry</xosid:token> search record
                     type
                 </xosid:description>
             </xosid:parameter>
@@ -559,17 +581,16 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDictionaryInterfaceTypes">
+        <xosid:method xosid:name="getDictionaryRecordTypes">
             <xosid:description>
                 Gets the supported
-                <xosid:token>Dictionary</xosid:token> types.
+                <xosid:token>Dictionary</xosid:token> record types.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.type.TypeList"/>
                 <xosid:description>
                     a list containing the supported
-                    <xosid:token>Dictionary</xosid:token> interface
-                    types
+                    <xosid:token>Dictionary</xosid:token> record types
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -579,26 +600,25 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsDictionaryInterfaceType">
+        <xosid:method xosid:name="supportsDictionaryrecordType">
             <xosid:description>
                 Tests if the given
-                <xosid:token>Dictionary</xosid:token> interface type is
+                <xosid:token>Dictionary</xosid:token> record type is
                 supported.
             </xosid:description>
-            <xosid:parameter xosid:name="dictionaryInterfaceType">
+            <xosid:parameter xosid:name="dictionaryRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a <xosid:token>Type</xosid:token> indicating a
-                    <xosid:token>Dictionary</xosid:token> interface
-                    type
+                    <xosid:token>Dictionary</xosid:token> record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
                 <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
-                    <xosid:token>true</xosid:token> if the given
-                    interface Type is supported,
-                    <xosid:token>false</xosid:token> otherwise
+                    <xosid:token>true</xosid:token> if the given record
+                    Type is supported, <xosid:token>false</xosid:token>
+                    otherwise
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -608,10 +628,10 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDictionarySearchInterfaceTypes">
+        <xosid:method xosid:name="getDictionarySearchRecordTypes">
             <xosid:description>
                 Gets the supported
-                <xosid:token>Dictionary</xosid:token> search interface
+                <xosid:token>Dictionary</xosid:token> search record
                 types.
             </xosid:description>
             <xosid:return>
@@ -619,7 +639,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
                 <xosid:description>
                     a list containing the supported
                     <xosid:token>Dictionary</xosid:token> search
-                    interface types
+                    record types
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -629,26 +649,26 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsDictionarySearchInterfaceType">
+        <xosid:method xosid:name="supportsDictionarySearchRecordType">
             <xosid:description>
                 Tests if the given
-                <xosid:token>Dictionary</xosid:token> search interface
+                <xosid:token>Dictionary</xosid:token> search record
                 type is supported.
             </xosid:description>
-            <xosid:parameter xosid:name="dictionarySearchInterfaceType">
+            <xosid:parameter xosid:name="dictionarySearchRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a <xosid:token>Type</xosid:token> indicating a
                     <xosid:token>Dictionary</xosid:token> search
-                    interface type
+                    record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
                 <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
-                    <xosid:token>true</xosid:token> if the given Type
-                    is supported, <xosid:token>false</xosid:token>
-                    otherwise
+                    <xosid:token>true</xosid:token> if the given record
+                    <xosid:token>Type</xosid:token> is supported,
+                    <xosid:token>false</xosid:token> otherwise
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -2937,11 +2957,6 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             <xosid:token>EntryList</xosid:token> or be used to perform
             a search within the result set through
             <xosid:token>EntrySearch.</xosid:token>
-            Entries may have a varying interface extensions indicated
-            by their respective types. The interface extension is
-            accessed via the <xosid:token>ENtryQuery.</xosid:token> The
-            returns in this session may not be cast directly to these
-            interfaces.
         </xosid:description>
 
 
@@ -3049,13 +3064,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
 
         <xosid:method xosid:name="getEntryQuery">
             <xosid:description>
-                Gets an entry query interface. The returned query only
-                makes available the core
-                <xosid:token>EntryQuery</xosid:token> interface and
-                does not support additional interface types.
-                <xosid:token>getEntryQueryForType()</xosid:token>
-                should be used if additional interface types are
-                required.
+                Gets an entry query interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.dictionary.EntryQuery"/>
@@ -3063,132 +3072,6 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
                     the entry query
                 </xosid:description>
             </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getEntryQueryForTypes">
-            <xosid:description>
-                Gets an entry query interface of the specified key and
-                value types. The returned query contains the method to
-                access the query interfaces corresponding to the
-                specified <xosid:token>Types</xosid:token> for each of
-                the key and value.
-            </xosid:description>
-            <xosid:parameter xosid:name="keyType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of key
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:parameter xosid:name="valueType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of value
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.dictionary.EntryQuery"/>
-                <xosid:description>
-                    the entry query
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>keyType</xosid:token> or
-                    <xosid:token>valueType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>DictionaryManager.supportsEntryTypes(keyType,
-                    valueType)</xosid:token> is
-                    <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getEntryQueryForKeyType">
-            <xosid:description>
-                Gets an entry query interface of the specified key
-                type. The returned query contains the method to access
-                the query interfaces corresponding to the specified
-                <xosid:token>Type.</xosid:token>
-            </xosid:description>
-            <xosid:parameter xosid:name="keyType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of key
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.dictionary.EntryQuery"/>
-                <xosid:description>
-                    the entry query
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>keyType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>DictionaryManager.supportsEntryKeyType(keyType)</xosid:token>
-                    is <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getEntryQueryForValueType">
-            <xosid:description>
-                Gets an entry query interface of the specified value
-                type. The returned query contains the method to access
-                the query interfaces corresponding to the specified
-                <xosid:token>Type.</xosid:token>
-            </xosid:description>
-            <xosid:parameter xosid:name="valueType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of value
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.dictionary.EntryQuery"/>
-                <xosid:description>
-                    the entry query
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>valueType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>DictionaryManager.supportsEntryValueType(valueType)</xosid:token>
-                    is <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -3265,40 +3148,19 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getEntrySearchForInterfaceType">
+        <xosid:method xosid:name="getEntrySearchOrder">
             <xosid:description>
-                Gets a key search interface of the specified type. The
-                returned query contains the search interface extension
-                corresponding to the specified
-                <xosid:token>Type</xosid:token> but may not be cast
-                directly from this method return.
+                Gets an entry search order interface. The
+                <xosid:token>EntrySearchOrder</xosid:token> is
+                supplied to a <xosid:token>EntrySearch</xosid:token> to
+                specify the ordering of results.
             </xosid:description>
-            <xosid:parameter xosid:name="entrySearchInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of search interface query to retrieve
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.dictionary.EntrySearch"/>
+                <xosid:interfaceType xosid:type="osid.dictionary.EntrySearchOrder"/>
                 <xosid:description>
-                    the entry query
+                    the entry search order interface
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-
-                                        <xosid:token>entrySearchInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>DictionaryManager.supportsEntrySearchInterfaceType(entrySearchInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -3319,7 +3181,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="entrySearch">
-                <xosid:interfaceType xosid:type="osid.authentication.KeySearch"/>
+                <xosid:interfaceType xosid:type="osid.dictionary.EntrySearch"/>
                 <xosid:description>
                     the search interface
                 </xosid:description>
@@ -3439,6 +3301,48 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
                     otherwise
                 </xosid:description>
             </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="canCreateEntryWithTypes">
+            <xosid:description>
+                Tests if this user can create a single
+                <xosid:token>Entry </xosid:token>using the desired
+                types.
+            </xosid:description>
+            <xosid:parameter xosid:name="keyType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    key type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="entryType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    entry type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if
+                    <xosid:token>Entry</xosid:token> creation using
+                    the specified <xosid:token>Types</xosid:token> is
+                    supported, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>keyType</xosid:token>
+                   or <xosid:token> entryType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -3877,7 +3781,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
                 <xosid:token>Entry</xosid:token> is changed.
             </xosid:description>
             <xosid:parameter xosid:name="key">
-                <xosid:primitiveType xosid:type="object"/>
+                <xosid:primitiveType xosid:type="interface"/>
                 <xosid:description>
                     the entry key
                 </xosid:description>
@@ -3957,7 +3861,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
                 <xosid:token>Entry</xosid:token> is deleted.
             </xosid:description>
             <xosid:parameter xosid:name="key">
-                <xosid:primitiveType xosid:type="object"/>
+                <xosid:primitiveType xosid:type="interface"/>
                 <xosid:description>
                     the entry key
                 </xosid:description>
@@ -4309,22 +4213,21 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDictionariesByInterfaceType">
+        <xosid:method xosid:name="getDictionariesByRecordType">
             <xosid:description>
                 Gets a <xosid:token>DictionaryList</xosid:token>
-                corresponding to the given dictionary interface
-                <xosid:token>Type. </xosid:token>The set of
-                dictionaries implementing the given interface type is
-                returned. In plenary mode, the returned list contains
-                all known dictionaries or an error results. Otherwise,
-                the returned list may contain only those dictionaries
-                that are accessible through this session. In both
-                cases, the order of the set is not specified.
+                containing the given dictionary record
+                <xosid:token>Type. </xosid:token>In plenary mode, the
+                returned list contains all known dictionaries or an
+                error results. Otherwise, the returned list may contain
+                only those dictionaries that are accessible through
+                this session. In both cases, the order of the set is
+                not specified.
             </xosid:description>
-            <xosid:parameter xosid:name="dictionaryInterfaceType">
+            <xosid:parameter xosid:name="dictionaryRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    a dictionary interface type
+                    a dictionary record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -4336,8 +4239,8 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>dictionaryInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
+                    <xosid:token>dictionaryRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
@@ -4425,11 +4328,10 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             <xosid:token>DictionaryList</xosid:token> or be used to
             perform a search within the result set through
             <xosid:token>DictionarySearch.</xosid:token>
-            Dictionaries may have a query interface indicated by their
-            respective interface types. The typed query interface is
-            accessed via the
-            <xosid:token>DictionaryQuery.</xosid:token> The returns in
-            this session may not be cast directly to these interfaces.
+            Dictionaries may have a record query interface indicated by
+            their respective record types. The record query interface
+            is accessed via the
+            <xosid:token>DictionaryQuery.</xosid:token>
         </xosid:description>
 
 
@@ -4476,46 +4378,6 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
                     the dictionary query
                 </xosid:description>
             </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getDictionaryQueryForInterfaceType">
-            <xosid:description>
-                Gets a dictionary query interface of the specified
-                type. The returned query contains the method to access
-                the query interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but may be cast
-                directly from this method return.
-            </xosid:description>
-            <xosid:parameter xosid:name="dictionaryInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of query interface to retrieve
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.dictionary.DictionaryQuery"/>
-                <xosid:description>
-                    the dictionary query
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>dictionaryInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>DictionaryManager.supportsDictionarySearchInterfaceType(dictionaryInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -4594,40 +4456,20 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDictionarySearchForInterfaceType">
+        <xosid:method xosid:name="getDictionarySearchOrder">
             <xosid:description>
-                Gets a dictionary search interface of the specified
-                type. The returned search interface provides access to
-                the search interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but must not be cast
-                directly from this method return.
+                Gets a dictionary search order interface. The
+                <xosid:token>DictuionarySearchOrder</xosid:token> is
+                supplied to a
+                <xosid:token>DictionarySearch</xosid:token> to specify
+                the ordering of results.
             </xosid:description>
-            <xosid:parameter xosid:name="dictionarySearchInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of search interface to retrieve
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.dictionary.DictionarySearch"/>
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionarySearchOrder"/>
                 <xosid:description>
-                    the dictionary search interface
+                    the dictionary search order interface
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-
-                                        <xosid:token>dictionarySearchInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>DictionaryManager.supportsDictionarySearchInterfaceType(dictionarySearchInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -4728,23 +4570,21 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="canCreateDictionaryWithInterfaceTypes">
+        <xosid:method xosid:name="canCreateDictionaryWithRecordTypes">
             <xosid:description>
                 Tests if this user can create a single
                 <xosid:token>Dictionary </xosid:token>using the
-                desired interface types. A <xosid:token>Dictionary
-               </xosid:token>interface <xosid:token>
-                Type</xosid:token> may specify the implementation of
-                other more well-known <xosid:token>Types.</xosid:token>
-                A provider may or may not accept the creation of a
-                <xosid:token>Dictionary</xosid:token> using anything
-                other than the
-                <xosid:token>DictionaryForm</xosid:token> of the leaf
-                interface <xosid:token>Type,</xosid:token> or may
-                accept creation using one or more higher level
-                interface <xosid:token>Types.</xosid:token>
+                desired record types. While
+                <xosid:token>DictionaryManager.getDictionaryRecordTypes()</xosid:token>
+                can be used to examine which records are supported,
+                this method tests which record(s) are required for
+                creating a specific
+                <xosid:token>Dictionary.</xosid:token> Providing an
+                empty array tests if a
+                <xosid:token>Dictionary</xosid:token> can be created
+                with no records.
             </xosid:description>
-            <xosid:parameter xosid:name="dictionaryInterfaceTypes">
+            <xosid:parameter xosid:name="dictionaryRecordTypes">
                 <xosid:interfaceType xosid:type="osid.type.Type" xosid:array="true"/>
                 <xosid:description>
                     array of types
@@ -4755,47 +4595,17 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
                 <xosid:description>
                     <xosid:token>true</xosid:token> if
                     <xosid:token>Dictionary</xosid:token> creation
-                    using the specified interface
+                    using the specified record
                     <xosid:token>Types</xosid:token> is supported,
                     <xosid:token>false</xosid:token> otherwise
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-
-                                        <xosid:token>dictionaryInterfaceTypes</xosid:token>
-                    is <xosid:token>null</xosid:token>
+                    <xosid:token>dictionaryRecordTypes</xosid:token> is
+                    <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getRequiredDictionaryInterfaceTypesForCreate">
-            <xosid:description>
-                Gets the list of minimum required interface
-                <xosid:token>Types</xosid:token> for creating a new
-                <xosid:token>Dictionary. </xosid:token>A new
-                <xosid:token>Dictionary</xosid:token> can be created
-                using any one of the interface types returned in this
-                list. This may be a series of leaf
-                <xosid:token>Types,</xosid:token> or multiple higher
-                level <xosid:token>Types</xosid:token> if creation
-                requirements are more lenient. An empty list suggests
-                no creates are supported as a root
-                <xosid:token>Catalog</xosid:token> interface is always
-                identified with its own
-                <xosid:token>Type.</xosid:token>
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
-                <xosid:description>
-                    one or more types
-                </xosid:description>
-            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -4807,38 +4617,14 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             <xosid:description>
                 Gets the dictionary form for creating new dictionaries.
                 A new form should be requested for each create
-                transaction. This method is used for creating new
-                <xosid:token>Dictionary </xosid:token>objects, where
-                only the <xosid:token>Dictionary</xosid:token>
-                <xosid:token>Type</xosid:token> is known.
+                transaction.
             </xosid:description>
-            <xosid:parameter xosid:name="dictionaryInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the interface <xosid:token>Type</xosid:token> of
-                    the <xosid:token>Dictionary</xosid:token> to be
-                    created
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.dictionary.DictionaryForm"/>
                 <xosid:description>
                     the dictionary form
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>dictionaryInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>canCreateDictionaryWithInterfaceTypes(dictionaryInterfaceType)</xosid:token>
-                    is <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -5975,10 +5761,12 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
         <xosid:implements xosid:interface=""/>
         <xosid:description>
             An <xosid:token>Entry</xosid:token> contains a key and a
-            value. The key and value have a Type that indicates their
-            type. The Type may indicate the key and value are simple
-            strings or, more complex objects may be managed that allows
-            for a translation from one arbitrary object to another.
+            value. The key and value have a Type such that an entry is
+            identified by the combination of the key, key type, and
+            value type. The Type may indicate the key and value are
+            simple strings or, more complex objects may be managed that
+            allows for a translation from one arbitrary object to
+            another.
         </xosid:description>
 
 
@@ -6372,59 +6160,60 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>
+    </xosid:interface>
 
-        <xosid:method xosid:name="getDictionaryQueryForInterfaceType">
+
+    <xosid:interface xosid:name="osid.dictionary.EntrySearchOrder"> 
+        <xosid:implements xosid:interface=""/>
+        <xosid:description>
+            This interface specifies options for ordering search
+            results.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="orderByKeyType">
             <xosid:description>
-                Gets the dictionary query interface for the dictionary
-                type. Supported types are defined in the
-                <xosid:token>DictionaryManager.</xosid:token>
+                Specifies a preference for ordering the results by key
+                type.
             </xosid:description>
-            <xosid:parameter xosid:name="dictionaryInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
+            <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
-                    a dictionary type
+                    This method must be implemented.
                 </xosid:description>
-            </xosid:parameter>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.dictionary.DictionaryQuery"/>
-                <xosid:description>
-                    the dictionary query
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>dictionaryInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
-                <xosid:description>
+            </xosid:compliance>
+        </xosid:method>
 
-                                        <xosid:token>supportsdictionaryQuery()</xosid:token>
-                    is <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+        <xosid:method xosid:name="orderByKey">
+            <xosid:description>
+                Specifies a preference for ordering the results by key.
+            </xosid:description>
+            <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
 
-                                        <xosid:token>DictionaryManager.supportsDictionaryInterfaceType(dictionaryInterfaceType)
-                    is false</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="optional">
+        <xosid:method xosid:name="orderByValueType">
+            <xosid:description>
+                Specifies a preference for ordering the results by
+                value type.
+            </xosid:description>
+            <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
-                    This method must be implemented if
-                   
-                    <xosid:token>supportsDictionaryQuery()</xosid:token>
-                    is <xosid:token>true.</xosid:token>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="orderByValue">
+            <xosid:description>
+                Specifies a preference for ordering the results by
+                value.
+            </xosid:description>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>
@@ -6438,57 +6227,6 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             searches.
         </xosid:description>
 
-
-        <xosid:method xosid:name="searchWithinEntryResults">
-            <xosid:description>
-                Eexecute this search using a previous search result.
-            </xosid:description>
-            <xosid:parameter xosid:name="results">
-                <xosid:interfaceType xosid:type="osid.dictionary.EntrySearchResults"/>
-                <xosid:description>
-                    results from a query
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
-                <xosid:description>
-                    <xosid:token>results</xosid:token> is not valid
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>results</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="searchAmongEntries">
-            <xosid:description>
-                Execute this search among the given list of entries.
-            </xosid:description>
-            <xosid:parameter xosid:name="entryIds">
-                <xosid:interfaceType xosid:type="osid.id.Id" xosid:array="true"/>
-                <xosid:description>
-                    list of entries
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>entryIds</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
 
         <xosid:method xosid:name="limitResultSet">
             <xosid:description>
@@ -6525,10 +6263,35 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="orderByKey">
+        <xosid:method xosid:name="hasSearchRecordType">
             <xosid:description>
-                Specifies a preference for ordering the results by key.
+                Tests if this search supports the given record
+                <xosid:token>Type.</xosid:token> The given record type
+                may be supported by the object through interface/type
+                inheritence. This method should be checked before
+                retrieving the record interface.
             </xosid:description>
+            <xosid:parameter xosid:name="searchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if a search record
+                    the given record <xosid:token>Type</xosid:token> is
+                    available, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>searchRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -6536,11 +6299,27 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="orderByValue">
+        <xosid:method xosid:name="searchWithinEntryResults">
             <xosid:description>
-                Specifies a preference for ordering the results by
-                value.
+                Eexecute this search using a previous search result.
             </xosid:description>
+            <xosid:parameter xosid:name="results">
+                <xosid:interfaceType xosid:type="osid.dictionary.EntrySearchResults"/>
+                <xosid:description>
+                    results from a query
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>results</xosid:token> is not valid
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>results</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -6548,11 +6327,22 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="orderByDictionary">
+        <xosid:method xosid:name="searchAmongEntries">
             <xosid:description>
-                Specifies a preference for ordering the results by
-                dictionary.
+                Execute this search among the given list of entries.
             </xosid:description>
+            <xosid:parameter xosid:name="entries">
+                <xosid:interfaceType xosid:type="osid.dictionary.EntryList"/>
+                <xosid:description>
+                    list of entries
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>entries</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -6560,25 +6350,105 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getEntrySearchInterface">
+        <xosid:method xosid:name="orderEntryResults">
             <xosid:description>
-                Gets the <xosid:token>EntrySearch</xosid:token>
-                interface corresponding to the entry search interface
-                <xosid:token>Type</xosid:token> provided in the search
-               session <xosid:token>. </xosid:token>A
-                <xosid:token>EntrySearch</xosid:token> returned from
-                the search session is only required to implement the
-                root <xosid:token>EntrySearch</xosid:token> interface.
-                This method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the search session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>EntrySearch</xosid:token> interface.
+                Specify an ordering to the search results.
             </xosid:description>
+            <xosid:parameter xosid:name="entrySearchOrder">
+                <xosid:interfaceType xosid:type="osid.dictionary.EntrySearchOrder"/>
+                <xosid:description>
+                    entry searcgh order
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>entrySearchOrder</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>entrySearchOrder</xosid:token> is not
+                    of this service
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getEntrySearchRecord">
+            <xosid:description>
+                Gets the record corresponding to the given entry search
+                record <xosid:token>Type. </xosid:token>This method
+                must be used to retrieve an object implementing the
+                requested record interface along with all of its
+                ancestor interfaces.
+            </xosid:description>
+            <xosid:parameter xosid:name="entrySearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    an entry search record type
+                </xosid:description>
+            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.dictionary.EntrySearch"/>
                 <xosid:description>
                     the entry search interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>entrySearchRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(entrySearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.dictionary.EntrySearchRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
+        <xosid:description>
+            A record for an <xosid:token>EntrySearch.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getEntrySearch">
+            <xosid:description>
+                Gets the <xosid:token>EntrySearch</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.dictionary.EntrySearch"/>
+                <xosid:description>
+                    the entry search
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -6607,7 +6477,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.dictionary.EntryList"/>
                 <xosid:description>
-                    the dictionary list
+                    the entry list
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -6619,29 +6489,47 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
 
         <xosid:method xosid:name="getEntrySearchResultsInterface">
             <xosid:description>
-                Gets the dictionary entry search results interface
-                corresponding to the
-                <xosid:token>searchType</xosid:token> used in
-                retrieving the <xosid:token>EntrySearch</xosid:token>
-                interface. A
-                <xosid:token>EntrySearchResults</xosid:token> returned
-                from the search session is only required to implement
-                the root <xosid:token>EntrySearchResults</xosid:token>
-                interface. This method must be used to retrieve a
-                search results object implementing the interface
-                specified when retrieving the
-                <xosid:token>EntrySearch</xosid:token> from the search
-                session along with all of its ancestor interfaces,
-                including the core
-                <xosid:token>EntrySearchResults</xosid:token>
-                interface.
+                Gets the record corresponding to the given entry search
+                record <xosid:token>Type. </xosid:token>This method
+                must be used to retrieve an object implementing the
+                requested record interface along with all of its
+                ancestor interfaces.
             </xosid:description>
+            <xosid:parameter xosid:name="entrySearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    an entry search record type
+                </xosid:description>
+            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.dictionary.EntrySearchResults"/>
                 <xosid:description>
-                    the entry results interface
+                    the entry results record
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>entrySearchRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(entrySearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -6784,20 +6672,22 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (el.hasNext()) {
      Entry entry = el.getNextEntry();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (el.hasNext()) {
      Entry[] entries = el.getNextEntries(el.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -6889,53 +6779,44 @@ while (el.hasNext()) {
 
             <xosid:pbreak/>
 
-            <xosid:token>getDictionaryInterface()</xosid:token> should
-            be used to retrieve the interface corresponding to this
-            <xosid:token>Type.</xosid:token> The existence of the
-            interface must not be assumed until requested at which
-            point it is safe to cast into the interface indicated by
-            the type.
+            <xosid:token>getDictionaryRecord()</xosid:token> should be
+            used to retrieve the record corresponding to this
+            <xosid:token>Type.</xosid:token>
         </xosid:description>
 
 
-        <xosid:method xosid:name="getDictionaryInterface">
+        <xosid:method xosid:name="getDictionaryRecord">
             <xosid:description>
-                Gets the <xosid:token>Dictionary</xosid:token>
-                interface corresponding to the given
-                <xosid:token>Dictionary</xosid:token> interface
-                <xosid:token>Type. </xosid:token>A
-                <xosid:token>Dictionary</xosid:token> returned from
-                another method is only required to implement the root
-                <xosid:token>Dictionary</xosid:token> interface and
-                this method must be used to retrieve a dictionary
-                object implementing the requested interface along with
-                all of its ancestor interfaces, including the core
-                <xosid:token>Dictionary</xosid:token> interface. The
-                <xosid:token>dictionaryInterfaceType</xosid:token> may
-                be the <xosid:token>Type</xosid:token> returned by
-                <xosid:token>getInterfaceType()</xosid:token> or any
-                parent of <xosid:token>getInterfaceType()</xosid:token>
-                in the <xosid:token>Type</xosid:token> hierarchy where
-               
-                <xosid:token>implementsInterfaceType(dictionaryInterfaceType)</xosid:token>
+                Gets the record corresponding to the given
+                <xosid:token>Dictionary</xosid:token> record
+                <xosid:token>Type. </xosid:token>This method must be
+                used to retrieve an object implementing the requested
+                record interface along with all of its ancestor
+                interfaces. The
+                <xosid:token>dictionaryRecordType</xosid:token> may be
+                the <xosid:token>Type</xosid:token> returned in
+                <xosid:token>getRecordTypes()</xosid:token> or any of
+                its parents in a <xosid:token>Type</xosid:token>
+                hierarchy where
+                <xosid:token>hasRecordType(dictionaryRecordType)</xosid:token>
                 is <xosid:token>true</xosid:token>.
             </xosid:description>
-            <xosid:parameter xosid:name="dictionaryInterfaceType">
+            <xosid:parameter xosid:name="dictionaryRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the type of the interface to retrieve
+                    the type of the record to retrieve
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.dictionary.Dictionary"/>
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionaryRecord"/>
                 <xosid:description>
-                    the dictionary with the specified interface
+                    the dictionary with the specified record
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>dictionaryInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
+                    <xosid:token>dictionaryRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
@@ -6951,10 +6832,39 @@ while (el.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementsInterfaceType(dictionaryInterfaceType)</xosid:token>
+                                        <xosid:token>hasRecordType(dictionaryRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.dictionary.DictionaryRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>Dictionary.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDictionary">
+            <xosid:description>
+                Gets the <xosid:token>Dictionary</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.dictionary.Dictionary"/>
+                <xosid:description>
+                    the dictionary
+                </xosid:description>
+            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -6976,29 +6886,103 @@ while (el.hasNext()) {
         </xosid:description>
 
 
-        <xosid:method xosid:name="matchKeyType">
+        <xosid:method xosid:name="supportsEntryQuery">
             <xosid:description>
-                Sets the <xosid:token>Type</xosid:token> for querying
-                keys of a given type.
+                Tests if an <xosid:token>EntryQuery</xosid:token> is
+                available.
             </xosid:description>
-            <xosid:parameter xosid:name="keyType">
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if an entry query
+                    interface is available,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getEntryQuery">
+            <xosid:description>
+                Gets the query interface for an entry.
+            </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> for a positive
+                    match, <xosid:token>false</xosid:token> for
+                    negative match
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.dictionary.EntryQuery"/>
+                <xosid:description>
+                    the entry query
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>supportsEntryQuery()</xosid:token> is
+                    <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="optional">
+                <xosid:description>
+                    This method must be implemented if
+                    <xosid:token>supportsEntryQuery()</xosid:token> is
+                    <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getDictionaryQueryRecord">
+            <xosid:description>
+                Gets the record query interface corresponding to the
+                given <xosid:token>Dictionary</xosid:token> record
+                <xosid:token>Type. </xosid:token>Multiple record
+                retrievals of the same type may return the same
+                underlying object and do not result in adding terms to
+                the query. Multiple record retrievals of different
+                types add <xosid:token>AND</xosid:token> terms to the
+                other elements set in this query.
+            </xosid:description>
+            <xosid:parameter xosid:name="dictionaryRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the key <xosid:token>Type</xosid:token>
+                    a dictionary record type
                 </xosid:description>
             </xosid:parameter>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionaryQueryRecord"/>
                 <xosid:description>
-                    <xosid:token>true</xosid:token> if the key type is
-                    a positive match, <xosid:token>false</xosid:token>
-                    for negative match
+                    the dictionary query record
                 </xosid:description>
-            </xosid:parameter>
+            </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>keyType</xosid:token> is
+                    <xosid:token>dictionaryRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(dictionaryRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -7007,124 +6991,210 @@ while (el.hasNext()) {
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>
+    </xosid:interface>
 
-        <xosid:method xosid:name="matchKey">
-            <xosid:description>
-                Matches entries of this key.
-            </xosid:description>
-            <xosid:parameter xosid:name="key">
-                <xosid:primitiveType xosid:type="object"/>
-                <xosid:description>
-                    the key
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if the key is a
-                    positive match, <xosid:token>false</xosid:token>
-                    for negative match
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>keyType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
 
-        <xosid:method xosid:name="matchValueType">
-            <xosid:description>
-                Sets the <xosid:token>Type</xosid:token> of this entry
-                value.
-            </xosid:description>
-            <xosid:parameter xosid:name="valueType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the value <xosid:token>Type</xosid:token>
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if the value type
-                    is a positive match,
-                    <xosid:token>false</xosid:token> for negative match
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>valueType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
+    <xosid:interface xosid:name="osid.dictionary.DictionaryQueryRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>DictionaryQuery.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
 
-        <xosid:method xosid:name="matchValue">
-            <xosid:description>
-                Sets the value in this entry.
-            </xosid:description>
-            <xosid:parameter xosid:name="value">
-                <xosid:primitiveType xosid:type="object"/>
-                <xosid:description>
-                    the value
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if the value is a
-                    positive match, <xosid:token>false</xosid:token>
-                    for negative match
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>value</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
 
-        <xosid:method xosid:name="getDictionaryQueryInterface">
+        <xosid:method xosid:name="getDictionaryQuery">
             <xosid:description>
                 Gets the <xosid:token>DictionaryQuery</xosid:token>
-                interface corresponding to the
-                <xosid:token>Dictionary</xosid:token> interface
-                <xosid:token>Type</xosid:token> provided in the search
-                session. A <xosid:token>DictionaryQuery</xosid:token>
-                returned from the search session is only required to
-                implement the root
-                <xosid:token>DictionaryQuery</xosid:token> interface.
-                This method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the search session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>DictionaryQuery</xosid:token> interface.
-                Multiple retrievals of this interface may return the
-                same underlying object and do not result in adding
-                terms to the query.
+                from which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.dictionary.DictionaryQuery"/>
                 <xosid:description>
-                    the dictionary query interface
+                    the dictionary query
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.dictionary.DictionaryForm"> 
+        <xosid:implements xosid:interface="osid.OsidCatalogForm"/>
+        <xosid:description>
+            This is the form for creating and updating a
+            <xosid:token>Dictionary. </xosid:token>Like all
+            <xosid:token>OsidForm</xosid:token> objects, various data
+            elements may be set here for use in the create and update
+            methods in the
+            <xosid:token>DictionaryAdminSession.</xosid:token> For each
+            data element that may be set, metadata may be examined to
+            provide display hints or data constraints.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDictionaryFormRecord">
+            <xosid:description>
+                Gets the
+                <xosid:token>DictionaryFormRecord</xosid:token>
+                interface corresponding to the given dictionary record
+                interface <xosid:token>Type.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="dictionaryRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a dictionary record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionaryFormRecord"/>
+                <xosid:description>
+                    the record
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>dictionaryRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(dictionaryRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.dictionary.DictionaryFormRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>DictionaryForm.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDictionaryForm">
+            <xosid:description>
+                Gets the <xosid:token>DictionaryForm</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionaryForm"/>
+                <xosid:description>
+                    the dictionary form
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.dictionary.DictionarySearchOrder"> 
+        <xosid:implements xosid:interface="osid.OsidCatalogSearchOrder"/>
+        <xosid:description>
+            An interface for specifying the ordering of search results.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDictionarySearchOrderRecord">
+            <xosid:description>
+                Gets the dictionary search order record corresponding
+                to the given dictionary record <xosid:token>Type.
+                </xosid:token>Multiple retrievals return the same
+                underlying object.
+            </xosid:description>
+            <xosid:parameter xosid:name="dictionaryRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a dictionary record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionarySearchOrderReceord"/>
+                <xosid:description>
+                    the dictionary search order record interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>dictionaryRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(dictionaryRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.dictionary.DictionarySearchOrderRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a
+            <xosid:token>DictionarySearchOrder.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDictionarySearchOrder">
+            <xosid:description>
+                Gets the
+                <xosid:token>DictionarySearchOrder</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionarySearchOrder"/>
+                <xosid:description>
+                    the dictionary search order
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -7177,7 +7247,7 @@ while (el.hasNext()) {
                 dictionaries.
             </xosid:description>
             <xosid:parameter xosid:name="dictionaryIds">
-                <xosid:interfaceType xosid:type="osid.id.Id" xosid:array="true"/>
+                <xosid:interfaceType xosid:type="osid.id.IdList"/>
                 <xosid:description>
                     list of dictionaries
                 </xosid:description>
@@ -7195,10 +7265,28 @@ while (el.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="orderByKey">
+        <xosid:method xosid:name="orderDictionaryResults">
             <xosid:description>
-                Specifies a preference for ordering the results by key.
+                Specify an ordering to the search results.
             </xosid:description>
+            <xosid:parameter xosid:name="dictionarySearchOrder">
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionarySearchOrder"/>
+                <xosid:description>
+                    dictionary search order
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>dictionarySearchOrder</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>dictionarySearchOrder</xosid:token> is
+                    not of this service
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -7206,37 +7294,77 @@ while (el.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="orderByValue">
+        <xosid:method xosid:name="getDictinarySearchRecord">
             <xosid:description>
-                Specifies a preference for ordering the results by
-                value.
+                Gets the record corresponding to the given dictionary
+                search record <xosid:token>Type. </xosid:token>This
+                method must be used to retrieve an object implementing
+                the requested record interface along with all of its
+                ancestor interfaces.
             </xosid:description>
+            <xosid:parameter xosid:name="dictionarySearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a dictionary search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionarySearchRecord"/>
+                <xosid:description>
+                    the dictionary search interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+
+                                        <xosid:token>dictionarySearchRecordType</xosid:token>
+                    is <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(dictionarySearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>
+    </xosid:interface>
 
-        <xosid:method xosid:name="getDictinarySearchInterface">
+
+    <xosid:interface xosid:name="osid.dictionary.DictionarySearchRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>DictionarySearch.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDictionarySearch">
             <xosid:description>
                 Gets the <xosid:token>DictionarySearch</xosid:token>
-                interface corresponding to the dictionary search
-                interface <xosid:token>Type</xosid:token> provided in
-                the search session<xosid:token>. </xosid:token>A
-                <xosid:token>DictionarySearch</xosid:token> returned
-                from the search session is only required to implement
-                the root <xosid:token>DictionarySearch</xosid:token>
-                interface. This method must be used to retrieve a query
-                object implementing the interface specified when
-                retrieving this object from the search session along
-                with all of its ancestor interfaces, including the core
-                <xosid:token>DictionarySearch</xosid:token> interface.
+                from which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.dictionary.DictionarySearch"/>
                 <xosid:description>
-                    the dictionary search interface
+                    the dictionary search
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -7275,32 +7403,50 @@ while (el.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDictionarySearchResultsInterface">
+        <xosid:method xosid:name="getDictionarySearchResultsRecord">
             <xosid:description>
-                Gets the dictionary search results interface
-                corresponding to the
-                <xosid:token>searchType</xosid:token> used in
-                retrieving the
-                <xosid:token>DictionarySearch</xosid:token> interface.
-                A <xosid:token>DictionarySearchResults</xosid:token>
-                returned from the search session is only required to
-                implement the root
-                <xosid:token>DictionarySearchResults</xosid:token>
-                interface. This method must be used to retrieve a
-                search results object implementing the interface
-                specified when retrieving the
-                <xosid:token>DictionarySearch</xosid:token> from the
-                search session along with all of its ancestor
-                interfaces, including the core
-                <xosid:token>DictionarySearchResults</xosid:token>
-                interface.
+                Gets the record corresponding to the given dictionary
+                search record <xosid:token>Type. </xosid:token>This
+                method must be used to retrieve an object implementing
+                the requested record interface along with all of its
+                ancestor interfaces.
             </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.dictionary.DictionarySearchResults"/>
+            <xosid:parameter xosid:name="dictionarySearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the dictionary results interface
+                    a dictionary search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionarySearchResultsRecord"/>
+                <xosid:description>
+                    the dictionary search interface
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+
+                                        <xosid:token>dictionarySearchRecordType</xosid:token>
+                    is <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(dictionarySearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -7310,40 +7456,26 @@ while (el.hasNext()) {
     </xosid:interface>
 
 
-    <xosid:interface xosid:name="osid.dictionary.DictionaryForm"> 
-        <xosid:implements xosid:interface="osid.OsidCatalogForm"/>
+    <xosid:interface xosid:name="osid.dictionary.DictionarySearchResultsRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
         <xosid:description>
-            This is the form for creating and updating a
-            <xosid:token>Dictionary. </xosid:token>Like all
-            <xosid:token>OsidForm</xosid:token> objects, various data
-            elements may be set here for use in the create and update
-            methods in the
-            <xosid:token>DictionaryAdminSession.</xosid:token> For each
-            data element that may be set, metadata may be examined to
-            provide display hints or data constraints.
+            A record for a
+            <xosid:token>DictionarySearchResults.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
         </xosid:description>
 
 
-        <xosid:method xosid:name="getDictionaryFormInterface">
+        <xosid:method xosid:name="getDictionarySearchResults">
             <xosid:description>
-                Gets the <xosid:token>DictionaryForm</xosid:token>
-                interface corresponding to the
-                <xosid:token>Dictionary</xosid:token> interface
-                <xosid:token>Type</xosid:token> provided in the admin
-               session <xosid:token>. </xosid:token>A
-                <xosid:token>DictionaryForm</xosid:token> returned
-                from the admin session is only required to implement
-                the root <xosid:token>DictionaryForm</xosid:token>
-                interface. This method must be used to retrieve a query
-                object implementing the interface specified when
-                retrieving this object from the admin session along
-                with all of its ancestor interfaces, including the core
-                <xosid:token>DictionaryForm</xosid:token> interface.
+                Gets the
+                <xosid:token>DictionarySearchResults</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.dictionary.DictionaryForm"/>
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionarySearchResults"/>
                 <xosid:description>
-                    the dictionary form interface
+                    the dictionary search results
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -7535,20 +7667,22 @@ while (el.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (dl.hasNext()) {
      Dictionary dictionary = dl.getNextEntry();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (dl.hasNext()) {
      Dictionary[] dictionaries = dl.getNextEntries(dl.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>

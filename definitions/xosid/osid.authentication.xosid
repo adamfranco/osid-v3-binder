@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.authentication generated at 7/17/2008 9:12:46 AM 
+    XOSID for osid.authentication generated at 10/14/2008 9:39:51 AM 
 
     Copyright (C) 2002-2008 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -97,7 +97,7 @@
 
     <xosid:description>
         The Authentication OSID helps a consumer acquire and validate
-        authentication credential_ without having to manage the details
+        authentication credentials without having to manage the details
         of a particular authentication environment. Authentication is
         generally a two step process. A user wishing to authenticate
         acquires a set of credentials and transports those credentials
@@ -171,10 +171,11 @@
         <xosid:pbreak/>
 
         Example client side authentication:
-         
+        
         <xosid:code>
-if (manager.supportsAuthenticationAcquisition() and
-    manager.supportsAcquisitionInputType(krb5ServiceType) and
+<![CDATA[
+if (manager.supportsAuthenticationAcquisition() &&
+    manager.supportsAcquisitionInputType(krb5ServiceType) &&
     manager.supportsCredentialType(serialKRB5Type)) {
     AuthenticationAcquisitionSession aas = manager.getAuthenticationAcquisitionSession();
 
@@ -188,7 +189,7 @@ if (manager.supportsAuthenticationAcquisition() and
     Authentication auth = aas.getAuthentication(kService, krb5ServiceType);
     SerializedKRB5Ticket ticket = (SerializedKRB5Ticket)        auth.getCredential(serialKRB5Type);
     send_data_to_peer(ticket); // app specific protocol
-}
+}]]>
         </xosid:code>
          
          
@@ -196,9 +197,10 @@ if (manager.supportsAuthenticationAcquisition() and
         <xosid:pbreak/>
 
         Example server side authentication:
-         
+        
         <xosid:code>
-if (manager.supportsAuthenticationValidation() and
+<![CDATA[
+if (manager.supportsAuthenticationValidation() &&
     manager.supportsCredentialType(serialSAML2Type)) {
     AuthenticationValidationSession avs = manager.getAuthenticationValidationSession();
 
@@ -207,7 +209,7 @@ if (manager.supportsAuthenticationValidation() and
     if (auth.isValid()) {
         Agent agent = auth.getAgent(); // identity established
     }
-}
+}]]>
         </xosid:code>
          
         Certain consumers may wish to be notified of changes within the
@@ -216,7 +218,8 @@ if (manager.supportsAuthenticationValidation() and
 
         <xosid:pbreak/>
 
-         <xosid:code>
+<xosid:code>
+<![CDATA[
 if (manager.supportsAgentNotification()) {
     AgentNotificationSession ans = manager.getAgentNotificationSession(receiver);
     ans.registerForNewAgents();
@@ -227,7 +230,7 @@ AgentReceiver receiver {
     newAgent(Id agentId) { print("new agent"); }
     changedAgent(Id agentId) { print("updated agent"); }
     deletedAgent(Id agentId) { print("deleted agent"); }
-}
+}]]>
         </xosid:code>
          
     </xosid:description>
@@ -532,16 +535,16 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getAgentInterfaceTypes">
+        <xosid:method xosid:name="getAgentRecordTypes">
             <xosid:description>
                 Gets the supported <xosid:token>Agent</xosid:token>
-                types.
+                record types.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.type.TypeList"/>
                 <xosid:description>
                     a list containing the supported
-                    <xosid:token>Agent</xosid:token> interface types
+                    <xosid:token>Agent</xosid:token> record types
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -551,24 +554,24 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsAgentInterfaceType">
+        <xosid:method xosid:name="supportsAgentRecordType">
             <xosid:description>
                 Tests if the given <xosid:token>Agent</xosid:token>
-                interface type is supported.
+                record type is supported.
             </xosid:description>
-            <xosid:parameter xosid:name="agentInterfaceType">
+            <xosid:parameter xosid:name="agentRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a <xosid:token>Type</xosid:token> indicating an
-                    <xosid:token>Agent</xosid:token> interface type
+                    <xosid:token>Agent</xosid:token> record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
                 <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
-                    <xosid:token>true</xosid:token> if the given
-                    interface Type is supported,
-                    <xosid:token>false</xosid:token> otherwise
+                    <xosid:token>true</xosid:token> if the given record
+                    Type is supported, <xosid:token>false</xosid:token>
+                    otherwise
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -578,16 +581,16 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getAgentSearchInterfaceTypes">
+        <xosid:method xosid:name="getAgentSearchRecordTypes">
             <xosid:description>
                 Gets the supported <xosid:token>Agent</xosid:token>
-                search interface types.
+                search record types.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.type.TypeList"/>
                 <xosid:description>
                     a list containing the supported
-                    <xosid:token>Agent</xosid:token> search interface
+                    <xosid:token>Agent</xosid:token> search record
                     types
                 </xosid:description>
             </xosid:return>
@@ -598,16 +601,16 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsAgentSearchInterfaceType">
+        <xosid:method xosid:name="supportsAgentSearchRecordType">
             <xosid:description>
                 Tests if the given <xosid:token>Agent</xosid:token>
-                search interface type is supported.
+                search record type is supported.
             </xosid:description>
-            <xosid:parameter xosid:name="agentSearchInterfaceType">
+            <xosid:parameter xosid:name="agentSearchRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a <xosid:token>Type</xosid:token> indicating an
-                    <xosid:token>Agent</xosid:token> search interface
+                    <xosid:token>Agent</xosid:token> search record
                     type
                 </xosid:description>
             </xosid:parameter>
@@ -626,16 +629,16 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getKeyInterfaceTypes">
+        <xosid:method xosid:name="getKeyRecordTypes">
             <xosid:description>
                 Gets the supported <xosid:token>Key</xosid:token>
-                interface types.
+                record types.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.type.TypeList"/>
                 <xosid:description>
                     a list containing the supported
-                    <xosid:token>Key</xosid:token> interface types
+                    <xosid:token>Key</xosid:token> record types
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -645,12 +648,12 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsKeyInterfaceType">
+        <xosid:method xosid:name="supportsKeyRecordType">
             <xosid:description>
                 Tests if the given <xosid:token>Key</xosid:token>
-                interface type is supported.
+                record type is supported.
             </xosid:description>
-            <xosid:parameter xosid:name="keyInterfaceType">
+            <xosid:parameter xosid:name="keyRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a <xosid:token>Type</xosid:token> indicating a
@@ -661,7 +664,7 @@ AgentReceiver receiver {
                 <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
                     <xosid:token>true</xosid:token> if the given key
-                    interface <xosid:token>Type</xosid:token> is
+                    record <xosid:token>Type</xosid:token> is
                     supported, <xosid:token>false</xosid:token>
                     otherwise
                 </xosid:description>
@@ -673,16 +676,15 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getKeySearchInterfaceTypes">
+        <xosid:method xosid:name="getKeySearchRecordTypes">
             <xosid:description>
-                Gets the supported key search interface types.
+                Gets the supported key search record types.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.type.TypeList"/>
                 <xosid:description>
                     a list containing the supported
-                    <xosid:token>Key</xosid:token> search interface
-                    types
+                    <xosid:token>Key</xosid:token> search record types
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -692,24 +694,22 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsKeySearchInterfaceType">
+        <xosid:method xosid:name="supportsKeySearchRecordType">
             <xosid:description>
-                Tests if the given key search interface type is
-                supported.
+                Tests if the given key search record type is supported.
             </xosid:description>
-            <xosid:parameter xosid:name="keySearchInterfaceType">
+            <xosid:parameter xosid:name="keySearchRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a <xosid:token>Type</xosid:token> indicating a
-                    <xosid:token>Key</xosid:token> search interface
-                    type
+                    <xosid:token>Key</xosid:token> search record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
                 <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
                     <xosid:token>true</xosid:token> if the given search
-                    interface <xosid:token>Type</xosid:token> is
+                    record <xosid:token>Type</xosid:token> is
                     supported, <xosid:token>false</xosid:token>
                     otherwise
                 </xosid:description>
@@ -1816,12 +1816,9 @@ AgentReceiver receiver {
             applications may need to know whether it had retrieved an
             entire set of objects and may sacrifice some
             interoperability for the sake of precision.
-            Agents may have an additional interface indicated by their
-            respective types. The interface is accessed via the
-            <xosid:token>Agent.</xosid:token> The
-            <xosid:token>Agent</xosid:token> returns from the methods
-            in this session may not be cast directly to the typed
-            interfaces.
+            Agents may have an additional records indicated by their
+            respective record types. The record may not be accessed
+            through a cast of the <xosid:token>Agent.</xosid:token>
         </xosid:description>
 
 
@@ -2087,22 +2084,20 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getAgentsByInterfaceType">
+        <xosid:method xosid:name="getAgentsByRecordType">
             <xosid:description>
-                Gets an <xosid:token>AgentList</xosid:token>
-                corresponding to the given agent interface
-                <xosid:token>Type. </xosid:token>The set of agents
-                implementing the given interface type is returned. In
-                plenary mode, the returned list contains all known
-                agents or an error results. Otherwise, the returned
-                list may contain only those agents that are accessible
-                through this session. In both cases, the order of the
-                set is not specified.
+                Gets an <xosid:token>AgentList</xosid:token> containing
+                the given repository record
+                <xosid:token>Type.</xosid:token> In plenary mode, the
+                returned list contains all known agents or an error
+                results. Otherwise, the returned list may contain only
+                those agents that are accessible through this session.
+                In both cases, the order of the set is not specified.
             </xosid:description>
-            <xosid:parameter xosid:name="agentInterfaceType">
+            <xosid:parameter xosid:name="agentRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    an agent interface type
+                    an agent record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -2113,7 +2108,7 @@ AgentReceiver receiver {
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>agentInterfaceType</xosid:token> is
+                    <xosid:token>agentRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -2200,11 +2195,9 @@ AgentReceiver receiver {
             <xosid:token>AgentList</xosid:token> or be used to perform
             a search within the result set through
             <xosid:token>AgentSearch.</xosid:token>
-            Agents may have a query interface indicated by their
-            respective interface types. The typed query interface is
-            accessed via the <xosid:token>AgentQuery.</xosid:token> The
-            returns in this session may not be cast directly to these
-            interfaces.
+            Agents may have a record query interface indicated by their
+            respective record types. The record query interface is
+            accessed via the <xosid:token>AgentQuery.</xosid:token>
         </xosid:description>
 
 
@@ -2236,13 +2229,7 @@ AgentReceiver receiver {
 
         <xosid:method xosid:name="getAgentQuery">
             <xosid:description>
-                Gets an agent query interface. The returned query only
-                makes available the core
-                <xosid:token>AgentQuery</xosid:token> interface and
-                does not support additional interface types.
-                <xosid:token>getAgentQueryForType()</xosid:token>
-                should be used if additional interface types are
-                required.
+                Gets an agent query interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.authentication.AgentQuery"/>
@@ -2250,46 +2237,6 @@ AgentReceiver receiver {
                     the agent query
                 </xosid:description>
             </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getAgentQueryForInterfaceType">
-            <xosid:description>
-                Gets an agent query interface of the specified
-                interface type. The returned query contains the method
-                to access the query interface corresponding to the
-                specified <xosid:token>Type </xosid:token>but must not
-                be cast directly from this method return.
-            </xosid:description>
-            <xosid:parameter xosid:name="agentInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of query interface to retrieve
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.authentication.AgentQuery"/>
-                <xosid:description>
-                    the agent query interface
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>agentInterfaceType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>AgentManager.supportsAgentInterfaceType(agentInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -2333,7 +2280,8 @@ AgentReceiver receiver {
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a query form is not of this service
+                    an <xosid:token>AgentQuery</xosid:token> is not of
+                    this service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -2345,14 +2293,7 @@ AgentReceiver receiver {
 
         <xosid:method xosid:name="getAgentSearch">
             <xosid:description>
-                Gets an agent search interface. The returned query only
-                makes available the core
-                <xosid:token>AgentSearch</xosid:token> interface and
-                does not support additional interface types.
-               
-                <xosid:token>getAgentSearchForInterfaceType()</xosid:token>
-                should be used if additional interface types are
-                required.
+                Gets an agent search interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.authentication.AgentSearch"/>
@@ -2367,40 +2308,19 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getAgentSearchForInterfaceType">
+        <xosid:method xosid:name="getAgentSearchOrder">
             <xosid:description>
-                Gets an agent search interface of the specified type.
-                The returned search interface provides access to the
-                search interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but may not be cast
-                directly from this method return.
+                Gets an agent search order interface. The
+                <xosid:token>AgentSearchOrder</xosid:token> is
+                supplied to an <xosid:token>AgentSearch</xosid:token>
+                to specify the ordering of results.
             </xosid:description>
-            <xosid:parameter xosid:name="agentSearchInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of search interface to retrieve
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.authentication.AgentSearch"/>
+                <xosid:interfaceType xosid:type="osid.authentication.AgentSearchOrder"/>
                 <xosid:description>
-                    the agent search interface
+                    the agent search order interface
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-
-                                        <xosid:token>agentSearchInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>AgentManager.supportsAgentSearchInterfaceType(agentSearchInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -2453,7 +2373,7 @@ AgentReceiver receiver {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
                     <xosid:token>agentSearch</xosid:token> or a query
-                    form is not of this service
+                    is not of this service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -2502,22 +2422,20 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="canCreateAgentWithInterfaceTypes">
+        <xosid:method xosid:name="canCreateAgentWithRecordTypes">
             <xosid:description>
                 Tests if this user can create a single
                 <xosid:token>Agent </xosid:token>using the desired
-                interface types. An <xosid:token>Agent
-               </xosid:token>interface <xosid:token>
-                Type</xosid:token> may specify the implementation of
-                other more well-known <xosid:token>Types.</xosid:token>
-                A provider may or may not accept the creation of an
-                <xosid:token>Agent</xosid:token> using anything other
-                than the <xosid:token>AgentForm</xosid:token> of the
-                leaf interface <xosid:token>Type,</xosid:token> or may
-                accept creation using one or more higher level
-                interface <xosid:token>Types.</xosid:token>
+                record interface types. While
+                <xosid:token>AuthenticationManager.getAgentRecordTypes()</xosid:token>
+                can be used to examine which record interfaces are
+                supported, this method tests which record(s) are
+                required for creating a specific
+                <xosid:token>Agent.</xosid:token> Providing an empty
+                array tests if an <xosid:token>Agent</xosid:token> can
+                be created with no records.
             </xosid:description>
-            <xosid:parameter xosid:name="agentInterfaceTypes">
+            <xosid:parameter xosid:name="agentRecordTypes">
                 <xosid:interfaceType xosid:type="osid.type.Type" xosid:array="true"/>
                 <xosid:description>
                     array of types
@@ -2528,46 +2446,17 @@ AgentReceiver receiver {
                 <xosid:description>
                     <xosid:token>true</xosid:token> if
                     <xosid:token>Agent</xosid:token> creation using
-                    the specified interface
+                    the specified record
                     <xosid:token>Types</xosid:token> is supported,
                     <xosid:token>false</xosid:token> otherwise
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>agentInterfaceTypes</xosid:token> is
+                    <xosid:token>agentRecordTypes</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getRequiredAgentInterfaceTypesForCreate">
-            <xosid:description>
-                Gets the list of minimum required interface
-                <xosid:token>Types</xosid:token> for creating a new
-                <xosid:token>Agent. </xosid:token>A new
-                <xosid:token>Agent</xosid:token> can be created using
-                any one of the interface types returned in this list.
-                This may be a series of leaf
-                <xosid:token>Types,</xosid:token> or multiple higher
-                level <xosid:token>Types</xosid:token> if creation
-                requirements are more lenient. An empty list suggests
-                no creates are supported as a root
-                <xosid:token>Agent</xosid:token> interface is always
-                identified with its own
-                <xosid:token>Type.</xosid:token>
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
-                <xosid:description>
-                    one or more types
-                </xosid:description>
-            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -2578,38 +2467,14 @@ AgentReceiver receiver {
         <xosid:method xosid:name="getAgentFormForCreate">
             <xosid:description>
                 Gets the agent form for creating new agents. A new form
-                should be requested for each create transaction. This
-                method is used for creating new
-                <xosid:token>Agents,</xosid:token> where only the
-                <xosid:token>Agent</xosid:token>
-                <xosid:token>Type</xosid:token> is known.
+                should be requested for each create transaction.
             </xosid:description>
-            <xosid:parameter xosid:name="agentInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the interface <xosid:token>Type</xosid:token> of
-                    the <xosid:token>Agent</xosid:token> to be created
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.authentication.AgentForm"/>
                 <xosid:description>
-                    the agent form interface
+                    the agent form
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>agentInterfaceType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>canCreateAgentWithInterfaceTypes(agentInterfaceType)</xosid:token>
-                    is <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -2621,8 +2486,8 @@ AgentReceiver receiver {
             <xosid:description>
                 Creates a new <xosid:token>Agent.</xosid:token>
             </xosid:description>
-            <xosid:parameter xosid:name="agentForms">
-                <xosid:interfaceType xosid:type="osid.authentication.AgentForm" xosid:array="true"/>
+            <xosid:parameter xosid:name="agentForm">
+                <xosid:interfaceType xosid:type="osid.authentication.AgentForm"/>
                 <xosid:description>
                     the forms for this <xosid:token>Agent</xosid:token>
                 </xosid:description>
@@ -2646,7 +2511,7 @@ AgentReceiver receiver {
             </xosid:error>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>agentForms</xosid:token> is
+                    <xosid:token>agentForm</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -2662,8 +2527,8 @@ AgentReceiver receiver {
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    an <xosid:token>agentForm</xosid:token> is not
-                    supported
+                    <xosid:token>agentForm</xosid:token> is not of this
+                    service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -3254,10 +3119,9 @@ AgentReceiver receiver {
             some administrative applications may need to know whether
             it had retrieved an entire set of objects and may sacrifice
             some interoperability for the sake of precision.
-            Keys may have interface extensions indicated by their
-            respective types. The interface extension is accessed via
-            the <xosid:token>Key.</xosid:token> The returns may not be
-            cast directly from the returns in the lookup methods.
+            Keys may have an additional records indicated by their
+            respective record types. The record may not be accessed
+            through a cast of the <xosid:token>Key.</xosid:token>
         </xosid:description>
 
 
@@ -3470,21 +3334,21 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getKeysByInterfaceType">
+        <xosid:method xosid:name="getKeysByRecordType">
             <xosid:description>
                 Gets a list of keys corresponding to the given key
-                interface <xosid:token>Type.</xosid:token> The set of
-                keys implementing the given nterface type is returned.
-                In plenary mode, the returned list contains all known
-                keys or an error results. Otherwise, the returned list
-                may contain only those keys that are accessible through
+                record <xosid:token>Type.</xosid:token> The set of keys
+                implementing the given record type is returned. In
+                plenary mode, the returned list contains all known keys
+                or an error results. Otherwise, the returned list may
+                contain only those keys that are accessible through
                 this session. In both cases, the order of the set is
                 not specified.
             </xosid:description>
-            <xosid:parameter xosid:name="keyInterfaceType">
+            <xosid:parameter xosid:name="keyRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    a key interface type
+                    a key record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -3495,7 +3359,7 @@ AgentReceiver receiver {
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>keyInterfaceType</xosid:token> is
+                    <xosid:token>keyRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -3580,10 +3444,9 @@ AgentReceiver receiver {
             <xosid:token>KeyList</xosid:token> or be used to perform a
             search within the result set through
             <xosid:token>KeySearch.</xosid:token>
-            Keys may have a varying interface extensions indicated by
-            their respective types. The interface extension is accessed
-            via the <xosid:token>KeyQuery.</xosid:token> The returns in
-            this session may not be cast directly to these interfaces.
+            Keys may have a record query interface indicated by their
+            respective record types. The record query interface is
+            accessed via the KeyQuery.
         </xosid:description>
 
 
@@ -3615,12 +3478,7 @@ AgentReceiver receiver {
 
         <xosid:method xosid:name="getKeyQuery">
             <xosid:description>
-                Gets a key query interface. The returned query only
-                makes available the core
-                <xosid:token>KeyQUery</xosid:token> interface and does
-                not support additional interface types.
-                <xosid:token>getKeyQueryForType()</xosid:token> should
-                be used if additional interface types are required.
+                Gets a key query interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.authentication.KeyQuery"/>
@@ -3628,45 +3486,6 @@ AgentReceiver receiver {
                     the key query
                 </xosid:description>
             </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getKeyQueryForInterfaceType">
-            <xosid:description>
-                Gets a key query interface of the specified type. The
-                returned query contains the method to access the query
-                interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but must not be cast
-                directly from this method return.
-            </xosid:description>
-            <xosid:parameter xosid:name="keyInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of query to retrieve
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.authentication.KeyQuery"/>
-                <xosid:description>
-                    the key query
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>keyInterfaceType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-                    <xosid:token>keyInterfaceType</xosid:token> is not
-                    supported
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -3745,39 +3564,19 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getKeySearchForInterfaceType">
+        <xosid:method xosid:name="getKeySearchOrder">
             <xosid:description>
-                Gets a key search interface of the specified type. The
-                returned query contains the search interface extension
-                corresponding to the specified
-                <xosid:token>Type</xosid:token> but must not be cast
-                directly from this method return.
+                Gets a key search order interface. The
+                <xosid:token>KeySearchOrder</xosid:token> is supplied
+                to a <xosid:token>KeySearch</xosid:token> to specify
+                the ordering of results.
             </xosid:description>
-            <xosid:parameter xosid:name="keySearchInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of search interface query to retrieve
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.authentication.KeySearch"/>
+                <xosid:interfaceType xosid:type="osid.authentication.KeySearchOrder"/>
                 <xosid:description>
-                    the key query interface
+                    the key search order interface
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>keySearchInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>AgentManager.supportsKeySearchInterfaceType(keySearchInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -3829,8 +3628,9 @@ AgentReceiver receiver {
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    <xosid:token>keySearch</xosid:token> or a query
-                    form is not of this service
+                    <xosid:token>keySearch</xosid:token> or a
+                    <xosid:token>keyQuery</xosid:token> is not of this
+                    service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -3886,21 +3686,20 @@ AgentReceiver receiver {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="canCreateKeyWithInterfaceTypes">
+        <xosid:method xosid:name="canCreateKeyWithRecordTypes">
             <xosid:description>
                 Tests if this user can create a single
                 <xosid:token>Key </xosid:token>using the desired
-                types. A <xosid:token>Key Type</xosid:token> may
-                specify the implementation of other more well-known
-                <xosid:token>Types.</xosid:token> A provider may or
-                may not accept the creation of a
-                <xosid:token>Key</xosid:token> using anything other
-                than the <xosid:token>CompositionForm</xosid:token> of
-                the leaf <xosid:token>Type,</xosid:token> or may accept
-                creation using one or more higher level
-                <xosid:token>Types.</xosid:token>
+                record interface types. While
+                <xosid:token>AuthenticationManager.getKeyRecordTypes()</xosid:token>
+                can be used to examine which record interfaces are
+                supported, this method tests which record(s) are
+                required for creating a specific
+                <xosid:token>Key.</xosid:token> Providing an empty
+                array tests if a <xosid:token>Key</xosid:token> can be
+                created with no records.
             </xosid:description>
-            <xosid:parameter xosid:name="keyInterfaceTypes">
+            <xosid:parameter xosid:name="keyRecordTypes">
                 <xosid:interfaceType xosid:type="osid.type.Type" xosid:array="true"/>
                 <xosid:description>
                     array of types
@@ -3911,46 +3710,17 @@ AgentReceiver receiver {
                 <xosid:description>
                     <xosid:token>true</xosid:token> if
                     <xosid:token>Key</xosid:token> creation using the
-                    specified interface
-                    <xosid:token>Types</xosid:token> is supported,
-                    <xosid:token>false</xosid:token> otherwise
+                    specified record <xosid:token>Types</xosid:token>
+                    is supported, <xosid:token>false</xosid:token>
+                    otherwise
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>keyInterfaceTypes</xosid:token> is
+                    <xosid:token>keyRecordTypes</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getRequiredKeyInterfaceTypesForCreate">
-            <xosid:description>
-                Gets the list of minimum required interface
-                <xosid:token>Types</xosid:token> for creating a new
-                <xosid:token>Key.</xosid:token> A new
-                <xosid:token>Key</xosid:token> can be created using
-                any one of the interface types returned in this list.
-                This may be a series of leaf
-                <xosid:token>Types,</xosid:token> or multiple higher
-                level <xosid:token>Types</xosid:token> if creation
-                requirements are more lenient. An empty list suggests
-                no creates are supported as a root
-                <xosid:token>Key</xosid:token> interface is always
-                identified with its own
-                <xosid:token>Type.</xosid:token>
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
-                <xosid:description>
-                    one or more types
-                </xosid:description>
-            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -3971,13 +3741,6 @@ AgentReceiver receiver {
                     <xosid:token>Agent</xosid:token>
                 </xosid:description>
             </xosid:parameter>
-            <xosid:parameter xosid:name="keyInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the interface <xosid:token>Type</xosid:token> of
-                    the <xosid:token>Key</xosid:token> to be created
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.authentication.KeyForm"/>
                 <xosid:description>
@@ -3991,15 +3754,18 @@ AgentReceiver receiver {
             </xosid:error>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>agentId</xosid:token> or
-                    <xosid:token>keyInterfaceType</xosid:token> is
+                    <xosid:token>agentId</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
                 <xosid:description>
-                    <xosid:token>keyInterfaceType</xosid:token> is not
-                    supported
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -4020,10 +3786,10 @@ AgentReceiver receiver {
                     <xosid:token>Agent</xosid:token>
                 </xosid:description>
             </xosid:parameter>
-            <xosid:parameter xosid:name="keyForms">
-                <xosid:interfaceType xosid:type="osid.authentication.KeyForm" xosid:array="true"/>
+            <xosid:parameter xosid:name="keyForm">
+                <xosid:interfaceType xosid:type="osid.authentication.KeyForm"/>
                 <xosid:description>
-                    the forms for this <xosid:token>Key</xosid:token>
+                    the form for this <xosid:token>Key</xosid:token>
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -4062,9 +3828,8 @@ AgentReceiver receiver {
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a<xosid:token> keyForm
-                   </xosid:token>or <xosid:token>
-                    principalType</xosid:token> is not supported
+                    a<xosid:token> keyForm</xosid:token> is not of this
+                    service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -4549,57 +4314,43 @@ AgentReceiver receiver {
         <xosid:description>
             An <xosid:token>Agent</xosid:token> represents an
             authenticatable identity. Like all OSID objects, an
-            <xosid:token>Agent</xosid:token> is identified by its Id
-            and any persisted references should use the Id. 
-
-            <xosid:pbreak/>
-
-            <xosid:token>getAgentInterface()</xosid:token> should be
-            used to retrieve the interface corresponding to this
-            <xosid:token>Type.</xosid:token> The existence of the
-            interface must not be assumed until requested at which
-            point it is safe to cast into the interface indicated by
-            the type.
+            <xosid:token>Agent</xosid:token> is identified by its
+            <xosid:token>Id</xosid:token> and any persisted references
+            should use the <xosid:token>Id.</xosid:token>
         </xosid:description>
 
 
-        <xosid:method xosid:name="getAgentInterface">
+        <xosid:method xosid:name="getAgentRecord">
             <xosid:description>
-                Gets the <xosid:token>Agent</xosid:token> interface
-                corresponding to the given
-                <xosid:token>Agent</xosid:token> interface
-                <xosid:token>Type. </xosid:token>An
-                <xosid:token>Agent</xosid:token> returned from another
-                method is only required to implement the root
-                <xosid:token>Agent</xosid:token> interface and this
-                method must be used to retrieve an agent object
-                implementing the requested interface along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>Agent</xosid:token> interface. The
-                <xosid:token>agentInterfaceType</xosid:token> may be
-                the <xosid:token>Type</xosid:token> returned by
-                <xosid:token>getInterfaceType()</xosid:token> or any
-                parent of <xosid:token>getInterfaceType()</xosid:token>
-                in the <xosid:token>Type</xosid:token> hierarchy where
-               
-                <xosid:token>implementsInterfaceType(agentInterfaceType)</xosid:token>
+                Gets the record corresponding to the given
+                <xosid:token>Agent</xosid:token> record
+                <xosid:token>Type. </xosid:token>This method must be
+                used to retrieve an object implementing the requested
+                record interface along with all of its ancestor
+                interfaces. The
+                <xosid:token>subjectRecordType</xosid:token> may be the
+                <xosid:token>Type</xosid:token> returned in
+                <xosid:token>getRecordTypes()</xosid:token> or any of
+                its parents in a <xosid:token>Type</xosid:token>
+                hierarchy where
+                <xosid:token>hasRecordType(agentRecordType)</xosid:token>
                 is <xosid:token>true</xosid:token>.
             </xosid:description>
-            <xosid:parameter xosid:name="agentInterfaceType">
+            <xosid:parameter xosid:name="agentRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the type of the interface to retrieve
+                    the type of the record to retrieve
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.authentication.Agent"/>
+                <xosid:interfaceType xosid:type="osid.authentication.AgentRecord"/>
                 <xosid:description>
-                    the agent with the specified interface
+                    the agent record
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>agentInterfaceType</xosid:token> is
+                    <xosid:token>agentRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -4616,10 +4367,39 @@ AgentReceiver receiver {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementsInterfaceType(agentInterfaceType)</xosid:token>
+                                        <xosid:token>hasRecordType(agentRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.AgentRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for an <xosid:token>Agent.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getAgent">
+            <xosid:description>
+                Gets the <xosid:token>Agent</xosid:token> from which
+                this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.Agent"/>
+                <xosid:description>
+                    the agent
+                </xosid:description>
+            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -4637,7 +4417,7 @@ AgentReceiver receiver {
             <xosid:token>AND</xosid:token> term while multiple
             invocations of a method produces a nested
             <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>AgentQuery</xosid:token> subinterface. 
+            <xosid:token>AgentQuery</xosid:token> record. 
 
             <xosid:pbreak/>
 
@@ -4645,10 +4425,11 @@ AgentReceiver receiver {
             begins with "Tom" and whose "login name" is "tom" or
             "tjcoppet" in an interface specified by
             <xosid:token>companyAgentType.</xosid:token>
-             
+            
             <xosid:code>
+<![CDATA[
 AgentQuery queries[1];
-queries[0] = session.getAgentQueryForInterfaceType(companyAgentType);
+queries[0] = session.getAgentQueryRecord(companyAgentType);
 
 queries[0].matchDisplayName("Tom*", wildcardStringMatchType, false);
 
@@ -4657,7 +4438,7 @@ companyAgentQuery.matchLoginName("tom");
 companyAgentQuery = queries[0].getAgentQueryInterface();
 companyAgentQuery.matchLoginName("tjcoppet");
 
-AgentList agentList = session.getAgentsByQuery(queries);
+AgentList agentList = session.getAgentsByQuery(queries);]]>
             </xosid:code>
              
         </xosid:description>
@@ -4721,29 +4502,259 @@ AgentList agentList = session.getAgentsByQuery(queries);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getAgentQueryInterface">
+        <xosid:method xosid:name="getAgentQueryRecord">
             <xosid:description>
-                Gets the <xosid:token>AgentQuery</xosid:token>
-                interface corresponding to the
-                <xosid:token>Agent</xosid:token> interface
-                <xosid:token>Type</xosid:token> provided in the search
-                session. An <xosid:token>AgentQuery</xosid:token>
-                returned from the search session is only required to
-                implement the root
-                <xosid:token>AgentQuery</xosid:token> interface. This
-                method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the search session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>AgentQuery</xosid:token> interface.
-                Multiple retrievals of this interface may return the
-                same underlying object and do not result in adding
-                terms to the query.
+                Gets the record query interface corresponding to the
+                given <xosid:token>Agent</xosid:token> record
+                <xosid:token>Type. </xosid:token>Multiple record
+                retrievals of the same type may return the same
+                underlying object and do not result in adding terms to
+                the query. Multiple record retrievals of different
+                types add <xosid:token>AND</xosid:token> terms to the
+                other elements set in this query.
+            </xosid:description>
+            <xosid:parameter xosid:name="agentRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    an agent record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.AgentQueryRecord"/>
+                <xosid:description>
+                    the agent query record
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>agentRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(agentRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.AgentQueryRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>AgentQuery.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getAgentQuery">
+            <xosid:description>
+                Gets the <xosid:token>AgentQuery</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.authentication.AgentQuery"/>
                 <xosid:description>
-                    the agent query interface
+                    the agent query
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.AgentForm"> 
+        <xosid:implements xosid:interface="osid.OsidForm"/>
+        <xosid:description>
+            This is the form for creating and updating
+            <xosid:token>Agents. </xosid:token>Like all
+            <xosid:token>OsidForm</xosid:token> objects, various data
+            elements may be set here for use in the create and update
+            methods in the
+            <xosid:token>AgentAdminSession.</xosid:token> For each data
+            element that may be set, metadata may be examined to
+            provide display hints or data constraints.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getAgentFormRecord">
+            <xosid:description>
+                Gets the <xosid:token>AgentFormRecord</xosid:token>
+                interface corresponding to the given agent record
+                interface <xosid:token>Type.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="agentRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the agent record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.AgentFormRecord"/>
+                <xosid:description>
+                    the record
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>agentRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(agentRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.AgentFormRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>AgentForm.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getAgentForm">
+            <xosid:description>
+                Gets the <xosid:token>AgentForm</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.AgentForm"/>
+                <xosid:description>
+                    the agent form
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.AgentSearchOrder"> 
+        <xosid:implements xosid:interface="osid.OsidSearchOrder"/>
+        <xosid:description>
+            An interface for specifying the ordering of search results.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getAgentSearchOrderRecord">
+            <xosid:description>
+                Gets the agent search order record corresponding to the
+                given agent record <xosid:token>Type.
+                </xosid:token>Multiple retrievals return the same
+                underlying object.
+            </xosid:description>
+            <xosid:parameter xosid:name="agentRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    an agent record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.AgentSearchOrderRecord"/>
+                <xosid:description>
+                    the agent search order record interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>agentRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(agentRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.AgentSearchOrderRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>AgentSearchOrder.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getAgentSearchOrder">
+            <xosid:description>
+                Gets the <xosid:token>AgentSearchOrder</xosid:token>
+                from which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.AgentSearchOrder"/>
+                <xosid:description>
+                    the agent search order
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -4765,17 +4776,18 @@ AgentList agentList = session.getAgentsByQuery(queries);
             <xosid:pbreak/>
 
             <xosid:code>
+<![CDATA[
 AgentSearch as = session.getAgentSearch();
 as.limitResultSet(25, 50);
 
 AgentQuery queries[1];
 queries[0] = session.getAgentQuery();
-String kwords[1];
-kwords[0] = """"squid"""";
-queries[0].matchKeywords(kwords);
+String kword = "squid";
+queries[0].matchKeywords(kword, true);
 
 AgentSearchResults results = session.getAgentsBySearch(queries, as);
 AgentList list = results.getAgents();
+]]>
             </xosid:code>
              
         </xosid:description>
@@ -4814,7 +4826,7 @@ AgentList list = results.getAgents();
                 Execute this search among the given list of agents.
             </xosid:description>
             <xosid:parameter xosid:name="agentIds">
-                <xosid:interfaceType xosid:type="osid.id.Id" xosid:array="true"/>
+                <xosid:interfaceType xosid:type="osid.id.IdList"/>
                 <xosid:description>
                     list of agents
                 </xosid:description>
@@ -4832,25 +4844,105 @@ AgentList list = results.getAgents();
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getAgentSearchInterface">
+        <xosid:method xosid:name="orderAgentResults">
             <xosid:description>
-                Gets the <xosid:token>AgentSearch</xosid:token>
-                interface corresponding to the agent search interface
-                <xosid:token>Type</xosid:token> provided in the search
-               session <xosid:token>. </xosid:token>An
-                <xosid:token>AgentSearch</xosid:token> returned from
-                the search session is only required to implement the
-                root <xosid:token>AgentSearch</xosid:token> interface.
-                This method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the search session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>AgentSearch</xosid:token> interface.
+                Specify an ordering to the search results.
+            </xosid:description>
+            <xosid:parameter xosid:name="agentSearchOrder">
+                <xosid:interfaceType xosid:type="osid.authentication.AgentSearchOrder"/>
+                <xosid:description>
+                    agent search order
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>agentSearchOrder</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>agentSearchOrder</xosid:token> is not
+                    of this service
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getAgentSearchRecord">
+            <xosid:description>
+                Gets the record corresponding to the given agent search
+                record <xosid:token>Type. </xosid:token>This method
+                must be used to retrieve an object implementing the
+                requested record interface along with all of its
+                ancestor interfaces.
+            </xosid:description>
+            <xosid:parameter xosid:name="agentSearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    an agent search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.AgentSearchRecord"/>
+                <xosid:description>
+                    the agent search interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>agentSearchRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(agentSearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.AgentSearchRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>AgentSearch.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getAgentSearch">
+            <xosid:description>
+                Gets the <xosid:token>AgentSearch</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.authentication.AgentSearch"/>
                 <xosid:description>
-                    the agent search interface
+                    the agent search
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -4868,8 +4960,9 @@ AgentList list = results.getAgents();
             This interface provides a means to capture results of a
             search and is used as a vehicle to perform a aserach within
             a search.
-             
+            
             <xosid:code>
+<![CDATA[
 AgentSearch as = session.getAgentSearch();
 as.limitResultSet(25, 50);
 
@@ -4880,7 +4973,7 @@ kwords[0] = "squid";
 queries[0].matchKeywords(kwords);
 
 AgentSearchResults results = session.getAgentsBySearch(queries, as);
-AgentList list = results.getAgents();
+AgentList list = results.getAgents();]]>
             </xosid:code>
              
         </xosid:description>
@@ -4903,30 +4996,49 @@ AgentList list = results.getAgents();
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getAgentSearchResultsInterface">
+        <xosid:method xosid:name="getAgentSearchResultsRecord">
             <xosid:description>
-                Gets the agent search results interface corresponding
-                to the <xosid:token>searchType</xosid:token> used in
-                retrieving the <xosid:token>AgentSearch</xosid:token>
-                interface. An
-                <xosid:token>AgentSearchResults</xosid:token> returned
-                from the search session is only required to implement
-                the root <xosid:token>AgentSearchResults</xosid:token>
-                interface. This method must be used to retrieve a
-                search results object implementing the interface
-                specified when retrieving the
-                <xosid:token>AgentSearch</xosid:token> from the search
-                session along with all of its ancestor interfaces,
-                including the core
-                <xosid:token>AgentSearchResults</xosid:token>
-                interface.
+                Gets the record corresponding to the given agent search
+                record <xosid:token>Type. </xosid:token>This method
+                must be used to retrieve an object implementing the
+                requested record interface along with all of its
+                ancestor interfaces.
             </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.authentication.AgentSearchResults"/>
+            <xosid:parameter xosid:name="agentSearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the agent search results interfcace
+                    an agent search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.AgentSearchResultsRecord"/>
+                <xosid:description>
+                    the agent search interface
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>agentSearchRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(agentSearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -4936,39 +5048,25 @@ AgentList list = results.getAgents();
     </xosid:interface>
 
 
-    <xosid:interface xosid:name="osid.authentication.AgentForm"> 
-        <xosid:implements xosid:interface="osid.OsidForm"/>
+    <xosid:interface xosid:name="osid.authentication.AgentSearchResultsRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
         <xosid:description>
-            This is the form for creating and updating
-            <xosid:token>Agents. </xosid:token>Like all
-            <xosid:token>OsidForm</xosid:token> objects, various data
-            elements may be set here for use in the create and update
-            methods in the
-            <xosid:token>AgentAdminSession.</xosid:token> For each data
-            element that may be set, metadata may be examined to
-            provide display hints or data constraints.
+            A record for a
+            <xosid:token>AgentSearchResults.</xosid:token> The methods
+            specified by the record type are available through the
+            underlying object.
         </xosid:description>
 
 
-        <xosid:method xosid:name="getAgentFormInterface">
+        <xosid:method xosid:name="getAgentSearchResults">
             <xosid:description>
-                Gets the <xosid:token>AgentForm</xosid:token> interface
-                corresponding to the <xosid:token>Agent</xosid:token>
-                interface <xosid:token>Type</xosid:token> provided in
-                the admin session<xosid:token>. </xosid:token>An
-                <xosid:token>AgentForm</xosid:token> returned from the
-                admin session is only required to implement the root
-                <xosid:token>AgentForm</xosid:token> interface. This
-                method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the admin session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>AgentForm</xosid:token> interface.
+                Gets the <xosid:token>AgentSearchResults</xosid:token>
+                from which this record originated.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.authentication.AgentForm"/>
+                <xosid:interfaceType xosid:type="osid.authentication.AgentSearchResults"/>
                 <xosid:description>
-                    the agent form interface
+                    the agent search results
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -5056,20 +5154,22 @@ AgentList list = results.getAgents();
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (al.hasNext()) {
      Agent agent = al.getNextAgent();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (al.hasNext()) {
      Agent[] agent = al.getNextAgents(al.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -5187,7 +5287,7 @@ while (al.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getInterfaceType">
+        <xosid:method xosid:name="getRecordTypeType">
             <xosid:description>
                 Gets the type of this key. The
                 <xosid:token>Type</xosid:token> explicitly indicates
@@ -5207,30 +5307,30 @@ while (al.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="implementsInterfaceType">
+        <xosid:method xosid:name="hasRecordType">
             <xosid:description>
-                Tests if this key supports the given interface
+                Tests if this key supports the given record
                 <xosid:token>Type.</xosid:token> The given type may be
                 supported by the key type through inheritence.
             </xosid:description>
-            <xosid:parameter xosid:name="keyInterfaceType">
+            <xosid:parameter xosid:name="keyRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    an interface type
+                    a key record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
                 <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
                     <xosid:token>true</xosid:token> if this key
-                    supports the given interface
+                    supports the given record
                     <xosid:token>Type,</xosid:token>
                     <xosid:token>false</xosid:token> otherwise
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>keyInterfaceType</xosid:token> is
+                    <xosid:token>keyRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -5241,43 +5341,37 @@ while (al.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getKeyInterface">
+        <xosid:method xosid:name="getKeyReceord">
             <xosid:description>
-                Gets the <xosid:token>Key</xosid:token> interface
-                corresponding to the given
-                <xosid:token>Key</xosid:token> interface
-                <xosid:token>Type. </xosid:token>A
-                <xosid:token>Key</xosid:token> returned from another
-                method is only required to implement the root
-                <xosid:token>Key</xosid:token> interface and this
-                method must be used to retrieve a key object
-                implementing the requested interface along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>Key</xosid:token> interface. The
-                <xosid:token>keyInterfaceType</xosid:token> may be the
-                <xosid:token>Type</xosid:token> returned by
-                <xosid:token>getInterfaceType()</xosid:token> or any
-                parent of <xosid:token>getInterfaceType()</xosid:token>
-                in the <xosid:token>Type</xosid:token> hierarchy where
-               
-                <xosid:token>implementsInterfaceType(keyInterfaceType)</xosid:token>
+                Gets the record corresponding to the given
+                <xosid:token>Key</xosid:token> record
+                <xosid:token>Type. </xosid:token>This method must be
+                used to retrieve an object implementing the requested
+                record interface along with all of its ancestor
+                interfaces. The
+                <xosid:token>keyRecordType</xosid:token> may be the
+                <xosid:token>Type</xosid:token> returned in
+                <xosid:token>getRecordTypes()</xosid:token> or any of
+                its parents in a <xosid:token>Type</xosid:token>
+                hierarchy where
+                <xosid:token>hasRecordType(keyRecordType)</xosid:token>
                 is <xosid:token>true</xosid:token>.
             </xosid:description>
-            <xosid:parameter xosid:name="keyInterfaceType">
+            <xosid:parameter xosid:name="keyRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the key interface type
+                    a key record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.authentication.Key"/>
+                <xosid:interfaceType xosid:type="osid.authentication.KeyRecord"/>
                 <xosid:description>
-                    the typed interface
+                    the key record
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>keyInterfaceType</xosid:token> is
+                    <xosid:token>repositoryRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -5294,10 +5388,39 @@ while (al.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementsInterfaceType(keyInterfaceType)</xosid:token>
+                                        <xosid:token>hasRecordType(keyRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.KeyRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>Key.</xosid:token> The methods
+            specified by the record type are available through the
+            underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getKey">
+            <xosid:description>
+                Gets the <xosid:token>Key</xosid:token> from which this
+                record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.Key"/>
+                <xosid:description>
+                    the key
+                </xosid:description>
+            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -5314,7 +5437,7 @@ while (al.hasNext()) {
             match request is produces an <xosid:token>AND</xosid:token>
             term while multiple invocations of a method produces a
             nested <xosid:token>OR,</xosid:token> except for accessing
-            the <xosid:token>KeyQuery</xosid:token> subinterface.
+            the <xosid:token>KeyQuery</xosid:token> record.
         </xosid:description>
 
 
@@ -5361,29 +5484,28 @@ while (al.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchInterfaceType">
+        <xosid:method xosid:name="matchRecordType">
             <xosid:description>
                 Sets a <xosid:token>Type</xosid:token> for querying
-                keys of a given interface type.
+                keys of a given record type.
             </xosid:description>
-            <xosid:parameter xosid:name="interfaceType">
+            <xosid:parameter xosid:name="recodrType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the key interface type
+                    a key record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="match">
                 <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
-                    <xosid:token>true</xosid:token> if the interface
-                    type query is a positive match,
-                    <xosid:token>false</xosid:token> for negative
-                    match
+                    <xosid:token>true</xosid:token> if the record type
+                    query is a positive match,
+                    <xosid:token>false</xosid:token> for negative match
                 </xosid:description>
             </xosid:parameter>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>interfaceType
+                    <xosid:token>recordType
                    </xosid:token>is <xosid:token> null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -5449,153 +5571,88 @@ while (al.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getKeyQueryInterface">
+        <xosid:method xosid:name="hasRecordType">
             <xosid:description>
-                Gets the <xosid:token>KeyQuery</xosid:token> interface
-                corresponding to the given
-                <xosid:token>Key</xosid:token> interface
-                <xosid:token>Type. </xosid:token>A
-                <xosid:token>KeyQuery</xosid:token> returned from the
-                search session is only required to implement the root
-                <xosid:token>KeyQuery</xosid:token> interface. This
-                method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the search session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>KeyQuery</xosid:token> interface.
-                Multiple retrievals of this interface may return the
-                same underlying object and do not result in adding
-                terms to the query.
+                Tests if this query supports the given record
+                <xosid:token>Type.</xosid:token> The given record type
+                may be supported by the object through interface/type
+                inheritence. This method should be checked before
+                retrieving the record interface.
             </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.authentication.KeyQuery"/>
+            <xosid:parameter xosid:name="keyRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the key query interface
+                    a type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if a record query
+                    of the given record <xosid:token>Type</xosid:token>
+                    is available, <xosid:token>false</xosid:token>
+                    otherwise
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>keyRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>
-    </xosid:interface>
 
-
-    <xosid:interface xosid:name="osid.authentication.KeySearch"> 
-        <xosid:implements xosid:interface=""/>
-        <xosid:description>
-            <xosid:token>KeySearch</xosid:token> defines options for
-            governing key searches.
-        </xosid:description>
-
-
-        <xosid:method xosid:name="searchWithinKeyResults">
+        <xosid:method xosid:name="getKeyQueryRecord">
             <xosid:description>
-                Execute this search using a previous search result.
+                Gets the record query interface corresponding to the
+                given <xosid:token>Key</xosid:token> record
+                <xosid:token>Type. </xosid:token>Multiple record
+                retrievals of the same type may return the same
+                underlying object and do not result in adding terms to
+                the query. Multiple record retrievals of different
+                types add <xosid:token>AND</xosid:token> terms to the
+                other elements set in this query.
             </xosid:description>
-            <xosid:parameter xosid:name="results">
-                <xosid:interfaceType xosid:type="osid.authentication.KeySearchResults"/>
+            <xosid:parameter xosid:name="keyRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    results from a query
+                    a key record type
                 </xosid:description>
             </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.KeyQueryRecord"/>
+                <xosid:description>
+                    the key query record
+                </xosid:description>
+            </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>results</xosid:token> is
+                    <xosid:token>keyRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    <xosid:token>results</xosid:token> is not of this
-                    service
+
+                                        <xosid:token>hasRecordType(keyRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="searchAmongKeys">
-            <xosid:description>
-                Execute this search among the given list of keys.
-            </xosid:description>
-            <xosid:parameter xosid:name="agentIds">
-                <xosid:interfaceType xosid:type="osid.id.Id" xosid:array="true"/>
-                <xosid:description>
-                    list of agents
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>agentIds</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="limitResultSet">
-            <xosid:description>
-                By default, searches return all matching results. This
-                method restricts the number of results by setting the
-                start and end of the result set starting from position
-                1. The ending position must be greater than the
-                starting position.
-            </xosid:description>
-            <xosid:parameter xosid:name="start">
-                <xosid:primitiveType xosid:type="cardinal"/>
-                <xosid:description>
-                    the start of the result set
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:parameter xosid:name="end">
-                <xosid:primitiveType xosid:type="cardinal"/>
-                <xosid:description>
-                    the end of the result set
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
-                <xosid:description>
-                    <xosid:token>end </xosid:token>is less than or
-                    equal to <xosid:token>start</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getKeySearchInterface">
-            <xosid:description>
-                Gets the <xosid:token>KeySearch</xosid:token> interface
-                corresponding to the key search interface
-                <xosid:token>Type</xosid:token> provided in the search
-               session <xosid:token>. </xosid:token>A
-                <xosid:token>KeySearch</xosid:token> returned from the
-                search session is only required to implement the root
-                <xosid:token>KeySearch</xosid:token> interface. This
-                method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the search session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>KeySearch</xosid:token> interface.
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.authentication.KeySearch"/>
-                <xosid:description>
-                    the key search interface
-                </xosid:description>
-            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -5605,69 +5662,24 @@ while (al.hasNext()) {
     </xosid:interface>
 
 
-    <xosid:interface xosid:name="osid.authentication.KeySearchResults"> 
-        <xosid:implements xosid:interface="osid.OsidSearchResults"/>
+    <xosid:interface xosid:name="osid.authentication.KeyQueryRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
         <xosid:description>
-            This interface provides a means to capture results of a
-            search and is used as a vehicle to perform a search within
-            a previous result set. This example fetches all keys and
-            orders them by the agent display name.
-             
-            <xosid:code>
-KeySearch ks = session.getKeySearch();
-AgentSearch as = ks.getAgentSearch();
-as.orderByDisplayName();
-
-KeyQuery keyQueries[1];
-keyQueries[0] = session.getKeyQuery();
-AgentQuery agQueries[1];
-qgQueries[1].matchDisplayName("*");
-KeySearchResults results = session.getKeysBySearch(keyQueries, ks);
-
-KeyList kl = results.getKeys();
-            </xosid:code>
-             
+            A record for a <xosid:token>KeyQuery.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
         </xosid:description>
 
 
-        <xosid:method xosid:name="getKeys">
+        <xosid:method xosid:name="getKeyQuery">
             <xosid:description>
-                Gets the key list resulting from the search.
+                Gets the <xosid:token>KeyQuery</xosid:token> from which
+                this record originated.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.authentication.KeyList"/>
+                <xosid:interfaceType xosid:type="osid.authentication.KeyQuery"/>
                 <xosid:description>
-                    the key list
-                </xosid:description>
-            </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getKeySearchResultsInterface">
-            <xosid:description>
-                Gets the file search results interface corresponding to
-                the <xosid:token>searchType</xosid:token> used in
-                retrieving the <xosid:token>KeySearch</xosid:token>
-                interface. A
-                <xosid:token>KeySearchResults</xosid:token> returned
-                from the search session is only required to implement
-                the root <xosid:token>KeySearchResults</xosid:token>
-                interface. This method must be used to retrieve a
-                search results object implementing the interface
-                specified when retrieving the
-                <xosid:token>KeySearch</xosid:token> from the search
-                session along with all of its ancestor interfaces,
-                including the core
-                <xosid:token>KeySearchResults</xosid:token> interface.
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.authentication.KeySearchResults"/>
-                <xosid:description>
-                    the key search results interface
+                    the key query
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -5745,21 +5757,23 @@ KeyList kl = results.getKeys();
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="validate">
+        <xosid:method xosid:name="isValid">
             <xosid:description>
-                Performs a validation of the data set in this form.
-                This method returns nothing if validation is not
-                performed or validation is successful. An transaction
-                is returned if the form is invalid.
+                Tests if ths form is in a valid state for submission. A
+                form is valid if all required data has been supplied
+                compliant with any constraints.
             </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>false</xosid:token> if there is a
+                    known error in this form,
+                    <xosid:token>true</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
             <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
                 <xosid:description>
                     attempt to perform validation failed
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="TRANSACTION_FAILURE" xosid:category="Operational">
-                <xosid:description>
-                    form is invalid
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -5769,25 +5783,491 @@ KeyList kl = results.getKeys();
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getKeyFormInterface">
+        <xosid:method xosid:name="hasRecordType">
             <xosid:description>
-                Gets the <xosid:token>KeyForm</xosid:token> interface
-                corresponding to the <xosid:token>Key</xosid:token>
-                interface <xosid:token>Type</xosid:token> provided in
-                the admin session<xosid:token>. </xosid:token>A
-                <xosid:token>KeyForm</xosid:token> returned from the
-                admin session is only required to implement the root
-                <xosid:token>KeyForm</xosid:token> interface. This
-                method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the admin session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>KeyForm</xosid:token> interface.
+                Tests if this form supports the given record
+                <xosid:token>Type.</xosid:token> The given record type
+                may be supported by the object through interface/type
+                inheritence. This method should be checked before
+                retrieving the record interface.
+            </xosid:description>
+            <xosid:parameter xosid:name="keyRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if a record form of
+                    the given record <xosid:token>Type</xosid:token> is
+                    available, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>keyRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getKeyFormRecord">
+            <xosid:description>
+                Gets the <xosid:token>KeyFormRecord</xosid:token>
+                interface corresponding to the given key record
+                interface <xosid:token>Type.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="keyRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a key record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.KeyFormRecord"/>
+                <xosid:description>
+                    the key form record
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>keyRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(keyRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.KeyFormRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>KeyForm.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getKeyForm">
+            <xosid:description>
+                Gets the <xosid:token>KeyForm</xosid:token> from which
+                this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.authentication.KeyForm"/>
                 <xosid:description>
-                    the key form interfcace
+                    the key form
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.KeySearchOrder"> 
+        <xosid:implements xosid:interface="osid.OsidSearchOrder"/>
+        <xosid:description>
+            An interface for specifying the ordering of search results.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getKeySearchOrderRecord">
+            <xosid:description>
+                Gets the key search order record corresponding to the
+                given key record <xosid:token>Type.
+                </xosid:token>Multiple retrievals return the same
+                underlying object.
+            </xosid:description>
+            <xosid:parameter xosid:name="keyRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a key record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.KeySearchOrderRecord"/>
+                <xosid:description>
+                    the key search order record interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>keyRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(keyRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.KeySearchOrderRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>KeySearchOrder.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getKeySearchOrder">
+            <xosid:description>
+                Gets the <xosid:token>KeySearchOrder</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.KeySearchOrder"/>
+                <xosid:description>
+                    the key search order
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.KeySearch"> 
+        <xosid:implements xosid:interface="osid.OsidSearch"/>
+        <xosid:description>
+            <xosid:token>KeySearch</xosid:token> defines options for
+            governing key searches.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="searchWithinKeyResults">
+            <xosid:description>
+                Execute this search using a previous search result.
+            </xosid:description>
+            <xosid:parameter xosid:name="results">
+                <xosid:interfaceType xosid:type="osid.authentication.KeySearchResults"/>
+                <xosid:description>
+                    results from a query
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>results</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>results</xosid:token> is not of this
+                    service
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="searchAmongKeys">
+            <xosid:description>
+                Execute this search among the given list of keys.
+            </xosid:description>
+            <xosid:parameter xosid:name="agentIds">
+                <xosid:interfaceType xosid:type="osid.id.IdList"/>
+                <xosid:description>
+                    list of agents
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>agentIds</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="orderKeyResults">
+            <xosid:description>
+                Specify an ordering to the search results.
+            </xosid:description>
+            <xosid:parameter xosid:name="keySearchOrder">
+                <xosid:interfaceType xosid:type="osid.authentication.KeySearchOrder"/>
+                <xosid:description>
+                    key search order
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>keySearchOrder</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>keySearchOrder</xosid:token> is not of
+                    this service
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getKeySearchRecord">
+            <xosid:description>
+                Gets the record corresponding to the given key search
+                record <xosid:token>Type. </xosid:token>This method
+                must be used to retrieve an object implementing the
+                requested record interface along with all of its
+                ancestor interfaces.
+            </xosid:description>
+            <xosid:parameter xosid:name="keySearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a key search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.KeySearchRecord"/>
+                <xosid:description>
+                    the key search interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>keySearchRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(keySearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.KeySearchRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>KeySearch.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getKeySearch">
+            <xosid:description>
+                Gets the <xosid:token>KeySearch</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.KeySearch"/>
+                <xosid:description>
+                    the key search
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.KeySearchResults"> 
+        <xosid:implements xosid:interface="osid.OsidSearchResults"/>
+        <xosid:description>
+            This interface provides a means to capture results of a
+            search and is used as a vehicle to perform a search within
+            a previous result set. This example fetches all keys and
+            orders them by the agent display name.
+            
+            <xosid:code>
+<![CDATA[
+KeySearch ks = session.getKeySearch();
+AgentSearch as = ks.getAgentSearch();
+as.orderByDisplayName();
+
+KeyQuery keyQueries[1];
+keyQueries[0] = session.getKeyQuery();
+AgentQuery agQueries[1];
+qgQueries[1].matchDisplayName("*", true);
+KeySearchResults results = session.getKeysBySearch(keyQueries, ks);
+
+KeyList kl = results.getKeys();]]>
+            </xosid:code>
+             
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getKeys">
+            <xosid:description>
+                Gets the key list resulting from the search.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.KeyList"/>
+                <xosid:description>
+                    the key list
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getKeySearchResultsRecord">
+            <xosid:description>
+                Gets the record corresponding to the given key search
+                record <xosid:token>Type. </xosid:token>This method
+                must be used to retrieve an object implementing the
+                requested record interface along with all of its
+                ancestor interfaces.
+            </xosid:description>
+            <xosid:parameter xosid:name="keySearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a key search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.KeySearchResultsRecord"/>
+                <xosid:description>
+                    the key search interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>keySearchRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(keySearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.authentication.KeySearchResultsRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>KeySearchResults.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getKeySearchResults">
+            <xosid:description>
+                Gets the <xosid:token>KeySearchResults</xosid:token>
+                from which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.authentication.KeySearchResults"/>
+                <xosid:description>
+                    the key search results
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -5809,20 +6289,22 @@ KeyList kl = results.getKeys();
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (kl.hasNext()) {
      Key key = kl.getNextKey();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (kl.hasNext()) {
      Key[] keys = kl.getNextKeys(kl.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.hierarchy generated at 7/15/2008 8:25:46 AM 
+    XOSID for osid.hierarchy generated at 10/14/2008 10:16:06 AM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -290,7 +290,7 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getHierarchyInterfaceTypes">
+        <xosid:method xosid:name="getHierarchyRecordTypes">
             <xosid:description>
                 Gets the supported <xosid:token>Hierarchy</xosid:token>
                 types.
@@ -299,7 +299,53 @@
                 <xosid:interfaceType xosid:type="osid.type.TypeList"/>
                 <xosid:description>
                     a list containing the supported
-                    <xosid:token>Hierarchy</xosid:token> interface
+                    <xosid:token>Hierarchy</xosid:token> record types
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsHierarchyRecordType">
+            <xosid:description>
+                Tests if the given <xosid:token>Hierarchy</xosid:token>
+                record type is supported.
+            </xosid:description>
+            <xosid:parameter xosid:name="hierarchyRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a <xosid:token>Type</xosid:token> indicating a
+                    <xosid:token>Hierarchy</xosid:token> record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given record
+                    Type is supported, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getHierarchySearchRecordTypes">
+            <xosid:description>
+                Gets the supported <xosid:token>Hierarchy</xosid:token>
+                search record types.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    a list containing the supported
+                    <xosid:token>Hierarchy</xosid:token> search record
                     types
                 </xosid:description>
             </xosid:return>
@@ -310,64 +356,17 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsHierarchyInterfaceType">
+        <xosid:method xosid:name="supportsHierarchySearchRecordType">
             <xosid:description>
                 Tests if the given <xosid:token>Hierarchy</xosid:token>
-                interface type is supported.
+                search record type is supported.
             </xosid:description>
-            <xosid:parameter xosid:name="hierarchyInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    a <xosid:token>Type</xosid:token> indicating an
-                    <xosid:token>Agent</xosid:token> interface type
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if the given
-                    interface Type is supported,
-                    <xosid:token>false</xosid:token> otherwise
-                </xosid:description>
-            </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getHierarchySearchInterfaceTypes">
-            <xosid:description>
-                Gets the supported <xosid:token>Hierarchy</xosid:token>
-                search interface types.
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
-                <xosid:description>
-                    a list containing the supported
-                    <xosid:token>Hierarchy</xosid:token> search
-                    interface types
-                </xosid:description>
-            </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="supportsHierarchySearchInterfaceType">
-            <xosid:description>
-                Tests if the given <xosid:token>Hierarchy</xosid:token>
-                search interface type is supported.
-            </xosid:description>
-            <xosid:parameter xosid:name="hierarchySearchInterfaceType">
+            <xosid:parameter xosid:name="hierarchySearchRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a <xosid:token>Type</xosid:token> indicating a
-                    <xosid:token>Hierarchy</xosid:token> search
-                    interface type
+                    <xosid:token>Hierarchy</xosid:token> search record
+                    type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -1619,9 +1618,7 @@
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.id.IdList"/>
                 <xosid:description>
-                    <xosid:token>true</xosid:token> if this
-                    <xosid:token>Id</xosid:token> contains parents,
-                    <xosid:token>false</xosid:token> otherwise
+                    the root nodes
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
@@ -3395,12 +3392,12 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getHierarchiesByInterfaceType">
+        <xosid:method xosid:name="getHierarchiesByRecordType">
             <xosid:description>
                 Gets a <xosid:token>HierarchyList</xosid:token>
-                corresponding to the given hierarchy interface
+                corresponding to the given hierarchy record
                 <xosid:token>Type.</xosid:token> The set of
-                hierarchies implementing the given interface type are
+                hierarchies implementing the given record type are
                 returned. <xosid:token></xosid:token>In plenary mode,
                 the returned list contains all known hierarchies or an
                 error results. Otherwise, the returned list may contain
@@ -3408,10 +3405,10 @@
                 session. In both cases, the order of the set is not
                 specified.
             </xosid:description>
-            <xosid:parameter xosid:name="hierarchyInterfaceType">
+            <xosid:parameter xosid:name="hierarchyRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    a hierarchy interface type
+                    a hierarchy record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -3423,8 +3420,8 @@
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>hierarchyInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
+                    <xosid:token>hierarchyRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
@@ -3491,6 +3488,28 @@
             search element is specified within a single
             <xosid:token>HierarchyQuery</xosid:token> these elements
             form a boolean AND.
+            <xosid:token>getHierarchiesByQuery()</xosid:token> is the
+            basic search method and returns a list of
+            <xosid:token>Hierarchy</xosid:token> objects.A more
+            advanced search may be performed with
+            <xosid:token>getHierarchiesBySearch(). </xosid:token>It
+            accepts a <xosid:token>HierarchySearch</xosid:token>
+            interface in addition to the query interface for the
+            purpose of specifying additional options affecting the
+            entire search, such as ordering.
+            <xosid:token>getHierarchiesBySearch()</xosid:token> returns
+            a <xosid:token>HierarchySearchResults</xosid:token>
+            interface that can be used to access the resulting
+            <xosid:token>HierarchyList</xosid:token> or be used to
+            perform a search within the result set through
+            <xosid:token>HierarchySearch.</xosid:token>
+
+            <xosid:pbreak/>
+
+            Hierarchies may have a record query interface indicated by
+            their respective record types. The record query interface
+            is accessed via the
+            <xosid:token>HierarchuQuery.</xosid:token>
         </xosid:description>
 
 
@@ -3522,8 +3541,7 @@
 
         <xosid:method xosid:name="getHierarchyQuery">
             <xosid:description>
-                Gets a hierarchy query interface. The returned query
-                will not have an extension query.
+                Gets a hierarchy query interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyQuery"/>
@@ -3531,45 +3549,6 @@
                     the hierarchy query
                 </xosid:description>
             </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getHierarchyQueryForInterfaceType">
-            <xosid:description>
-                Gets a hierarchy query interface of the specified type.
-                The returned query contains the method to access the
-                query interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but may be cast
-                directly from this method return.
-            </xosid:description>
-            <xosid:parameter xosid:name="hierarchyInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of query to retrieve
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyQuery"/>
-                <xosid:description>
-                    the hierarchy query
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>hierarchyInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-                    <xosid:token>hierarchyInterfaceType</xosid:token>
-                    is not supported
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -3627,12 +3606,7 @@
 
         <xosid:method xosid:name="getHierarchySearch">
             <xosid:description>
-                Gets a hierarchy search interface. This interface
-                offers various options to restrict or order the search
-                results. The returned interface does not have a search
-                interface extension.
-                <xosid:token>getHierarchySearchForType()</xosid:token>
-                should be used if a typed extension is required.
+                Gets a hierarchy search interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.hierarchy.HierarchySearch"/>
@@ -3647,40 +3621,20 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getHierarchyForInterfaceType">
+        <xosid:method xosid:name="getHierarchySearchOrder">
             <xosid:description>
-                Gets a hierarchy search interface of the specified
-                type. The returned search interface provides access to
-                the search interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but may be cast
-                directly from this method return.
+                Gets a hierarchy search order interface. The
+                <xosid:token>HierarchySearchOrder</xosid:token> is
+                supplied to a
+                <xosid:token>HierarchySearch</xosid:token> to specify
+                the ordering of results.
             </xosid:description>
-            <xosid:parameter xosid:name="hierarchySearchInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of query to retrieve
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchySearch"/>
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchySearchOrder"/>
                 <xosid:description>
-                    the hierarchy query
+                    the hierarchy search order interface
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-
-                                        <xosid:token>hierarchySearchInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>HierarchyManager.supportsHierarchySearchInterfaceType(hierarchySearchInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -3782,21 +3736,21 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="canCreateHierarchyWithInterfaceTypes">
+        <xosid:method xosid:name="canCreateHierarchyWithRecordTypes">
             <xosid:description>
                 Tests if this user can create a single
                 <xosid:token>Hierarchy </xosid:token>using the desired
-                types. A <xosid:token>Hierarchy Type</xosid:token> may
-                specify the implementation of other more well-known
-                <xosid:token>Types.</xosid:token> A provider may or
-                may not accept the creation of a
-                <xosid:token>Hierarchy</xosid:token> using anything
-                other than the <xosid:token>HierarchyForm</xosid:token>
-                of the leaf <xosid:token>Type,</xosid:token> or may
-                accept creation using one or more higher level
-                <xosid:token>Types.</xosid:token>
+                record types. While
+                <xosid:token>HierarchyManager.getHierarchyRecordTypes()</xosid:token>
+                can be used to examine which record interfaces are
+                supported, this method tests which record(s) are
+                required for creating a specific
+                <xosid:token>Hierarchy.</xosid:token> Providing an
+                empty array tests if a
+                <xosid:token>Hierarchy</xosid:token> can be created
+                with no records.
             </xosid:description>
-            <xosid:parameter xosid:name="hierarchyTypes">
+            <xosid:parameter xosid:name="hierarchyRecordTypes">
                 <xosid:interfaceType xosid:type="osid.type.Type" xosid:array="true"/>
                 <xosid:description>
                     array of types
@@ -3814,39 +3768,10 @@
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>hierarchyTypes</xosid:token> is
+                    <xosid:token>hierarchyRecordTypes</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getRequiredHierarchyInterfaceTypesForCreate">
-            <xosid:description>
-                Gets the list of minimum required interface
-                <xosid:token>Types</xosid:token> for creating a new
-                <xosid:token>Hierarchy.</xosid:token> A new
-                <xosid:token>Hierarchy </xosid:token>can be created
-                using any one of the interface types returned in this
-                list. This may be a series of leaf
-                <xosid:token>Types,</xosid:token> or multiple higher
-                level <xosid:token>Types</xosid:token> if creation
-                requirements are more lenient. An empty list suggests
-                no creates are supported as a root
-                <xosid:token>Hierarchy</xosid:token> interface is
-                always identified with its own
-                <xosid:token>Type.</xosid:token>
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
-                <xosid:description>
-                    one or more types
-                </xosid:description>
-            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -3863,31 +3788,12 @@
                 <xosid:token>Hierarchy</xosid:token>
                 <xosid:token>Type</xosid:token> is known.
             </xosid:description>
-            <xosid:parameter xosid:name="hierarchyInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    a hierarchy type
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyForm"/>
                 <xosid:description>
                     the hierarchy form
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>hierarchyInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>canCreateHierarchyWithInterfaceTypes(hierarchyInterfaceType)</xosid:token>
-                    is <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -3899,10 +3805,10 @@
             <xosid:description>
                 Creates a new <xosid:token>Hierarchy.</xosid:token>
             </xosid:description>
-            <xosid:parameter xosid:name="hierarchyForms">
-                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyForm" xosid:array="true"/>
+            <xosid:parameter xosid:name="hierarchyForm">
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyForm"/>
                 <xosid:description>
-                    the forms for this
+                    the form for this
                     <xosid:token>Hierarchy</xosid:token>
                 </xosid:description>
             </xosid:parameter>
@@ -3925,7 +3831,7 @@
             </xosid:error>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>hierarchyForms</xosid:token> is
+                    <xosid:token>hierarchyForm</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -3941,8 +3847,8 @@
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    <xosid:token>hierarchyForms</xosid:token> is not
-                    supported
+                    a <xosid:token>hierarchyForm</xosid:token> is not
+                    of this service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -4025,12 +3931,9 @@
 
         <xosid:method xosid:name="getHierarchyFormForUpdate">
             <xosid:description>
-                Gets the agent form for updating an existing hierarchy.
-                A new hierarchy form should be requested for each
-                update transaction. This method is used when the
-                <xosid:token>Hierarchy</xosid:token> to be updated is
-                known and is desired to access any metadata specific to
-                the <xosid:token>Hierarchy</xosid:token> being updated.
+                Gets the hierarchy form for updating an existing
+                hierarchy. A new hierarchy form should be requested for
+                each update transaction.
             </xosid:description>
             <xosid:parameter xosid:name="hierarchyId">
                 <xosid:interfaceType xosid:type="osid.id.Id"/>
@@ -4657,62 +4560,47 @@
 
 
     <xosid:interface xosid:name="osid.hierarchy.Hierarchy"> 
-        <xosid:implements xosid:interface="osid.OsidObject"/>
+        <xosid:implements xosid:interface="osid.OsidCatalog"/>
         <xosid:description>
             A <xosid:token>Hierarchy</xosid:token> represents an
             authenticatable identity. Like all OSID objects, a
             <xosid:token>Hierarchy</xosid:token> is identified by its
-            Id and any persisted references should use the Id. 
-
-            <xosid:pbreak/>
-
-            <xosid:token>getHierarchyInterface()</xosid:token> should
-            be used to retrieve the interface corresponding to this
-            <xosid:token>Type.</xosid:token> The existence of the
-            interface must not be assumed until requested at which
-            point it is safe to cast into the interface indicated by
-            the type.
+            Id and any persisted references should use the Id.
         </xosid:description>
 
 
-        <xosid:method xosid:name="getHierarchyInterface">
+        <xosid:method xosid:name="getHierarchyRecord">
             <xosid:description>
-                Gets the <xosid:token>Hierarchy</xosid:token> interface
-                corresponding to the given
-                <xosid:token>Hierarchy</xosid:token> interface
-                <xosid:token>Type. </xosid:token>A
-                <xosid:token>Hierarchy</xosid:token> returned from
-                another method is only required to implement the root
-                <xosid:token>Hierarchy</xosid:token> interface and
-                this method must be used to retrieve an agent object
-                implementing the requested interface along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>Agent</xosid:token> interface. The
-                <xosid:token>hierarchyInterfaceType</xosid:token> may
-                be the <xosid:token>Type</xosid:token> returned by
-                <xosid:token>getInterfaceType()</xosid:token> or any
-                parent of <xosid:token>getInterfaceType()</xosid:token>
-                in the <xosid:token>Type</xosid:token> hierarchy where
-               
-                <xosid:token>implementsInterfaceType(hierarchyInterfaceType)</xosid:token>
+                Gets the record corresponding to the given
+                <xosid:token>Hierarchy</xosid:token> record
+                <xosid:token>Type. </xosid:token>This method must be
+                used to retrieve an object implementing the requested
+                record interface along with all of its ancestor
+                interfaces. The
+                <xosid:token>hierarchyRecordType</xosid:token> may be
+                the <xosid:token>Type</xosid:token> returned in
+                <xosid:token>getRecordTypes()</xosid:token> or any of
+                its parents in a <xosid:token>Type</xosid:token>
+                hierarchy where
+                <xosid:token>hasRecordType(hierarchyRecordType)</xosid:token>
                 is <xosid:token>true</xosid:token>.
             </xosid:description>
-            <xosid:parameter xosid:name="hierarchyInterfaceType">
+            <xosid:parameter xosid:name="hierarchyRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the type of the interface to retrieve
+                    the type of the record to retrieve
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.hierarchy.Hierarchy"/>
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyRecord"/>
                 <xosid:description>
-                    the agent with the specified interface
+                    the agent with the specified record
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>hierarchyInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
+                    <xosid:token>hierarchyRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
@@ -4728,7 +4616,7 @@
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementsInterfaceType(hierarchyInterfaceType)</xosid:token>
+                                        <xosid:token>hasRecordType(hierarchyrecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -4741,11 +4629,45 @@
     </xosid:interface>
 
 
+    <xosid:interface xosid:name="osid.hierarchy.HierarchyRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>Hierarchy.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getHierarchy">
+            <xosid:description>
+                Gets the <xosid:token>Hierarchy</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.hierarchy.Hierarchy"/>
+                <xosid:description>
+                    the hierarchy
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
     <xosid:interface xosid:name="osid.hierarchy.HierarchyQuery"> 
-        <xosid:implements xosid:interface="osid.OsidQuery"/>
+        <xosid:implements xosid:interface="osid.OsidCatalogQuery"/>
         <xosid:description>
             This is the query interface for searching hierarchies.
             Results are returned if all the specified elements match.
+            Each method match request produces an
+            <xosid:token>AND</xosid:token> term while multiple
+            invocations of a method produces a nested
+            <xosid:token>OR,</xosid:token> except for accessing the
+            <xosid:token>HierarchyQuery</xosid:token> record.
         </xosid:description>
 
 
@@ -4783,26 +4705,261 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getHierarchyQueryInterface">
+        <xosid:method xosid:name="getHierarchyQueryRecord">
             <xosid:description>
-                Gets the <xosid:token>HierarchyQuery</xosid:token>
-                interface corresponding to the
-                <xosid:token>Hierarchy</xosid:token> interface
-                <xosid:token>Type</xosid:token> provided in the search
-                session. A <xosid:token>HierarchyQuery</xosid:token>
-                returned from the search session is only required to
-                implement the root
-                <xosid:token>HierarchyQuery</xosid:token> interface.
-                This method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the search session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>Hierarchy</xosid:token> interface.
+                Gets the record query interface corresponding to the
+                given <xosid:token>Hierarchy</xosid:token> record
+                <xosid:token>Type. </xosid:token>Multiple record
+                retrievals of the same type may return the same
+                underlying object and do not result in adding terms to
+                the query. Multiple record retrievals of different
+                types add <xosid:token>AND</xosid:token> terms to the
+                other elements set in this form.
+            </xosid:description>
+            <xosid:parameter xosid:name="hierarchyRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a hierarchy record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyQueryRecord"/>
+                <xosid:description>
+                    the hierarchy query record
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>hierarchyRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(hierarchyRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.hierarchy.HierarchyQueryRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>HierarchyQuery.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getHierarchyQuery">
+            <xosid:description>
+                Gets the <xosid:token>HierarchyQuery</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyQuery"/>
                 <xosid:description>
-                    the query extension
+                    the hierarchy query
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.hierarchy.HierarchyForm"> 
+        <xosid:implements xosid:interface="osid.OsidCatalogForm"/>
+        <xosid:description>
+            This is the form for creating and updating
+            <xosid:token>Hierarchy</xosid:token> objects. Like all
+            <xosid:token>OsidForm</xosid:token> objects, various data
+            elements may be set here for use in the create and update
+            methods in the
+            <xosid:token>HierarchyAdminSession.</xosid:token> For each
+            data element that may be set, metadata may be examined to
+            provide display hints or data constraints.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getHierarchyFormRecord">
+            <xosid:description>
+                Gets the <xosid:token>HierarchyFormRecord</xosid:token>
+                interface corresponding to the given hierarchy record
+                interface <xosid:token>Type.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="hierarchyRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the hierarchy record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyFormRecord"/>
+                <xosid:description>
+                    the record
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>hierarchyRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(hierarchyRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.hierarchy.HierarchyFormRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>HierarchyForm.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getHierarchyForm">
+            <xosid:description>
+                Gets the <xosid:token>HierarchyForm</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyForm"/>
+                <xosid:description>
+                    the hierarchy form
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.hierarchy.HierarchySearchOrder"> 
+        <xosid:implements xosid:interface="osid.OsidCatalogSearchOrder"/>
+        <xosid:description>
+            An interface for specifying the ordering of search results.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getHierarchySearchOrderRecord">
+            <xosid:description>
+                Gets the hierarchy sarch record interface corresponding
+                to the given repository record <xosid:token>Type.
+                </xosid:token>Multiple retrievals return the same
+                underlying object.
+            </xosid:description>
+            <xosid:parameter xosid:name="hierarchyRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a hierarchy record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchySearchOrderRecord"/>
+                <xosid:description>
+                    the hierarchy search order record interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>hierarchyRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(hierarchyRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.hierarchy.HierarchySearchOrderRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a
+            <xosid:token>HierarchySearchOrder.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getHierarchySearchOrder">
+            <xosid:description>
+                Gets the
+                <xosid:token>HierarchySearchOrder</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchySearchOrder"/>
+                <xosid:description>
+                    the hierarchy search order
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -4855,7 +5012,7 @@
                 Execute this search using a given list of hierarchies.
             </xosid:description>
             <xosid:parameter xosid:name="hierarchyIds">
-                <xosid:interfaceType xosid:type="osid.id.Id" xosid:array="true"/>
+                <xosid:interfaceType xosid:type="osid.id.IdList"/>
                 <xosid:description>
                     list of hierarchies
                 </xosid:description>
@@ -4873,25 +5030,106 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getHierarchySearchInterface">
+        <xosid:method xosid:name="orderHierarchyResults">
+            <xosid:description>
+                Specify an ordering to the search results.
+            </xosid:description>
+            <xosid:parameter xosid:name="hierarchySearchOrder">
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchySearchOrder"/>
+                <xosid:description>
+                    hierarchy search order
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>hierarchySearchOrder</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>hierarchySearchOrder</xosid:token> is
+                    not of this service
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getHierarchySearchRecord">
+            <xosid:description>
+                Gets the record corresponding to the given hierarchy
+                search record <xosid:token>Type. </xosid:token>This
+                method must be used to retrieve an object implementing
+                the requested record interface along with all of its
+                ancestor interfaces.
+            </xosid:description>
+            <xosid:parameter xosid:name="hierarchySearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a hierarchy search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchySearchRecord"/>
+                <xosid:description>
+                    the hierarchy search interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+
+                                        <xosid:token>hierarchySearchRecordType</xosid:token>
+                    is <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(hierarchyRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.hierarchy.HierarchySearchRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>HierarchySearch.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getHierarchySearch">
             <xosid:description>
                 Gets the <xosid:token>HierarchySearch</xosid:token>
-                interface corresponding to the hierarchy search
-                interface <xosid:token>Type</xosid:token> provided in
-                the search session<xosid:token>. </xosid:token>A
-                <xosid:token>HierarchySearch</xosid:token> returned
-                from the search session is only required to implement
-                the root <xosid:token>HierarchySearch</xosid:token>
-                interface. This method must be used to retrieve a query
-                object implementing the interface specified when
-                retrieving this object from the search session along
-                with all of its ancestor interfaces, including the core
-                <xosid:token>HierarchySearch</xosid:token> interface.
+                from which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.hierarchy.HierarchySearch"/>
                 <xosid:description>
-                    the hierarchy search interface
+                    the hierarchy search
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -4929,32 +5167,50 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getHierarchySearchResultsInterface">
+        <xosid:method xosid:name="getHierarchySearchResultsRecord">
             <xosid:description>
-                Gets the hierarchy search results interface
-                corresponding to the
-                <xosid:token>searchType</xosid:token> used in
-                retrieving the
-                <xosid:token>HierarchySearch</xosid:token> interface. A
-                <xosid:token>HierarchySearchResults</xosid:token>
-                returned from the search session is only required to
-                implement the root
-                <xosid:token>HierarchySearchResults</xosid:token>
-                interface. This method must be used to retrieve a
-                search results object implementing the interface
-                specified when retrieving the
-                <xosid:token>HierarchySearch</xosid:token> from the
-                search session along with all of its ancestor
-                interfaces, including the core
-                <xosid:token>HierarchySearchResults</xosid:token>
-                interface.
+                Gets the record corresponding to the given hierarchy
+                search record <xosid:token>Type. </xosid:token>This
+                method must be used to retrieve an object implementing
+                the requested record interface along with all of its
+                ancestor interfaces.
             </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchySearchResults"/>
+            <xosid:parameter xosid:name="hierarchySearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the hierarchy results interface
+                    a hierarchy search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchySearchResultsRecord"/>
+                <xosid:description>
+                    the hierarchy search interface
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+
+                                        <xosid:token>hierarchySearchRecordType</xosid:token>
+                    is <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(hierarchySearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -4964,40 +5220,26 @@
     </xosid:interface>
 
 
-    <xosid:interface xosid:name="osid.hierarchy.HierarchyForm"> 
-        <xosid:implements xosid:interface="osid.OsidForm"/>
+    <xosid:interface xosid:name="osid.hierarchy.HierarchySearchResultsRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
         <xosid:description>
-            This is the form for creating and updating
-            <xosid:token>Hierarchy</xosid:token> objects. Like all
-            <xosid:token>OsidForm</xosid:token> objects, various data
-            elements may be set here for use in the create and update
-            methods in the
-            <xosid:token>HierarchyAdminSession.</xosid:token> For each
-            data element that may be set, metadata may be examined to
-            provide display hints or data constraints.
+            A record for a
+            <xosid:token>HierarchySearchResults.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
         </xosid:description>
 
 
-        <xosid:method xosid:name="getHierarchyFormInterface">
+        <xosid:method xosid:name="getHierarchySearchResults">
             <xosid:description>
-                Gets the <xosid:token>HierarchyForm</xosid:token>
-                interface corresponding to the
-                <xosid:token>Hierarchy</xosid:token> interface
-                <xosid:token>Type</xosid:token> provided in the admin
-               session <xosid:token>. </xosid:token>A
-                <xosid:token>HierarchyForm</xosid:token> returned from
-                the admin session is only required to implement the
-                root <xosid:token>HierarchyForm</xosid:token>
-                interface. This method must be used to retrieve a query
-                object implementing the interface specified when
-                retrieving this object from the admin session along
-                with all of its ancestor interfaces, including the core
-                <xosid:token>HierarchyForm</xosid:token> interface.
+                Gets the
+                <xosid:token>HierarchySearchResults</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyForm"/>
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchySearchResults"/>
                 <xosid:description>
-                    the hierarchy form extension
+                    the hierarchy search results
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -5084,20 +5326,22 @@
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (hl.hasNext()) {
      Hierarchy hierarchy = hl.getNextHierarchy();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (hl.hasNext()) {
      Hierarchy[] hierarchies = gl.getNextHierarchies(hl.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
@@ -5310,20 +5554,22 @@ while (hl.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (pl.hasNext()) {
      Position position = pl.getNextPosition();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (pl.hasNext()) {
      Position[] positions = pl.getNextPositions(pl.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>
