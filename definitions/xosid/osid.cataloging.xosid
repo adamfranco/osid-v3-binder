@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.cataloging generated at 7/14/2008 6:27:41 PM 
+    XOSID for osid.cataloging generated at 10/14/2008 10:01:36 AM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -306,16 +306,17 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getCatalogInterfaceTypes">
+        <xosid:method xosid:name="supportsConfigurationHierarchySequencing">
             <xosid:description>
-                Gets the supported <xosid:token>Catalog</xosid:token>
-                inyterface types.
+                Tests if the configuration hierarchy supports node
+                sequencing.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
-                    a list containing the supported
-                    <xosid:token>Catalog</xosid:token> interface types
+                    <xosid:token>true</xosid:token> if configuration
+                    hierarchy node sequencing is supported,
+                    <xosid:token>false</xosid:token> otherwise
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -325,16 +326,35 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsCatalogInterfaceType">
+        <xosid:method xosid:name="getCatalogRecordTypes">
+            <xosid:description>
+                Gets the supported <xosid:token>Catalog</xosid:token>
+                record types.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    a list containing the supported
+                    <xosid:token>Catalog</xosid:token> record types
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsCatalogRecordType">
             <xosid:description>
                 Tests if the given <xosid:token>Catalog</xosid:token>
-                interface type is supported.
+                record type is supported.
             </xosid:description>
-            <xosid:parameter xosid:name="cataloginterfaceType">
+            <xosid:parameter xosid:name="catalogRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a <xosid:token>Type</xosid:token> indicating a
-                    <xosid:token>Catalog</xosid:token> interface type
+                    <xosid:token>Catalog</xosid:token> record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -352,15 +372,14 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getCatalogSearchInterfaceTypes">
+        <xosid:method xosid:name="getCatalogSearchRecordTypes">
             <xosid:description>
-                Gets the supported catalog search interface types.
+                Gets the supported catalog search reciord types.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.type.TypeList"/>
                 <xosid:description>
-                    a list containing the supported search interface
-                    types
+                    a list containing the supported search record types
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -370,16 +389,16 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsCatalogSearchInterfaceType">
+        <xosid:method xosid:name="supportsCatalogSearchRecordType">
             <xosid:description>
-                Tests if the given catalog search interface type is
+                Tests if the given catalog search record type is
                 supported.
             </xosid:description>
-            <xosid:parameter xosid:name="catalogSearchInterfaceType">
+            <xosid:parameter xosid:name="catalogSearchRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a <xosid:token>Type</xosid:token> indicating a
-                    catalog search interface type
+                    catalog search record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -1581,7 +1600,7 @@
         <xosid:method xosid:name="getCatalogIdsById">
             <xosid:description>
                 Gets the <xosid:token>Catalog Ids</xosid:token> mapped
-                to an Id.
+                to an <xosid:token>Id.</xosid:token>
             </xosid:description>
             <xosid:parameter xosid:name="id">
                 <xosid:interfaceType xosid:type="osid.id.Id"/>
@@ -1622,7 +1641,7 @@
         <xosid:method xosid:name="getCatalogsById">
             <xosid:description>
                 Gets the <xosid:token>Catalogs</xosid:token> mapped to
-                an Id.
+                an <xosid:token>Id.</xosid:token>
             </xosid:description>
             <xosid:parameter xosid:name="id">
                 <xosid:interfaceType xosid:type="osid.id.Id"/>
@@ -2315,20 +2334,18 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getCatalogsByInterfaceType">
+        <xosid:method xosid:name="getCatalogsByRecordType">
             <xosid:description>
                 Gets a <xosid:token>CatalogList</xosid:token>
-                corresponding to the given catalog interface
-                <xosid:token>Type </xosid:token>which does not include
-                catalogs of interface types derived from the specified
+                containing the given subject record
                 <xosid:token>Type. </xosid:token>In plenary mode, the
-                returned list contains all known catalogs or an error
+                returned list contains all known subjects or an error
                 results. Otherwise, the returned list may contain only
                 those catalogs that are accessible through this
                 session. In both cases, the order of the set is not
                 specified.
             </xosid:description>
-            <xosid:parameter xosid:name="catalogInterfaceType">
+            <xosid:parameter xosid:name="catalogRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a catalog interface type
@@ -2430,11 +2447,10 @@
             <xosid:token>CatalogList</xosid:token> or be used to
             perform a search within the result set through
             <xosid:token>CatalogSearch.</xosid:token>
-            Catalogs may have a query interface indicated by their
-            respective interface types. The typed query interface is
-            accessed via the <xosid:token>CatalogQuery.</xosid:token>
-            The returns in this session may not be cast directly to
-            these interfaces.
+            Catalogs may have a record query interface indicated by
+            their respective record interface types. The record query
+            interface is accessed via the
+            <xosid:token>CatalogQuery.</xosid:token>
         </xosid:description>
 
 
@@ -2475,46 +2491,6 @@
                     the catalog query
                 </xosid:description>
             </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getCatalogQueryForInterfaceType">
-            <xosid:description>
-                Gets a catalog query interface of the specified type.
-                The returned query contains the method to access the
-                query interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but may be cast
-                directly from this method return.
-            </xosid:description>
-            <xosid:parameter xosid:name="catalogInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of query to retrieve
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.cataloging.CatalogQuery"/>
-                <xosid:description>
-                    the catalog query
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>catalogInterfaceType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>CatalogManager.supportsCatalogInterfaceType(catalogInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -2593,40 +2569,19 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getCatalogSearchForInterfaceType">
+        <xosid:method xosid:name="getCatalogsSearchOrder">
             <xosid:description>
-                Gets a catalog search interface of the specified type.
-                The returned search interface provides access to the
-                search interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but must not be cast
-                directly from this method return.
+                Gets a subject search order interface. The
+                <xosid:token>CatalogSearchOrder</xosid:token> is
+                supplied to a <xosid:token>CatalogSearch</xosid:token>
+                to specify the ordering of results.
             </xosid:description>
-            <xosid:parameter xosid:name="catalogSearchInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of query to retrieve
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.cataloging.CatalogSearch"/>
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogSearchOrder"/>
                 <xosid:description>
-                    the catalog search
+                    the catalog search order interface
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-
-                                        <xosid:token>catalogSearchInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>CatalogManager.supportsCatalogSearchInterfaceType(catalogSearchInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -2727,22 +2682,20 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="canCreateCatalogWithInterfaceTypes">
+        <xosid:method xosid:name="canCreateCatalogWithRecordTypes">
             <xosid:description>
                 Tests if this user can create a single
                 <xosid:token>Catalog </xosid:token>using the desired
-                interface types. A <xosid:token>Catalog
-               </xosid:token>interface <xosid:token>
-                Type</xosid:token> may specify the implementation of
-                other more well-known <xosid:token>Types.</xosid:token>
-                A provider may or may not accept the creation of a
-                <xosid:token>Catalog</xosid:token> using anything
-                other than the <xosid:token>CatalogForm</xosid:token>
-                of the leaf interface <xosid:token>Type,</xosid:token>
-                or may accept creation using one or more higher level
-                interface <xosid:token>Types.</xosid:token>
+                record interface types. While
+                <xosid:token>CatalogingManager.getCatalogRecordTypes()</xosid:token>
+                can be used to examine which record interfaces are
+                supported, this method tests which record(s) are
+                required for creating a specific
+                <xosid:token>Catalog.</xosid:token> Providing an empty
+                array tests if a <xosid:token>Catalog</xosid:token> can
+                be created with no records.
             </xosid:description>
-            <xosid:parameter xosid:name="catalogInterfaceTypes">
+            <xosid:parameter xosid:name="catalogRecordTypes">
                 <xosid:interfaceType xosid:type="osid.type.Type" xosid:array="true"/>
                 <xosid:description>
                     array of types
@@ -2753,46 +2706,17 @@
                 <xosid:description>
                     <xosid:token>true</xosid:token> if
                     <xosid:token>Catalog</xosid:token> creation using
-                    the specified interface
+                    the specified record
                     <xosid:token>Types</xosid:token> is supported,
                     <xosid:token>false</xosid:token> otherwise
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>catalogInterfaceTypes</xosid:token> is
+                    <xosid:token>catalogRecordTypes</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getRequiredCatalogInterfaceTypesForCreate">
-            <xosid:description>
-                Gets the list of minimum required interface
-                <xosid:token>Types</xosid:token> for creating a new
-                <xosid:token>Catalog. </xosid:token>A new
-                <xosid:token>Catalog</xosid:token> can be created
-                using any one of the interface types returned in this
-                list. This may be a series of leaf
-                <xosid:token>Types,</xosid:token> or multiple higher
-                level <xosid:token>Types</xosid:token> if creation
-                requirements are more lenient. An empty list suggests
-                no creates are supported as a root
-                <xosid:token>Catalog</xosid:token> interface is always
-                identified with its own
-                <xosid:token>Type.</xosid:token>
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
-                <xosid:description>
-                    one or more types
-                </xosid:description>
-            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -2804,36 +2728,13 @@
             <xosid:description>
                 Gets the catalog form for creating new catalogs. A new
                 form should be requested for each create transaction.
-                This method is used for creating new
-                <xosid:token>Catalog </xosid:token>objects, where only
-                the <xosid:token>Catalog</xosid:token>
-                <xosid:token>Type</xosid:token> is known.
             </xosid:description>
-            <xosid:parameter xosid:name="catalogInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    catalog type
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.cataloging.CatalogForm"/>
                 <xosid:description>
                     the catalog form
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>catalogInterfaceType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>canCreateCatalogWithInterfaceTypes(catalogInterfaceType)</xosid:token>
-                    is <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -2845,8 +2746,8 @@
             <xosid:description>
                 Creates a new <xosid:token>Catalog.</xosid:token>
             </xosid:description>
-            <xosid:parameter xosid:name="catalogForms">
-                <xosid:interfaceType xosid:type="osid.cataloging.CatalogForm" xosid:array="true"/>
+            <xosid:parameter xosid:name="catalogForm">
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogForm"/>
                 <xosid:description>
                     the forms for this
                     <xosid:token>Catalog</xosid:token>
@@ -2871,7 +2772,7 @@
             </xosid:error>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>catalogForms</xosid:token> is
+                    <xosid:token>catalogForm</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -2887,8 +2788,8 @@
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>catalogForm</xosid:token> is not
-                    supported
+                    <xosid:token>catalogForm</xosid:token> is not of
+                    this service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -3959,13 +3860,14 @@
         <xosid:description>
             A <xosid:token>Catalog</xosid:token> represents a
             collection of entries. Like all OSID objects, a
-            <xosid:token>Catalog</xosid:token> is identified by its Id
-            and any persisted references should use the Id. 
+            <xosid:token>Catalog</xosid:token> is identified by its
+            <xosid:token>Id</xosid:token> and any persisted references
+            should use the <xosid:token>Id.</xosid:token> 
 
             <xosid:pbreak/>
 
-            <xosid:token>getCatalogInterface()</xosid:token> should be
-            used to retrieve the interface corresponding to this
+            <xosid:token>getCatalogRecord()</xosid:token> should be
+            used to retrieve any record corresponding to arecord
             <xosid:token>Type.</xosid:token> The existence of the
             interface must not be assumed until requested at which
             point it is safe to cast into the interface indicated by
@@ -3975,41 +3877,35 @@
 
         <xosid:method xosid:name="getCatalogInterface">
             <xosid:description>
-                Gets the <xosid:token>Catalog</xosid:token> interface
-                corresponding to the given
-                <xosid:token>Catalog</xosid:token> interface
-                <xosid:token>Type. </xosid:token>A
-                <xosid:token>Catalog</xosid:token> returned from
-                another method is only required to implement the root
-                <xosid:token>Catalog</xosid:token> interface and this
-                method must be used to retrieve a catalog object
-                implementing the requested interface along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>Catalog</xosid:token> interface. The
-                <xosid:token>catalogInterfaceType</xosid:token> may be
-                the <xosid:token>Type</xosid:token> returned by
-                <xosid:token>getInterfaceType()</xosid:token> or any
-                parent of <xosid:token>getInterfaceType()</xosid:token>
-                in the <xosid:token>Type</xosid:token> hierarchy where
-               
-                <xosid:token>implementsInterfaceType(catalogInterfaceType)</xosid:token>
+                Gets the record corresponding to the given
+                <xosid:token>Catalog</xosid:token> record
+                <xosid:token>Type. </xosid:token>This method must be
+                used to retrieve an object implementing the requested
+                record interface along with all of its ancestor
+                interfaces. The
+                <xosid:token>catalogRecordType</xosid:token> may be the
+                <xosid:token>Type</xosid:token> returned in
+                <xosid:token>getRecordTypes()</xosid:token> or any of
+                its parents in a <xosid:token>Type</xosid:token>
+                hierarchy where
+                <xosid:token>hasRecordType(catalogRecordType)</xosid:token>
                 is <xosid:token>true</xosid:token>.
             </xosid:description>
-            <xosid:parameter xosid:name="catalogInterfaceType">
+            <xosid:parameter xosid:name="catalogRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the type of the interface to retrieve
+                    a type of the record to retrieve
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.cataloging.Catalog"/>
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogRecord"/>
                 <xosid:description>
-                    the catalog with the specified interface
+                    the catalog record
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>catalogInterfaceType</xosid:token> is
+                    <xosid:token>catalogRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -4026,10 +3922,39 @@
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementsInterfaceType(catalogInterfaceType)</xosid:token>
+                                        <xosid:token>hasInterfaceType(catalogRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.cataloging.CatalogRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>Catalog.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getCatalog">
+            <xosid:description>
+                Gets the <xosid:token>Catalog</xosid:token> from which
+                this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.cataloging.Catalog"/>
+                <xosid:description>
+                    the catalog
+                </xosid:description>
+            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -4047,7 +3972,7 @@
             <xosid:token>AND</xosid:token> term while multiple
             invocations of a method produces a nested
             <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>CatalogQuery</xosid:token> subinterface.
+            <xosid:token>CatalogQuery</xosid:token> record.
         </xosid:description>
 
 
@@ -4084,29 +4009,260 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getCatalogQueryInterface">
+        <xosid:method xosid:name="getCatalogQueryRecord">
             <xosid:description>
-                Gets the <xosid:token>CatalogQuery</xosid:token>
-                interface corresponding to the
-                <xosid:token>Catalog</xosid:token> interface
-                <xosid:token>Type</xosid:token> provided in the search
-                session. A <xosid:token>CatalogQuery</xosid:token>
-                returned from the search session is only required to
-                implement the root
-                <xosid:token>CatalogQuery</xosid:token> interface. This
-                method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the search session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>CatalogQuery</xosid:token> interface.
-                Multiple retrievals of this interface may return the
-                same underlying object and do not result in adding
-                terms to the query.
+                Gets the record query interface corresponding to the
+                given <xosid:token>Catalog</xosid:token> record
+                <xosid:token>Type. </xosid:token>Multiple record
+                retrievals of the same type may return the same
+                underlying object and do not result in adding terms to
+                the query. Multiple record retrievals of different
+                types add <xosid:token>AND</xosid:token> terms to the
+                other elements set in this query.
+            </xosid:description>
+            <xosid:parameter xosid:name="catalogRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a catalog record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogQueryRecord"/>
+                <xosid:description>
+                    the catalog query record
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>catalogRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(catalogRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.cataloging.CatalogQueryRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>CatalogQuery.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getCatalogQuery">
+            <xosid:description>
+                Gets the <xosid:token>CatalogQuery</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.cataloging.CatalogQuery"/>
                 <xosid:description>
-                    the catalog query interface
+                    the catalog query
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.cataloging.CatalogForm"> 
+        <xosid:implements xosid:interface="osid.OsidCatalogForm"/>
+        <xosid:description>
+            This is the form for creating and updating
+            <xosid:token>Catalogs. </xosid:token>Like all
+            <xosid:token>OsidForm</xosid:token> objects, various data
+            elements may be set here for use in the create and update
+            methods in the
+            <xosid:token>CatalogAdminSession.</xosid:token> For each
+            data element that may be set, metadata may be examined to
+            provide display hints or data constraints.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getCatalogFormRecord">
+            <xosid:description>
+                Gets the <xosid:token>CatalogFormRecord</xosid:token>
+                interface corresponding to the given catalog record
+                interface <xosid:token>Type.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="catalogRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a catalog record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogFormRecord"/>
+                <xosid:description>
+                    the record
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>catalogRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(catalogRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.cataloging.CatalogFormRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>CatalogForm.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getCatalogForm">
+            <xosid:description>
+                Gets the <xosid:token>CatalogForm</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogForm"/>
+                <xosid:description>
+                    the catalog form
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.cataloging.CatalogSearchOrder"> 
+        <xosid:implements xosid:interface="osid.OsidSearchOrder"/>
+        <xosid:description>
+            An interface for specifying the ordering of search results.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getCatalogSearchOrderRecord">
+            <xosid:description>
+                Gets the catalog search order record corresponding to
+                the given subject record <xosid:token>Type.
+                </xosid:token>Multiple retrievals return the same
+                underlying object.
+            </xosid:description>
+            <xosid:parameter xosid:name="catalogRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a catalog record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogSearchOrderRecord"/>
+                <xosid:description>
+                    the catalog search order record interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>catalogRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(catalogRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.cataloging.CatalogSearchOrderRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a
+            <xosid:token>CatalogSearchOrder.</xosid:token> The methods
+            specified by the record type are available through the
+            underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getCatalogSearchOrder">
+            <xosid:description>
+                Gets the <xosid:token>CatalogSearchOrder</xosid:token>
+                from which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogSearchOrder"/>
+                <xosid:description>
+                    the catalog search order
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -4177,25 +4333,105 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getCatalogSearchInterface">
+        <xosid:method xosid:name="orderCatalogResults">
             <xosid:description>
-                Gets the <xosid:token>CatalogSearch</xosid:token>
-                interface corresponding to the catalog search interface
-                <xosid:token>Type</xosid:token> provided in the search
-                session. A <xosid:token>CatalogSearch</xosid:token>
-                returned from the search session is only required to
-                implement the root
-                <xosid:token>CatalogSearch</xosid:token> interface.
-                This method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the search session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>CatalogSearch</xosid:token> interface.
+                Specify an ordering to the search results.
+            </xosid:description>
+            <xosid:parameter xosid:name="catalogSearchOrder">
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogSearchOrder"/>
+                <xosid:description>
+                    catalog search order
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>catalogSearchOrder</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>catalogSearchOrder</xosid:token> is
+                    not of this service
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getCatalogSearchRecord">
+            <xosid:description>
+                Gets the record corresponding to the given catalog
+                search record <xosid:token>Type. </xosid:token>This
+                method must be used to retrieve an object implementing
+                the requested record interface along with all of its
+                ancestor interfaces.
+            </xosid:description>
+            <xosid:parameter xosid:name="catalogSearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a catalog search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogSearchRecord"/>
+                <xosid:description>
+                    the catalog search interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>catalogSearchRecordType</xosid:token>
+                    is <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(catalogSearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.cataloging.CatalogSearchRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>CatalogSearch.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getCatalogSearch">
+            <xosid:description>
+                Gets the <xosid:token>CatalogSearch</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.cataloging.CatalogSearch"/>
                 <xosid:description>
-                    the catalog search interface
+                    the catalog search
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -4233,31 +4469,49 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getCatalogSearchResultsInterface">
+        <xosid:method xosid:name="getCatalogSearchResultsRecord">
             <xosid:description>
-                Gets the catalog search results interface corresponding
-                to the <xosid:token>searchType</xosid:token> used in
-                retrieving the <xosid:token>CatalogSearch</xosid:token>
-                interface. A
-                <xosid:token>CatalogSearchResults</xosid:token>
-                returned from the search session is only required to
-                implement the root
-                <xosid:token>CatalogSearchResults</xosid:token>
-                interface. This method must be used to retrieve a
-                search results object implementing the interface
-                specified when retrieving the
-                <xosid:token>CatalogSearch</xosid:token> from the
-                search session along with all of its ancestor
-                interfaces, including the core
-                <xosid:token>CatalogSearchResults</xosid:token>
-                interface.
+                Gets the record corresponding to the given catalog
+                search record <xosid:token>Type. </xosid:token>This
+                method must be used to retrieve an object implementing
+                the requested record interface along with all of its
+                ancestor interfaces.
             </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.cataloging.CatalogSearchResults"/>
+            <xosid:parameter xosid:name="catalogSearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the catalog search results
+                    a catalog search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogSearchResultsRecord"/>
+                <xosid:description>
+                    the catalog search interface
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>catalogSearchRecordType</xosid:token>
+                    is <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(catalogSearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -4267,40 +4521,26 @@
     </xosid:interface>
 
 
-    <xosid:interface xosid:name="osid.cataloging.CatalogForm"> 
-        <xosid:implements xosid:interface="osid.OsidCatalogForm"/>
+    <xosid:interface xosid:name="osid.cataloging.CatalogSearchResultsRecord"> 
+        <xosid:implements xosid:interface="osid.OsidSearchRecord"/>
         <xosid:description>
-            This is the form for creating and updating
-            <xosid:token>Catalogs. </xosid:token>Like all
-            <xosid:token>OsidForm</xosid:token> objects, various data
-            elements may be set here for use in the create and update
-            methods in the
-            <xosid:token>CatalogAdminSession.</xosid:token> For each
-            data element that may be set, metadata may be examined to
-            provide display hints or data constraints.
+            A record for a
+            <xosid:token>CatalogSearchResults.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
         </xosid:description>
 
 
-        <xosid:method xosid:name="getCatalogFormInterface">
+        <xosid:method xosid:name="getCatalogSearchResults">
             <xosid:description>
-                Gets the <xosid:token>CatalogForm</xosid:token>
-                interface corresponding to the
-                <xosid:token>Catalog</xosid:token> interface
-                <xosid:token>Type</xosid:token> provided in the admin
-               session <xosid:token>. </xosid:token>A
-                <xosid:token>Catalog</xosid:token> returned from the
-                admin session is only required to implement the root
-                <xosid:token>Catalog</xosid:token> interface. This
-                method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the admin session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>CatalogForm</xosid:token> interface.
+                Gets the
+                <xosid:token>CatalogSearchResults</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.cataloging.CatalogForm"/>
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogSearchResults"/>
                 <xosid:description>
-                    the catalog form interface
+                    the catalog search results
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -4491,20 +4731,22 @@
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (cl.hasNext()) {
      Catalog catalog = al.getNextCatalog();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (cl.hasNext()) {
      Catalog[] catalogs = cl.getNextCatalogs(cl.available());
-}
+}]]>
             </xosid:code>
              
         </xosid:description>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.locale generated at 7/14/2008 11:29:46 PM 
+    XOSID for osid.locale generated at 10/14/2008 10:33:13 AM 
 
     Copyright (C) 2002-2008 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -1883,7 +1883,7 @@
                 Converts a date/time from one calendar to another.
             </xosid:description>
             <xosid:parameter xosid:name="sourceDateTime">
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     the date/time units to convert
                 </xosid:description>
@@ -1901,7 +1901,7 @@
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     the resulting date/time
                 </xosid:description>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.resource generated at 10/5/2008 2:42:46 PM 
+    XOSID for osid.resource generated at 10/14/2008 10:51:32 AM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -3254,12 +3254,11 @@
                 record types. While
                 <xosid:token>ResourceManager.getResourceRecordTypes()</xosid:token>
                 can be used to examine which record interfaces are
-                supported, this method tests which record interface(s)
-                are required for creating a specific
-                <xosid:token>Resource.</xosid:token> Providing an
-                empty array tests if a
-                <xosid:token>Resource</xosid:token> can be created with
-                no records.
+                supported, this method tests which record(s) are
+                required for creating a specific
+                <xosid:token>Resource.</xosid:token> Providing an empty
+                array tests if a <xosid:token>Resource</xosid:token>
+                can be created with no records.
             </xosid:description>
             <xosid:parameter xosid:name="resourceRecordTypes">
                 <xosid:interfaceType xosid:type="osid.type.Type" xosid:array="true"/>
@@ -6075,8 +6074,8 @@
                 record interface types. While
                 <xosid:token>ResourceManager.getBinRecordTypes()</xosid:token>
                 can be used to examine which record interfaces are
-                supported, this method tests which record interface(s)
-                are required for creating a specific
+                supported, this method tests which record(s) are
+                required for creating a specific
                 <xosid:token>Bin.</xosid:token> Providing an empty
                 array tests if a <xosid:token>Bin</xosid:token> can be
                 created with no records.
@@ -7938,7 +7937,7 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="orderResults">
+        <xosid:method xosid:name="orderResourceResults">
             <xosid:description>
                 Specify an ordering to the search results.
             </xosid:description>
@@ -8844,7 +8843,7 @@ while (arl.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="orderResults">
+        <xosid:method xosid:name="orderBinResults">
             <xosid:description>
                 Specify an ordering to the search results.
             </xosid:description>
