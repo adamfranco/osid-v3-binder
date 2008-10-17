@@ -92,7 +92,6 @@ public class EnumerationItem
      */
 
     protected OsidBinderFactory getOsidBinderFactory() {
-	
 	return (this.factory);
     }
 }
