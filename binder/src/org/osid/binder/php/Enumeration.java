@@ -1,7 +1,7 @@
 //
 // Enumeration.java
 //
-//     Produces the Java Binding for an Enumeration.
+//     Produces the PHP Binding for an Enumeration.
 //  
 //
 // Tom Coppeto
@@ -31,13 +31,13 @@
 //      DEALINGS IN THE SOFTWARE.
 //
 
-package org.osid.binder.java;
+package org.osid.binder.php;
 
 import java.io.PrintStream;
 
 
 /**
- *  Produces the Java binding for an enumeration.
+ *  Produces the PHP binding for an enumeration.
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0

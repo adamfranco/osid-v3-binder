@@ -1,7 +1,7 @@
 //
 // Compliance.java
 //
-//     Produces the Java binding for a Compliance statement.
+//     Produces the PHP binding for a Compliance statement.
 //  
 //
 // Tom Coppeto
@@ -31,13 +31,13 @@
 //      DEALINGS IN THE SOFTWARE.
 //
 
-package org.osid.binder.java;
+package org.osid.binder.php;
 
 import java.io.PrintStream;
 
 
 /**
- *  Produces the Java binding for a Compliance statement.
+ *  Produces the PHP binding for a Compliance statement.
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0

@@ -31,7 +31,7 @@
 //      DEALINGS IN THE SOFTWARE.
 //
 
-package org.osid.binder.java;
+package org.osid.binder.php;
 
 import java.io.File;
 import java.io.PrintStream;
@@ -236,7 +236,7 @@ public class OsidBinder
 	    name = name.substring(pos + 1);
 	}
 
-	File efile = new File(directory, name + ".java");
+	File efile = new File(directory, name + ".php");
 	if (efile.exists()) {
 	    return;
 	}

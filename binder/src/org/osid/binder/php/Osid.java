@@ -1,7 +1,7 @@
 //
 // Osid.java
 //
-//     Outputs the Java binding for an OSID.
+//     Outputs the PHP binding for an OSID.
 //  
 //
 // Tom Coppeto
@@ -31,7 +31,7 @@
 //      DEALINGS IN THE SOFTWARE.
 //
 
-package org.osid.binder.java;
+package org.osid.binder.php;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,7 +44,7 @@ import org.w3c.dom.NodeList;
 
 
 /**
- *  Outputs the Java binding for an OSID.
+ *  Outputs the PHP binding for an OSID.
  *  
  *  @author  Tom Coppeto
  *  @version 3.0.0
@@ -100,7 +100,7 @@ public class Osid
 */
 
 	    try {
-		out = new PrintStream(new FileOutputStream(new File(dir, getClassName(intraface.getName()) + ".java")));
+		out = new PrintStream(new FileOutputStream(new File(dir, getClassName(intraface.getName()) + ".php")));
 	    } catch (FileNotFoundException fnfe) {
 		System.err.println("cannot open " + dir.getPath() + "/" + getClassName(intraface.getName()));
 		return;
@@ -112,7 +112,7 @@ public class Osid
 
 	for (org.osid.binder.Enumeration enumeration: getEnumerations()) {
 	    try {
-		out = new PrintStream(new FileOutputStream(new File(dir, getClassName(enumeration.getName()) + ".java")));
+		out = new PrintStream(new FileOutputStream(new File(dir, getClassName(enumeration.getName()) + ".php")));
 	    } catch (FileNotFoundException fnfe) {
 		System.err.println("cannot open " + dir.getPath() + "/" + getClassName(enumeration.getName()));
 		return;
@@ -145,7 +145,7 @@ public class Osid
 	    }
 
 	    try {
-		out = new PrintStream(new FileOutputStream(new File(dir, getClassName(intraface.getName()) + ".java")));
+		out = new PrintStream(new FileOutputStream(new File(dir, getClassName(intraface.getName()) + ".php")));
 	    } catch (FileNotFoundException fnfe) {
 		System.err.println("cannot open " + dir.getPath() + "/" + getClassName(intraface.getName()));
 		return;

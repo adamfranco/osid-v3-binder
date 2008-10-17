@@ -32,7 +32,7 @@
 //      DEALINGS IN THE SOFTWARE.
 //
 
-package org.osid.binder.java;
+package org.osid.binder.php;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
