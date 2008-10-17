@@ -67,13 +67,11 @@ public class Enumeration
      */
 
     protected OsidBinderFactory getOsidBinderFactory() {
-
 	return (this.factory);
     }
 
 
     void print(PrintStream out) {
-
 	out.println("//");
 	out.println("// " + getName());
 	out.println("//");
@@ -155,23 +153,23 @@ public class Enumeration
 	    out.println("        this.description  = description;");
 	    out.println("    }");
 	    out.println();
-	    out.println("    public String service() {");
+	    out.println("    public String getOSIDServiceName() {");
 	    out.println("        return (this.service);");
 	    out.println("    }");
 	    out.println();
-	    out.println("    public String osid() {");
+	    out.println("    public String getOSIDPackageName() {");
 	    out.println("        return (this.osid);");
 	    out.println("    }");
 	    out.println();
-	    out.println("    public String manager() {");
+	    out.println("    public String getManager() {");
 	    out.println("        return (this.manager);");
 	    out.println("    }");
 	    out.println();
-	    out.println("    public String proxyManager() {");
+	    out.println("    public String getProxyManager() {");
 	    out.println("        return (this.proxyManager);");
 	    out.println("    }");
 	    out.println();
-	    out.println("    public String description() {");
+	    out.println("    public String getDescription() {");
 	    out.println("        return (this.description);");
 	    out.println("    }");
 	} else {
@@ -185,11 +183,11 @@ public class Enumeration
 	    out.println("        this.description = description;");
 	    out.println("    }");
 	    out.println();
-	    out.println("    public String displayName() {");
+	    out.println("    public String getDisplayName() {");
 	    out.println("        return (this.displayName);");
 	    out.println("    }");
 	    out.println();
-	    out.println("    public String description() {");
+	    out.println("    public String getDescription() {");
 	    out.println("        return (this.description);");
 	    out.println("    }");
 	}
@@ -200,7 +198,6 @@ public class Enumeration
 
 
     private String getClassName(final String path) {
-	
 	int pos = path.lastIndexOf(".");
 	return (path.substring(pos + 1));
     }
@@ -218,21 +215,18 @@ public class Enumeration
 
 
     private String getManagerName(final String osid) {
-
 	return ("org.osid." + osid.toLowerCase() + "." +
 		capitalize(osid.toLowerCase()) + "Manager");
     }
 
 
     private String getProxyManagerName(final String osid) {
-
-	return ("org.osid." + osid.toLowerCase() + "," + 
+	return ("org.osid." + osid.toLowerCase() + "." + 
 		capitalize(osid.toLowerCase()) + "ProxyManager");
     }
 
     
     private String capitalize(final String s) {
-
 	char chars[] = s.toCharArray();
 	chars[0] = Character.toUpperCase(chars[0]);
 	return (new String(chars));
