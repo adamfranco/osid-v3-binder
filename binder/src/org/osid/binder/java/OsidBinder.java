@@ -273,12 +273,12 @@ public class OsidBinder
 	    } else {
 		out.println("    extends Exception {");
 	    }
-	} else if (error.getCategory().equals("integration") || error.getCategory().equals("programming")) {
+	} else if (error.getCategory().equalsIgnoreCase("integration") || error.getCategory().equalsIgnoreCase("programming")) {
 	    out.println();	    
 	    out.println("    extends OsidRuntimeException {");
 	} else {
 	    out.println();	    
-	    out.println("    extends OsidRuntimeException {");
+	    out.println("    extends OsidException {");
 	}
 
 	out.println();

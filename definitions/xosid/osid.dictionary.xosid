@@ -3781,7 +3781,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
                 <xosid:token>Entry</xosid:token> is changed.
             </xosid:description>
             <xosid:parameter xosid:name="key">
-                <xosid:primitiveType xosid:type="interface"/>
+                <xosid:primitiveType xosid:type="object"/>
                 <xosid:description>
                     the entry key
                 </xosid:description>
@@ -3861,7 +3861,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
                 <xosid:token>Entry</xosid:token> is deleted.
             </xosid:description>
             <xosid:parameter xosid:name="key">
-                <xosid:primitiveType xosid:type="interface"/>
+                <xosid:primitiveType xosid:type="object"/>
                 <xosid:description>
                     the entry key
                 </xosid:description>
@@ -7138,7 +7138,7 @@ while (el.hasNext()) {
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.dictionary.DictionarySearchOrderReceord"/>
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionarySearchOrderRecord"/>
                 <xosid:description>
                     the dictionary search order record interface
                 </xosid:description>
@@ -7207,7 +7207,7 @@ while (el.hasNext()) {
 
 
     <xosid:interface xosid:name="osid.dictionary.DictionarySearch"> 
-        <xosid:implements xosid:interface="osid.OsidCatalogSearch"/>
+        <xosid:implements xosid:interface="osid.OsidSearch"/>
         <xosid:description>
             This interface defines search options.
         </xosid:description>

@@ -7598,7 +7598,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 Gets the created time of this entry.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     the created time
                 </xosid:description>
@@ -7615,7 +7615,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 Gets the last modified time of this entry.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     the last modified time
                 </xosid:description>
@@ -7632,7 +7632,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 Gets the last access time of this entry.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     the last access time
                 </xosid:description>
@@ -8336,13 +8336,13 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 specified time period.
             </xosid:description>
             <xosid:parameter xosid:name="start">
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     start time of the query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="end">
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     end time of the query
                 </xosid:description>
@@ -8381,13 +8381,13 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 specified time period.
             </xosid:description>
             <xosid:parameter xosid:name="start">
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     start time of the query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="end">
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     end time of the query
                 </xosid:description>
@@ -8426,13 +8426,13 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 the specified time period.
             </xosid:description>
             <xosid:parameter xosid:name="start">
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     start time of the query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="end">
-                <xosid:interfaceType xosid:type="osid.DateTime"/>
+                <xosid:interfaceType xosid:type="osid.calendaring.DateTime"/>
                 <xosid:description>
                     end time of the query
                 </xosid:description>
