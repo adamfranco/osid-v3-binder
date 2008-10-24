@@ -1,0 +1,341 @@
+<?xml version="1.0"?>
+<!--
+    build.xml
+
+        A generic build.xml file. 
+
+
+    Tom Coppeto
+    OnTapSolutions
+    21 July 2005
+
+
+    Copyright (c) 2005 Massachusetts Institute of Technology
+        Permission is hereby granted, free of charge, to any person
+        obtaining a copy of this software and associated documentation
+        files (the "Software"), to deal in the Software without
+        restriction, including without limitation the rights to use,
+        copy, modify, merge, publish, distribute, sublicesne, and/or
+        sell copies of the Software, and to permit the persons to whom the
+        Software is furnished to do so, subject the following conditions:
+
+        The above copyright notice and this permission notice shall be
+        included in all copies or substantial portions of the Software.
+  
+        The Software is provided "AS IS", WITHOUT WARRANTY OF ANY KIND,
+        EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+        OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+        NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+        HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+        WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+        DEALINGS IN THE SOFTWARE.
+
+
+    $Id: build.xml,v 1.10 2006/04/26 15:02:07 tom Exp $
+-->
+
+
+<!DOCTYPE project [
+    <!ENTITY javadoc SYSTEM "./build-jdoc.xml">
+]>
+
+
+
+<!-- ============================= Project ================================ -->
+
+<project default="compile" basedir="../..">
+
+    <property file="package/build/build.properties" />
+
+
+<!-- ======================= Property Definitions ========================= -->
+
+<!--
+    The "source" directories. These directories are where source, config,
+    and other binary imports exist and kept under revision control. Other 
+    directories in the tree are generated in the build process.
+-->
+    <property name="bin.home"            value="${basedir}/bin" />
+    <property name="doc.home"            value="${basedir}/doc" />
+    <property name="etc.home"            value="${basedir}/etc" />
+    <property name="lib.home"            value="${basedir}/lib" />
+    <property name="src.home"            value="${basedir}/src" />
+
+<!-- 
+    The "build" directories. Files in these directories are products of
+    the compilation processes.
+-->  
+    <property name="build.home"          value="${basedir}/build" /> 
+    <property name="build.bin"           value="${build.home}/bin" />
+    <property name="build.class"         value="${build.home}/classes" />
+    <property name="build.doc"           value="${build.home}/doc" />
+    <property name="build.etc"           value="${build.home}/etc" />
+    <property name="build.lib"           value="${build.home}/lib" />
+
+<!--
+    The "distribution" directories. Files in these directories contain the
+    merge of build files and non-buildable file imports from the "source"
+    directories. The directory layout matches that of a released tree.
+-->
+    <property name="dist.home"           value="${basedir}/dist" />
+    <property name="dist.bin"            value="${dist.home}/bin" />
+    <property name="dist.doc"            value="${dist.home}/doc" />
+    <property name="dist.javadoc"        value="${dist.doc}/javadoc" />
+    <property name="dist.etc"            value="${dist.home}/etc" />   
+    <property name="dist.lib"            value="${dist.home}/lib" />
+
+<!--
+    The "release" directories. rel.home is imported via the caller of this
+    build file and specifies the directory root of the release. The 
+    distribution is copied into the release tree upon a release. rel.lib
+    specifies the location of released libraries that may need to be included 
+    in the compilation of this package.
+-->
+    <property name="rel.lib"             value="${rel.home}/lib" />
+
+<!-- 
+    Import package specific build instructions.
+-->
+    <import file="build-pkg.xml"/>
+
+
+<!--  ==================== Compilation Control Options ==================== -->
+
+<!--
+    These properties control option settings on the Javac compiler when it
+    is invoked using the <javac> task.
+
+    compile.debug        Should compilation include the debug option?
+    compile.deprecation  Should compilation include the deprecation option?
+-->
+
+    <property name="compile.debug"       value="true"/>
+    <property name="compile.deprecation" value="true"/>
+
+
+
+<!-- =========================== all Target =============================== -->
+
+    <target name="all" depends="clean, compile, dist"
+        description="Clean, compile and make distribution"/>
+
+
+
+<!-- ========================== clean Target ============================== -->
+
+<!--
+    The "clean" target deletes any previous "build" directory,
+    so that you can be ensured the application can be built from scratch.
+    It doesn't clean the release.
+-->
+
+    <target name="clean" depends="" description="Removes the build directory">
+        <delete dir="${build.home}" />
+        <delete dir="${dist.home}" />
+	
+	<antcall target="clean-pkg" />
+    </target>
+
+
+
+<!-- ========================= prepare Target ============================= -->
+
+    <target name="prepare" depends="" description="Validate dependencies">
+
+        <available property="has.bin"       file="${bin.home}" />
+        <available property="has.doc"       file="${doc.home}" />
+	<available property="has.etc"       file="${etc.home}" />
+	<available property="has.lib"       file="${lib.home}" />
+        <available property="has.src"       file="${src.home}" />
+
+	<antcall target="prepare-pkg" />
+    </target>
+
+
+
+<!-- ========================= validate Target ============================ -->
+
+    <target name="validate" depends="prepare" 
+        description="Validate dependencies">
+
+        <antcall target="validate-pkg" />
+    </target>
+
+
+
+<!-- ========================= compile Target ============================ -->
+
+    <target name="compile" depends="prepare,validate"
+        description="Compile Java sources" if="has.src">
+
+        <mkdir dir="${build.class}"/>
+
+        <javac srcdir="${src.home}" 
+	    destdir="${build.class}"
+            debug="${compile.debug}"
+            deprecation="${compile.deprecation}"
+            optimize="${compile.optimize}"
+	    source="1.5"
+	    target="1.5"
+         >
+<!--
+	    <compilerarg value="-Xlint:unchecked" />
+-->
+
+            <classpath refid="classpath"/>
+	    <include name="**/*.java" />
+	    <exclude name="**/attic/**"/>
+            <exclude name="**/authentication/**"/>
+	    <exclude name="**/sql.foo/**"/>
+	    <exclude name="**/mulberry/**"/>
+        </javac>
+
+    <antcall target="compile-pkg" />
+    </target>
+
+
+
+<!-- ========================= javadoc Target ============================ -->
+
+    <target name="javadoc" depends="compile" 
+        description="Generate JavaDoc" if="has.src">
+
+        <mkdir dir="${build.doc}/${api.name}" />
+	<javadoc 
+	    packagenames="*"
+	    destdir="${build.doc}/${api.name}"
+	    author="true"
+	    use="true"
+	    verbose="false"
+	    package="true"
+	    failonerror="true"
+         >
+	    <classpath refid="classpath" />
+	    <fileset dir="${src.home}" defaultexcludes="yes">
+	        <include name="**/*.java" />
+		<exclude name="**/attic/**" />
+		<exclude name="**/*Test.java" />
+	    </fileset>
+	    <taglet name="org.osid.binder.java.ComplianceTaglet"/>
+            <taglet name="org.osid.binder.java.ProviderNotesTaglet"/>
+	    &javadoc;
+
+         </javadoc>
+    </target>
+
+
+
+<!-- =========================== jar Target ============================== -->
+
+    <target name="jar" depends="compile" if="has.src"
+        description="Makes the JAR file">
+
+        <mkdir dir="${build.lib}"/>
+        <jar jarfile="${build.lib}/${api.name}.jar"
+            basedir="${build.class}" 
+	    index="false"
+            includes="**">
+
+	    <manifest>
+                <attribute name="Specification-Title" value="${specTitle}" />
+                <attribute name="Specification-Version" value="${specVersion}" />
+                <attribute name="Specification-Vendor" value="${specVendor}" />
+                <attribute name="Implementation-Title" value="${implTitle}" />
+                <attribute name="Implementation-Version" value="${implVersion}" />
+                <attribute name="Implementation-Vendor" value="${implVendor}" />
+                <attribute name="Class-Path" value="${jarClasspath}" />
+	    </manifest>
+        </jar>
+    </target>
+
+
+<!-- ========================== dist Target ============================== -->
+
+    <target name="dist" depends="jar,javadoc"
+        description="Assembles the distribution">
+
+        <available property="built.lib"     file="${build.lib}" />
+        <available property="built.javadoc" file="${build.doc}/${api.name}" />
+
+        <mkdir dir="${dist.home}" />
+
+	<antcall target="dist-bin" />
+	<antcall target="dist-doc" />
+	<antcall target="dist-etc" />
+	<antcall target="dist-lib" />
+	<antcall target="dist-built-javadoc" />
+	<antcall target="dist-built-lib" />
+
+        <antcall target="dist-pkg" />
+    </target>
+
+
+    <target name="dist-bin" if="has.bin">
+        <mkdir dir="${dist.bin}" />
+        <copy todir="${dist.bin}">
+	    <fileset dir="${bin.home}" />
+	</copy>
+    </target>
+
+    <target name="dist-doc" if="has.doc">
+        <mkdir dir="${dist.doc}" />
+        <copy todir="${dist.doc}">
+	    <fileset dir="${doc.home}" />
+        </copy>
+    </target>
+
+    <target name="dist-etc" if="has.etc">
+        <mkdir dir="${dist.etc}" />
+	<copy todir="${dist.etc}">
+	    <fileset dir="${etc.home}" />
+        </copy>
+    </target>
+
+    <target name="dist-lib" if="has.lib">
+        <mkdir dir="${dist.lib}" />
+        <copy todir="${dist.lib}">
+	    <fileset dir="${lib.home}" />
+        </copy>
+    </target>
+
+    <target name="dist-built-lib" if="built.lib">
+        <mkdir dir="${dist.lib}" />
+	<copy todir="${dist.lib}">
+	    <fileset dir="${build.lib}" />
+        </copy>
+    </target>
+
+    <target name="dist-built-javadoc" if="built.javadoc">
+        <mkdir dir="${dist.javadoc}" />
+        <copy todir="${dist.javadoc}">
+	    <fileset dir="${build.doc}" />
+        </copy>
+    </target>
+
+
+
+<!-- ========================== test Target ============================== -->
+
+    <target name="test" depends="dist" if="${has.src}"
+        description="Tests the distribution">
+
+	<antcall target="test-pkg" />
+    </target>
+
+
+
+<!-- ========================= release Target ============================ -->
+
+    <target name="release" depends="test" if="rel.home"
+        description="Releases the distribution">
+
+        <mkdir dir="${rel.home}" />
+        <copy todir="${rel.home}">
+	    <fileset dir="${dist.home}" />
+        </copy>
+
+	<antcall target="rel-pkg" />
+    </target>
+
+</project>
