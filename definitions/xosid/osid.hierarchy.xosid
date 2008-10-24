@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.hierarchy generated at 10/14/2008 10:16:06 AM 
+    XOSID for osid.hierarchy generated at 10/24/2008 11:51:52 AM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -2064,7 +2064,7 @@
                     the <xosid:token>Id</xosid:token> to query
                 </xosid:description>
             </xosid:parameter>
-            <xosid:parameter xosid:name="decendantId">
+            <xosid:parameter xosid:name="descendantId">
                 <xosid:interfaceType xosid:type="osid.id.Id"/>
                 <xosid:description>
                     the <xosid:token>Id</xosid:token> of a descendant

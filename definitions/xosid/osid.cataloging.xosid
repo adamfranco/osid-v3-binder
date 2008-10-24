@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.cataloging generated at 10/14/2008 10:01:36 AM 
+    XOSID for osid.cataloging generated at 10/24/2008 11:25:42 AM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -2184,7 +2184,7 @@
             <xosid:description>
                 Gets a <xosid:token>CatalogList</xosid:token>
                 corresponding to the given <xosid:token>IdList.
-                </xosid:token> In plenary mode, the returned list
+                </xosid:token>In plenary mode, the returned list
                 contains all of the catalogs specified in the
                 <xosid:token>Id</xosid:token> list, in the order of
                 the list, including duplicates, or an error results if

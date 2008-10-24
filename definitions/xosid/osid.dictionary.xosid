@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.dictionary generated at 10/14/2008 4:08:00 PM 
+    XOSID for osid.dictionary generated at 10/24/2008 11:43:49 AM 
 
     Copyright (C) 2002-2008 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -4363,14 +4363,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
 
         <xosid:method xosid:name="getDictionaryQuery">
             <xosid:description>
-                Gets a dictionary query interface. The returned query
-                only makes available the core
-                <xosid:token>DictionaryQuery</xosid:token> interface
-                and does not support additional interface types.
-               
-                <xosid:token>getDictionaryQueryForInterfaceType()</xosid:token>
-                should be used if additional interface types are
-                required.
+                Gets a dictionary query interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.dictionary.DictionaryQuery"/>
@@ -4388,8 +4381,8 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
         <xosid:method xosid:name="getDictionariesByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Dictionary</xosid:token>
-                elements matching the given query interface. Each
-                element in the array is OR'd.
+                elements matching the given query. Each element in the
+                array is OR'd.
             </xosid:description>
             <xosid:parameter xosid:name="dictionaryQueries">
                 <xosid:interfaceType xosid:type="osid.dictionary.DictionaryQuery" xosid:array="true"/>
@@ -4434,14 +4427,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
 
         <xosid:method xosid:name="getDictionarySearch">
             <xosid:description>
-                Gets a dictionary search interface. The returned query
-                only makes available the core
-                <xosid:token>DictionarySearch</xosid:token> interface
-                and does not support additional interface types.
-               
-                <xosid:token>getDictionarySearchForInterfaceType()</xosid:token>
-                should be used if additional interface types are
-                required.
+                Gets a dictionary search interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.dictionary.DictionarySearch"/>
@@ -4459,7 +4445,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
         <xosid:method xosid:name="getDictionarySearchOrder">
             <xosid:description>
                 Gets a dictionary search order interface. The
-                <xosid:token>DictuionarySearchOrder</xosid:token> is
+                <xosid:token>DictionarySearchOrder</xosid:token> is
                 supplied to a
                 <xosid:token>DictionarySearch</xosid:token> to specify
                 the ordering of results.

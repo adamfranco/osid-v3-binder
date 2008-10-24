@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.resource generated at 10/14/2008 10:51:32 AM 
+    XOSID for osid.resource generated at 10/24/2008 12:36:28 PM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -7408,10 +7408,18 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchNoAgent">
+        <xosid:method xosid:name="matchAnyAgent">
             <xosid:description>
-                Matches resources with no agent.
+                Matches resources with any agent.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match any agent,
+                    <xosid:token>false</xosid:token> to match
+                    resources with no agent
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.

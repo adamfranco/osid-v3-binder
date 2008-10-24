@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.authentication generated at 10/14/2008 9:39:51 AM 
+    XOSID for osid.authentication generated at 10/24/2008 10:55:20 AM 
 
     Copyright (C) 2002-2008 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -2088,7 +2088,7 @@ AgentReceiver receiver {
             <xosid:description>
                 Gets an <xosid:token>AgentList</xosid:token> containing
                 the given repository record
-                <xosid:token>Type.</xosid:token> In plenary mode, the
+                <xosid:token>Type.</xosid:token>In plenary mode, the
                 returned list contains all known agents or an error
                 results. Otherwise, the returned list may contain only
                 those agents that are accessible through this session.
@@ -3542,14 +3542,7 @@ AgentReceiver receiver {
 
         <xosid:method xosid:name="getKeySearch">
             <xosid:description>
-                Gets a key query interface. The returned query only
-                makes available the core
-                <xosid:token>KeyQuery</xosid:token> interface and does
-                not support additional interface types.
-               
-                <xosid:token>getKeyQueryForInterfaceType()</xosid:token>
-                should be used if additional interface types are
-                required.
+                Gets a key query interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.authentication.KeySearch"/>
@@ -4429,13 +4422,13 @@ AgentReceiver receiver {
             <xosid:code>
 <![CDATA[
 AgentQuery queries[1];
-queries[0] = session.getAgentQueryRecord(companyAgentType);
+queries[0] = session.getAgentQuery();
 
 queries[0].matchDisplayName("Tom*", wildcardStringMatchType, false);
 
-companyAgentQuery = queries[0].getAgentQueryInterface();
+companyAgentQuery = queries[0].getAgentQueryRecord(companyAgentType);
 companyAgentQuery.matchLoginName("tom");
-companyAgentQuery = queries[0].getAgentQueryInterface();
+companyAgentQuery = queries[0].getAgentQueryRecord(companyAgentType);
 companyAgentQuery.matchLoginName("tjcoppet");
 
 AgentList agentList = session.getAgentsByQuery(queries);]]>
@@ -4443,6 +4436,25 @@ AgentList agentList = session.getAgentsByQuery(queries);]]>
              
         </xosid:description>
 
+
+        <xosid:method xosid:name="matchAnyKey">
+            <xosid:description>
+                Matches agents with any key value.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if to match agents
+                    with a key, <xosid:token>false</xosid:token> to
+                    match agents with no key
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
 
         <xosid:method xosid:name="supportsKeyQuery">
             <xosid:description>
@@ -4786,8 +4798,7 @@ String kword = "squid";
 queries[0].matchKeywords(kword, true);
 
 AgentSearchResults results = session.getAgentsBySearch(queries, as);
-AgentList list = results.getAgents();
-]]>
+AgentList list = results.getAgents();]]>
             </xosid:code>
              
         </xosid:description>

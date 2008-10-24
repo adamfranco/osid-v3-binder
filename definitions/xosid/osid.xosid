@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid generated at 10/14/2008 9:15:42 AM 
+    XOSID for osid generated at 10/24/2008 10:47:26 AM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -1660,8 +1660,7 @@
 
 <xosid:code>
 <![CDATA[
-OsidQuery { OsidQuery.matchDisplayName AND (OsidQuery.matchDescription OR OsidQuery.matchDescription)} OR OsidQuery
-]]>
+OsidQuery { OsidQuery.matchDisplayName AND (OsidQuery.matchDescription OR OsidQuery.matchDescription)} OR OsidQuery]]>
             </xosid:code>
              
             <xosid:pbreak/>
@@ -1701,15 +1700,14 @@ OsidQuery { OsidQuery.matchDisplayName AND (OsidQuery.matchDescription OR OsidQu
 
 <xosid:code>
 <![CDATA[
-ObjectQuery queries[2];
-]]>
+ObjectQuery queries[2];]]>
             </xosid:code>
              
             <xosid:pbreak/>
 
 <xosid:code>
 <![CDATA[
-queries[0] = session.getObjectQueryForInterfaceType(colorType);
+queries[0] = session.getObjectQuery();
 queries[0].addDisplayNameMatch("Fred*", wildcardStringMatchType, true);
 
 queries[1] = session.getObjectQuery();
@@ -1719,8 +1717,7 @@ queries[1].addDescriptionMatch("dinosaur", wordStringMatchType, false);
 ColorQuery recordQuery;
 recordQuery = queries[1].getObjectRecord(colorRecordType);
 recordQuery.matchColor("purple");
-ObjectList list = session.getObjectsByQuery(queries);
-]]>
+ObjectList list = session.getObjectsByQuery(queries);]]>
             </xosid:code>
              
         </xosid:description>
@@ -1938,10 +1935,18 @@ ObjectList list = session.getObjectsByQuery(queries);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetDescription">
+        <xosid:method xosid:name="matchAnyDescription">
             <xosid:description>
-                Matches a description that has no value.
+                Matches a description that has any value.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match any
+                    description, <xosid:token>false</xosid:token> to
+                    match descriptions with no values
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -2011,17 +2016,6 @@ ObjectList list = session.getObjectsByQuery(queries);
                    </xosid:token>is <xosid:token> null</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="matchUnsetGenusType">
-            <xosid:description>
-                Matches a genus that has no value.
-            </xosid:description>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -2154,8 +2148,7 @@ ObjectForm form = session.getObjectFormForUpdate(objectId);
 form.setDisplayName("new name");
 ColorForm recordForm = form.getFormRecord(colorRecordType);
 recordForm.setColor("green");
-session.updateObject(objectId, form);
-]]>
+session.updateObject(objectId, form);]]>
             </xosid:code>
              
         </xosid:description>
@@ -2492,8 +2485,7 @@ queries[0] = session.getObjectQuery();
 queries[0].addDescriptionMatch("*food*", wildcardStringMatchType, true);
 
 ObjectSearchResults results = session.getObjectsBySearch(queries, os);
-ObjectList list = results.getObjectList();
-]]>
+ObjectList list = results.getObjectList();]]>
             </xosid:code>
              
         </xosid:description>
@@ -2665,8 +2657,7 @@ queries[0] = session.getObjectQuery();
 queries[0].addDescriptionMatch("*food*", wildcardStringMatchType, true);
 
 ObjectSearchResults results = session.getObjectsBySearch(queries, os);
-ObjectList list = results.getObjectList();
-]]>
+ObjectList list = results.getObjectList();]]>
             </xosid:code>
              
         </xosid:description>
@@ -2768,8 +2759,7 @@ os.searchWithinResults(results);
 
 queries[0].addDisplayNameMatch("pickles", wordStringMatchType, true);
 results = session.getObjectsBySearch(queries, os);
-OsidList pickles = results.getObjectList();
-]]>
+OsidList pickles = results.getObjectList();]]>
             </xosid:code>
              
         </xosid:description>
@@ -3208,10 +3198,18 @@ OsidList pickles = results.getObjectList();
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetProvider">
+        <xosid:method xosid:name="matchAnyProvider">
             <xosid:description>
-                Match assets with no provider.
+                Match assets with a provider value.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match any
+                    provider, <xosid:token>false</xosid:token> to match
+                    descriptions with no values
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
