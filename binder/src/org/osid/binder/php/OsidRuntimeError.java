@@ -86,7 +86,7 @@ public class OsidRuntimeError
      */
 
     public String getBinderType() {
-	return ("org.osid.OsidRuntimeException");
+	return ("osid.OsidRuntimeException");
     }
 
     

@@ -70,7 +70,7 @@ public class Error
 	String name = getType();
 	boolean upper = true;
 	
-	sb.append("org.osid.");
+	sb.append("osid.");
 	for (int i = 0; i < name.length(); i++) {
 	    char c = name.charAt(i);
 	    if (upper == true) {
@@ -102,7 +102,7 @@ public class Error
     protected void printJDoc(PrintStream out, String margin) {
 
 	int col = 0;
-	col = org.osid.binder.Text.printPlain(out, "@throws " + getBinderType() + " ", margin, col, false);
+	col = org.osid.binder.Text.printPlain(out, "@throws " + org.osid.binder.php.Interface.getClassName(getBinderType()) + " ", margin, col, false);
 
 	if (getDescription() != null) {
 	    col = getDescription().printHtml(out, margin + "        ", col);

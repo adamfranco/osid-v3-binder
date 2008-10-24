@@ -66,21 +66,29 @@ public class Interface
 
     void print(PrintStream out) {
 
-	out.println("//");
-	out.println("// " + getName());
-	out.println("//");
-	out.println("//     Specifies the OSID definition for " + getName() + ".");
-	out.println("//");
-	getCopyright().printPlain(out, "// ");
+	out.println("/**");
+	out.println(" * " + getClassName());
+	out.println(" * ");
+	out.println(" *     Specifies the OSID definition for " + getClassName() + ".");
+	out.println(" * ");
+	getCopyright().printPlain(out, " * ");
 	out.println();
-	out.println("//");
-	getLicense().printPlain(out, "//     ");
+	out.println(" * ");
+	getLicense().printPlain(out, " *     ");
 	out.println();
-	out.println("//");
+	out.println(" * ");
+	out.println(" * @package " + getPackageName());
+	out.println(" */");
 	out.println();
 
-	out.println("package " + getPackageName() + ";");
-	out.println();
+// 	out.println("package " + getPackageName() + ";");
+// 	out.println();
+
+// Require the interface definitions used by this interface
+	for (String s: getInheritedInterfaces()) {		
+		out.println("require_once(dirname(__FILE__).\"/" + getRelativePath(s) + getFileName(s) + ".php\");");
+	}
+
 	out.println();
 
 	out.println("/**");
@@ -88,24 +96,27 @@ public class Interface
             getDescription().printHtmlParagraph(out, " *  ");
             out.println();
         }
-
+	
+	out.println(" * ");
+	out.println(" * @package " + getPackageName());
 	out.println(" */");
-        out.println();
 
-	out.print("public interface " + getClassName());
+	out.print("interface " + getClassName());
 	boolean first = true;
 	for (String s: getInheritedInterfaces()) {
 	    if (!first) {
-		out.println(",");
-		out.print("            org." + s);
+		out.print(",");
+		out.println();
+		out.print("            " + getClassName(s));
 	    } else {
 		out.println();
-		out.print("    extends org." + s);
+		out.print("    extends " + getClassName(s));
 		first = false;
 	    } 
 	}
 
-	out.println(" {");
+	out.println();
+	out.println("{");
 
 	/*	includeInheritedMethods(out);*/
 	
@@ -118,7 +129,8 @@ public class Interface
 
 	/* we can't rely on the GC to free up resources like spawned threads */
 	printClose(out, getName());
-
+	
+	out.println();
 	out.println("}");
 	return;
     }
@@ -126,17 +138,17 @@ public class Interface
 
     void printAssembly(PrintStream out) {
 
-	out.println("//");
-	out.println("// " + getName());
-	out.println("//");
-	out.println("//     Defines an assembly for " + getName() + ".");
-	out.println("//");
-	getCopyright().printPlain(out, "// ");
+	out.println("/**");
+	out.println(" * " + getClassName());
+	out.println(" * ");
+	out.println(" *     Defines an assembly for " + getClassName() + ".");
+	out.println(" * ");
+	getCopyright().printPlain(out, " * ");
 	out.println();
-	out.println("//");
-	getLicense().printPlain(out, "//     ");
+	out.println(" * ");
+	getLicense().printPlain(out, " *     ");
 	out.println();
-	out.println("//");
+	out.println(" */");
 	out.println();
 
 	out.println("package " + getAssemblyName() + ";");
@@ -238,20 +250,64 @@ public class Interface
 
 
     protected String getClassName() {
-	int pos = getName().lastIndexOf(".");
-	return (getName().substring(pos + 1));
+	return (getName().replace(".", "_"));
     }
-
+    
+    public static String getClassName(String path) {
+	return (path.replace(".", "_"));
+    }
+	
+	public static String getFileName(String path) {
+	int pos = path.lastIndexOf(".");
+	return (path.substring(pos + 1));
+    }
 
     protected String getPackageName() {
 	int pos = getName().lastIndexOf(".");
 	return ("org." + getName().substring(0, pos));
+    }
+    
+    public static String getPackageName(String path) {
+	int pos = path.lastIndexOf(".");
+	return ("org." + path.substring(0, pos));
     }
 
 
     protected String getAssemblyName() {
 	String[] parts = getName().split("\\.");
 	return ("org." + parts[0] + ".assembly." + parts[1]);
+    }
+    
+     /**
+     * Answer the relative directory path of a package as compared to
+     * the package for the current interface.
+     */
+    private String getRelativePath(String path) {
+    String[] myParts = getPackageName(super.getName()).split("\\.");
+    String[] othersParts = getPackageName(path).split("\\.");
+    
+    Integer fork;
+    Integer i;
+    String relativePath = "";
+    
+    // Find the place where the relative paths fork
+    for (fork = 1; fork < myParts.length && fork < othersParts.length; fork++) {
+    	if (!myParts[fork].equals(othersParts[fork])) {
+    		break;
+    	}
+    }
+        
+    // Traverse up the filesystem path;
+    for (i = fork; i < myParts.length; i++) {
+    	relativePath = relativePath + "../";
+    }
+    
+    // Traverse down into the destination path;
+    for (i = fork; i < othersParts.length; i++) {
+    	relativePath = relativePath + othersParts[i] + "/";
+    }
+    
+    return (relativePath);
     }
 }
 	

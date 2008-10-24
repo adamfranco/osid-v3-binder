@@ -119,14 +119,14 @@ public class Method
 	}
 
 	out.println("     */");
-	out.println();
+// 	out.println();
 	
-	String intLine = "    public ";
-	if (getReturn() == null) {
-	    intLine = intLine + "void ";
-	} else {
-	    intLine = intLine + getReturn().getBinderType() + " ";
-	}
+	String intLine = "    public function ";
+// 	if (getReturn() == null) {
+// 	    intLine = intLine + "void ";
+// 	} else {
+// 	    intLine = intLine + getReturn().getBinderType() + " ";
+// 	}
       
 	intLine = intLine + getName() + "(";
 	int indent = intLine.length();
@@ -137,7 +137,12 @@ public class Method
 		intLine = intLine + ", ";
 	    }
 
-	    String pname = parameter.getBinderType() + " " + parameter.getName();
+		String pname = "";
+		if (parameter.getBinderType().length() == 0) {
+		   pname = parameter.getName();
+		} else {
+			pname = parameter.getBinderType() + " " + parameter.getName();
+		}
 	    if (!first && ((pname.length() + intLine.length()) > 78)) {
 		out.println(intLine);
 		intLine = "";
@@ -153,20 +158,20 @@ public class Method
 	out.print(intLine);
 	out.print(")");
 
-	first = true;
-	for (org.osid.binder.Error error: getErrors()) {
-	    if (isCheckedError(error) == false) {
-		continue;
-	    }
-	    if (first) {
-		out.println();
-		out.print("        throws " + error.getBinderType());
-		first = false;
-	    } else {
-		out.println(",");
-		out.print("               " + error.getBinderType());
-	    }
-	} 
+// 	first = true;
+// 	for (org.osid.binder.Error error: getErrors()) {
+// 	    if (isCheckedError(error) == false) {
+// 		continue;
+// 	    }
+// 	    if (first) {
+// 		out.println();
+// 		out.print("        throws " + error.getBinderType());
+// 		first = false;
+// 	    } else {
+// 		out.println(",");
+// 		out.print("               " + error.getBinderType());
+// 	    }
+// 	} 
 	
 	out.println(";");
 	return;

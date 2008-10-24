@@ -68,15 +68,18 @@ public class Parameter
     public String getBinderType() {
 	
 	String ret;
+	if (isArray()) {
+	    ret = "array"; // ret + "[]";
+	} else
 	if (isPrimitiveType()) {
-	    ret = PrimitiveTranslator.translate(getType());
+	    ret = ""; // PrimitiveTranslator.translate(getType());
 	} else {
-	    ret = "org." + getType();
+	    ret =org.osid.binder.php.Interface.getClassName(getType());
 	}
 
-	if (isArray()) {
-	    ret = ret + "[]";
-	}
+// 	if (isArray()) {
+// 	    ret = ret + "[]";
+// 	}
 
 	return (ret);
     }
@@ -94,7 +97,16 @@ public class Parameter
 
 
     void printJDoc(PrintStream out, String margin) {
-	String pre = margin + "@param  " + getName() + " ";
+	String type;
+	if (isArray()) {
+	    type = "array";
+	} else if (isPrimitiveType()) {
+	    type = PrimitiveTranslator.translate(getType());
+	} else {
+	    type = "object " + org.osid.binder.php.Interface.getClassName(getType());
+	}
+
+	String pre = margin + "@param " + type +  " " + getName() + " ";
 	out.print(pre);
 	getDescription().printHtml(out, margin + "        ", pre.length());
 	out.println();

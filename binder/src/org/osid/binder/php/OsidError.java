@@ -89,7 +89,7 @@ public class OsidError
      */
 
     public String getBinderType() {
-	return ("org.osid.OsidException");
+	return ("osid.OsidException");
     }
 
     

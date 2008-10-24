@@ -100,24 +100,28 @@ public class Osid
 */
 
 	    try {
-		out = new PrintStream(new FileOutputStream(new File(dir, getClassName(intraface.getName()) + ".php")));
+		out = new PrintStream(new FileOutputStream(new File(dir, getFileName(intraface.getName()) + ".php")));
 	    } catch (FileNotFoundException fnfe) {
-		System.err.println("cannot open " + dir.getPath() + "/" + getClassName(intraface.getName()));
+		System.err.println("cannot open " + dir.getPath() + "/" + getFileName(intraface.getName()));
 		return;
 	    }
-
+		
+		out.println("<?php");
+		out.println("");
 	    ((Interface) intraface).print(out);
 	    out.close();
 	}
 
 	for (org.osid.binder.Enumeration enumeration: getEnumerations()) {
 	    try {
-		out = new PrintStream(new FileOutputStream(new File(dir, getClassName(enumeration.getName()) + ".php")));
+		out = new PrintStream(new FileOutputStream(new File(dir, getFileName(enumeration.getName()) + ".php")));
 	    } catch (FileNotFoundException fnfe) {
-		System.err.println("cannot open " + dir.getPath() + "/" + getClassName(enumeration.getName()));
+		System.err.println("cannot open " + dir.getPath() + "/" + getFileName(enumeration.getName()));
 		return;
 	    }
-
+	    
+	    out.println("<?php");
+		out.println("");
 	    ((Enumeration) enumeration).print(out);
 	    out.close();
 	}
@@ -145,9 +149,9 @@ public class Osid
 	    }
 
 	    try {
-		out = new PrintStream(new FileOutputStream(new File(dir, getClassName(intraface.getName()) + ".php")));
+		out = new PrintStream(new FileOutputStream(new File(dir, getFileName(intraface.getName()) + ".php")));
 	    } catch (FileNotFoundException fnfe) {
-		System.err.println("cannot open " + dir.getPath() + "/" + getClassName(intraface.getName()));
+		System.err.println("cannot open " + dir.getPath() + "/" + getFileName(intraface.getName()));
 		return;
 	    }
 
@@ -165,8 +169,19 @@ public class Osid
 
 	
     private String getClassName(String path) {
+    return (path.replace(".", "_"));
+        
+// 	int pos = path.lastIndexOf(".");
+// 	path = path.substring(pos + 1);
+// 	
+// 	return (path);
+    }
+    
+    private String getFileName(String path) {
 	int pos = path.lastIndexOf(".");
-	return (path.substring(pos + 1));
+	path = path.substring(pos + 1);
+	
+	return (path);
     }
 
 
@@ -202,8 +217,8 @@ public class Osid
 	    out.println(" * @see org.osid");
 	}
 	out.println(" */");
-	out.println();
-	out.println("package org." + getName() + ";");
+// 	out.println();
+// 	out.println("package org." + getName() + ";");
 	
 	return;
     }

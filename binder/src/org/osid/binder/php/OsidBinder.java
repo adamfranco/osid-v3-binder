@@ -230,13 +230,9 @@ public class OsidBinder
 				org.osid.binder.Osid osid)
 	throws org.osid.binder.OsidBinderException {
 
-	String name = error.getBinderType();
-	int pos = name.lastIndexOf('.');
-	if (pos > 0) {
-	    name = name.substring(pos + 1);
-	}
+	String name = org.osid.binder.php.Interface.getClassName(error.getBinderType());
 
-	File efile = new File(directory, name + ".php");
+	File efile = new File(directory, org.osid.binder.php.Interface.getFileName(error.getBinderType()) + ".php");
 	if (efile.exists()) {
 	    return;
 	}
@@ -248,38 +244,45 @@ public class OsidBinder
 	    throw new org.osid.binder.OsidBinderException("cannot open file " + efile.getPath(), e);
 	}
 
-	out.println("//");
-	out.println("// " + error.getBinderType());
-	out.println("//");
-	out.println("//     Specifies the OSID exception " + name + ".");
-	out.println("//");
-	osid.getCopyright().printPlain(out, "// ");
+	out.println("<?php");
 	out.println();
-	out.println("//");
-	osid.getLicense().printPlain(out, "//     ");
+	out.println("/**");
+	out.println(" * " + name);
+	out.println(" * ");
+	out.println(" *     Specifies the OSID exception " + name + ".");
+	out.println(" * ");
+	osid.getCopyright().printPlain(out, " * ");
 	out.println();
-	out.println("//");
+	out.println(" * ");
+	osid.getLicense().printPlain(out, " *     ");
 	out.println();
+	out.println(" *");
+	out.println(" * @package " + org.osid.binder.php.Interface.getPackageName(error.getBinderType()));
+	out.println(" */");
+// 	out.println();
 	
-	out.println("package org.osid;");
-	out.println();
-	out.println();
+// 	out.println("package org.osid;");
+// 	out.println();
+// 	out.println();
 	
-	out.print("public class " + name);
+	out.print("class " + name);
 	if (error.getCategory().equals("")) {
 	    out.println();
-	    if (name.equals("OsidRuntimeException")) {
-		out.println("    extends RuntimeException {");
+	    if (name.equals("osid_OsidRuntimeException")) {
+		out.println("    extends RuntimeException");
 	    } else {
-		out.println("    extends Exception {");
+		out.println("    extends Exception");
 	    }
 	} else if (error.getCategory().equalsIgnoreCase("integration") || error.getCategory().equalsIgnoreCase("programming")) {
 	    out.println();	    
-	    out.println("    extends OsidRuntimeException {");
+	    out.println("    extends osid_OsidRuntimeException");
 	} else {
 	    out.println();	    
-	    out.println("    extends OsidException {");
+	    out.println("    extends osid_OsidException");
 	}
+	
+    out.println("{");	    
+
 
 	out.println();
 	out.println();
@@ -288,50 +291,15 @@ public class OsidBinder
 	out.println("     *  Constructs a <code>" + name + "</code> with the specified");
 	out.println("     *  detail message. The error message string <code>msg</code> can");
 	out.println("     *  later be retrieved by the getMessage() method of ");
-	out.println("     *  {@link java.lang.Throwable}.");
+	out.println("     *  {@link Exception}.");
 	out.println("     *  ");
-	out.println("     *  @param msg the error message");
+	out.println("     *  @param optional string $msg the error message");
+	out.println("     *  @param optional int $code An error code for the Exception");
 	out.println("     */");
-	out.println();
-	out.println("    public " + name + "(String msg) {");
-	out.println("        super(msg);");
+	out.println("    public function __construct ($msg = null, $code = 0) {");
+	out.println("        parent::__construct($msg, $code);");
 	out.println("        return;");
 	out.println("    }");
-
-	out.println();
-	out.println();
-
-	out.println("    /**");
-	out.println("     *  Constructs a <code>" + name + "</code> with the specified");
-	out.println("     *  detail message and cause. The error message string <code>msg</code> can");
-	out.println("     *  later be retrieved by the getMessage() method of ");
-	out.println("     *  {@link java.lang.Throwable}.");
-	out.println("     *");
-	out.println("     *  @param msg the error message");
-	out.println("     *  @param t the cause of the exception");
-	out.println("     */");
-	out.println();
-	out.println("    public " + name + "(String msg, Throwable t) {");
-	out.println("        super(msg, t);");
-	out.println("        return;");
-	out.println("    }");
-
-	out.println();
-	out.println();
-
-	out.println("    /**");
-	out.println("     *  Constructs a <code>" + name + "</code> with the specified");
-	out.println("     *  cause and a detail message of <code>");
-	out.println("     *  cause.toString()</code> which typically contains the class and");
-	out.println("     *  detail message of <code>cause</code>.");
-	out.println("     *");
-	out.println("     *  @param t the cause of the exception");
-	out.println("     */");
-	out.println();
-	out.println("    public " + name + "(Throwable t) {");
-	out.println("        super(t);");
-	out.println("        return;");
-	out.println("    }");	
 
 	out.println("}");
 	out.close();
