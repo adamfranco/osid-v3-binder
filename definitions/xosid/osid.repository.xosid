@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.repository generated at 10/14/2008 8:47:58 AM 
+    XOSID for osid.repository generated at 10/24/2008 12:14:30 PM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -8334,14 +8334,14 @@ Asset newAsset = session.createAsset(form);]]>
             <xosid:description>
                 Tests if this user can create a single
                 <xosid:token>Asset </xosid:token>using the desired
-                record interface types. While
+                record types. While
                 <xosid:token>RepositoryManager.getAssetRecordTypes()</xosid:token>
-                can be used to examine which record interfaces are
-                supported, this method tests which record(s) are
-                required for creating a specific
-                <xosid:token>Asset.</xosid:token> Providing an empty
-                array tests if an <xosid:token>Asset</xosid:token> can
-                be created with no records.
+                can be used to examine which records are supported,
+                this method tests which record(s) are required for
+                creating a specific <xosid:token>Asset.</xosid:token>
+                Providing an empty array tests if an
+                <xosid:token>Asset</xosid:token> can be created with
+                no records.
             </xosid:description>
             <xosid:parameter xosid:name="assetRecordTypes">
                 <xosid:interfaceType xosid:type="osid.type.Type" xosid:array="true"/>
@@ -13322,12 +13322,12 @@ return "subject updated";]]>
                 <xosid:token>Subject </xosid:token>using the desired
                 record types. While
                 <xosid:token>RepositoryManager.getSubjectRecordTypes()</xosid:token>
-                can be used to examine which record interfaces are
-                supported, this method tests which record(s) are
-                required for creating a specific
-                <xosid:token>Subject.</xosid:token> Providing an empty
-                array tests if a <xosid:token>Subject</xosid:token> can
-                be created with no records.
+                can be used to examine which records are supported,
+                this method tests which record(s) are required for
+                creating a specific <xosid:token>Subject.</xosid:token>
+                Providing an empty array tests if a
+                <xosid:token>Subject</xosid:token> can be created with
+                no records.
             </xosid:description>
             <xosid:parameter xosid:name="subjectRecordTypes">
                 <xosid:interfaceType xosid:type="osid.type.Type" xosid:array="true"/>
@@ -15385,7 +15385,7 @@ return "subject updated";]]>
             <xosid:description>
                 Gets a <xosid:token>RepositoryList</xosid:token>
                 containing the given repository record
-                <xosid:token>Type.</xosid:token>In plenary mode, the
+                <xosid:token>Type. </xosid:token>In plenary mode, the
                 returned list contains all known repositories or an
                 error results. Otherwise, the returned list may contain
                 only those repositories that are accessible through
@@ -15729,12 +15729,11 @@ return "subject updated";]]>
             <xosid:description>
                 Tests if this user can create a single
                 <xosid:token>Repository </xosid:token>using the
-                desired record interface types. While
-               
+                desired record types. While
                 <xosid:token>RepositoryManager.getRepositoryRecordTypes()</xosid:token>
-                can be used to examine which record interfaces are
-                supported, this method tests which record(s) are
-                required for creating a specific
+                can be used to examine which records are supported,
+                this method tests which record(s) are required for
+                creating a specific
                 <xosid:token>Repository.</xosid:token> Providing an
                 empty array tests if a
                 <xosid:token>Repository</xosid:token> can be created
@@ -20922,10 +20921,18 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetTitle">
+        <xosid:method xosid:name="matchAnyTitle">
             <xosid:description>
-                Matches a title that has bo value.
+                Matches a title that has any value.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any title, <xosid:token>false</xosid:token> to
+                    match assets with no title
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -20950,10 +20957,19 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetPublicDomain">
+        <xosid:method xosid:name="matchAnyPublicDomain">
             <xosid:description>
-                Matches assets with no public domain value.
+                Matches assets with any public domain value.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any public domain value,
+                    <xosid:token>false</xosid:token> to match assets
+                    with no public domain value
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -21016,10 +21032,19 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetCopyright">
+        <xosid:method xosid:name="matchAnyCopyright">
             <xosid:description>
-                Matches assets with no copyright statement.
+                Matches assets with any copyright statement.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any copyright value,
+                    <xosid:token>false</xosid:token> to match assets
+                    with no copyright value
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -21082,10 +21107,19 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetCopyrightRegistration">
+        <xosid:method xosid:name="matchAnyCopyrightRegistration">
             <xosid:description>
-                Matches assets with no copyright registration.
+                Matches assets with any copyright registration.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any copyright registration value,
+                    <xosid:token>false</xosid:token> to match assets
+                    with no copyright registration value
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -21148,10 +21182,19 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetLicense">
+        <xosid:method xosid:name="matchAnyLicense">
             <xosid:description>
-                Matches assets with no license registration.
+                Matches assets with any license statement.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any license value,
+                    <xosid:token>false</xosid:token> to match assets
+                    with no license value
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -21212,6 +21255,26 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
+        <xosid:method xosid:name="matchAnyDistributionRights">
+            <xosid:description>
+                Matches assets with any distribution rights.
+            </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any distribution rights values,
+                    <xosid:token>false</xosid:token> to match assets
+                    with distribution rights values
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
         <xosid:method xosid:name="matchProviderId">
             <xosid:description>
                 Sets the provider <xosid:token>Id</xosid:token> for
@@ -21244,10 +21307,18 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetProvider">
+        <xosid:method xosid:name="matchAnyProvider">
             <xosid:description>
-                Matches assets with no provider.
+                Matches assets with any provider.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any provider, <xosid:token>false</xosid:token>
+                    to match assets with no providers
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -21342,10 +21413,18 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetSource">
+        <xosid:method xosid:name="matchAnySource">
             <xosid:description>
-                Matches assets with no source.
+                Matches assets with any source.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any source, <xosid:token>false</xosid:token>
+                    to match assets with no sources
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -21452,10 +21531,19 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetCreatedTime">
+        <xosid:method xosid:name="matchAnyCreatedTime">
             <xosid:description>
-                Matches assets with no creation time.
+                Matches assets with any creation time.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any created time,
+                    <xosid:token>false</xosid:token> to match assets
+                    with no cerated time
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -21525,10 +21613,19 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetPublishedTime">
+        <xosid:method xosid:name="matchAnyPublishedTime">
             <xosid:description>
                 Matches assets with no published time.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any published time,
+                    <xosid:token>false</xosid:token> to match assets
+                    with no published time
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -21589,10 +21686,18 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetAssetCredits">
+        <xosid:method xosid:name="matchAnyAssetCredits">
             <xosid:description>
-                Matches assets with no credits.
+                Matches assets with any credits.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any credits, <xosid:token>false</xosid:token>
+                    to match assets with no credits
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -21645,10 +21750,19 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetTemporalCoverage">
+        <xosid:method xosid:name="matchAnyTemporalCoverage">
             <xosid:description>
-                Matches assets with no temporal coverage.
+                Matches assets with any temporal coverage.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any temporal coverage,
+                    <xosid:token>false</xosid:token> to match assets
+                    with no temporal coverage
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -21711,10 +21825,19 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetSpatialCoverage">
+        <xosid:method xosid:name="matchAnySpatialCoverage">
             <xosid:description>
                 Matches assets with no spatial coverage.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any spatial coverage,
+                    <xosid:token>false</xosid:token> to match assets
+                    with no spatial coverage
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -21778,10 +21901,18 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetAssetContent">
+        <xosid:method xosid:name="matchAnyAssetContent">
             <xosid:description>
-                Matches assets with no content.
+                Matches assets with any content.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any content, <xosid:token>false</xosid:token>
+                    to match assets with no content
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -21876,7 +22007,7 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchSubjecttId">
+        <xosid:method xosid:name="matchSubjectId">
             <xosid:description>
                 Sets the subject <xosid:token>Id</xosid:token> for this
                 query.
@@ -21901,6 +22032,26 @@ return "subject updated";]]>
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsSubjectQuery">
+            <xosid:description>
+                Tests if a <xosid:token>SubjectQuery</xosid:token> is
+                available.
+            </xosid:description>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if a subject query
+                    interface is available,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -21941,10 +22092,18 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetSubject">
+        <xosid:method xosid:name="matchAnySubject">
             <xosid:description>
-                Matches assets with no subject mappings.
+                Matches assets with any subject mappings.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any subject, <xosid:token>false</xosid:token>
+                    to match assets with no subjects
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -22035,6 +22194,26 @@ return "subject updated";]]>
                    
                     <xosid:token>supportsCompositionQuery()</xosid:token>
                     is <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="matchAnyComposition">
+            <xosid:description>
+                Matches assets with any composition mappings.
+            </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match assets
+                    with any composition,
+                    <xosid:token>false</xosid:token> to match assets
+                    with no composition mappings
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>
@@ -23144,25 +23323,6 @@ return "subject updated";]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsAssetContentSearchOrder">
-            <xosid:description>
-                Tests if an asset content order interface is available.
-            </xosid:description>
-            <xosid:return>
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if an asset content
-                    order interface is available,
-                    <xosid:token>false</xosid:token> otherwise
-                </xosid:description>
-            </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
         <xosid:method xosid:name="getAssetSearchOrderRecord">
             <xosid:description>
                 Gets the asset search order record corresponding to the
@@ -23991,11 +24151,19 @@ while (al.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetAccessibility">
+        <xosid:method xosid:name="matchAnyAccessibility">
             <xosid:description>
-                Matches a license registration that has no
-                accessibility type.
+                Matches asset content that has any accessibility type.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match content
+                    with any accessibility type,
+                    <xosid:token>false</xosid:token> to match content
+                    with no accessibility type
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -24041,6 +24209,26 @@ while (al.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
+        <xosid:method xosid:name="matchAnyDataLength">
+            <xosid:description>
+                Matches content that has any data length.
+            </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match content
+                    with any data length,
+                    <xosid:token>false</xosid:token> to match content
+                    with no data length
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
         <xosid:method xosid:name="matchData">
             <xosid:description>
                 Matches data in this content.
@@ -24072,10 +24260,18 @@ while (al.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetData">
+        <xosid:method xosid:name="matchAnyData">
             <xosid:description>
-                Matches content that has no data.
+                Matches content that has any data.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match content
+                    with any data, <xosid:token>false</xosid:token> to
+                    match content with no data
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -24137,10 +24333,18 @@ while (al.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetUrl">
+        <xosid:method xosid:name="matchAnyUrl">
             <xosid:description>
-                Matches content that has no url.
+                Matches content that has any url.
             </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match content
+                    with any url, <xosid:token>false</xosid:token> to
+                    match content with no url
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -24930,17 +25134,6 @@ while (acl.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchUnsetResource">
-            <xosid:description>
-                Matches credits woith no resource.
-            </xosid:description>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
         <xosid:method xosid:name="supportsResourceQuery">
             <xosid:description>
                 Tests if a <xosid:token>ResourceQuery</xosid:token> is
@@ -25570,6 +25763,25 @@ while (aal.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
+        <xosid:method xosid:name="matchAnyAsset">
+            <xosid:description>
+                Matches subjects that has any asset mapping.
+            </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match subjects
+                    with any asset, <xosid:token>false</xosid:token> to
+                    match subjects with no asset
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
         <xosid:method xosid:name="matchRepositoryId">
             <xosid:description>
                 Sets the repository <xosid:token>Id</xosid:token> for
@@ -25740,6 +25952,26 @@ while (aal.hasNext()) {
                    
                     <xosid:token>supportsCompositionQuery()</xosid:token>
                     is <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="matchAnyComposition">
+            <xosid:description>
+                Matches subjects that has any composition mapping.
+            </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match subjects
+                    with any composition,
+                    <xosid:token>false</xosid:token> to match subjects
+                    with no composition
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>
@@ -27947,6 +28179,26 @@ while (rl.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
+        <xosid:method xosid:name="matchAnyAsset">
+            <xosid:description>
+                Matches compositions that has any asset mapping.
+            </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match
+                    compositions with any asset,
+                    <xosid:token>false</xosid:token> to match
+                    compositions with no asset
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
         <xosid:method xosid:name="matchRepositoryId">
             <xosid:description>
                 Sets the repository <xosid:token>Id</xosid:token> for
@@ -28117,6 +28369,26 @@ while (rl.hasNext()) {
                     This method must be implemented if
                     <xosid:token>supportsSubjectQuery()</xosid:token>
                     is <xosid:token>true.</xosid:token>
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="matchAnySubject">
+            <xosid:description>
+                Matches compositions that has any subject mapping.
+            </xosid:description>
+            <xosid:parameter xosid:name="match">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> to match
+                    compositions with any subject,
+                    <xosid:token>false</xosid:token> to match
+                    compositions with no subject
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>

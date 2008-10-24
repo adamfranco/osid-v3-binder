@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.logging generated at 10/14/2008 10:37:27 AM 
+    XOSID for osid.logging generated at 10/24/2008 11:55:39 AM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -3118,8 +3118,7 @@ while (entries.hasNext()) {
 
         <xosid:method xosid:name="getLogEntryQuery">
             <xosid:description>
-                Gets a log entry query interface. The returned query
-                will not have a query for the content type.
+                Gets a log entry query interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.logging.LogEntryQuery"/>
@@ -3183,14 +3182,7 @@ while (entries.hasNext()) {
 
         <xosid:method xosid:name="getLogEntrySearch">
             <xosid:description>
-                Gets a log entry search interface. The returned query
-                only makes available the core
-                <xosid:token>LogEntry</xosid:token> interface and does
-                not support additional search interface types.
-               
-                <xosid:token>getLogEntrySearchForInterfaceType()</xosid:token>
-                should be used if additional interface types are
-                required.
+                Gets a log entry search interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.logging.LogEntrySearch"/>
@@ -4324,14 +4316,7 @@ while (entries.hasNext()) {
 
         <xosid:method xosid:name="getLogSearch">
             <xosid:description>
-                Gets a log search interface. The returned query only
-                makes available the core
-                <xosid:token>LogSearch</xosid:token> interface and does
-                not support additional interface types.
-               
-                <xosid:token>getLogSearchForInterfaceType()</xosid:token>
-                should be used if additional interface types are
-                required.
+                Gets a log search interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.logging.LogSearch"/>
