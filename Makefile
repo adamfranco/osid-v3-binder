@@ -36,12 +36,15 @@ all:
 	(cd definitions; make validate)
 	(cd bindings/java; make bindings)
 	(cd bindings/java; make install)
+	(cd bindings/php; make bindings)
+	(cd bindings/php; make install)
 
 binders:
 	(cd binder; make install)
 
 clean:
 	(cd bindings/java; make clean)	
+	(cd bindings/php; make clean)	
 	(cd binder; make clean)	
 
 install: binders all
