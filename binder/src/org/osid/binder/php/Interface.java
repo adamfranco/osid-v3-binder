@@ -211,7 +211,7 @@ public class Interface
 	    out.println("     *  Shuts down this <code>" + interfaceName + "</code>");
 	    out.println("     */");
 	    out.println();
-	    out.println("    public void shutdown();");
+	    out.println("    public function shutdown();");
 	}
 
 	if (interfaceName.equals("osid.OsidSession")) {
@@ -221,7 +221,7 @@ public class Interface
 	    out.println("     *  Closes this <code>" + interfaceName + "</code>");
 	    out.println("     */");
 	    out.println();
-	    out.println("    public void close();");
+	    out.println("    public function close();");
 	}
 
 	if (interfaceName.equals("osid.OsidList")) {
@@ -231,7 +231,7 @@ public class Interface
 	    out.println("     *  Closes down this <code>" + interfaceName + "</code>");
 	    out.println("     */");
 	    out.println();
-	    out.println("    public void done();");
+	    out.println("    public function done();");
 	}
 
 	return;
