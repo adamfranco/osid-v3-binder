@@ -139,9 +139,9 @@ public class Method
 
 		String pname = "";
 		if (parameter.getBinderType().length() == 0) {
-		   pname = parameter.getName();
+		   pname = "$" + parameter.getName();
 		} else {
-			pname = parameter.getBinderType() + " " + parameter.getName();
+			pname = parameter.getBinderType() + " $" + parameter.getName();
 		}
 	    if (!first && ((pname.length() + intLine.length()) > 78)) {
 		out.println(intLine);

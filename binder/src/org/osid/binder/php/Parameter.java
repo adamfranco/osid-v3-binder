@@ -106,7 +106,7 @@ public class Parameter
 	    type = "object " + org.osid.binder.php.Interface.getClassName(getType());
 	}
 
-	String pre = margin + "@param " + type +  " " + getName() + " ";
+	String pre = margin + "@param " + type +  " $" + getName() + " ";
 	out.print(pre);
 	getDescription().printHtml(out, margin + "        ", pre.length());
 	out.println();
