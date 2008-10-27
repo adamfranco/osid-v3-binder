@@ -264,6 +264,14 @@ public class OsidBinder
 // 	out.println("package org.osid;");
 // 	out.println();
 // 	out.println();
+
+	if (error.getCategory().equals("")) {
+		// No need to require base exception classes.
+	} else if (error.getCategory().equalsIgnoreCase("integration") || error.getCategory().equalsIgnoreCase("programming")) {
+		out.println("require_once(dirname(__FILE__).\"/" + org.osid.binder.php.Interface.getFileName("osid.OsidRuntimeException") + ".php\");");
+	} else {
+		out.println("require_once(dirname(__FILE__).\"/" + org.osid.binder.php.Interface.getFileName("osid.OsidException") + ".php\");");	
+	}
 	
 	out.print("class " + name);
 	if (error.getCategory().equals("")) {
