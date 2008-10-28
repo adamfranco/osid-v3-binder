@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.filing generated at 7/16/2008 11:03:17 AM 
+    XOSID for osid.filing generated at 10/28/2008 2:26:56 PM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -183,13 +183,14 @@
 
         <xosid:pbreak/>
 
-         <xosid:code>
+<xosid:code>
+<![CDATA[
 
 FilieSession session = filingManager.getFileSession();
 if (session.canReadFile()) {
     DataInputStream dis = session.getInputStream();
 }
-
+]]>
         </xosid:code>
          
         <xosid:pbreak/>
@@ -198,8 +199,9 @@ if (session.canReadFile()) {
 
         <xosid:pbreak/>
 
-         <xosid:code>
-FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
+<xosid:code>
+<![CDATA[
+FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");]]>
         </xosid:code>
          
     </xosid:description>
@@ -464,15 +466,59 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getFileSearchInterfaceTypes">
+        <xosid:method xosid:name="getFileRecordTypes">
             <xosid:description>
-                Gets the supported file search interface types.
+                Gets the supported file record types.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.type.TypeList"/>
                 <xosid:description>
                     a list containing the supported
-                    <xosid:token>File</xosid:token> search interface
+                    <xosid:token>File</xosid:token> record types
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsFileRecordType">
+            <xosid:description>
+                Tests if the given file record type is supported.
+            </xosid:description>
+            <xosid:parameter xosid:name="fileRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a <xosid:token>Type</xosid:token> indicating a file
+                    record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given record
+                    <xosid:token>Type</xosid:token> is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getFileSearchRecordTypes">
+            <xosid:description>
+                Gets the supported file search record types.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    a list containing the supported
+                    <xosid:token>File</xosid:token> search record
                     types
                 </xosid:description>
             </xosid:return>
@@ -483,23 +529,23 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsFileSearchInterfaceType">
+        <xosid:method xosid:name="supportsFileSearchRecordType">
             <xosid:description>
-                Tests if the given file search interface type is
+                Tests if the given file search record type is
                 supported.
             </xosid:description>
-            <xosid:parameter xosid:name="fileSearchInterfaceType">
+            <xosid:parameter xosid:name="fileSearchRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a <xosid:token>Type</xosid:token> indicating a file
-                    search interface type
+                    search record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
                 <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
                     <xosid:token>true</xosid:token> if the given search
-                    interface <xosid:token>Type</xosid:token> is
+                    record <xosid:token>Type</xosid:token> is
                     supported, <xosid:token>false</xosid:token>
                     otherwise
                 </xosid:description>
@@ -511,16 +557,15 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDirectorySearchInterfaceTypes">
+        <xosid:method xosid:name="getDirectoryRecordTypes">
             <xosid:description>
-                Gets the supported directory search interface types.
+                Gets the supported directory record types.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.type.TypeList"/>
                 <xosid:description>
                     a list containing the supported
-                    <xosid:token>Directory</xosid:token> search
-                    interface types
+                    <xosid:token>Directory</xosid:token> record types
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -530,23 +575,68 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="supportsDirectorySearchInterfaceType">
+        <xosid:method xosid:name="supportsDirectoryRecordType">
             <xosid:description>
-                Tests if the given directory search interface type is
-                supported.
+                Tests if the given directory record type is supported.
             </xosid:description>
-            <xosid:parameter xosid:name="directorySearchInterfaceType">
+            <xosid:parameter xosid:name="directoryRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
                     a <xosid:token>Type</xosid:token> indicating a
-                    directory search interface type
+                    directory record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if the given record
+                    <xosid:token>Type</xosid:token> is supported,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getDirectorySearchRecordTypes">
+            <xosid:description>
+                Gets the supported directory search record types.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
+                <xosid:description>
+                    a list containing the supported
+                    <xosid:token>Directory</xosid:token> search record
+                    types
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="supportsDirectorySearchRecordType">
+            <xosid:description>
+                Tests if the given directory search record type is
+                supported.
+            </xosid:description>
+            <xosid:parameter xosid:name="directorySearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a <xosid:token>Type</xosid:token> indicating a
+                    directory search record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
                 <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
                     <xosid:token>true</xosid:token> if the given search
-                    interface <xosid:token>Type</xosid:token> is
+                    record <xosid:token>Type</xosid:token> is
                     supported, <xosid:token>false</xosid:token>
                     otherwise
                 </xosid:description>
@@ -3530,11 +3620,6 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             directories objects. The search query is constructed using
             the <xosid:token>FileQuery</xosid:token> and
             <xosid:token>DirectoryQuery</xosid:token> interfaces.
-            Multiple query interfaces may be submitted into a search to
-            perform a boolean <xosid:token>OR.</xosid:token> If more
-            than one search element is specified within a single
-            <xosid:token>FileQuery</xosid:token> these elements form a
-            boolean AND.
 
             <xosid:pbreak/>
 
@@ -3672,14 +3757,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
 
         <xosid:method xosid:name="getFileQuery">
             <xosid:description>
-                Gets a file query interface. The returned query only
-                makes available the core
-                <xosid:token>FileQuery</xosid:token> interface and does
-                not support additional interface types.
-               
-                <xosid:token>getFileQueryForInterfaceType()</xosid:token>
-                should be used if additional interface types are
-                required.
+                Gets a file query interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.filing.FileQuery"/>
@@ -3687,46 +3765,6 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                     the file query
                 </xosid:description>
             </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getFileQueryForInterfaceType">
-            <xosid:description>
-                Gets a file query interface of the specified type. The
-                returned query contains the method to access the query
-                interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but must not be cast
-                directly from this method return.
-            </xosid:description>
-            <xosid:parameter xosid:name="fileInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of query interface to retrieve
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.filing.FileQuery"/>
-                <xosid:description>
-                    the file query
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>fileInterfaceType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>FilingManager.supportsFileInterfaceType()</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -3737,13 +3775,12 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
         <xosid:method xosid:name="getFilesByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Files</xosid:token>
-                matching the given search interface. Each element in
-                the array is OR'd.
+                matching the given query.
             </xosid:description>
-            <xosid:parameter xosid:name="fileQueries">
-                <xosid:interfaceType xosid:type="osid.filing.FileQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="fileQuery">
+                <xosid:interfaceType xosid:type="osid.filing.FileQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -3754,7 +3791,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>fileQueries</xosid:token> is
+                    <xosid:token>fileQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -3770,8 +3807,8 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>fileQuery</xosid:token> is not of
-                    this service
+                    <xosid:token>fileQuery</xosid:token> is not of this
+                    service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -3805,39 +3842,19 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getFileSearchForInterfaceType">
+        <xosid:method xosid:name="getFileSearchOrder">
             <xosid:description>
-                Gets a file search interface of the specified type. The
-                returned search interface provides access to the search
-                interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but must not be cast
-                directly from this method return.
+                Gets a file search order interface. The
+                <xosid:token>FileSearchOrder</xosid:token> is supplied
+                to a <xosid:token>FileSearch</xosid:token> to specify
+                the ordering of results.
             </xosid:description>
-            <xosid:parameter xosid:name="fileSearchInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of search interface to retrieve
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.filing.FileSearch"/>
+                <xosid:interfaceType xosid:type="osid.filing.FileSearchOrder"/>
                 <xosid:description>
-                    the file search
+                    the file search order interface
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>fileSearchInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>FilingManager.supportsFileSearchInterfaceType(fileSearchInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -3848,13 +3865,12 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
         <xosid:method xosid:name="getFilesBySearch">
             <xosid:description>
                 Gets the search results matching the given search query
-                using the given search interface. Each element in the
-                query array is OR'd.
+                using the given search interface.
             </xosid:description>
-            <xosid:parameter xosid:name="fileQueries">
-                <xosid:interfaceType xosid:type="osid.filing.FileQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="fileQuery">
+                <xosid:interfaceType xosid:type="osid.filing.FileQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="fileSearch">
@@ -3871,7 +3887,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>fileQueries
+                    <xosid:token>fileQuery
                    </xosid:token>or <xosid:token>
                     fileSearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -3889,7 +3905,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a<xosid:token> fileQueries
+                    <xosid:token>fileQuery
                    </xosid:token>or <xosid:token>
                     fileSearch</xosid:token> is not of this service
                 </xosid:description>
@@ -4783,7 +4799,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDirectory">
+        <xosid:method xosid:name="getSubdirectory">
             <xosid:description>
                 Gets a specified directory or alias to the directory by
                 its name in the current directory only. For federated
@@ -4831,7 +4847,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDirectories">
+        <xosid:method xosid:name="getSubdirectories">
             <xosid:description>
                 Gets the list of directories and aliases to directories
                 in this directory. In a federated view, this method
@@ -5064,13 +5080,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             This session provides methods for searching among
             <xosid:token>Directory</xosid:token> objects. The search
             query is constructed using the
-            <xosid:token>DirectoryQuery</xosid:token> interface.
-            Multiple <xosid:token>DirectoryQuery</xosid:token>
-            interfaces may be submitted into a search to perform a
-            boolean <xosid:token>OR.</xosid:token> If more than one
-            search element is specified within a single
-            <xosid:token>DirectoryQuery</xosid:token> these elements
-            form a boolean AND.
+            <xosid:token>DirectoryQuery</xosid:token> interface. 
 
             <xosid:pbreak/>
 
@@ -5206,14 +5216,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
 
         <xosid:method xosid:name="getDirectoryQuery">
             <xosid:description>
-                Gets a directory query interface. The returned query
-                only makes available the core
-                <xosid:token>DirectoryQuery</xosid:token> interface and
-                does not support additional interface types.
-               
-                <xosid:token>getDirectoryQueryForInterfaceType()</xosid:token>
-                should be used if additional interface types are
-                required.
+                Gets a directory query interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.filing.DirectoryQuery"/>
@@ -5221,46 +5224,6 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                     the directory query
                 </xosid:description>
             </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getDirectoryQueryForInterfaceType">
-            <xosid:description>
-                Gets a directory query interface of the specified type.
-                The returned query contains the method to access the
-                query interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but must not be cast
-                directly from this method return.
-            </xosid:description>
-            <xosid:parameter xosid:name="directoryInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of query interface to retrieve
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.filing.DirectoryQuery"/>
-                <xosid:description>
-                    the directory query
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>directoryInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>FilingManager.supportsDirectoryInterfaceType()</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -5271,13 +5234,12 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
         <xosid:method xosid:name="getDirectoriesByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Directory</xosid:token>
-                objects matching the given search interface. Each
-                element in the array is OR'd.
+                objects matching the given query.
             </xosid:description>
-            <xosid:parameter xosid:name="directoryQueries">
-                <xosid:interfaceType xosid:type="osid.filing.DirectoryQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="directoryQuery">
+                <xosid:interfaceType xosid:type="osid.filing.DirectoryQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -5289,7 +5251,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>directoryQueries</xosid:token> is
+                    <xosid:token>directoryQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -5318,14 +5280,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
 
         <xosid:method xosid:name="getDirectorySearch">
             <xosid:description>
-                Gets a diectory search interface. The returned query
-                only makes available the core
-                <xosid:token>DirectorySearch</xosid:token> interface
-                and does not support additional interface types.
-               
-                <xosid:token>getDirectorySearchForInterfaceType()</xosid:token>
-                should be used if additional interface types are
-                required.
+                Gets a diectory search interface.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.filing.DirectorySearch"/>
@@ -5340,40 +5295,20 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDirectorySearchForInterfaceType">
+        <xosid:method xosid:name="getDirectorySearchOrder">
             <xosid:description>
-                Gets a directory search interface of the specified
-                type. The returned search interface provides access to
-                the search interface corresponding to the specified
-                <xosid:token>Type </xosid:token>but must not be cast
-                directly from this method return.
+                Gets a directory search order interface. The
+                <xosid:token>DirectorySearchOrder</xosid:token> is
+                supplied to a
+                <xosid:token>DirectorySearch</xosid:token> to specify
+                the ordering of results.
             </xosid:description>
-            <xosid:parameter xosid:name="directorySearchInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type of search interface to retrieve
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.filing.DirectorySearch"/>
+                <xosid:interfaceType xosid:type="osid.filing.DirectorySearchOrder"/>
                 <xosid:description>
-                    the directory search
+                    the directory search order interface
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-
-                                        <xosid:token>directorySearchInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>FilingManager.supportsDirectorySearchInterfaceType(directorySearchInterfaceType)</xosid:token>
-                   is <xosid:token> false</xosid:token>
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -5384,12 +5319,12 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
         <xosid:method xosid:name="getDirectoriesBySearch">
             <xosid:description>
                 Gets the search results matching the given search
-                interface. Each element in the array is OR'd.
+                interface.
             </xosid:description>
-            <xosid:parameter xosid:name="directoryQueries">
-                <xosid:interfaceType xosid:type="osid.filing.DirectoryQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="directoryQuery">
+                <xosid:interfaceType xosid:type="osid.filing.DirectoryQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="directorySearch">
@@ -5406,7 +5341,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>directoryQueries
+                    <xosid:token>directoryQuery
                    </xosid:token>or <xosid:token>
                     directorySearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -5424,7 +5359,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>directoryQuery
+                    <xosid:token>directoryQuery
                    </xosid:token>or <xosid:token>
                     directorySearch</xosid:token> is not of this
                     service
@@ -5544,22 +5479,20 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="canCreateFileWithInterfaceTypes">
+        <xosid:method xosid:name="canCreateFileWithRecordTypes">
             <xosid:description>
                 Tests if this user can create a single
                 <xosid:token>File </xosid:token>using the desired
-                interface types. A <xosid:token>File
-               </xosid:token>interface <xosid:token>
-                Type</xosid:token> may specify the implementation of
-                other more well-known <xosid:token>Types.</xosid:token>
-                A provider may or may not accept the creation of a
-                <xosid:token>File</xosid:token> using anything other
-                than the <xosid:token>FileForm</xosid:token> of the
-                leaf interface <xosid:token>Type,</xosid:token> or may
-                accept creation using one or more higher level
-                interface <xosid:token>Types.</xosid:token>
+                record types. While
+                <xosid:token>FilingManager.getFileRecordTypes()</xosid:token>
+                can be used to examine which records are supported,
+                this method tests which record(s) are required for
+                creating a specific <xosid:token>File.</xosid:token>
+                Providing an empty array tests if a
+                <xosid:token>File</xosid:token> can be created with no
+                records.
             </xosid:description>
-            <xosid:parameter xosid:name="fileInterfaceTypes">
+            <xosid:parameter xosid:name="fileRecordTypes">
                 <xosid:interfaceType xosid:type="osid.type.Type" xosid:array="true"/>
                 <xosid:description>
                     array of types
@@ -5577,39 +5510,10 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>fileInterfaceTypes</xosid:token> is
+                    <xosid:token>fileRecordTypes</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getRequiredFileInterfaceTypesForCreate">
-            <xosid:description>
-                Gets the list of minimum required interface
-                <xosid:token>Types</xosid:token> for creating a new
-                <xosid:token>File. </xosid:token>A new
-                <xosid:token>File</xosid:token> can be created using
-                any one of the interface types returned in this list.
-                This may be a series of leaf
-                <xosid:token>Types,</xosid:token> or multiple higher
-                level <xosid:token>Types</xosid:token> if creation
-                requirements are more lenient. An empty list suggests
-                no creates are supported as a root
-                <xosid:token>File</xosid:token> interface is always
-                identified with its own
-                <xosid:token>Type.</xosid:token>
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
-                <xosid:description>
-                    one or more types
-                </xosid:description>
-            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -5660,10 +5564,10 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             <xosid:description>
                 Creates a new file in this directory.
             </xosid:description>
-            <xosid:parameter xosid:name="fileForms">
-                <xosid:interfaceType xosid:type="osid.filing.FileForm" xosid:array="true"/>
+            <xosid:parameter xosid:name="fileForm">
+                <xosid:interfaceType xosid:type="osid.filing.FileForm"/>
                 <xosid:description>
-                    the file forms
+                    the file form
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -5687,7 +5591,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:error>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>fileForms</xosid:token> is
+                    <xosid:token>fileForm</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -5703,7 +5607,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>fileForm</xosid:token> is not
+                    <xosid:token>fileForm</xosid:token> is not
                     supported
                 </xosid:description>
             </xosid:error>
@@ -5850,22 +5754,21 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="canCreateDirectoryWithInterfaceTypes">
+        <xosid:method xosid:name="canCreateDirectoryWithRecordTypes">
             <xosid:description>
                 Tests if this user can create a single
                 <xosid:token>Directory </xosid:token>using the desired
-                interface types. A <xosid:token>Directory
-               </xosid:token>interface <xosid:token>
-                Type</xosid:token> may specify the implementation of
-                other more well-known <xosid:token>Types.</xosid:token>
-                A provider may or may not accept the creation of a
-                <xosid:token>Directory</xosid:token> using anything
-                other than the <xosid:token>DirectoryForm</xosid:token>
-                of the leaf interface <xosid:token>Type,</xosid:token>
-                or may accept creation using one or more higher level
-                interface <xosid:token>Types.</xosid:token>
+                record types. While
+                <xosid:token>FilingManager.getDiectoryRecordTypes()</xosid:token>
+                can be used to examine which records are supported,
+                this method tests which record(s) are required for
+                creating a specific
+                <xosid:token>Directory.</xosid:token> Providing an
+                empty array tests if a
+                <xosid:token>Directory</xosid:token> can be created
+                with no records.
             </xosid:description>
-            <xosid:parameter xosid:name="directoryInterfaceTypes">
+            <xosid:parameter xosid:name="directoryRecordTypes">
                 <xosid:interfaceType xosid:type="osid.type.Type" xosid:array="true"/>
                 <xosid:description>
                     array of types
@@ -5876,46 +5779,17 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 <xosid:description>
                     <xosid:token>true</xosid:token> if
                     <xosid:token>Directory</xosid:token> creation
-                    using the specified interface
+                    using the specified record
                     <xosid:token>Types</xosid:token> is supported,
                     <xosid:token>false</xosid:token> otherwise
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>directoryInterfaceTypes</xosid:token>
-                    is <xosid:token>null</xosid:token>
+                    <xosid:token>directoryRecordTypes</xosid:token> is
+                    <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getRequiredDirectoryInterfaceTypesForCreate">
-            <xosid:description>
-                Gets the list of minimum required interface
-                <xosid:token>Types</xosid:token> for creating a new
-                <xosid:token>Directory.</xosid:token> A new
-                <xosid:token>Directory</xosid:token> can be created
-                with any one of the interface types returned in this
-                list. This may be a series of leaf
-                <xosid:token>Types,</xosid:token> or multiple higher
-                level <xosid:token>Types</xosid:token> if creation
-                requirements are more lenient. An empty list suggests
-                no creates are supported as a root
-                <xosid:token>Directory</xosid:token> interface is
-                always identified with its own
-                <xosid:token>Type.</xosid:token>
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
-                <xosid:description>
-                    one or more types
-                </xosid:description>
-            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -5970,10 +5844,10 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             <xosid:description>
                 Creates a new directory.
             </xosid:description>
-            <xosid:parameter xosid:name="directoryForms">
-                <xosid:interfaceType xosid:type="osid.filing.DirectoryForm" xosid:array="true"/>
+            <xosid:parameter xosid:name="directoryForm">
+                <xosid:interfaceType xosid:type="osid.filing.DirectoryForm"/>
                 <xosid:description>
-                    the directory forms
+                    the directory form
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -5984,8 +5858,8 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:return>
             <xosid:error xosid:type="ALREADY_EXISTS" xosid:category="User">
                 <xosid:description>
-                    <xosid:token>name</xosid:token> already exists as a
-                    file in this direrctory
+                    <xosid:token>name</xosid:token> already exists in
+                    this direrctory
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
@@ -5995,7 +5869,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:error>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>directoryForms</xosid:token> is
+                    <xosid:token>directoryForm</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -6528,6 +6402,14 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             <xosid:description>
                 Overwrite files if a destination pathname exists.
             </xosid:description>
+            <xosid:parameter xosid:name="overwite">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if files can be
+                    overwritten, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method is must be implemented.
@@ -6540,6 +6422,14 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 Create any missing directories for a destination path
                 that does not exist.
             </xosid:description>
+            <xosid:parameter xosid:name="create">
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if intermediate
+                    directories should be created,
+                    <xosid:token>false</xosid:token> otherwise
+                </xosid:description>
+            </xosid:parameter>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method is must be implemented.
@@ -6553,9 +6443,9 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 be a file or directory. If the destination is a file
                 and exists, the destination is only replaced if
                 <xosid:token>overwrite()</xosid:token> is
-                <xosid:token>true.</xosid:token> If the desitination
-                is a directory and does not exist, the missing
-                directories are only created if
+                <xosid:token>true.</xosid:token> If the destination is
+                a directory and does not exist, the missing directories
+                are only created if
                 <xosid:token>createMissingPaths()</xosid:token> is
                 <xosid:token>true.</xosid:token>
             </xosid:description>
@@ -6577,6 +6467,11 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                     <xosid:token>dst</xosid:token> exists and
                     <xosid:token>overwrite()</xosid:token> is
                     <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>src</xosid:token> is not a file
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
@@ -6633,6 +6528,11 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                     the destination name or path of the directory
                 </xosid:description>
             </xosid:parameter>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>src</xosid:token> is not a directory
+                </xosid:description>
+            </xosid:error>
             <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
                 <xosid:description>
                     <xosid:token>src</xosid:token> is not found, or the
@@ -6671,9 +6571,9 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 be a file or directory. If the destination is a file
                 and exists, the destination is only replaced if
                 <xosid:token>overwrite()</xosid:token> is
-                <xosid:token>true.</xosid:token> If the desitination
-                is a directory and does not exist, the missing
-                directories are only created if
+                <xosid:token>true.</xosid:token> If the destination is
+                a directory and does not exist, the missing directories
+                are only created if
                 <xosid:token>createMissingPaths()</xosid:token> is
                 <xosid:token>true.</xosid:token>
             </xosid:description>
@@ -6695,6 +6595,11 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                     <xosid:token>dst</xosid:token> exists and
                     <xosid:token>overwrite()</xosid:token> is
                     <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>src</xosid:token> is not a file
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
@@ -6751,6 +6656,11 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                     the destination name or path of the directory
                 </xosid:description>
             </xosid:parameter>
+            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>src</xosid:token> is not a directory
+                </xosid:description>
+            </xosid:error>
             <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
                 <xosid:description>
                     <xosid:token>src</xosid:token> is not found, or the
@@ -6799,6 +6709,11 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                     the destination path
                 </xosid:description>
             </xosid:parameter>
+            <xosid:error xosid:type="ALREADY_EXISTS" xosid:category="User">
+                <xosid:description>
+                    <xosid:token>src</xosid:token> exists
+                </xosid:description>
+            </xosid:error>
             <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
                 <xosid:description>
                     <xosid:token>src</xosid:token> is not found, or the
@@ -7644,17 +7559,16 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getInterfaceType">
+        <xosid:method xosid:name="getRecordTypes">
             <xosid:description>
-                Gets the type of this entry. The
+                Gets the record types of this entry. The
                 <xosid:token>Type</xosid:token> explicitly indicates
-                the specification of the extension interface and
-                implicitly may define an object family.
+                the specification of the record interface.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
                 <xosid:description>
-                    the type
+                    the record types
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -7664,30 +7578,29 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="implementsInterfaceType">
+        <xosid:method xosid:name="hasRecordType">
             <xosid:description>
-                Tests if this entry supports the given interface
+                Tests if this entry supports the given record
                 <xosid:token>Type.</xosid:token> The given type may be
-                supported by the key type through inheritence.
+                supported through inheritence.
             </xosid:description>
-            <xosid:parameter xosid:name="interfaceType">
+            <xosid:parameter xosid:name="recordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    an interface type
+                    a record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
                 <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
-                    <xosid:token>true</xosid:token> if this entry
-                    supports the given interface
-                    <xosid:token>Type,</xosid:token>
+                    <xosid:token>true</xosid:token> if this entry has
+                    the given record <xosid:token>Type,</xosid:token>
                     <xosid:token>false</xosid:token> otherwise
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>interfaceType</xosid:token> is
+                    <xosid:token>recordType</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -7715,7 +7628,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="isOfGenus">
+        <xosid:method xosid:name="isOfGenusType">
             <xosid:description>
                 Tests if this object is of the given genus
                 <xosid:token>Type.</xosid:token> The given genus type
@@ -7818,26 +7731,25 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getPropertiesByInterfaceType">
+        <xosid:method xosid:name="getPropertiesByRecordType">
             <xosid:description>
                 Gets a list of properties corresponding to the
-                specified interface type. Properties provide a means
-                for applications to display a representation of the
-                contents of an object without understanding its
-                interface <xosid:token>Type</xosid:token>
-                specification. Applications needing to examine a
-                specific property or perform updates should use the
-                methods defined by the object interface
-                <xosid:token>Type. </xosid:token>The resulting set
-                includes properties specified by parents of the
-                interface <xosid:token>type</xosid:token> in the
-                interface type hierarchy.
+                specified record type. Properties provide a means for
+                applications to display a representation of the
+                contents of an object without understanding its record
+                <xosid:token>Type</xosid:token> specification.
+                Applications needing to examine a specific property or
+                perform updates should use the methods defined by the
+                object interface <xosid:token>Type. </xosid:token>The
+                resulting set includes properties specified by parents
+                of the record <xosid:token>type</xosid:token> in the
+                type hierarchy.
             </xosid:description>
-            <xosid:parameter xosid:name="interfaceType">
+            <xosid:parameter xosid:name="recordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the interface type corresponding to the properties
-                    set to retrieve
+                    the record type corresponding to the properties set
+                    to retrieve
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -7848,7 +7760,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>interfaceType</xosid:token> is
+                    <xosid:token>recordType</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -7865,7 +7777,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementsInterfaceType(interfaceType)</xosid:token>
+                                        <xosid:token>hasRecordType(recordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -8072,14 +7984,6 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 <xosid:token>DifrectoryEntryQuery.</xosid:token>
                 Multiple retrievals return the same object.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for a
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.filing.DirectoryQuery"/>
                 <xosid:description>
@@ -8090,61 +7994,6 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 <xosid:description>
 
                                         <xosid:token>supportsDirectoryQuery()</xosid:token>
-                    is <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="optional">
-                <xosid:description>
-                    This method must be implemented if
-                   
-                    <xosid:token>supportsDirectoryQuery()</xosid:token>
-                    is <xosid:token>true.</xosid:token>
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getDirectoryQueryForInterfaceType">
-            <xosid:description>
-                Gets the directory query interface for the directory
-                type. Supported types are defined in the
-                <xosid:token>FilingManager.</xosid:token>
-            </xosid:description>
-            <xosid:parameter xosid:name="directoryInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    a directory interface type
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.filing.DirectoryQuery"/>
-                <xosid:description>
-                    the directory query
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>directoryInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
-                <xosid:description>
-                    <xosid:token>supportDirectoryQuery()</xosid:token>
-                    is <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>FilingManager.supportsDirectoryInterfaceType(directoryInterfaceType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -8247,14 +8096,6 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             <xosid:description>
                 Gets the query interface for an agent.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for a
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.authentication.AgentQuery"/>
                 <xosid:description>
@@ -8265,60 +8106,6 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 <xosid:description>
                     <xosid:token>supportsAgentQuery()</xosid:token> is
                     <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="optional">
-                <xosid:description>
-                    This method must be implemented if
-                    <xosid:token>supportsAgentQuery()</xosid:token> is
-                    <xosid:token>true.</xosid:token>
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getAgentQueryForInterfaceType">
-            <xosid:description>
-                Gets the agent query interface for the repository type.
-                Supported agent types are defined in the
-                <xosid:token>FilingManager.</xosid:token>
-            </xosid:description>
-            <xosid:parameter xosid:name="agentInterfaceType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the agent interface type
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for a
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.authentication.AgentQuery"/>
-                <xosid:description>
-                    the agent query
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>agentInterfaceType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNIMPLEMENTED" xosid:category="Integration">
-                <xosid:description>
-                    <xosid:token>supportsAgentQuery()</xosid:token> is
-                    <xosid:token>false</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
-                <xosid:description>
-
-                                        <xosid:token>FilingManager.supportsAgentInterfaceType(agentInterfaceType)</xosid:token>
-                    is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="optional">
@@ -8497,15 +8284,15 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="matchInterfaceType">
+        <xosid:method xosid:name="matchRecordType">
             <xosid:description>
                 Sets a <xosid:token>Type</xosid:token> for querying
-                objects of a given interface type.
+                objects of a given record type.
             </xosid:description>
-            <xosid:parameter xosid:name="interfaceType">
+            <xosid:parameter xosid:name="recordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the object interface type
+                    the entry record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="match">
@@ -8518,7 +8305,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:parameter>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>interfaceType
+                    <xosid:token>recordType
                    </xosid:token>is <xosid:token> null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -8528,144 +8315,36 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>
-    </xosid:interface>
 
-
-    <xosid:interface xosid:name="osid.filing.DirectoryEntrySearch"> 
-        <xosid:implements xosid:interface=""/>
-        <xosid:description>
-            <xosid:token>DirectoryEntrySearch</xosid:token> defines
-            methods in common to both
-            <xosid:token>FileSearch</xosid:token> and
-            <xosid:token>DirectorySearch.</xosid:token>
-        </xosid:description>
-
-
-        <xosid:method xosid:name="limitResultSet">
+        <xosid:method xosid:name="hasRecordType">
             <xosid:description>
-                By default, searches return all matching results. This
-                method restricts the number of results by setting the
-                start and end of the result set. The starting and
-                ending results can be used for paging results when a
-                certain ordering is requested. A starting position of 0
-                effectively sets the maximum number of results with the
-                ending position. The ending position must be greater
-                than the starting position.
+                Tests if this query supports the given record
+                <xosid:token>Type.</xosid:token> The given record type
+                may be supported by the object through interface/type
+                inheritence. This method should be checked before
+                retrieving the record interface.
             </xosid:description>
-            <xosid:parameter xosid:name="start">
-                <xosid:primitiveType xosid:type="cardinal"/>
+            <xosid:parameter xosid:name="recordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the start of the result set
+                    a type
                 </xosid:description>
             </xosid:parameter>
-            <xosid:parameter xosid:name="end">
-                <xosid:primitiveType xosid:type="cardinal"/>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
                 <xosid:description>
-                    the end of the result set
+                    <xosid:token>true</xosid:token> if a record query
+                    of the given record <xosid:token>Type</xosid:token>
+                    is available, <xosid:token>false</xosid:token>
+                    otherwise
                 </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="INVALID_ARGUMENT" xosid:category="Integration">
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>end </xosid:token>is less than or
-                    equal to <xosid:token>start</xosid:token>
+                    <xosid:token>recordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="orderByName">
-            <xosid:description>
-                Specifies a preference for ordering the result set by
-                the entry name.
-            </xosid:description>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="orderByPath">
-            <xosid:description>
-                Specifies a preference for ordering the result set by
-                the entry path.
-            </xosid:description>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="orderByOwner">
-            <xosid:description>
-                Specifies a preference for ordering the result set by
-                the entry owner.
-            </xosid:description>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="orderByCreatedTime">
-            <xosid:description>
-                Specifies a preference for ordering the result set by
-                the entry creation time.
-            </xosid:description>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="orderByModifiedTime">
-            <xosid:description>
-                Specifies a preference for ordering the result set by
-                the entry modification time.
-            </xosid:description>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="orderByLastAccessTime">
-            <xosid:description>
-                Specifies a preference for ordering the result set by
-                the entry last access time.
-            </xosid:description>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="orderByGenusType">
-            <xosid:description>
-                Specifies a preference for ordering the result set by
-                the entry genus type.
-            </xosid:description>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="orderByInterfaceType">
-            <xosid:description>
-                Specifies a preference for ordering the result set by
-                the entry interface type.
-            </xosid:description>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -8912,21 +8591,203 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>
+
+        <xosid:method xosid:name="hasRecordType">
+            <xosid:description>
+                Tests if this form supports the given record
+                <xosid:token>Type.</xosid:token> The given record type
+                may be supported by the object through interface/type
+                inheritence. This method should be checked before
+                retrieving the record interface.
+            </xosid:description>
+            <xosid:parameter xosid:name="recordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if a record form of
+                    the given record <xosid:token>Type</xosid:token> is
+                    available, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>recordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.DirectoryEntrySearchOrder"> 
+        <xosid:implements xosid:interface=""/>
+        <xosid:description>
+            An interface for specifying the order of search results.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="ascend">
+            <xosid:description>
+                Specifies a preference for ordering the result set in
+                an ascending manner.
+            </xosid:description>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="descend">
+            <xosid:description>
+                Specifies a preference for ordering the result set in a
+                descending manner.
+            </xosid:description>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="orderByName">
+            <xosid:description>
+                Specifies a preference for ordering the result set by
+                the entry name.
+            </xosid:description>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="orderByPath">
+            <xosid:description>
+                Specifies a preference for ordering the result set by
+                the entry path.
+            </xosid:description>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="orderByOwner">
+            <xosid:description>
+                Specifies a preference for ordering the result set by
+                the entry owner.
+            </xosid:description>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="orderByCreatedTime">
+            <xosid:description>
+                Specifies a preference for ordering the result set by
+                the entry creation time.
+            </xosid:description>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="orderByModifiedTime">
+            <xosid:description>
+                Specifies a preference for ordering the result set by
+                the entry modification time.
+            </xosid:description>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="orderByLastAccessTime">
+            <xosid:description>
+                Specifies a preference for ordering the result set by
+                the entry last access time.
+            </xosid:description>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="orderByGenusType">
+            <xosid:description>
+                Specifies a preference for ordering the result set by
+                the entry genus type.
+            </xosid:description>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="hasRecordType">
+            <xosid:description>
+                Tests if this search order supports the given record
+                <xosid:token>Type.</xosid:token> The given record type
+                may be supported by the object through interface/type
+                inheritence. This method should be checked before
+                retrieving the record interface.
+            </xosid:description>
+            <xosid:parameter xosid:name="recordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:primitiveType xosid:type="boolean"/>
+                <xosid:description>
+                    <xosid:token>true</xosid:token> if an order record
+                    of the given record <xosid:token>Type</xosid:token>
+                    is available, <xosid:token>false</xosid:token>
+                    otherwise
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>recordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
     </xosid:interface>
 
 
     <xosid:interface xosid:name="osid.filing.File"> 
         <xosid:implements xosid:interface="osid.filing.DirectoryEntry"/>
         <xosid:description>
-            <xosid:token>File</xosid:token> represents a file in a file system.
-
-            <xosid:pbreak/>
-
-            <xosid:token>getFileInterface()</xosid:token> should be
-            used to retrieve the interface corresponding to this Type.
-            The existence of the interface must not be assumed until
-            requested at which point it is safe to cast into the
-            interface indicated by the type.
+            <xosid:token>File</xosid:token> represents a file in a file
+            system.
         </xosid:description>
 
 
@@ -8973,42 +8834,37 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getFileInterface">
+        <xosid:method xosid:name="getFileRecord">
             <xosid:description>
-                Gets the <xosid:token>File</xosid:token> interface
-                corresponding to the given
-                <xosid:token>File</xosid:token> <xosid:token>Type.
-                </xosid:token>A <xosid:token>File</xosid:token>
-                returned from another method is only required to
-                implement the root <xosid:token>File</xosid:token>
-                interface and this method must be used to retrieve a
-                file object implementing the requested interface along
-                with all of its ancestor interfaces, including the core
-                <xosid:token>File</xosid:token> interface. The
-                <xosid:token>fileInterfaceType</xosid:token> may be
-                the <xosid:token>Type</xosid:token> returned by
-                <xosid:token>getInterfaceType()</xosid:token> or any
-                parent of <xosid:token>getInterfaceType()</xosid:token>
-                in the <xosid:token>Type</xosid:token> hierarchy where
-               
-                <xosid:token>implementsInterfaceType(fileInterfaceType)</xosid:token>
+                Gets the record corresponding to the given
+                <xosid:token>File</xosid:token> record
+                <xosid:token>Type. </xosid:token>This method must be
+                used to retrieve an object implementing the requested
+                record interface along with all of its ancestor
+                interfaces. The
+                <xosid:token>fileRecordType</xosid:token> may be the
+                <xosid:token>Type</xosid:token> returned in
+                <xosid:token>getRecordTypes()</xosid:token> or any of
+                its parents in a <xosid:token>Type</xosid:token>
+                hierarchy where
+                <xosid:token>hasRecordType(fileRecordType)</xosid:token>
                 is <xosid:token>true</xosid:token>.
             </xosid:description>
             <xosid:parameter xosid:name="fileInterfaceType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the file interface type
+                    the file record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.filing.File"/>
                 <xosid:description>
-                    the typed interface
+                    the file record
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>fileInterfaceType</xosid:token> is
+                    <xosid:token>fileRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -9025,10 +8881,39 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementsInterfaceType(fileInterfaceType)</xosid:token>
+                                        <xosid:token>hasInterfaceType(fileRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.FileRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>File.</xosid:token> The methods
+            specified by the record type are available through the
+            underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getFile">
+            <xosid:description>
+                Gets the <xosid:token>File</xosid:token> from which
+                this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.File"/>
+                <xosid:description>
+                    the file
+                </xosid:description>
+            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -9042,11 +8927,9 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
         <xosid:implements xosid:interface="osid.filing.DirectoryEntryQuery"/>
         <xosid:description>
             This is the query interface for searching files. Each
-            method match request produces an
-            <xosid:token>AND</xosid:token> term while multiple
-            invocations of a method produces a nested
-            <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>FileQuery</xosid:token> subinterface.
+            method specifies an <xosid:token>AND</xosid:token> term
+            while multiple invocations of the same method produces a
+            nested <xosid:token>OR.</xosid:token>
         </xosid:description>
 
 
@@ -9175,28 +9058,266 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getFileQueryInterface">
+        <xosid:method xosid:name="getFileQueryRecord">
             <xosid:description>
-                Gets the <xosid:token>FileQuery</xosid:token> interface
-                corresponding to the <xosid:token>File</xosid:token>
-                interface <xosid:token>Type</xosid:token> provided in
-                the search session.<xosid:token> </xosid:token>A
-                <xosid:token>FileQuery</xosid:token> returned from the
-                search session is only required to implement the root
-                <xosid:token>FileQuery</xosid:token> interface. This
-                method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the search session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>FileQuery</xosid:token> interface.
-                Multiple retrievals of this interface may return the
-                same underlying object and do not result in adding
-                terms to the query.
+                Gets the record query interface corresponding to the
+                given <xosid:token>File</xosid:token> record
+                <xosid:token>Type. </xosid:token>Multiple record
+                retrievals produce a nested boolean
+                <xosid:token>OR</xosid:token> term.
+            </xosid:description>
+            <xosid:parameter xosid:name="fileRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a file record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.FileQuery"/>
+                <xosid:description>
+                    the file query record
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>fileRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(fileRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.FileQueryRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>FileQuery.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getFileQuery">
+            <xosid:description>
+                Gets the <xosid:token>FileQuery</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.filing.FileQuery"/>
                 <xosid:description>
-                    the query interface
+                    the file query
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.FileForm"> 
+        <xosid:implements xosid:interface="osid.filing.DirectoryEntryForm"/>
+        <xosid:description>
+            This is the form for creating and updating
+            <xosid:token>Files. </xosid:token>Like all
+            <xosid:token>OsidForm</xosid:token> objects, various data
+            elements may be set here for use in the create and update
+            methods in the <xosid:token>FileAdminSession.</xosid:token>
+            For each data element that may be set, metadata may be
+            examined to provide display hints or data constraints.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getFileFormRecord">
+            <xosid:description>
+                Gets the <xosid:token>FileFormRecord</xosid:token>
+                interface corresponding to the given log record
+                interface <xosid:token>Type.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="fileRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the file record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.FileFormRecord"/>
+                <xosid:description>
+                    the record
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>fileRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(fileRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.FileFormRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>FileForm.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getFileForm">
+            <xosid:description>
+                Gets the <xosid:token>FileForm</xosid:token> from which
+                this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.FileForm"/>
+                <xosid:description>
+                    the file form
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.FileSearchOrder"> 
+        <xosid:implements xosid:interface="osid.filing.DirectoryEntrySearchOrder"/>
+        <xosid:description>
+            An interface for specifying the ordering of search results.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="orderBySize">
+            <xosid:description>
+                Specifies a preference for ordering the results by file
+                size.
+            </xosid:description>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getFileSearchOrderRecord">
+            <xosid:description>
+                Gets the file search record order corresponding to the
+                given file record Type. Multiple retrievals return the
+                same underlying object.
+            </xosid:description>
+            <xosid:parameter xosid:name="fileRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a file record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.FileSearchOrderRecord"/>
+                <xosid:description>
+                    the file search order record interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>fileRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(fileRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.FileSearchOrderRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>FileSearchOrder.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getFileSearchOrder">
+            <xosid:description>
+                Gets the <xosid:token>FileSearchOrder</xosid:token>
+                from which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.FileSearchOrder"/>
+                <xosid:description>
+                    the file search order
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -9209,7 +9330,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
 
 
     <xosid:interface xosid:name="osid.filing.FileSearch"> 
-        <xosid:implements xosid:interface="osid.filing.DirectoryEntrySearch"/>
+        <xosid:implements xosid:interface="osid.OsidSearch"/>
         <xosid:description>
             The search interface for governing file searches.
         </xosid:description>
@@ -9266,11 +9387,28 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="orderBySize">
+        <xosid:method xosid:name="orderFileResults">
             <xosid:description>
-                Specifies a preference for ordering the results by file
-                size.
+                Specify an ordering to the search results.
             </xosid:description>
+            <xosid:parameter xosid:name="fileSearchOrder">
+                <xosid:interfaceType xosid:type="osid.filing.FileSearchOrder"/>
+                <xosid:description>
+                    file search order
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>fileSearchOrder</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>fileSearchOrder</xosid:token> is not
+                    of this service
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -9278,21 +9416,76 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getFileSearchInterface">
+        <xosid:method xosid:name="getFileSearchRecord">
             <xosid:description>
-                Gets the typed interface for this search. The interface
-                returned must match the query interface type specified
-                when retrieving this query interface, or any ancestor
-                of the supplied query interface type. The root
-                interface is this <xosid:token>FileSearch</xosid:token>
-                itself. The returned interface should be treated as an
-                extension of this interface and as such multiple calls
-                to this method may return the same underlying object.
+                Gets the record corresponding to the given file search
+                record <xosid:token>Type. </xosid:token>This method
+                must be used to retrieve an object implementing the
+                requested record interface along with all of its
+                ancestor interfaces.
+            </xosid:description>
+            <xosid:parameter xosid:name="fileSearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a file search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.FileSearchRecord"/>
+                <xosid:description>
+                    the file search interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>fileSearchRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(fileSearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.FileSearchRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>FileSearch.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getFileSearch">
+            <xosid:description>
+                Gets the <xosid:token>FileSearch</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.filing.FileSearch"/>
                 <xosid:description>
-                    the file search interface
+                    the file search
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -9330,29 +9523,49 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getFileSearchResultsExtension">
+        <xosid:method xosid:name="getFileSearchResultsRecord">
             <xosid:description>
-                Gets the file search results interface corresponding to
-                the <xosid:token>searchType</xosid:token> used in
-                retrieving the <xosid:token>FileSearch</xosid:token>
-                interface. A
-                <xosid:token>FileSearchResults</xosid:token> returned
-                from the search session is only required to implement
-                the root <xosid:token>FileSearchResults</xosid:token>
-                interface. This method must be used to retrieve a
-                search results object implementing the interface
-                specified when retrieving the
-                <xosid:token>FileSearch</xosid:token> from the search
-                session along with all of its ancestor interfaces,
-                including the core
-                <xosid:token>FileSearchResults</xosid:token> interface.
+                Gets the record corresponding to the given file search
+                record <xosid:token>Type. </xosid:token>This method
+                must be used to retrieve an object implementing the
+                requested record interface along with all of its
+                ancestor interfaces.
             </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.filing.FileSearchResults"/>
+            <xosid:parameter xosid:name="fileSearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the file results extension
+                    a file search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.FileSearchResultsRecord"/>
+                <xosid:description>
+                    the file search interface
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>fileSearchRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(fileSearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -9362,33 +9575,25 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
     </xosid:interface>
 
 
-    <xosid:interface xosid:name="osid.filing.FileForm"> 
-        <xosid:implements xosid:interface="osid.filing.DirectoryEntryForm"/>
+    <xosid:interface xosid:name="osid.filing.FileSearchResultsRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
         <xosid:description>
-            <xosid:token>File</xosid:token> represents a file in a file
-            system.
+            A record for a
+            <xosid:token>FileSearchResults.</xosid:token> The methods
+            specified by the record type are available through the
+            underlying object.
         </xosid:description>
 
 
-        <xosid:method xosid:name="getFileFormInterface">
+        <xosid:method xosid:name="getFileSearchResults">
             <xosid:description>
-                Gets the <xosid:token>FileForm</xosid:token> interface
-                corresponding to the <xosid:token>File</xosid:token>
-                interface <xosid:token>Type</xosid:token> provided in
-                the admin session<xosid:token>. </xosid:token>A
-                <xosid:token>FileForm</xosid:token> returned from the
-                admin session is only required to implement the root
-                <xosid:token>FileForm</xosid:token> interface. This
-                method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the admin session along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>FileForm</xosid:token> interface.
+                Gets the <xosid:token>FileSearchResults</xosid:token>
+                from which this record originated.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.filing.FileForm"/>
+                <xosid:interfaceType xosid:type="osid.filing.FileSearchResults"/>
                 <xosid:description>
-                    the filing form interfcace
+                    the file search results
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -9472,19 +9677,21 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (el.hasNext()) {
      Entry entry = el.getNextEntry();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (el.hasNext()) {
-     Entry[] entries = e
+     Entry[] entries = e]]>
             </xosid:code>
              
         </xosid:description>
@@ -9570,56 +9777,43 @@ while (el.hasNext()) {
         <xosid:implements xosid:interface="osid.filing.DirectoryEntry"/>
         <xosid:description>
             <xosid:token>Directory</xosid:token> represents a directory
-            in a file system that may contain other files and directories.
-
-            <xosid:pbreak/>
-
-            <xosid:token>getDirectoryInterface()</xosid:token> should
-            be used to retrieve the interface corresponding to this
-            Type. The existence of the interface must not be assumed
-            until requested at which point it is safe to cast into the
-            interface indicated by the type.
+            in a file system that may contain other files and
+            directories.
         </xosid:description>
 
 
-        <xosid:method xosid:name="getDirectoryInterface">
+        <xosid:method xosid:name="getDirectoryRecord">
             <xosid:description>
-                Gets the <xosid:token>Directory</xosid:token> interface
-                corresponding to the given
-                <xosid:token>Directory</xosid:token> interface
-                <xosid:token>Type. </xosid:token>A
-                <xosid:token>Directory</xosid:token> returned from
-                another method is only required to implement the root
-                <xosid:token>Directory</xosid:token> interface and
-                this method must be used to retrieve a directory object
-                implementing the requested interface along with all of
-                its ancestor interfaces, including the core
-                <xosid:token>Directory</xosid:token> interface. The
-                <xosid:token>directoryInterfaceType</xosid:token> may
-                be the <xosid:token>Type</xosid:token> returned by
-                <xosid:token>getInterfaceType()</xosid:token> or any
-                parent of <xosid:token>getInterfaceType()</xosid:token>
-                in the <xosid:token>Type</xosid:token> hierarchy where
-               
-                <xosid:token>implementsInterfaceType(directoryInterfaceType)</xosid:token>
+                Gets the record corresponding to the given
+                <xosid:token>Directory</xosid:token> record
+                <xosid:token>Type. </xosid:token>This method must be
+                used to retrieve an object implementing the requested
+                record interface along with all of its ancestor
+                interfaces. The
+                <xosid:token>directoryRecordType</xosid:token> may be
+                the <xosid:token>Type</xosid:token> returned in
+                <xosid:token>getRecordTypes()</xosid:token> or any of
+                its parents in a <xosid:token>Type</xosid:token>
+                hierarchy where
+                <xosid:token>hasRecordType(directoryRecordType)</xosid:token>
                 is <xosid:token>true</xosid:token>.
             </xosid:description>
-            <xosid:parameter xosid:name="directoryInterfaceType">
+            <xosid:parameter xosid:name="directoryRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the directory interface type
+                    the directory record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.filing.Directory"/>
                 <xosid:description>
-                    the typed interface
+                    the directory record
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>directoryInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
+                    <xosid:token>directoryRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
@@ -9635,10 +9829,39 @@ while (el.hasNext()) {
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
 
-                                        <xosid:token>implementsInterfaceType(directoryInterfaceType)</xosid:token>
+                                        <xosid:token>hasInterfaceType(directoryRecordType)</xosid:token>
                     is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.DirectoryRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>Directory.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDirectory">
+            <xosid:description>
+                Gets the <xosid:token>Directory</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.Directory"/>
+                <xosid:description>
+                    the directory
+                </xosid:description>
+            </xosid:return>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -9661,12 +9884,12 @@ while (el.hasNext()) {
 
             <xosid:pbreak/>
 
-             <xosid:code>
-DirectoryQuery queries[1];
-queries[0] = session.getDirectoryQuery();
-queries[0].matchName("Library", wordStringMatchType, true);
+<xosid:code>
+<![CDATA[
+DirectoryQuery query = session.getDirectoryQuery();
+query.matchName("Library", wordStringMatchType, true);
 
-DirectoryList list = session.getDirectoriesByQuery(queries);
+DirectoryList list = session.getDirectoriesByQuery(query);]]>
             </xosid:code>
              
         </xosid:description>
@@ -9780,29 +10003,257 @@ DirectoryList list = session.getDirectoriesByQuery(queries);
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDirectoryQueryInterface">
+        <xosid:method xosid:name="getDirectoryQueryRecord">
             <xosid:description>
-                Gets the <xosid:token>DirectoryQuery</xosid:token>
-                interface corresponding to the
-                <xosid:token>Directory</xosid:token> interface
-                <xosid:token>Type</xosid:token> provided in the serch
-               session. <xosid:token> </xosid:token>A
-                <xosid:token>DirectoryQuery</xosid:token> returned
-                from the search session is only required to implement
-                the root <xosid:token>DirectoryQuery</xosid:token>
-                interface. This method must be used to retrieve a query
-                object implementing the interface specified when
-                retrieving this object from the search session along
-                with all of its ancestor interfaces, including the core
-                <xosid:token>DirectoryQuery</xosid:token> interface.
-                Multiple retrievals of this interface may return the
-                same underlying object and do not result in adding
-                terms to the query.
+                Gets the record query interface corresponding to the
+                given <xosid:token>Directory</xosid:token> record
+                <xosid:token>Type. </xosid:token>Multiple record
+                retrievals produce a nested boolean
+                <xosid:token>OR</xosid:token> term.
+            </xosid:description>
+            <xosid:parameter xosid:name="directoryRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a directory record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.DirectoryQuery"/>
+                <xosid:description>
+                    the directory query record
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>directoryRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(directoryRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.DirectoryQueryRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>DirectoryQuery.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDirectoryQuery">
+            <xosid:description>
+                Gets the <xosid:token>DirectoryQuery</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.filing.DirectoryQuery"/>
                 <xosid:description>
-                    the directory query interface
+                    the directory query
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.DirectoryForm"> 
+        <xosid:implements xosid:interface="osid.filing.DirectoryEntryForm"/>
+        <xosid:description>
+            This is the form for creating and updating
+            <xosid:token>Directory </xosid:token>objects. Like all
+            <xosid:token>OsidForm</xosid:token> objects, various data
+            elements may be set here for use in the create and update
+            methods in the
+            <xosid:token>DirectoryAdminSession.</xosid:token> For each
+            data element that may be set, metadata may be examined to
+            provide display hints or data constraints.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDirectoryFormRecord">
+            <xosid:description>
+                Gets the <xosid:token>DirectoryFormRecord</xosid:token>
+                interface corresponding to the given log record
+                interface <xosid:token>Type.</xosid:token>
+            </xosid:description>
+            <xosid:parameter xosid:name="directoryRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the directory record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.DirectoryFormRecord"/>
+                <xosid:description>
+                    the record
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>directoryRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(directoryRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.DirectoryFormRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>DirectoryForm.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDirectoryForm">
+            <xosid:description>
+                Gets the <xosid:token>DirectoryForm</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.DirectoryForm"/>
+                <xosid:description>
+                    the directory form
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.DirectorySearchOrder"> 
+        <xosid:implements xosid:interface="osid.filing.DirectoryEntrySearchOrder"/>
+        <xosid:description>
+            An interface for specifying the ordering of search results.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getFileSearchOrderRecord">
+            <xosid:description>
+                Gets the directory search record order corresponding to
+                the given directory record Type. Multiple retrievals
+                return the same underlying object.
+            </xosid:description>
+            <xosid:parameter xosid:name="directoryRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a directory record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.DirectorySearchOrderRecord"/>
+                <xosid:description>
+                    the directory search order record interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>directoryRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasRecordType(directoryRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.DirectorySearchOrderRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a
+            <xosid:token>DirectorySearchOrder.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDirectorySearchOrder">
+            <xosid:description>
+                Gets the
+                <xosid:token>DirectorySearchOrder</xosid:token> from
+                which this record originated.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.DirectorySearchOrder"/>
+                <xosid:description>
+                    the directory search order
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -9815,7 +10266,7 @@ DirectoryList list = session.getDirectoriesByQuery(queries);
 
 
     <xosid:interface xosid:name="osid.filing.DirectorySearch"> 
-        <xosid:implements xosid:interface="osid.filing.DirectoryEntrySearch"/>
+        <xosid:implements xosid:interface="osid.OsidSearch"/>
         <xosid:description>
             The search interface for gioverning directory searches.
             An example to find directories whose name is "Library"
@@ -9823,16 +10274,16 @@ DirectoryList list = session.getDirectoriesByQuery(queries);
 
             <xosid:pbreak/>
 
-             <xosid:code>
-DirectoryQuery queries[1];
-queries[0] = session.getDirectoryQuery();
-queries[0].addNameMatch("Library", wordStringMatchType, true);
+<xosid:code>
+<![CDATA[
+DirectoryQuery query = session.getDirectoryQuery();
+query.addNameMatch("Library", wordStringMatchType, true);
 
 DirectorySearch search = session.getDirectorySearch();
 search.orderByPath();
 
-DirectorySearchResults results = session.getDirectoriesBySearch(queries, search);
-DirectoryList directories = results.getDirectories();
+DirectorySearchResults results = session.getDirectoriesBySearch(query, search);
+DirectoryList directories = results.getDirectories();]]>
             </xosid:code>
              
         </xosid:description>
@@ -9889,25 +10340,106 @@ DirectoryList directories = results.getDirectories();
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDirectorySearchInterface">
+        <xosid:method xosid:name="orderDirectoryResults">
+            <xosid:description>
+                Specify an ordering to the search results.
+            </xosid:description>
+            <xosid:parameter xosid:name="directorySearchOrder">
+                <xosid:interfaceType xosid:type="osid.filing.DirectorySearchOrder"/>
+                <xosid:description>
+                    directory search order
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>directorySearchOrder</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>directorySearchOrder</xosid:token> is
+                    not of this service
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getDirectorySearchRecord">
+            <xosid:description>
+                Gets the record corresponding to the given directory
+                search record <xosid:token>Type. </xosid:token>This
+                method must be used to retrieve an object implementing
+                the requested record interface along with all of its
+                ancestor interfaces.
+            </xosid:description>
+            <xosid:parameter xosid:name="directorySearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    a directory search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.DirectorySearchRecord"/>
+                <xosid:description>
+                    the directory search interface
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+
+                                        <xosid:token>directorySearchRecordType</xosid:token>
+                    is <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(directorySearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+    </xosid:interface>
+
+
+    <xosid:interface xosid:name="osid.filing.DirectorySearchRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
+        <xosid:description>
+            A record for a <xosid:token>DirectorySearch.</xosid:token>
+            The methods specified by the record type are available
+            through the underlying object.
+        </xosid:description>
+
+
+        <xosid:method xosid:name="getDirectorySearch">
             <xosid:description>
                 Gets the <xosid:token>DirectorySearch</xosid:token>
-                interface corresponding to the directory search
-                interface <xosid:token>Type</xosid:token> provided in
-                the search session<xosid:token>. </xosid:token>A
-                <xosid:token>DirectorySearch</xosid:token> returned
-                from the search session is only required to implement
-                the root <xosid:token>DirectorySearch</xosid:token>
-                interface. This method must be used to retrieve a query
-                object implementing the interface specified when
-                retrieving this object from the search session along
-                with all of its ancestor interfaces, including the core
-                <xosid:token>DirectorySearch</xosid:token> interface.
+                from which this record originated.
             </xosid:description>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.filing.DirectorySearch"/>
                 <xosid:description>
-                    the directory search interface
+                    the directory search
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -9932,23 +10464,23 @@ DirectoryList directories = results.getDirectories();
 
             <xosid:pbreak/>
 
-             <xosid:code>
-DirectoryQuery queries[1];
-queries[0] = session.getDirectoryQuery();
-queries[0].addNameMatch("Library", wordStringMatchType, true);
-
+<xosid:code>
+<![CDATA[
+DirectoryQuery query = session.getDirectoryQuery();
+query.addNameMatch("Library", wordStringMatchType, true);
 DirectorySearch search = session.getDirectorySearch();
-DirectorySearchResults results = session.getDirectoriesBySearch(queries, search);
+DirectorySearchResults results = session.getDirectoriesBySearch(query, search);
 
-queries[0] = session.getDirectoryQuery();
-queries[0].addNameMatch("System", wordStringMatchType, true);
-
+query = session.getDirectoryQuery();
+query.addNameMatch("System", wordStringMatchType, true);
 search = session.getDirectorySearch();
 search.searchWithinDirectoryResults(results);
-search.orderByPath();
+DirectorySearchOrder order = session.getDirectorySearchOrder();
+order.orderByPath();
+search.orderDirectoryResults(order);
 
-results = session.getDirectoriesBySearch(queries, search);
-DirectoryList directories = results.getDirectories();
+results = session.getDirectoriesBySearch(query, search);
+DirectoryList directories = results.getDirectories();]]>
             </xosid:code>
              
         </xosid:description>
@@ -9971,31 +10503,50 @@ DirectoryList directories = results.getDirectories();
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDirectorySearchResultsInterface">
+        <xosid:method xosid:name="getDirectorySearchResultsRecord">
             <xosid:description>
-                Gets the directory results interface corresponding to
-                the <xosid:token>searchType</xosid:token> used in
-                retrieving the
-                <xosid:token>DirectorySearch</xosid:token> interface. A
-                <xosid:token>DirectorySearchResults</xosid:token>
-                returned from the search session is only required to
-                implement the root
-                <xosid:token>DirectorySearchResults</xosid:token>
-                interface. This method must be used to retrieve a
-                search results object implementing the interface
-                specified when retrieving the
-                <xosid:token>DirectorySearch</xosid:token> from the
-                search session along with all of its ancestor
-                interfaces, including the core
-                <xosid:token>DirectorySearchResults</xosid:token>
-                interface.
+                Gets the record corresponding to the given directory
+                search record <xosid:token>Type. </xosid:token>This
+                method must be used to retrieve an object implementing
+                the requested record interface along with all of its
+                ancestor interfaces.
             </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.filing.DirectorySearchResults"/>
+            <xosid:parameter xosid:name="directorySearchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    the directory results interface
+                    a directory search record type
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.filing.DirectorySearchResultsRecord"/>
+                <xosid:description>
+                    the directory search interface
                 </xosid:description>
             </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+
+                                        <xosid:token>directorySearchRecordType</xosid:token>
+                    is <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(directorySearchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
+                </xosid:description>
+            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -10005,34 +10556,26 @@ DirectoryList directories = results.getDirectories();
     </xosid:interface>
 
 
-    <xosid:interface xosid:name="osid.filing.DirectoryForm"> 
-        <xosid:implements xosid:interface="osid.filing.DirectoryEntryForm"/>
+    <xosid:interface xosid:name="osid.filing.DirectorySearchResultsRecord"> 
+        <xosid:implements xosid:interface="osid.OsidRecord"/>
         <xosid:description>
-            <xosid:token>File</xosid:token> represents a file in a file
-            system.
+            A record for a
+            <xosid:token>DirectorySearchResults.</xosid:token> The
+            methods specified by the record type are available through
+            the underlying object.
         </xosid:description>
 
 
-        <xosid:method xosid:name="getDirectoryFormInterface">
+        <xosid:method xosid:name="getDirectorySearchResults">
             <xosid:description>
-                Gets the <xosid:token>DirectoryForm</xosid:token>
-                interface corresponding to the
-                <xosid:token>Directory</xosid:token> interface
-                <xosid:token>Type</xosid:token> provided in the admin
-               session <xosid:token>. </xosid:token>A
-                <xosid:token>DirectoryForm</xosid:token> returned from
-                the admin session is only required to implement the
-                root <xosid:token>DirectoryForm</xosid:token>
-                interface. This method must be used to retrieve a query
-                object implementing the interface specified when
-                retrieving this object from the admin session along
-                with all of its ancestor interfaces, including the core
-                <xosid:token>DirectoryForm</xosid:token> interface.
+                Gets the
+                <xosid:token>DirectorySearchResults</xosid:token> from
+                which this record originated.
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.filing.DirectoryForm"/>
+                <xosid:interfaceType xosid:type="osid.filing.DirectorySearchResults"/>
                 <xosid:description>
-                    the directory form interfcace
+                    the directory search results
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">
@@ -10055,7 +10598,8 @@ DirectoryList directories = results.getDirectories();
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 class myReceiver {
     void newDirectory(string path) {
         print "new directory created: " + path;
@@ -10069,13 +10613,13 @@ class myReceiver {
 
 notificationSession = manager.getDirectoryNotificationSessionForDirectory(myReceiver, "/Users/tom");
 notificationSession.useFederatedDirectoryView();
-notificationSession.registerForNewDirectories();
+notificationSession.registerForNewDirectories();]]>
             </xosid:code>
              
         </xosid:description>
 
 
-        <xosid:method xosid:name="newDirectories">
+        <xosid:method xosid:name="newDirectory">
             <xosid:description>
                 The callback for notifications of new directories.
             </xosid:description>
@@ -10109,9 +10653,9 @@ notificationSession.registerForNewDirectories();
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="deletedDirectories">
+        <xosid:method xosid:name="deletedDirectory">
             <xosid:description>
-                the callback for notification of deleted files.
+                the callback for notification of deleted directories.
             </xosid:description>
             <xosid:parameter xosid:name="directoryPath">
                 <xosid:primitiveType xosid:type="string"/>
@@ -10138,19 +10682,21 @@ notificationSession.registerForNewDirectories();
 
             <xosid:pbreak/>
 
-             <xosid:code>
+<xosid:code>
+<![CDATA[
 while (el.hasNext()) {
      Entry entry = el.getNextEntry();
 }
 
-
+]]>
             </xosid:code>
-             or
+            or
             <xosid:code>
+<![CDATA[
 
 
 while (el.hasNext()) {
-     Entry[] entries = e
+     Entry[] entries = e]]>
             </xosid:code>
              
         </xosid:description>

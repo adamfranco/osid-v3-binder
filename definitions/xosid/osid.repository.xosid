@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.repository generated at 10/24/2008 12:14:30 PM 
+    XOSID for osid.repository generated at 10/28/2008 3:17:29 PM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -7880,13 +7880,7 @@
             This session provides methods for searching among
             <xosid:token>Asset</xosid:token> objects. The search query
             is constructed using the
-            <xosid:token>AssetQuery</xosid:token> interface. Multiple
-            <xosid:token>AssetQuery</xosid:token> interfaces may be
-            submitted into a search to perform a boolean
-            <xosid:token>OR.</xosid:token> If more than one search
-            element is specified within a single
-            <xosid:token>AssetQuery,</xosid:token> these elements form
-            a boolean AND.
+            <xosid:token>AssetQuery</xosid:token> interface.
             <xosid:token>getAssetsByQuery()</xosid:token> is the basic
             search method and returns a list of
             <xosid:token>Assets.</xosid:token> A more advanced search
@@ -8049,13 +8043,12 @@
         <xosid:method xosid:name="getAssetsByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Assets</xosid:token>
-                matching the given search interface. Each element in
-                the array is OR'd.
+                matching the given search interface.
             </xosid:description>
-            <xosid:parameter xosid:name="assetQueries">
-                <xosid:interfaceType xosid:type="osid.repository.AssetQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="assetQuery">
+                <xosid:interfaceType xosid:type="osid.repository.AssetQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -8066,7 +8059,7 @@
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>assetQueries</xosid:token> is
+                    <xosid:token>assetQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -8082,7 +8075,7 @@
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    an <xosid:token>assetQuery</xosid:token> is not of
+                    the <xosid:token>assetQuery</xosid:token> is not of
                     this service
                 </xosid:description>
             </xosid:error>
@@ -8133,13 +8126,12 @@
         <xosid:method xosid:name="getAssetsBySearch">
             <xosid:description>
                 Gets the search results matching the given search query
-                using the given search. Each element in the query array
-                is OR'd.
+                using the given search.
             </xosid:description>
-            <xosid:parameter xosid:name="assetQueries">
-                <xosid:interfaceType xosid:type="osid.repository.AssetQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="assetQuey">
+                <xosid:interfaceType xosid:type="osid.repository.AssetQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="assetSearch">
@@ -8156,7 +8148,7 @@
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>assetQueries
+                    <xosid:token>assetQuery
                    </xosid:token>or <xosid:token>
                     assetSearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -8174,7 +8166,7 @@
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    an <xosid:token>assetQuery
+                    <xosid:token>assetQuery
                    </xosid:token>or <xosid:token>
                     assetSearch</xosid:token> is not of this service
                 </xosid:description>
@@ -12866,15 +12858,9 @@ Asset newAsset = session.createAsset(form);]]>
         <xosid:implements xosid:interface="osid.OsidSession"/>
         <xosid:description>
             This session provides methods for searching among
-            <xosid:token>Subject</xosid:token> objects. The search
-            query is constructed using the
-            <xosid:token>SubjectQuery</xosid:token> interface. Multiple
-            <xosid:token>SubjectQuery</xosid:token> interfaces may be
-            submitted into a search to perform a boolean
-            <xosid:token>OR.</xosid:token> If more than one search
-            element is specified within a single
-            <xosid:token>SubjectQuery,</xosid:token> these elements
-            form a boolean AND.
+            <xosid:token>Asset</xosid:token> objects. The search query
+            is constructed using the
+            <xosid:token>SubjectQuery</xosid:token> interface.
             <xosid:token>getSubjectsByQuery()</xosid:token> is the
             basic search method and returns a list of
             <xosid:token>Subjects.</xosid:token> A more advanced
@@ -13038,13 +13024,12 @@ Asset newAsset = session.createAsset(form);]]>
         <xosid:method xosid:name="getSubjectsByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Subjects</xosid:token>
-                matching the given search interface. Each element in
-                the array is OR'd.
+                matching the given search interface.
             </xosid:description>
-            <xosid:parameter xosid:name="subjectQueries">
-                <xosid:interfaceType xosid:type="osid.repository.SubjectQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="subjectQuery">
+                <xosid:interfaceType xosid:type="osid.repository.SubjectQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -13055,7 +13040,7 @@ Asset newAsset = session.createAsset(form);]]>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>subjectQueries</xosid:token> is
+                    <xosid:token>subjectQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -13071,7 +13056,7 @@ Asset newAsset = session.createAsset(form);]]>
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>subjectQuery</xosid:token> is not of
+                    <xosid:token>subjectQuery</xosid:token> is not of
                     this service
                 </xosid:description>
             </xosid:error>
@@ -13122,13 +13107,12 @@ Asset newAsset = session.createAsset(form);]]>
         <xosid:method xosid:name="getSubjectsBySearch">
             <xosid:description>
                 Gets the search results matching the given search query
-                using the given search. Each element in the query array
-                is OR'd.
+                using the given search.
             </xosid:description>
-            <xosid:parameter xosid:name="subjectQueries">
-                <xosid:interfaceType xosid:type="osid.repository.SubjectQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="subjectQuery">
+                <xosid:interfaceType xosid:type="osid.repository.SubjectQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="subjectSearch">
@@ -13145,7 +13129,7 @@ Asset newAsset = session.createAsset(form);]]>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>subjectQueries
+                    <xosid:token>subjectQuery
                    </xosid:token>or <xosid:token>
                     subjectSearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -13163,7 +13147,7 @@ Asset newAsset = session.createAsset(form);]]>
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>subjectQuery
+                    <xosid:token>subjectQuery
                    </xosid:token>or <xosid:token>
                     subjectSearch</xosid:token> is not of this service
                 </xosid:description>
@@ -15469,12 +15453,6 @@ return "subject updated";]]>
             <xosid:token>Repository</xosid:token> objects. The search
             query is constructed using the
             <xosid:token>RepositoryQuery</xosid:token> interface.
-            Multiple <xosid:token>RepositoryQuery</xosid:token>
-            interfaces may be submitted into a search to perform a
-            boolean <xosid:token>OR.</xosid:token> If more than one
-            search element is specified within a single
-            <xosid:token>RepositoryQuery</xosid:token> these elements
-            form a boolean <xosid:token>AND.</xosid:token>
             <xosid:token>getRepositoriesByQuery()</xosid:token> is the
             basic search method and returns a list of
             <xosid:token>Repository</xosid:token> objects.A more
@@ -15547,13 +15525,12 @@ return "subject updated";]]>
         <xosid:method xosid:name="getRepositoriesByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Repositories</xosid:token>
-                matching the given search interface. Each element in
-                the array is OR'd.
+                matching the given search interface.
             </xosid:description>
-            <xosid:parameter xosid:name="repositoryQueries">
-                <xosid:interfaceType xosid:type="osid.repository.RepositoryQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="repositoryQuery">
+                <xosid:interfaceType xosid:type="osid.repository.RepositoryQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -15565,7 +15542,7 @@ return "subject updated";]]>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>repositoryQueries</xosid:token> is
+                    <xosid:token>repositoryQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -15581,7 +15558,7 @@ return "subject updated";]]>
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>repositoryQuery</xosid:token> is not
+                    <xosid:token>repositoryQuery</xosid:token> is not
                     of this service
                 </xosid:description>
             </xosid:error>
@@ -15633,13 +15610,12 @@ return "subject updated";]]>
         <xosid:method xosid:name="getRepositoriesBySearch">
             <xosid:description>
                 Gets the search results matching the given search query
-                using the given search. Each element in the query array
-                is OR'd.
+                using the given search.
             </xosid:description>
-            <xosid:parameter xosid:name="repositoryQueries">
-                <xosid:interfaceType xosid:type="osid.repository.RepositoryQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="repositoryQuery">
+                <xosid:interfaceType xosid:type="osid.repository.RepositoryQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="repositorySearch">
@@ -15656,7 +15632,7 @@ return "subject updated";]]>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>repositoryQueries
+                    <xosid:token>repositoryQuery
                    </xosid:token>or <xosid:token>
                     repositorySearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -15674,7 +15650,7 @@ return "subject updated";]]>
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>repositoryQuery
+                    <xosid:token>repositoryQuery
                    </xosid:token>or <xosid:token>
                     repositorySearch</xosid:token> is not of this
                     service
@@ -17374,12 +17350,6 @@ return "subject updated";]]>
             <xosid:token>Composition</xosid:token> objects. The search
             query is constructed using the
             <xosid:token>CompositionQuery</xosid:token> interface.
-            Multiple <xosid:token>CompositionQuery</xosid:token>
-            interfaces may be submitted into a search to perform a
-            boolean <xosid:token>OR.</xosid:token> If more than one
-            search element is specified within a single
-            <xosid:token>CompositionQuery</xosid:token> these elements
-            form a boolean AND.
             <xosid:token>getCompositionsByQuery()</xosid:token> is the
             basic search method and returns a list of
             <xosid:token>Compositions.</xosid:token> A more advanced
@@ -17544,13 +17514,12 @@ return "subject updated";]]>
         <xosid:method xosid:name="getCompositionsByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Compositions</xosid:token>
-                matching the given query interface. Each element in the
-                array is OR'd.
+                matching the given query interface.
             </xosid:description>
-            <xosid:parameter xosid:name="compositionQueries">
-                <xosid:interfaceType xosid:type="osid.repository.CompositionQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="compositionQuery">
+                <xosid:interfaceType xosid:type="osid.repository.CompositionQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -17562,7 +17531,7 @@ return "subject updated";]]>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>compositionQueries</xosid:token> is
+                    <xosid:token>compositionQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -17578,8 +17547,8 @@ return "subject updated";]]>
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>compositionQuery</xosid:token> is
-                    not of this service
+                    <xosid:token>compositionQuery</xosid:token> is not
+                    of this service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -17630,13 +17599,12 @@ return "subject updated";]]>
         <xosid:method xosid:name="getCompositionsBySearch">
             <xosid:description>
                 Gets the search results matching the given search query
-                using the given search. Each element in the query array
-                is OR'd.
+                using the given search.
             </xosid:description>
-            <xosid:parameter xosid:name="compositionQueries">
-                <xosid:interfaceType xosid:type="osid.repository.CompositionQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="compositionQuery">
+                <xosid:interfaceType xosid:type="osid.repository.CompositionQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="compositionSearch">
@@ -17653,7 +17621,7 @@ return "subject updated";]]>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>compositionQueries
+                    <xosid:token>compositionQuery
                    </xosid:token>or <xosid:token>
                     compositionSearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -17671,7 +17639,7 @@ return "subject updated";]]>
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>compositionQuery
+                    <xosid:token>compositionQuery
                    </xosid:token>or <xosid:token>
                     compositionSearch</xosid:token> is not of this
                     service
@@ -20859,20 +20827,16 @@ return "subject updated";]]>
         <xosid:implements xosid:interface="osid.OsidQuery"/>
         <xosid:description>
             This is the query interface for searching assets. Each
-            method match request produces an
-            <xosid:token>AND</xosid:token> term while multiple
-            invocations of a method produces a nested
-            <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>AssetQuery</xosid:token> record.
+            method specifies an <xosid:token>AND</xosid:token> term
+            while multiple invocations of the same method produce a
+            nested <xosid:token>OR.</xosid:token> The query record is
+            identified by the <xosid:token>Asset Type.</xosid:token>
         </xosid:description>
 
 
         <xosid:method xosid:name="matchTitle">
             <xosid:description>
-                Adds a title for this query. Supplying multiple strings
-                behaves like a boolean <xosid:token>OR</xosid:token>
-                among the elements each which must correspond to the
-                <xosid:token>stringMatchType.</xosid:token>
+                Adds a title for this query.
             </xosid:description>
             <xosid:parameter xosid:name="title">
                 <xosid:primitiveType xosid:type="string"/>
@@ -20979,11 +20943,7 @@ return "subject updated";]]>
 
         <xosid:method xosid:name="matchCopyright">
             <xosid:description>
-                Adds a copyright for this query. Supplying multiple
-                strings behaves like a boolean
-                <xosid:token>OR</xosid:token> among the elements each
-                which must correspond to the
-                <xosid:token>stringMatchType.</xosid:token>
+                Adds a copyright for this query.
             </xosid:description>
             <xosid:parameter xosid:name="copyright">
                 <xosid:primitiveType xosid:type="string"/>
@@ -21054,11 +21014,7 @@ return "subject updated";]]>
 
         <xosid:method xosid:name="matchCopyrightRegistration">
             <xosid:description>
-                Adds a copyright registration for this query. Supplying
-                multiple strings behaves like a boolean
-                <xosid:token>OR</xosid:token> among the elements each
-                which must correspond to the
-                <xosid:token>stringMatchType.</xosid:token>
+                Adds a copyright registration for this query.
             </xosid:description>
             <xosid:parameter xosid:name="registration">
                 <xosid:primitiveType xosid:type="string"/>
@@ -21129,11 +21085,7 @@ return "subject updated";]]>
 
         <xosid:method xosid:name="matchLicense">
             <xosid:description>
-                Adds a license for this query. Supplying multiple
-                strings behaves like a boolean
-                <xosid:token>OR</xosid:token> among the elements each
-                which must correspond to the
-                <xosid:token>stringMatchType.</xosid:token>
+                Adds a license for this query.
             </xosid:description>
             <xosid:parameter xosid:name="license">
                 <xosid:primitiveType xosid:type="string"/>
@@ -21352,14 +21304,6 @@ return "subject updated";]]>
                 queries can be retrieved for a nested
                 <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for a
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.resource.ResourceQuery"/>
                 <xosid:description>
@@ -21455,16 +21399,9 @@ return "subject updated";]]>
         <xosid:method xosid:name="getSourceQuery">
             <xosid:description>
                 Gets the query interface for the source. Multiple
-                queries can be retrieved for a nested OR term.
+                queries can be retrieved for a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for a
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.resource.ResourceQuery"/>
                 <xosid:description>
@@ -21656,16 +21593,9 @@ return "subject updated";]]>
         <xosid:method xosid:name="getAssetCreditQuery">
             <xosid:description>
                 Gets the query interface for an asset credit. Multiple
-                queries can be retrieved for a nested OR term.
+                queries can be retrieved for a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for a
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.AssetCreditQuery"/>
                 <xosid:description>
@@ -21796,14 +21726,6 @@ return "subject updated";]]>
                 queries can be retrieved for a nested
                 <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for a
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.spatial.SpatialUnitQuery"/>
                 <xosid:description>
@@ -21869,15 +21791,9 @@ return "subject updated";]]>
         <xosid:method xosid:name="getAssetContentQuery">
             <xosid:description>
                 Gets the query interface for the asset content.
+                Multiple queries can be retrieved for a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for a
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.AssetContentQuery"/>
                 <xosid:description>
@@ -21974,16 +21890,10 @@ return "subject updated";]]>
 
         <xosid:method xosid:name="getRepositoryQuery">
             <xosid:description>
-                Gets the query interface for a repository.
+                Gets the query interface for a repository. Multiple
+                queries can be retrieved for a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for a
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.RepositoryQuery"/>
                 <xosid:description>
@@ -22061,7 +21971,9 @@ return "subject updated";]]>
 
         <xosid:method xosid:name="getSubjectQuery">
             <xosid:description>
-                Gets the query interface for a subject.
+                Gets the query interface for a subject. Multiple
+                queries can be retrieved for a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
             <xosid:parameter xosid:name="match">
                 <xosid:primitiveType xosid:type="boolean"/>
@@ -22165,16 +22077,10 @@ return "subject updated";]]>
 
         <xosid:method xosid:name="getCompositionQuery">
             <xosid:description>
-                Gets the query interface for a composition.
+                Gets the query interface for a composition. Multiple
+                queries can be retrieved for a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for a
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.CompositionQuery"/>
                 <xosid:description>
@@ -22222,12 +22128,8 @@ return "subject updated";]]>
             <xosid:description>
                 Gets the record query interface corresponding to the
                 given <xosid:token>Asset</xosid:token> record
-                <xosid:token>Type. </xosid:token>Multiple record
-                retrievals of the same type may return the same
-                underlying object and do not result in adding terms to
-                the query. Multiple record retrievals of different
-                types add <xosid:token>AND</xosid:token> terms to the
-                other elements set in this query.
+                <xosid:token>Type. </xosid:token>Multiuple retrievals
+                produce a nested <xosid:token>OR</xosid:token> term.
             </xosid:description>
             <xosid:parameter xosid:name="assetRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
@@ -24110,11 +24012,9 @@ while (al.hasNext()) {
         <xosid:implements xosid:interface="osid.OsidQuery"/>
         <xosid:description>
             This is the query interface for searching asset contents.
-            Each method match request produces an
-            <xosid:token>AND</xosid:token> term while multiple
-            invocations of a method produces a nested
-            <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>AssetContent</xosid:token> record.
+            Each method forms an <xosid:token>AND</xosid:token> term
+            while multiple invocations of the same method produce a
+            nested <xosid:token>OR.</xosid:token>
         </xosid:description>
 
 
@@ -24357,11 +24257,8 @@ while (al.hasNext()) {
                 Gets the record query interface corresponding to the
                 given <xosid:token>AssetContent</xosid:token> record
                 <xosid:token>Type. </xosid:token>Multiple record
-                retrievals of the same type may return the same
-                underlying object and do not result in adding terms to
-                the query. Multiple record retrievals of different
-                types add <xosid:token>AND</xosid:token> terms to the
-                other elements set in this form.
+                retrievals produce a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
             <xosid:parameter xosid:name="assetContentRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
@@ -25045,10 +24942,9 @@ while (acl.hasNext()) {
         <xosid:implements xosid:interface=""/>
         <xosid:description>
             This is the query interface for searching asset credits.
-            Each method match request produces an
-            <xosid:token>AND</xosid:token> term while multiple
-            invocations of a method produce a nested
-            <xosid:token>OR.</xosid:token>
+            Each method specifies an <xosid:token>AND</xosid:token>
+            term while multiple invocations of the same method produce
+            a nested <xosid:token>OR.</xosid:token>
         </xosid:description>
 
 
@@ -25158,15 +25054,9 @@ while (acl.hasNext()) {
         <xosid:method xosid:name="getResourceQuery">
             <xosid:description>
                 Gets the query interface for the resource or alias.
+                Multiple retrievals produce a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for a
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.resource.ResourceQuery"/>
                 <xosid:description>
@@ -25670,11 +25560,9 @@ while (aal.hasNext()) {
         <xosid:implements xosid:interface="osid.OsidQuery"/>
         <xosid:description>
             This is the query interface for searching subjects. Each
-            method match request produces an
-            <xosid:token>AND</xosid:token> term while multiple
-            invocations of a method produces a nested
-            <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>SubjectQuery</xosid:token> record.
+            method match specifies an <xosid:token>AND</xosid:token>
+            term while multiple invocations of the same method produce
+            a nested <xosid:token>OR.</xosid:token>
         </xosid:description>
 
 
@@ -25732,16 +25620,10 @@ while (aal.hasNext()) {
 
         <xosid:method xosid:name="getAssetQuery">
             <xosid:description>
-                Gets the query interface for an asset.
+                Gets the query interface for an asset. Multiple
+                retrievals produce a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.AssetQuery"/>
                 <xosid:description>
@@ -25836,16 +25718,10 @@ while (aal.hasNext()) {
 
         <xosid:method xosid:name="getRepositoryQuery">
             <xosid:description>
-                Gets the query interface for a repository.
+                Gets the query interface for a repository. Multiple
+                retrievals produce a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.RepositoryQuery"/>
                 <xosid:description>
@@ -25923,16 +25799,10 @@ while (aal.hasNext()) {
 
         <xosid:method xosid:name="getCompositionQuery">
             <xosid:description>
-                Gets the query interface for a composition.
+                Gets the query interface for a composition. Multiple
+                retrievals produce a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.CompositionQuery"/>
                 <xosid:description>
@@ -25981,11 +25851,8 @@ while (aal.hasNext()) {
                 Gets the record query interface corresponding to the
                 given <xosid:token>Subject</xosid:token> record
                 <xosid:token>Type. </xosid:token>Multiple record
-                retrievals of the same type may return the same
-                underlying object and do not result in adding terms to
-                the query. Multiple record retrievals of different
-                types add <xosid:token>AND</xosid:token> terms to the
-                other elements set in this query.
+                retrievals produce a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
             <xosid:parameter xosid:name="subjectRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
@@ -26894,11 +26761,9 @@ while (sl.hasNext()) {
         <xosid:implements xosid:interface="osid.OsidCatalogQuery"/>
         <xosid:description>
             This is the query interface for searching repositories.
-            Each method match request produces an
-            <xosid:token>AND</xosid:token> term while multiple
-            invocations of a method produces a nested
-            <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>RepositoryQuery</xosid:token> record.
+            Each method specifies an <xosid:token>AND</xosid:token>
+            term while multiple invocations of the same method produce
+            a nested <xosid:token>OR.</xosid:token>
         </xosid:description>
 
 
@@ -26956,16 +26821,10 @@ while (sl.hasNext()) {
 
         <xosid:method xosid:name="getAssetQuery">
             <xosid:description>
-                Gets the query interface for an asset.
+                Gets the query interface for an asset. Multiple
+                retrievals produce a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.AssetQuery"/>
                 <xosid:description>
@@ -27041,16 +26900,10 @@ while (sl.hasNext()) {
 
         <xosid:method xosid:name="getSubjectQuery">
             <xosid:description>
-                Gets the query interface for a subject.
+                Gets the query interface for a subject. Multiple
+                retrievals produce a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.SubjectQuery"/>
                 <xosid:description>
@@ -27126,16 +26979,10 @@ while (sl.hasNext()) {
 
         <xosid:method xosid:name="getCompositionQuery">
             <xosid:description>
-                Gets the query interface for a composition.
+                Gets the query interface for a composition. Multiple
+                retrievals produce a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.CompositionQuery"/>
                 <xosid:description>
@@ -27164,11 +27011,8 @@ while (sl.hasNext()) {
                 Gets the record query interface corresponding to the
                 given <xosid:token>Repository</xosid:token> record
                 <xosid:token>Type. </xosid:token>Multiple record
-                retrievals of the same type may return the same
-                underlying object and do not result in adding terms to
-                the query. Multiple record retrievals of different
-                types add <xosid:token>AND</xosid:token> terms to the
-                other elements set in this query.
+                retrievals produce a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
             <xosid:parameter xosid:name="repositoryRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
@@ -28086,11 +27930,9 @@ while (rl.hasNext()) {
         <xosid:implements xosid:interface="osid.OsidQuery"/>
         <xosid:description>
             This is the query interface for searching compositions.
-            Each method match request produces an
-            <xosid:token>AND</xosid:token> term while multiple
-            invocations of a method produces a nested
-            <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>CompositionQuery</xosid:token> record.
+            Each method specifies an <xosid:token>AND</xosid:token>
+            term while multiple invocations of the same method produces
+            a nested <xosid:token>OR.</xosid:token>
         </xosid:description>
 
 
@@ -28148,16 +27990,10 @@ while (rl.hasNext()) {
 
         <xosid:method xosid:name="getAssetQuery">
             <xosid:description>
-                Gets the query interface for an asset.
+                Gets the query interface for an asset. Multiple
+                retrievals produce a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.AssetQuery"/>
                 <xosid:description>
@@ -28253,16 +28089,10 @@ while (rl.hasNext()) {
 
         <xosid:method xosid:name="getRepositoryQuery">
             <xosid:description>
-                Gets the query interface for a repository.
+                Gets the query interface for a repository. Multiple
+                retrievals produce a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.RepositoryQuery"/>
                 <xosid:description>
@@ -28340,18 +28170,10 @@ while (rl.hasNext()) {
 
         <xosid:method xosid:name="getSubjectQuery">
             <xosid:description>
-                Gets the query interface for a subject. There is only
-                one SubjectQuery per CompositionQuery. Multiple
-                retrievals return the same object.
+                Gets the query interface for a subject. Multiple
+                retrievals produce a nested
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.repository.SubjectQuery"/>
                 <xosid:description>
@@ -28397,12 +28219,8 @@ while (rl.hasNext()) {
             <xosid:description>
                 Gets the record query interface corresponding to the
                 given <xosid:token>Composition</xosid:token> record
-                <xosid:token>Type. </xosid:token>Multiple record
-                retrievals of the same type may return the same
-                underlying object and do not result in adding terms to
-                the query. Multiple record retrievals of different
-                types add <xosid:token>AND</xosid:token> terms to the
-                other elements set in this query.
+                <xosid:token>Type. </xosid:token>Multiple retrievals
+                produce a nested <xosid:token>OR</xosid:token> term.
             </xosid:description>
             <xosid:parameter xosid:name="compositionRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
