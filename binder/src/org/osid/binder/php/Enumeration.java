@@ -117,12 +117,20 @@ public class Enumeration
 	    out.print("    /** ");
 	    item.getDescription().printHtml(out, "        ", 10);
 	    out.println("*/");
-	    out.print("    static $" + item.getBinderName());
+	    out.println("    public static function " + item.getBinderName() + "() {");
 	     if (getName().equals("osid.OSID")) {
-	out.println(";");
+			out.print("        return new osid_OSID ");
+			out.println("("
+				  + "\"" + getServiceName(item.getBinderName()) + "\", " 
+				  + "null, " 
+				  + "\"" + getManagerName(item.getBinderName()) + "\", " 
+				  + "\"" + getProxyManagerName(item.getBinderName()) + "\", "
+				  + "\"" + item.getDescription().getText() + "\"" 
+				  + ");");
 	     } else {
-	     	 out.println(" = \"" + getServiceName(item.getBinderName()) + "\";");
+	     	 out.println("        return \"" + getServiceName(item.getBinderName()) + "\";");
 	     }
+	    out.println("    }");
    		out.println();
 	}
 
@@ -139,12 +147,10 @@ public class Enumeration
 	out.println("        return $ret;");
 	out.println("    }");
 	
-	out.println("}");
 	
 	if (getName().equals("osid.OSID")) {
 		out.println();
 		out.println();
-		out.println("class OsidEnumItem {");
 		out.println("    private $service;");
 		out.println("    private $osid;");
 		out.println("    private $manager;");
@@ -178,30 +184,31 @@ public class Enumeration
 		out.println("    public function getDescription() {");
 		out.println("        return $this->description;");
 		out.println("    }");
-		out.println("}");
 	}
 	
-	out.println();
-	out.println();
-	for (org.osid.binder.EnumerationItem item: getItems()) {
-		if (getName().equals("osid.OSID")) {
-			out.println();
-			out.print("/** ");
-			item.getDescription().printHtml(out, "        ", 10);
-			out.println("*/");
-			out.print(getClassName(getName()) + "::$" + item.getBinderName() + " = ");
+	out.println("}");
 	
-		   
-			out.print("new OsidEnumItem ");
-			out.println("("
-				  + "\"" + getServiceName(item.getBinderName()) + "\", " 
-				  + "null, " 
-				  + "\"" + getManagerName(item.getBinderName()) + "\", " 
-				  + "\"" + getProxyManagerName(item.getBinderName()) + "\", "
-				  + "\"" + item.getDescription().getText() + "\"" 
-				  + ");");
-	    }
-	}
+	out.println();
+// 	out.println();
+// 	for (org.osid.binder.EnumerationItem item: getItems()) {
+// 		if (getName().equals("osid.OSID")) {
+// 			out.println();
+// 			out.print("/** ");
+// 			item.getDescription().printHtml(out, "        ", 10);
+// 			out.println("*/");
+// 			out.print(getClassName(getName()) + "::$" + item.getBinderName() + " = ");
+// 	
+// 		   
+// 			out.print("new osid_OSID ");
+// 			out.println("("
+// 				  + "\"" + getServiceName(item.getBinderName()) + "\", " 
+// 				  + "null, " 
+// 				  + "\"" + getManagerName(item.getBinderName()) + "\", " 
+// 				  + "\"" + getProxyManagerName(item.getBinderName()) + "\", "
+// 				  + "\"" + item.getDescription().getText() + "\"" 
+// 				  + ");");
+// 	    }
+// 	}
 	return;
     }
 
