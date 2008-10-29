@@ -50,31 +50,31 @@ public class PrimitiveTranslator {
 	}
 
 	if (primitive.equals("cardinal")) {
-	    return ("long");
+	    return ("integer");
 	}
 
 	if (primitive.equals("float")) {
-	    return ("double");
+	    return ("float");
 	}
 
 	if (primitive.equals("integer")) {
-	    return ("long");
+	    return ("integer");
 	}
 
 	if (primitive.equals("interface")) {
-	    return ("java.lang.Object");
+	    return ("object");
 	}
 
 	if (primitive.equals("object")) {
-	    return ("java.lang.Object");
+	    return ("object");
 	}
 
 	if (primitive.equals("string")) {
-	    return ("String");
+	    return ("string");
 	}
 
 	if (primitive.equals("timestamp")) {
-	    return ("java.util.Date");
+	    return ("DateTime");
 	}
 
 	return (primitive);
