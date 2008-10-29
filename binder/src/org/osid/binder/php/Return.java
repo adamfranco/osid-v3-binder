@@ -67,15 +67,19 @@ public class Return
 
     public String getBinderType() {
 	String ret;
-
-	if (isPrimitiveType()) {
-	    ret = PrimitiveTranslator.translate(getType());
-	} else {
-	    ret = "org." + getType();
-	}
-
+	
 	if (isArray()) {
-	    ret = ret + "[]";
+		if (isPrimitiveType()) {
+			ret = "array of " + PrimitiveTranslator.translate(getType()) + "s";
+		} else {
+			ret = "array of " + org.osid.binder.php.Interface.getClassName(getType()) + " objects ";
+		}
+	} else {
+		if (isPrimitiveType()) {
+			ret = PrimitiveTranslator.translate(getType());
+		} else {
+			ret = "object " + org.osid.binder.php.Interface.getClassName(getType());
+		}
 	}
 
 	return (ret);
@@ -94,7 +98,7 @@ public class Return
 
 
     void printJDoc(PrintStream out, String margin) {
-	String pre = margin + "@return ";
+	String pre = margin + "@return " + getBinderType() + " ";
 	out.print(pre);
 	getDescription().printHtml(out, margin + "        ", pre.length());
 	out.println();
