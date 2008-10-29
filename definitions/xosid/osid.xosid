@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid generated at 10/24/2008 10:47:26 AM 
+    XOSID for osid generated at 10/28/2008 8:54:51 AM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -1643,11 +1643,6 @@
 
             If multiple data elements are set in this interface, the
             results matching all the given data (eg: AND) are returned.
-            Search methods throughout the OSIDs accept multiple
-            <xosid:token>OsidQuery</xosid:token> interfaces. Each
-            <xosid:token>OsidQuery</xosid:token> in the array behaves
-            like an OR such that results are returned that match any of
-            the given <xosid:token>OsidQuery</xosid:token> objects.
             Any match method inside an
             <xosid:token>OsidQuery</xosid:token> may be invoked
             multiple times. In the case of a match method, each
@@ -1660,7 +1655,7 @@
 
 <xosid:code>
 <![CDATA[
-OsidQuery { OsidQuery.matchDisplayName AND (OsidQuery.matchDescription OR OsidQuery.matchDescription)} OR OsidQuery]]>
+OsidQuery { OsidQuery.matchDisplayName AND (OsidQuery.matchDescription OR OsidQuery.matchDescription)}]]>
             </xosid:code>
              
             <xosid:pbreak/>
@@ -1691,33 +1686,31 @@ OsidQuery { OsidQuery.matchDisplayName AND (OsidQuery.matchDescription OR OsidQu
             <xosid:pbreak/>
 
             An example to find all objects whose name starts with
-            "Fred" plus objects whose name starts with "Barney", color
-            is "purple" and the word "dinosaur" does not appear in the
-            description. <xosid:token>ColorQuery</xosid:token> is an
-            interface extension of the object that defines a color.
+            "Fred" or whose name starts with "Barney", but the word
+            "dinosaur" does not appear in the description and not the
+            color is not purple.. <xosid:token>ColorQuery</xosid:token>
+            is a record of the object that defines a color.
 
             <xosid:pbreak/>
 
 <xosid:code>
 <![CDATA[
-ObjectQuery queries[2];]]>
+ObjectQuery query;]]>
             </xosid:code>
              
             <xosid:pbreak/>
 
 <xosid:code>
 <![CDATA[
-queries[0] = session.getObjectQuery();
-queries[0].addDisplayNameMatch("Fred*", wildcardStringMatchType, true);
-
-queries[1] = session.getObjectQuery();
-queries[1].addDisplayNameMatch("Barney*", wildcardStringMatchType, true);
-queries[1].addDescriptionMatch("dinosaur", wordStringMatchType, false);
+query = session.getObjectQuery();
+query.matchDisplayName("Fred*", wildcardStringMatchType, true);
+query.matchDisplayName("Barney*", wildcardStringMatchType, true);
+query.matchDescriptionMatch("dinosaur", wordStringMatchType, false);
 
 ColorQuery recordQuery;
-recordQuery = queries[1].getObjectRecord(colorRecordType);
-recordQuery.matchColor("purple");
-ObjectList list = session.getObjectsByQuery(queries);]]>
+recordQuery = query.getObjectRecord(colorRecordType);
+recordQuery.matchColor("purple", false);
+ObjectList list = session.getObjectsByQuery(query);]]>
             </xosid:code>
              
         </xosid:description>
@@ -2480,11 +2473,11 @@ OsidSearchOrder order = session.getObjectSearchOrder();
 order.orderByDisplayName();
 os.orderResults(order);
 
-OsidQuery queries[1];
-queries[0] = session.getObjectQuery();
-queries[0].addDescriptionMatch("*food*", wildcardStringMatchType, true);
+OsidQuery queru;
+query = session.getObjectQuery();
+query.addDescriptionMatch("*food*", wildcardStringMatchType, true);
 
-ObjectSearchResults results = session.getObjectsBySearch(queries, os);
+ObjectSearchResults results = session.getObjectsBySearch(query, os);
 ObjectList list = results.getObjectList();]]>
             </xosid:code>
              
@@ -2652,11 +2645,11 @@ ObjectList list = results.getObjectList();]]>
 OsidSearch os = session.getObjectSearch();
 os.limitResultSet(1, 25);
 
-OsidQuery queries[1];
-queries[0] = session.getObjectQuery();
-queries[0].addDescriptionMatch("*food*", wildcardStringMatchType, true);
+OsidQuery query;
+query = session.getObjectQuery();
+query.addDescriptionMatch("*food*", wildcardStringMatchType, true);
 
-ObjectSearchResults results = session.getObjectsBySearch(queries, os);
+ObjectSearchResults results = session.getObjectsBySearch(query, os);
 ObjectList list = results.getObjectList();]]>
             </xosid:code>
              
@@ -2748,17 +2741,18 @@ ObjectList list = results.getObjectList();]]>
 <![CDATA[
 OsidSearch os = session.getObjectSearch();
 
-OsidQuery queries[1];
-queries[0] = session.getAgentQuery();
-queries[0].addDescriptionMatch("*food*", wildcardStringMatchType, true);
-ObjectSearchResults results = session.getObjectBySearch(queries, os);
+OsidQuery query;
+query = session.getObjectQuery();
+query.matchDescription("*food*", wildcardStringMatchType, true);
+ObjectSearchResults results = session.getObjectBySearch(query, os);
 
 // get new search inteface and reference previous result set
 os = session.getObjectSearch();
 os.searchWithinResults(results);
 
-queries[0].addDisplayNameMatch("pickles", wordStringMatchType, true);
-results = session.getObjectsBySearch(queries, os);
+query = session.getObjectQuery();
+query.matchDisplayName("pickles", wordStringMatchType, true);
+results = session.getObjectsBySearch(query, os);
 OsidList pickles = results.getObjectList();]]>
             </xosid:code>
              
@@ -2786,33 +2780,25 @@ OsidList pickles = results.getObjectList();]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getProperties">
+        <xosid:method xosid:name="getSearchRecordTypes">
             <xosid:description>
-                Gets a list of properties corresponding to the search
-                type. Properties provide a means for applications to
-                display a representation of the contents of an
-                interface extension without understanding its
-                <xosid:token>Type</xosid:token> specification.
-                Applications needing to examine a specific property or
-                perform updates should use the extension interface
-                defined by its <xosid:token>Type.</xosid:token>
+                Gets the search record types available in this search.
+                A record <xosid:token>Type</xosid:token> explicitly
+                indicates the specification of an interface to the
+                record. A record may or may not inherit other record
+                interfaces through interface inheritance in which case
+                support of a record type may not be explicit in the
+                returned list. Interoperability with the typed
+                interface to this object should be performed through
+                <xosid:token>hasSearchRecordType().</xosid:token>
             </xosid:description>
             <xosid:return>
-                <xosid:interfaceType xosid:type="osid.PropertyList"/>
+                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
                 <xosid:description>
-                    a list of properties
+                    the search record types available through this
+                    object
                 </xosid:description>
             </xosid:return>
-            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
-                <xosid:description>
-                    unable to complete request
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
-                <xosid:description>
-                    an authorization failure occurred
-                </xosid:description>
-            </xosid:error>
             <xosid:compliance xosid:type="mandatory">
                 <xosid:description>
                     This method must be implemented.
@@ -2847,6 +2833,96 @@ OsidList pickles = results.getObjectList();]]>
                 <xosid:description>
                     <xosid:token>searchRecordType</xosid:token> is
                     <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getProperties">
+            <xosid:description>
+                Gets a list of properties. Properties provide a means
+                for applications to display a representation of the
+                contents of a search record without understanding its
+                <xosid:token>Type</xosid:token> specification.
+                Applications needing to examine a specific property
+                should use the extension interface defined by its
+                <xosid:token>Type.</xosid:token>
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.PropertyList"/>
+                <xosid:description>
+                    a list of properties
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    an authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getPropertiesBySearchRecordType">
+            <xosid:description>
+                Gets a list of properties corresponding to the
+                specified search record type. Properties provide a
+                means for applications to display a representation of
+                the contents of a search record without understanding
+                its record interface specification. Applications
+                needing to examine a specific propertyshould use the
+                methods defined by the search record
+                <xosid:token>Type. </xosid:token>The resulting set
+                includes properties specified by parents of the record
+                <xosid:token>type</xosid:token> in the case a record's
+                interface extends another.
+            </xosid:description>
+            <xosid:parameter xosid:name="searchRecordType">
+                <xosid:interfaceType xosid:type="osid.type.Type"/>
+                <xosid:description>
+                    the search record type corresponding to the
+                    properties set to retrieve
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.PropertyList"/>
+                <xosid:description>
+                    a list of properties
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
+                <xosid:description>
+                    <xosid:token>searchRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    an authorization failure occurred
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
+                <xosid:description>
+
+                                        <xosid:token>hasSearchRecordType(searchRecordType)</xosid:token>
+                    is <xosid:token>false</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -3965,7 +4041,7 @@ OsidList pickles = results.getObjectList();]]>
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="isSet">
+        <xosid:method xosid:name="hasValue">
             <xosid:description>
                 Tests if this data element is has a value.
             </xosid:description>

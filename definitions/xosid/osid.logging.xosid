@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.logging generated at 10/24/2008 11:55:39 AM 
+    XOSID for osid.logging generated at 10/28/2008 3:02:43 PM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -2973,12 +2973,6 @@ while (entries.hasNext()) {
             This session provides methods for searching among log
             entries. The search query is constructed using the
             <xosid:token>LogEntryQuery</xosid:token> interface.
-            Multiple <xosid:token>LogEntryQuery</xosid:token>
-            interfaces may be submitted into a search to perform a
-            boolean <xosid:token>OR.</xosid:token> If more than one
-            search element is specified within a single
-            <xosid:token>LogEntryQuery,</xosid:token> these elements
-            form a boolean AND.
             <xosid:token>getLogEntriesByQuery()</xosid:token> is the
             basic search method and returns a list of log entries. A
             more advanced search may be performed with
@@ -3136,10 +3130,10 @@ while (entries.hasNext()) {
         <xosid:method xosid:name="getLogEntriesByQuery">
             <xosid:description>
                 Gets a list of log entries matching the given search
-                interface. Each element in the array is OR'd.
+                interface.
             </xosid:description>
-            <xosid:parameter xosid:name="logEntryQueries">
-                <xosid:interfaceType xosid:type="osid.logging.LogEntryQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="logEntryQuery">
+                <xosid:interfaceType xosid:type="osid.logging.LogEntryQuery"/>
                 <xosid:description>
                     the search query array
                 </xosid:description>
@@ -3153,7 +3147,7 @@ while (entries.hasNext()) {
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>logEntryQueries</xosid:token> is
+                    <xosid:token>logEntryQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -3169,8 +3163,8 @@ while (entries.hasNext()) {
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>logEntryQuery</xosid:token> is not
-                    of this service
+                    <xosid:token>logEntryQuery</xosid:token> is not of
+                    this service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -3221,11 +3215,10 @@ while (entries.hasNext()) {
         <xosid:method xosid:name="getLogEntriesBySearch">
             <xosid:description>
                 Gets the search results matching the given search query
-                using the given search. Each element in the query array
-                is OR'd.
+                using the given search.
             </xosid:description>
-            <xosid:parameter xosid:name="logEntryQueries">
-                <xosid:interfaceType xosid:type="osid.logging.LogEntryQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="logEntryQuery">
+                <xosid:interfaceType xosid:type="osid.logging.LogEntryQuery"/>
                 <xosid:description>
                     the search query array
                 </xosid:description>
@@ -3244,7 +3237,7 @@ while (entries.hasNext()) {
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>logEntryQueries
+                    <xosid:token>logEntryQuery
                    </xosid:token>or <xosid:token>
                     logEntrySearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -3262,7 +3255,7 @@ while (entries.hasNext()) {
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>logEntryQuery
+                    <xosid:token>logEntryQuery
                    </xosid:token>or <xosid:token>
                     logEntrySearch</xosid:token> is not of this service
                 </xosid:description>
@@ -4107,12 +4100,12 @@ while (entries.hasNext()) {
         <xosid:method xosid:name="getLogsByRecordType">
             <xosid:description>
                 Gets a <xosid:token>LogList</xosid:token> containing
-                the given repository record
-                <xosid:token>Type.</xosid:token>In plenary mode, the
-                returned list contains all known logs or an error
-                results. Otherwise, the returned list may contain only
-                those logs that are accessible through this session. In
-                both cases, the order of the set is not specified.
+                the given repository record <xosid:token>Type.
+                </xosid:token>In plenary mode, the returned list
+                contains all known logs or an error results. Otherwise,
+                the returned list may contain only those logs that are
+                accessible through this session. In both cases, the
+                order of the set is not specified.
             </xosid:description>
             <xosid:parameter xosid:name="logRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
@@ -4189,14 +4182,8 @@ while (entries.hasNext()) {
             This session provides methods for searching
             <xosid:token>Log</xosid:token> objects. The search query
             is constructed using the
-            <xosid:token>LogQuery</xosid:token> interface. Multiple
-            <xosid:token>LogQuery</xosid:token> interfaces may be
-            submitted into a search to perform a boolean
-            <xosid:token>OR.</xosid:token> If more than one search
-            element is specified within a single
-            <xosid:token>LogQuery</xosid:token> these elements form a
-            boolean <xosid:token>AND.</xosid:token> The log interface
-            <xosid:token>Type</xosid:token> also specifies the
+            <xosid:token>LogQuery</xosid:token> interface. The log
+            record <xosid:token>Type</xosid:token> also specifies the
             interface for the log query. 
 
             <xosid:pbreak/>
@@ -4215,11 +4202,10 @@ while (entries.hasNext()) {
             <xosid:token>LogList</xosid:token> or be used to perform a
             search within the result set through
             <xosid:token>LogSearch.</xosid:token>
-            Logs may have a query interface indicated by their
-            respective interface types. The typed query interface is
-            accessed via the <xosid:token>LogQuery.</xosid:token> The
-            returns in this session may not be cast directly to these
-            interfaces.
+            Logs may have a query record indicated by their respective
+            record types. The query record is accessed via the
+            <xosid:token>LogQuery.</xosid:token> The returns in this
+            session may not be cast directly to these interfaces.
         </xosid:description>
 
 
@@ -4270,11 +4256,10 @@ while (entries.hasNext()) {
         <xosid:method xosid:name="getLogsByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Logs</xosid:token> matching
-                the given search interface. Each element in the array
-                is OR'd.
+                the given search interface.
             </xosid:description>
-            <xosid:parameter xosid:name="logQueries">
-                <xosid:interfaceType xosid:type="osid.logging.LogQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="logQuery">
+                <xosid:interfaceType xosid:type="osid.logging.LogQuery"/>
                 <xosid:description>
                     the search query array
                 </xosid:description>
@@ -4287,7 +4272,7 @@ while (entries.hasNext()) {
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>logQueries</xosid:token> is
+                    <xosid:token>logQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -4303,8 +4288,8 @@ while (entries.hasNext()) {
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>logQuery</xosid:token> is not of
-                    this service
+                    <xosid:token>logQuery</xosid:token> is not of this
+                    service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -4333,7 +4318,7 @@ while (entries.hasNext()) {
 
         <xosid:method xosid:name="getLogSearchOrder">
             <xosid:description>
-                Gets a repository search order interface. The
+                Gets a log search order interface. The
                 <xosid:token>LogSearchOrder</xosid:token> is supplied
                 to a <xosid:token>LogSearch</xosid:token> to specify
                 the ordering of results.
@@ -4354,10 +4339,10 @@ while (entries.hasNext()) {
         <xosid:method xosid:name="getLogsBySearch">
             <xosid:description>
                 Gets the search results matching the given search
-                interface. Each element in the array is OR'd.
+                interface.
             </xosid:description>
-            <xosid:parameter xosid:name="logQueries">
-                <xosid:interfaceType xosid:type="osid.logging.LogQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="logQuery">
+                <xosid:interfaceType xosid:type="osid.logging.LogQuery"/>
                 <xosid:description>
                     the search query array
                 </xosid:description>
@@ -4376,7 +4361,7 @@ while (entries.hasNext()) {
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>logQueries
+                    <xosid:token>logQuery
                    </xosid:token>or <xosid:token>
                     logSearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -4394,7 +4379,7 @@ while (entries.hasNext()) {
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>logQuery
+                    <xosid:token>logQuery
                    </xosid:token>or <xosid:token>
                     logSearch</xosid:token> is not of this service
                 </xosid:description>
@@ -5614,6 +5599,31 @@ while (entries.hasNext()) {
         </xosid:description>
 
 
+        <xosid:method xosid:name="getId">
+            <xosid:description>
+                Gets the <xosid:token>Id</xosid:token> associated with
+                this instance of this log entry. Persisting any
+                reference to this object is done by persisting the
+                <xosid:token>Id</xosid:token> returned from this
+                method. The <xosid:token>Id</xosid:token> returned may
+                be different than the <xosid:token>Id</xosid:token>
+                used to query this object. In this case, the new
+                <xosid:token>Id</xosid:token> should be preferred over
+                the old one for future queries.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.id.Id"/>
+                <xosid:description>
+                    the <xosid:token>Id</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
         <xosid:method xosid:name="getPriority">
             <xosid:description>
                 Gets the priority level og this entry.
@@ -5808,38 +5818,11 @@ while (entries.hasNext()) {
         <xosid:implements xosid:interface=""/>
         <xosid:description>
             This is the query interface for searching log entries. Each
-            method match request produces an
-            <xosid:token>AND</xosid:token> term while multiple
-            invocations of a method produces a nested
-            <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>LogEntryQuery</xosid:token> record.
+            method specifies an <xosid:token>AND</xosid:token> term
+            while multiple invocations of the same method produce a
+            nested <xosid:token>OR.</xosid:token>
         </xosid:description>
 
-
-        <xosid:method xosid:name="getId">
-            <xosid:description>
-                Gets the <xosid:token>Id</xosid:token> associated with
-                this instance of this log entry. Persisting any
-                reference to this object is done by persisting the
-                <xosid:token>Id</xosid:token> returned from this
-                method. The <xosid:token>Id</xosid:token> returned may
-                be different than the <xosid:token>Id</xosid:token>
-                used to query this object. In this case, the new
-                <xosid:token>Id</xosid:token> should be preferred over
-                the old one for future queries.
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.id.Id"/>
-                <xosid:description>
-                    the <xosid:token>Id</xosid:token>
-                </xosid:description>
-            </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
 
         <xosid:method xosid:name="getStringMatchTypes">
             <xosid:description>
@@ -6074,14 +6057,6 @@ while (entries.hasNext()) {
             <xosid:description>
                 Gets the query interface for an agent.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for a
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.authentication.AgentQuery"/>
                 <xosid:description>
@@ -6155,26 +6130,12 @@ while (entries.hasNext()) {
 
         <xosid:method xosid:name="getContentQuery">
             <xosid:description>
-                Gets the content query interface corresponding to the
+                Gets the content query record corresponding to the
                 content interface <xosid:token>Type</xosid:token>
-                provided in the search session. An object is returned
-                from the search session is only required to implement
-                the root <xosid:token>LogQuery</xosid:token> interface.
-                This method must be used to retrieve a query object
-                implementing the interface specified when retrieving
-                this object from the search session along with all of
-                its ancestor interfaces. Multiple retrievals of this
-                interface may return the same underlying object and do
-                not result in adding terms to the query.
+                provided in the search session. Multiple retrievale
+                produce a nested boolean <xosid:token>OR</xosid:token>
+                term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for a
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:primitiveType xosid:type="object"/>
                 <xosid:description>
@@ -6871,46 +6832,11 @@ while (lel.hasNext()) {
         <xosid:implements xosid:interface="osid.OsidCatalogQuery"/>
         <xosid:description>
             This is the query interface for searching for logs. Each
-            method match request produces an
-            <xosid:token>AND</xosid:token> term while multiple
-            invocations of a method produces a nested
-            <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>LogQuery</xosid:token> record.
+            method specifies an <xosid:token>AND</xosid:token> term
+            while multiple invocations of the same method produce a
+            nested <xosid:token>OR.</xosid:token>
         </xosid:description>
 
-
-        <xosid:method xosid:name="matchLogEntryId">
-            <xosid:description>
-                Matches a log entry <xosid:token>Id</xosid:token> in
-                this log. Multiple Ids are treated as a boolean
-                <xosid:token>OR.</xosid:token>
-            </xosid:description>
-            <xosid:parameter xosid:name="id">
-                <xosid:interfaceType xosid:type="osid.id.Id"/>
-                <xosid:description>
-                    <xosid:token>Id</xosid:token> to match
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if for a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>id</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
 
         <xosid:method xosid:name="supportsLogEntryQuery">
             <xosid:description>
@@ -6935,14 +6861,6 @@ while (lel.hasNext()) {
             <xosid:description>
                 Gets the query interface for a log entry.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.logging.LogEntryQuery"/>
                 <xosid:description>
@@ -6969,11 +6887,8 @@ while (lel.hasNext()) {
                 Gets the record query interface corresponding to the
                 given <xosid:token>Log</xosid:token> record
                 <xosid:token>Type. </xosid:token>Multiple record
-                retrievals of the same type may return the same
-                underlying object and do not result in adding terms to
-                the query. Multiple record retrievals of different
-                types add <xosid:token>AND</xosid:token> terms to the
-                other elements set in this query.
+                retrievals produce a nested boolean
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
             <xosid:parameter xosid:name="logRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
@@ -7149,7 +7064,7 @@ while (lel.hasNext()) {
 
         <xosid:method xosid:name="getLogSearchOrderRecord">
             <xosid:description>
-                Gets the log sarch record order corresponding to the
+                Gets the log search record order corresponding to the
                 given log record Type. Multiple retrievals return the
                 same underlying object.
             </xosid:description>
@@ -7315,7 +7230,7 @@ while (lel.hasNext()) {
 
         <xosid:method xosid:name="getLogSearchRecord">
             <xosid:description>
-                Gets the record corresponding to the given asset search
+                Gets the record corresponding to the given log search
                 record <xosid:token>Type. </xosid:token>This method
                 must be used to retrieve an object implementing the
                 requested record interface along with all of its

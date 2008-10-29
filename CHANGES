@@ -1,0 +1,123 @@
+DRAFT 3 CHANGES (as of 10/24/08)
+
+Java Binder
+
+* removed extra NULL_ARGUMENT errors
+
+* enumerations: added periods to package names
+  		added methods
+
+* managers: add shutdown()
+
+* sessions: add close()
+
+* lists: add done()
+
+* removed CVS tags
+
+
+
+General Patterns
+
+* removed array in search queries
+
+* moved DateTime interfaces to calendaring package
+
+* added descriptions to enumerations
+
+* recasted "interfaces" as "records" such that objects can have multiple records
+
+* added search order interfaces and separating ordering from Search interfaces
+
+* converted timestamp primitive to osid.calendaring.DateTime where applicable
+
+* moved getXXXByType() for Forms and Queries such that the form and query are
+responsible for retrieving associated records
+
+* changed "unset" query methods to "any" with a boolean switch in OsidQueries
+
+
+OSID Package
+
+* OsidManager: fixed typo in supportsJournaling()
+
+* OsidProxyManager: fixed typo
+
+* OsidRecord: implementsRecordType() 
+	    remove getType()
+
+* OsidQuery - remove matchUnsetGenus() - it is a required element
+
+* Property - removed index
+
+* moved date/time interfaces out of OSID package
+
+
+
+Calendaring OSID Package
+
+* DateTime: removed java date utility
+  	    removed gregorian references
+
+* TimeResolution: fixed typo in name
+
+
+
+Filing OSID Package
+
+* added missing profile methods for file and directory record types
+
+* fixed method names in DirectoryReceiver
+
+* added ALREADY_EXIST errors in FileManagementSession methods
+
+* added boolean switches to overwrite() methods
+
+
+
+Hierarchy Package
+
+* HierarchyTraversalSession: fixed description to getRoots()
+
+
+Repository OSID Package
+
+* Asset: If not copyright known, then the copyright methods should throw illegal state.
+
+* AssetContent: getURL() - throw illegal state if no url
+                fixed getDataLength() description
+
+* fixed typo in AssetQuery (subjectt)
+
+* Added supportsSubjectQuery() method
+
+
+Resource OSID
+
+* new
+
+
+Transport OSID Package
+
+* DataInputStream: remove array in skip()
+ 		   available returns a cardinal
+		   include a hasNext() method
+		   added end of stream check
+
+
+
+DRAFT 2 (7/28/08)
+
+* fixed many typos
+
+* added test for support of hierarchy node sequencing in OsidProfiles
+
+
+DRAFT 1 (6/28/08)
+
+* changed equals() methods to IsEqual() for Type & Id
+
+* fixed rollbackService() method name in OsidManager
+
+* added unregisterForServiceMessages() in OsidManager
+

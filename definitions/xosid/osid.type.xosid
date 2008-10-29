@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.type generated at 10/14/2008 11:48:17 AM 
+    XOSID for osid.type generated at 10/28/2008 4:11:02 PM 
 
     Copyright (C) 2002-2007 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -1002,106 +1002,6 @@ print type.getDisplayName();]]>
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>
-
-        <xosid:method xosid:name="addChild">
-            <xosid:description>
-                Adds a type as a child to another.
-            </xosid:description>
-            <xosid:parameter xosid:name="parentType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the parent <xosid:token>Type</xosid:token>
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:parameter xosid:name="type">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type to add to
-                    <xosid:token>parentType</xosid:token>
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="ALREADY_EXISTS" xosid:category="User">
-                <xosid:description>
-                    <xosid:token>type</xosid:token> is already a child
-                    of <xosid:token>parentType</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
-                <xosid:description>
-                    <xosid:token>type</xosid:token> or
-                    <xosid:token>parentType</xosid:token> is not found
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>type</xosid:token> or
-                    <xosid:token>parentType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
-                <xosid:description>
-                    unable to complete request
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
-                <xosid:description>
-                    authorization failure
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="removeChild">
-            <xosid:description>
-                Removes a child from a type. This method removes the
-                child but does not delete the type.
-            </xosid:description>
-            <xosid:parameter xosid:name="parentType">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the parent <xosid:token>Type</xosid:token>
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:parameter xosid:name="type">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the type to to remove
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:error xosid:type="NOT_FOUND" xosid:category="User">
-                <xosid:description>
-                    <xosid:token>type</xosid:token> or
-                    <xosid:token>parentType</xosid:token> is not found
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>type</xosid:token> or
-                    <xosid:token>parentType</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
-                <xosid:description>
-                    unable to complete request
-                </xosid:description>
-            </xosid:error>
-            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
-                <xosid:description>
-                    authorization failure
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
     </xosid:interface>
 
 
@@ -1311,87 +1211,6 @@ print type.getDisplayName();]]>
                     <xosid:token>true</xosid:token> if the given
                     <xosid:token>Type</xosid:token> is equal to this
                     one, <xosid:token>false</xosid:token> otherwise
-                </xosid:description>
-            </xosid:return>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="isParent">
-            <xosid:description>
-                Tests if the given type is a parent of this type.
-            </xosid:description>
-            <xosid:parameter xosid:name="type">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the <xosid:token>Type</xosid:token>
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if
-                    <xosid:token>type</xosid:token> is a parent of
-                    this type, <xosid:token>false
-                    </xosid:token>otherwise
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>type</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="isAncestor">
-            <xosid:description>
-                Tests if the given type is an ancestor of this type.
-            </xosid:description>
-            <xosid:parameter xosid:name="type">
-                <xosid:interfaceType xosid:type="osid.type.Type"/>
-                <xosid:description>
-                    the <xosid:token>Type</xosid:token>
-                </xosid:description>
-            </xosid:parameter>
-            <xosid:return>
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if
-                    <xosid:token>type</xosid:token> is an ancestor of
-                    this type, <xosid:token>false
-                    </xosid:token>otherwise
-                </xosid:description>
-            </xosid:return>
-            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
-                <xosid:description>
-                    <xosid:token>type</xosid:token> is
-                    <xosid:token>null</xosid:token>
-                </xosid:description>
-            </xosid:error>
-            <xosid:compliance xosid:type="mandatory">
-                <xosid:description>
-                    This method must be implemented.
-                </xosid:description>
-            </xosid:compliance>
-        </xosid:method>
-
-        <xosid:method xosid:name="getParents">
-            <xosid:description>
-                Gets the parents of this type.
-            </xosid:description>
-            <xosid:return>
-                <xosid:interfaceType xosid:type="osid.type.TypeList"/>
-                <xosid:description>
-                    the parents of this type
                 </xosid:description>
             </xosid:return>
             <xosid:compliance xosid:type="mandatory">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.cataloging generated at 10/24/2008 11:25:42 AM 
+    XOSID for osid.cataloging generated at 10/28/2008 9:48:42 AM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -1380,12 +1380,12 @@
         <xosid:implements xosid:interface="osid.OsidSession"/>
         <xosid:description>
             This session provides methods to retrieve OSID
-            <xosid:token>Ids</xosid:token> to
-            <xosid:token>Catalogs</xosid:token> mappings. An
+            <xosid:token>Id</xosid:token> to
+            <xosid:token>Catalog</xosid:token> mappings. An
             <xosid:token>Id</xosid:token> may appear in multiple
             <xosid:token>Catalogs.</xosid:token> Each
             <xosid:token>Catalog</xosid:token> may have its own
-            authorizations as to who is allowed to look at it.
+            authorizations as who who is allowed to look at it.
 
             <xosid:pbreak/>
 
@@ -2421,14 +2421,9 @@
             This session provides methods for searching
             <xosid:token>Catalog</xosid:token> objects. The search
             query is constructed using the
-            <xosid:token>CatalogQuery</xosid:token> interface. Multiple
-            <xosid:token>CatalogQuery</xosid:token> interfaces may be
-            submitted into a search to perform a boolean OR. If more
-            than one search element is specified within a single
-            <xosid:token>CatalogQuery</xosid:token> these elements
-            form a boolean AND. The catalog interface
-            <xosid:token>Type</xosid:token> also specifies the
-            interface for the catalog query. 
+            <xosid:token>CatalogQuery</xosid:token> interface.The
+            catalog interface <xosid:token>Type</xosid:token> also
+            specifies the interface for the catalog query. 
 
             <xosid:pbreak/>
 
@@ -2501,13 +2496,12 @@
         <xosid:method xosid:name="getCatalogsByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Catalogs</xosid:token>
-                matching the given search interface. Each element in
-                the array is OR'd.
+                matching the given search interface.
             </xosid:description>
-            <xosid:parameter xosid:name="catalogQueries">
-                <xosid:interfaceType xosid:type="osid.cataloging.CatalogQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="catalogQuery">
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -2518,7 +2512,7 @@
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>catalogQueries</xosid:token> is
+                    <xosid:token>catalogQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -2534,7 +2528,7 @@
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>catalogQuery</xosid:token> is not of
+                    <xosid:token>catalogQuery</xosid:token> is not of
                     this service
                 </xosid:description>
             </xosid:error>
@@ -2592,12 +2586,12 @@
         <xosid:method xosid:name="getCatalogsBySearch">
             <xosid:description>
                 Gets the search results matching the given search
-                interface. Each element in the array is OR'd.
+                interface.
             </xosid:description>
-            <xosid:parameter xosid:name="catalogQueries">
-                <xosid:interfaceType xosid:type="osid.cataloging.CatalogQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="catalogQuery">
+                <xosid:interfaceType xosid:type="osid.cataloging.CatalogQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="catalogSearch">
@@ -2614,7 +2608,7 @@
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>catalogQueries
+                    <xosid:token>catalogQuery
                    </xosid:token>or <xosid:token>
                     catalogSearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -2632,7 +2626,7 @@
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a <xosid:token>catalogQuery
+                    <xosid:token>catalogQuery
                    </xosid:token>or <xosid:token>
                     catalogSearch</xosid:token> is not of this service
                 </xosid:description>
@@ -3968,11 +3962,9 @@
         <xosid:implements xosid:interface="osid.OsidCatalogQuery"/>
         <xosid:description>
             This is the query interface for searching catalogs. Each
-            method match request produces an
-            <xosid:token>AND</xosid:token> term while multiple
-            invocations of a method produces a nested
-            <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>CatalogQuery</xosid:token> record.
+            method specifies an <xosid:token>AND</xosid:token> term
+            while multiple invocations of the same method produces a
+            nested <xosid:token>OR.</xosid:token>
         </xosid:description>
 
 
@@ -4014,11 +4006,8 @@
                 Gets the record query interface corresponding to the
                 given <xosid:token>Catalog</xosid:token> record
                 <xosid:token>Type. </xosid:token>Multiple record
-                retrievals of the same type may return the same
-                underlying object and do not result in adding terms to
-                the query. Multiple record retrievals of different
-                types add <xosid:token>AND</xosid:token> terms to the
-                other elements set in this query.
+                retrievals produce a boolean
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
             <xosid:parameter xosid:name="catalogRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>

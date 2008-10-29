@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.id generated at 10/14/2008 10:21:24 AM 
+    XOSID for osid.id generated at 10/28/2008 2:21:47 PM 
 
     Copyright (C) 2002-2008 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -100,7 +100,7 @@
         identifiers. All OSID objects are identified by a unique and
         immutable <xosid:token>Id.</xosid:token> The
         <xosid:token>Id</xosid:token> OSID can be used to generate new
-        <xosid:token>Ids</xosid:token> when creating new objects. 
+        <xosid:token>Ids</xosid:token> when creating new obje_ts. 
 
         <xosid:pbreak/>
 

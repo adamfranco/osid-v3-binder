@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.transport generated at 10/14/2008 11:43:58 AM 
+    XOSID for osid.transport generated at 10/28/2008 4:04:02 PM 
 
     Copyright (C) 2002-2007 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -143,7 +143,7 @@
 <![CDATA[
 TransportSession session = manager.getOutboundSession();
 DataOutputStream out = session.sendData();
-String cmd = "<call><command>get_songs</command><params><param>" + album + "</param></call>";
+String cmd = "<call><command>get_songs</command><params><param>" + album + "</param></params></call>";
 out.write(cmd.length(), cmd);
 out.close();
 

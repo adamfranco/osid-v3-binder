@@ -1,0 +1,34 @@
+last updated: 10/24/08
+
+PACKAGE				VERSION
+
+osid				V3 Draft 3
+id				V3 Draft 3
+type				V3 Draft 3
+assessment			V3 Pre-Draft
+authentication			V3 Draft 3
+authorization			V3 Pre-Draft
+calendaring			incomplete
+cataloging			V3 Draft 3
+configuration			V3 Draft 1
+course				V3 Pre-Draft
+dictionary			V3 Draft 3
+filing				V3 Draft 2
+grading
+hierarchy			V3 Draft 3
+installation			V3 Pre-Draft
+journaling
+learning objective		
+locale				V3 Draft 3
+logging				V3 Draft 3
+messaging			incomplete
+metering
+provisioning			incomplete
+relationship
+repository			V3 Draft 3
+resource			V3 Draft 3
+spatial
+topology			incomplete
+transaction			V3 Draft 3
+transport			V3 Draft 3
+workflow

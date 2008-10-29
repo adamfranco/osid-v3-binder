@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.authentication generated at 10/24/2008 10:55:20 AM 
+    XOSID for osid.authentication generated at 10/28/2008 9:24:15 AM 
 
     Copyright (C) 2002-2008 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -175,7 +175,7 @@
         <xosid:code>
 <![CDATA[
 if (manager.supportsAuthenticationAcquisition() &&
-    manager.supportsAcquisitionInputType(krb5ServiceType) &&
+    manager.supportsAcquisition_nputType(krb5ServiceType) &&
     manager.supportsCredentialType(serialKRB5Type)) {
     AuthenticationAcquisitionSession aas = manager.getAuthenticationAcquisitionSession();
 
@@ -2169,14 +2169,9 @@ AgentReceiver receiver {
             This session provides methods for searching
             <xosid:token>Agent</xosid:token> objects. The search query
             is constructed using the
-            <xosid:token>AgentQuery</xosid:token> interface. Multiple
-            <xosid:token>AgentQuery</xosid:token> interfaces may be
-            submitted into a search to perform a boolean OR. If more
-            than one search element is specified within a single
-            <xosid:token>AgentQuery</xosid:token> these elements form
-            a boolean AND. The agent interface
-            <xosid:token>Type</xosid:token> also specifies the
-            interface for the agent query. 
+            <xosid:token>AgentQuery</xosid:token> interface. The agent
+            interface <xosid:token>Type</xosid:token> also specifies
+            the interface for the agent query. 
 
             <xosid:pbreak/>
 
@@ -2247,13 +2242,12 @@ AgentReceiver receiver {
         <xosid:method xosid:name="getAgentsByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Agents</xosid:token>
-                matching the given query interface. Each element in the
-                array is OR'd.
+                matching the given query interface.
             </xosid:description>
-            <xosid:parameter xosid:name="agentQueries">
-                <xosid:interfaceType xosid:type="osid.authentication.AgentQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="agentQuery">
+                <xosid:interfaceType xosid:type="osid.authentication.AgentQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -2264,7 +2258,7 @@ AgentReceiver receiver {
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>agentQueries</xosid:token> is
+                    <xosid:token>agentQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -2280,7 +2274,7 @@ AgentReceiver receiver {
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    an <xosid:token>AgentQuery</xosid:token> is not of
+                    <xosid:token>AgentQuery</xosid:token> is not of
                     this service
                 </xosid:description>
             </xosid:error>
@@ -2331,13 +2325,12 @@ AgentReceiver receiver {
         <xosid:method xosid:name="getAgentsBySearch">
             <xosid:description>
                 Gets the search results matching the given search query
-                using the given search. Each element in the query array
-                is OR'd.
+                using the given search.
             </xosid:description>
-            <xosid:parameter xosid:name="agentQueries">
-                <xosid:interfaceType xosid:type="osid.authentication.AgentQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="agentQuery">
+                <xosid:interfaceType xosid:type="osid.authentication.AgentQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="agentSearch">
@@ -2354,7 +2347,7 @@ AgentReceiver receiver {
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>agentQueries
+                    <xosid:token>agentQuery
                    </xosid:token>or <xosid:token>
                     agentSearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -2372,8 +2365,9 @@ AgentReceiver receiver {
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    <xosid:token>agentSearch</xosid:token> or a query
-                    is not of this service
+                    <xosid:token>agentSearch</xosid:token> or
+                    <xosid:token>agentQuery</xosid:token> is not of
+                    this service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -3420,13 +3414,9 @@ AgentReceiver receiver {
             This session provides methods for searching
             <xosid:token>Key</xosid:token> objects. The search query
             is constructed using the
-            <xosid:token>KeyQuery</xosid:token> interface. Multiple
-            <xosid:token>KeyQuery</xosid:token> interfaces may be
-            submitted into a search to perform a boolean OR. If more
-            than one search element is specified within a single
-            <xosid:token>KeyQuery</xosid:token> these elements form a
-            boolean AND. The key <xosid:token>Type</xosid:token> also
-            specifies the interface for the key query. 
+            <xosid:token>KeyQuery</xosid:token> interface. The key
+            <xosid:token>Type</xosid:token> also specifies the
+            interface for the key query. 
 
             <xosid:pbreak/>
 
@@ -3496,13 +3486,12 @@ AgentReceiver receiver {
         <xosid:method xosid:name="getKeysByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Keys</xosid:token> matching
-                the given search interface. Each element in the array
-                is OR'd.
+                the given search interface.
             </xosid:description>
-            <xosid:parameter xosid:name="keyQueries">
-                <xosid:interfaceType xosid:type="osid.authentication.KeyQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="keyQuery">
+                <xosid:interfaceType xosid:type="osid.authentication.KeyQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -3513,7 +3502,7 @@ AgentReceiver receiver {
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>keyQueries</xosid:token> is
+                    <xosid:token>keyQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -3529,8 +3518,8 @@ AgentReceiver receiver {
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    <xosid:token>keyQueries</xosid:token> is not of
-                    this service
+                    <xosid:token>keyQuery</xosid:token> is not of this
+                    service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -3580,13 +3569,12 @@ AgentReceiver receiver {
         <xosid:method xosid:name="getKeysBySearch">
             <xosid:description>
                 Gets a list of <xosid:token>Keys</xosid:token> matching
-                the given search interface. Each element in the array
-                is OR'd.
+                the given search interface.
             </xosid:description>
-            <xosid:parameter xosid:name="keyQueries">
-                <xosid:interfaceType xosid:type="osid.authentication.KeyQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="keyQuery">
+                <xosid:interfaceType xosid:type="osid.authentication.KeyQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="keySearch">
@@ -3603,7 +3591,7 @@ AgentReceiver receiver {
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>keyQueries
+                    <xosid:token>keyQuery
                    </xosid:token>or <xosid:token>
                     keySearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -4406,11 +4394,9 @@ AgentReceiver receiver {
         <xosid:implements xosid:interface="osid.OsidQuery"/>
         <xosid:description>
             This is the query interface for searching agents. Each
-            method match request produces an
-            <xosid:token>AND</xosid:token> term while multiple
-            invocations of a method produces a nested
-            <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>AgentQuery</xosid:token> record. 
+            method specifies an <xosid:token>AND</xosid:token> term
+            while multiple invocations of the same method produce a
+            nested <xosid:token>OR.</xosid:token>
 
             <xosid:pbreak/>
 
@@ -4421,17 +4407,16 @@ AgentReceiver receiver {
             
             <xosid:code>
 <![CDATA[
-AgentQuery queries[1];
-queries[0] = session.getAgentQuery();
+Agent Query query = session.getAgentQuery();
 
-queries[0].matchDisplayName("Tom*", wildcardStringMatchType, false);
+query.matchDisplayName("Tom*", wildcardStringMatchType, true);
 
-companyAgentQuery = queries[0].getAgentQueryRecord(companyAgentType);
+companyAgentQuery = query.getAgentQueryRecord(companyAgentType);
 companyAgentQuery.matchLoginName("tom");
-companyAgentQuery = queries[0].getAgentQueryRecord(companyAgentType);
+companyAgentQuery = query.getAgentQueryRecord(companyAgentType);
 companyAgentQuery.matchLoginName("tjcoppet");
 
-AgentList agentList = session.getAgentsByQuery(queries);]]>
+AgentList agentList = session.getAgentsByQuery(query);]]>
             </xosid:code>
              
         </xosid:description>
@@ -4483,18 +4468,10 @@ AgentList agentList = session.getAgentsByQuery(queries);]]>
                 return separate query terms nested inside this query
                 term, each which are treated as a boolean
                 <xosid:token>OR. </xosid:token>For example,
-                <xosid:token>AgentQuery1 OR (AgentQuery2.description
-                AND (AgentQuery2.KeyQuery1.name OR
-                AgentQuery2.KeyQuery2.name))</xosid:token>
+                <xosid:token>AgentQuery.description AND
+                (AgentQuery.KeyQuery1.name OR
+                AgentQuery.KeyQuery2.name)</xosid:token>
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if the key query is
-                    a positive match, <xosid:token>false</xosid:token>
-                    for negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.authentication.KeyQuery"/>
                 <xosid:description>
@@ -4518,12 +4495,8 @@ AgentList agentList = session.getAgentsByQuery(queries);]]>
             <xosid:description>
                 Gets the record query interface corresponding to the
                 given <xosid:token>Agent</xosid:token> record
-                <xosid:token>Type. </xosid:token>Multiple record
-                retrievals of the same type may return the same
-                underlying object and do not result in adding terms to
-                the query. Multiple record retrievals of different
-                types add <xosid:token>AND</xosid:token> terms to the
-                other elements set in this query.
+                <xosid:token>Type. </xosid:token>Multiple retrievals
+                produce a nested <xosid:token>OR</xosid:token> term.
             </xosid:description>
             <xosid:parameter xosid:name="agentRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
@@ -5445,10 +5418,10 @@ while (al.hasNext()) {
         <xosid:implements xosid:interface=""/>
         <xosid:description>
             This is the query interface for searching keys. Each method
-            match request is produces an <xosid:token>AND</xosid:token>
-            term while multiple invocations of a method produces a
-            nested <xosid:token>OR,</xosid:token> except for accessing
-            the <xosid:token>KeyQuery</xosid:token> record.
+            specifies an <xosid:token>AND</xosid:token> term while
+            multiple invocations of the same method produce a nested
+            <xosid:token>OR,</xosid:token> except for accessing the
+            <xosid:token>KeyQuery</xosid:token> record.
         </xosid:description>
 
 
@@ -5555,14 +5528,6 @@ while (al.hasNext()) {
                 term, each which are treated as a
                boolean <xosid:token> OR.</xosid:token>
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if the key query is
-                    a positive match, <xosid:token>false</xosid:token>
-                    for negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.authentication.AgentQuery"/>
                 <xosid:description>
@@ -5622,12 +5587,8 @@ while (al.hasNext()) {
             <xosid:description>
                 Gets the record query interface corresponding to the
                 given <xosid:token>Key</xosid:token> record
-                <xosid:token>Type. </xosid:token>Multiple record
-                retrievals of the same type may return the same
-                underlying object and do not result in adding terms to
-                the query. Multiple record retrievals of different
-                types add <xosid:token>AND</xosid:token> terms to the
-                other elements set in this query.
+                <xosid:token>Type. </xosid:token>Multiple retrievals
+                produce a nested <xosid:token>OR</xosid:token> term.
             </xosid:description>
             <xosid:parameter xosid:name="keyRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>

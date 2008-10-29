@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.dictionary generated at 10/24/2008 11:43:49 AM 
+    XOSID for osid.dictionary generated at 10/28/2008 10:04:10 AM 
 
     Copyright (C) 2002-2008 Massachusetts Institute of Technology. All
     Rights Reserved.
@@ -2931,12 +2931,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
         <xosid:description>
             This session provides methods for searching among entries.
             The search query is constructed using the
-            <xosid:token>EntryQuery</xosid:token> interface. Multiple
-            <xosid:token>EntryQuery</xosid:token> interfaces may be
-            submitted into a search to perform a boolean OR. If more
-            than one search element is specified within a single
-            <xosid:token>EntryQuery</xosid:token> these elements form
-            a boolean <xosid:token>AND.</xosid:token> The key
+            <xosid:token>EntryQuery</xosid:token> interface. The key
             <xosid:token>Type</xosid:token> also specifies the
             interface for the key query. 
 
@@ -3082,13 +3077,12 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
         <xosid:method xosid:name="getEntriesByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Entry</xosid:token>
-                elements matching the given search interface. Each
-                element in the array is OR'd.
+                elements matching the given search interface.
             </xosid:description>
-            <xosid:parameter xosid:name="entryQueries">
-                <xosid:interfaceType xosid:type="osid.dictionary.EntryQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="entryQuery">
+                <xosid:interfaceType xosid:type="osid.dictionary.EntryQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -3099,7 +3093,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>entryQueries</xosid:token> is
+                    <xosid:token>entryQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -3115,7 +3109,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    an<xosid:token> entryQuery</xosid:token> is not of
+                    <xosid:token>entryQuery</xosid:token> is not of
                     this service
                 </xosid:description>
             </xosid:error>
@@ -3171,13 +3165,12 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
         <xosid:method xosid:name="getEntriesBySearch">
             <xosid:description>
                 Gets a list of <xosid:token>Entry</xosid:token>
-                elements matching the given search interface. Each
-                element in the array is OR'd.
+                elements matching the given search interface.
             </xosid:description>
-            <xosid:parameter xosid:name="entryQueries">
-                <xosid:interfaceType xosid:type="osid.dictionary.EntryQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="entryQuery">
+                <xosid:interfaceType xosid:type="osid.dictionary.EntryQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="entrySearch">
@@ -3194,7 +3187,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>entryQueries
+                    <xosid:token>entryQuery
                    </xosid:token>or <xosid:token>
                     entrySearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -3212,8 +3205,9 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    <xosid:token>entrySearch</xosid:token> or a query
-                    form is not of this service
+                    <xosid:token>entrySearch</xosid:token> or
+                    <xosid:token>entryQuery</xosid:token> is not of
+                    this service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -4301,14 +4295,9 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
             This session provides methods for searching
             <xosid:token>Dictionary</xosid:token> objects. The search
             query is constructed using the
-            <xosid:token>DictionaryQuery</xosid:token> interface.
-            Multiple <xosid:token>DictionaryQuery</xosid:token>
-            interfaces may be submitted into a search to perform a
-            boolean OR. If more than one search element is specified
-            within a single <xosid:token>DictionaryQuery</xosid:token>
-            these elements form a boolean AND. The dictionary interface
-            <xosid:token>Type</xosid:token> also specifies the
-            interface for the dictionary query. 
+            <xosid:token>DictionaryQuery</xosid:token> interface.The
+            dictionary interface <xosid:token>Type</xosid:token> also
+            specifies the interface for the dictionary query. 
 
             <xosid:pbreak/>
 
@@ -4381,13 +4370,12 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
         <xosid:method xosid:name="getDictionariesByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Dictionary</xosid:token>
-                elements matching the given query. Each element in the
-                array is OR'd.
+                elements matching the given query.
             </xosid:description>
-            <xosid:parameter xosid:name="dictionaryQueries">
-                <xosid:interfaceType xosid:type="osid.dictionary.DictionaryQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="dictionaryQuery">
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionaryQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -4399,7 +4387,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>dictionaryQueries</xosid:token> is
+                    <xosid:token>dictionaryQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -4415,7 +4403,8 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a query form is not of this service
+                    <xosid:token>dictionaryQuery</xosid:token> is not
+                    of this service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -4466,13 +4455,12 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
         <xosid:method xosid:name="getDictionariesBySearch">
             <xosid:description>
                 Gets the search results matching the given search query
-                using the given search. Each element in the query array
-                is OR'd.
+                using the given search.
             </xosid:description>
-            <xosid:parameter xosid:name="dictionaryQueries">
-                <xosid:interfaceType xosid:type="osid.dictionary.DictionaryQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="dictionaryQuery">
+                <xosid:interfaceType xosid:type="osid.dictionary.DictionaryQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="dictionarySearch">
@@ -4489,7 +4477,7 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>dictionaryQueries
+                    <xosid:token>dictionaryQuery
                    </xosid:token>or <xosid:token>
                     dictionarySearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -4507,8 +4495,9 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    <xosid:token>dictionarySearch</xosid:token> or a
-                    query form is not of this service
+                    <xosid:token>dictionarySearch</xosid:token> or
+                    <xosid:token>dictionaryQuery</xosid:token> is not
+                    of this service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -5832,11 +5821,10 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
         <xosid:implements xosid:interface=""/>
         <xosid:description>
             This is the query interface for searching dictionary
-            entries. Each method match request produces an
+            entries. Each method specifies an
             <xosid:token>AND</xosid:token> term while multiple
-            invocations of a method produces a nested
-            <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>EntryQuery</xosid:token> subinterface.
+            invocations of the same method produce a nested
+            <xosid:token>OR.</xosid:token>
         </xosid:description>
 
 
@@ -6114,16 +6102,10 @@ JpegImage jpg = lookupSession.getEntry(tiffImage, tiffType, jpegType);]]>
 
         <xosid:method xosid:name="getDictionaryQuery">
             <xosid:description>
-                Gets the query interface for a dictionary.
+                Gets the query interface for a dictionary. Multiple
+                retrievals produce a nested boolean
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> if a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.dictionary.DictionaryQuery"/>
                 <xosid:description>
@@ -6864,11 +6846,9 @@ while (el.hasNext()) {
         <xosid:implements xosid:interface="osid.OsidCatalogQuery"/>
         <xosid:description>
             This is the query interface for searching dictionaries.
-            Each method match request produces an
-            <xosid:token>AND</xosid:token> term while multiple
-            invocations of a method produces a nested
-            <xosid:token>OR,</xosid:token> except for accessing the
-            <xosid:token>DictionaryQuery</xosid:token> subinterface.
+            Each method specifies an <xosid:token>AND</xosid:token>
+            term while multiple invocations of the same method produce
+            a nested <xosid:token>OR.</xosid:token>
         </xosid:description>
 
 
@@ -6894,16 +6874,10 @@ while (el.hasNext()) {
 
         <xosid:method xosid:name="getEntryQuery">
             <xosid:description>
-                Gets the query interface for an entry.
+                Gets the query interface for an entry. Multiple
+                retrievale produce a nested boolean
+                <xosid:token>OR</xosid:token> term.
             </xosid:description>
-            <xosid:parameter xosid:name="match">
-                <xosid:primitiveType xosid:type="boolean"/>
-                <xosid:description>
-                    <xosid:token>true</xosid:token> for a positive
-                    match, <xosid:token>false</xosid:token> for
-                    negative match
-                </xosid:description>
-            </xosid:parameter>
             <xosid:return>
                 <xosid:interfaceType xosid:type="osid.dictionary.EntryQuery"/>
                 <xosid:description>
@@ -6929,12 +6903,9 @@ while (el.hasNext()) {
             <xosid:description>
                 Gets the record query interface corresponding to the
                 given <xosid:token>Dictionary</xosid:token> record
-                <xosid:token>Type. </xosid:token>Multiple record
-                retrievals of the same type may return the same
-                underlying object and do not result in adding terms to
-                the query. Multiple record retrievals of different
-                types add <xosid:token>AND</xosid:token> terms to the
-                other elements set in this query.
+                <xosid:token>Type. </xosid:token>Multiple retrievale
+                produce a nested boolean <xosid:token>OR</xosid:token>
+                term.
             </xosid:description>
             <xosid:parameter xosid:name="dictionaryRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>

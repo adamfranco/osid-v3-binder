@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.hierarchy generated at 10/24/2008 11:51:52 AM 
+    XOSID for osid.hierarchy generated at 10/28/2008 2:17:56 PM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -3482,12 +3482,6 @@
             <xosid:token>Hierarchy</xosid:token> objects. The search
             query is constructed using the
             <xosid:token>HierarchyQuery</xosid:token> interface.
-            Multiple <xosid:token>HierarchyQuery</xosid:token>
-            interfaces may be submitted into a search to perform a
-            boolean <xosid:token>OR.</xosid:token> If more than one
-            search element is specified within a single
-            <xosid:token>HierarchyQuery</xosid:token> these elements
-            form a boolean AND.
             <xosid:token>getHierarchiesByQuery()</xosid:token> is the
             basic search method and returns a list of
             <xosid:token>Hierarchy</xosid:token> objects.A more
@@ -3559,13 +3553,12 @@
         <xosid:method xosid:name="getHierarchiesByQuery">
             <xosid:description>
                 Gets a list of <xosid:token>Hierarchy</xosid:token>
-                objects matching the given search interface. Each
-                element in the array is OR'd.
+                objects matching the given search interface.
             </xosid:description>
-            <xosid:parameter xosid:name="hierarchyQueries">
-                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="hierarchyQuery">
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -3577,7 +3570,7 @@
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>hierarchyQueries</xosid:token> is
+                    <xosid:token>hierarchyQuery</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -3593,8 +3586,8 @@
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    <xosid:token>hierarchyQueries</xosid:token> is not
-                    of this service
+                    <xosid:token>hierarchyQuery</xosid:token> is not of
+                    this service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
@@ -3645,13 +3638,12 @@
         <xosid:method xosid:name="getHierarchiesBySearch">
             <xosid:description>
                 Gets the search results matching the given search query
-                using the given search. Each element in the query array
-                is OR'd.
+                using the given search.
             </xosid:description>
-            <xosid:parameter xosid:name="hierarchyQueries">
-                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyQuery" xosid:array="true"/>
+            <xosid:parameter xosid:name="hierarchyQuery">
+                <xosid:interfaceType xosid:type="osid.hierarchy.HierarchyQuery"/>
                 <xosid:description>
-                    the search query array
+                    the search query
                 </xosid:description>
             </xosid:parameter>
             <xosid:parameter xosid:name="hierarchySearch">
@@ -3668,7 +3660,7 @@
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>hierarchyQueries
+                    <xosid:token>hierarchyQuery
                    </xosid:token>or <xosid:token>
                     hierarchySearch</xosid:token> is
                     <xosid:token>null</xosid:token>
@@ -3686,9 +3678,9 @@
             </xosid:error>
             <xosid:error xosid:type="UNSUPPORTED" xosid:category="Integration">
                 <xosid:description>
-                    a query or<xosid:token>
-                    hierarchySearch</xosid:token> is not of this
-                    service
+                    <xosid:token>hierarchyQuery</xosid:token>
+                   or <xosid:token> hierarchySearch</xosid:token> is
+                    not of this service
                 </xosid:description>
             </xosid:error>
             <xosid:compliance xosid:type="mandatory">
