@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 
 <!--
-    XOSID for osid.filing generated at 10/28/2008 2:26:56 PM 
+    XOSID for osid.filing generated at 10/30/2008 6:59:56 PM 
 
     Copyright (C) 2008 Massachusetts Institute of Technology. All Rights
     Reserved.
@@ -126,7 +126,7 @@
         within a given directory. Directory browsing is performed
         through the <xosid:token>DirectoryEntryLookupSession.
         </xosid:token>To browse a different directory, a new loookup
-        session is spawned.
+        ses_ion is spawned.
 
         <xosid:pbreak/>
 
@@ -4422,7 +4422,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
         <xosid:method xosid:name="exists">
             <xosid:description>
                 Tests if a file, directory or alias name exists. In a
-                federated view, the exietence test is performed on this
+                federated view, the existence test is performed on this
                 directory and any children of this directory. In an
                 isolated view, the existence test is restrcited to this
                 directory only.
@@ -4657,7 +4657,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getFilesByGenus">
+        <xosid:method xosid:name="getFilesByGenusType">
             <xosid:description>
                 Gets a <xosid:token>FileList</xosid:token>
                 corresponding to the given file genus
@@ -4704,7 +4704,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getFilesByDerivedGenusType">
+        <xosid:method xosid:name="getFilesByParentGenusType">
             <xosid:description>
                 Gets a <xosid:token>FileList</xosid:token>
                 corresponding to the given file genus
@@ -4752,10 +4752,10 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getFilesByInterfaceType">
+        <xosid:method xosid:name="getFilesByRecordType">
             <xosid:description>
                 Gets a <xosid:token>FileList</xosid:token>
-                corresponding to the given file interface
+                corresponding to the given file record
                 <xosid:token>Type.</xosid:token> The set of files
                 implementing the given interface type is
                returned. <xosid:token> </xosid:token>In plenary mode,
@@ -4876,7 +4876,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDirectoriesByName">
+        <xosid:method xosid:name="getSubdirectoriesByName">
             <xosid:description>
                 Gets a specified directories and aliases to directories
                 for the given directory name. In an isolated view, this
@@ -4926,7 +4926,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDirectoriesByGenusType">
+        <xosid:method xosid:name="getSubdirectoriesByGenusType">
             <xosid:description>
                 Gets a <xosid:token>DirectoryList</xosid:token>
                 corresponding to the given directory genus
@@ -4975,7 +4975,7 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDirectoriesByDerivedGenusType">
+        <xosid:method xosid:name="getSubdrectoriesByParentGenusType">
             <xosid:description>
                 Gets a <xosid:token>DirectoryList</xosid:token>
                 corresponding to the given directory genus
@@ -5024,22 +5024,23 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="getDirectoriesByInterfaceType">
+        <xosid:method xosid:name="getSuibdirectoriesByRecordType">
             <xosid:description>
                 Gets a <xosid:token>DirectoryList</xosid:token>
-                corresponding to the given file interface
-                <xosid:token>Type.</xosid:token> The set of interfaces
-                implementing the given interface type is returned. In
-                plenary mode, the returned list contains all known
-                directories or an error results. Otherwise, the
-                returned list may contain only those directories that
-                are accessible through this session. In both cases, the
-                order of the set is not specified.
+                corresponding to the given directory record
+                <xosid:token>Type.</xosid:token> The set of
+                directories implementing the given directory record
+                type is returned.<xosid:token> </xosid:token>In plenary
+                mode, the returned list contains all known directories
+                or an error results. Otherwise, the returned list may
+                contain only those directories that are accessible
+                through this session. In both cases, the order of the
+                set is not specified.
             </xosid:description>
-            <xosid:parameter xosid:name="directoryInterfaceType">
+            <xosid:parameter xosid:name="directoryRecordType">
                 <xosid:interfaceType xosid:type="osid.type.Type"/>
                 <xosid:description>
-                    a directory interface type
+                    a directory record type
                 </xosid:description>
             </xosid:parameter>
             <xosid:return>
@@ -5051,8 +5052,8 @@ FileSession session filingSession.getFileSessionForPath("/etc/osid/config.txt");
             </xosid:return>
             <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Programming">
                 <xosid:description>
-                    <xosid:token>directoryInterfaceType</xosid:token>
-                    is <xosid:token>null</xosid:token>
+                    <xosid:token>directoryRecordType</xosid:token> is
+                    <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
             <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
