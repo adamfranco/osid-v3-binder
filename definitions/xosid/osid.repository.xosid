@@ -8128,7 +8128,7 @@
                 Gets the search results matching the given search query
                 using the given search.
             </xosid:description>
-            <xosid:parameter xosid:name="assetQuey">
+            <xosid:parameter xosid:name="assetQuery">
                 <xosid:interfaceType xosid:type="osid.repository.AssetQuery"/>
                 <xosid:description>
                     the search query
