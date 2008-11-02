@@ -242,11 +242,11 @@ public class Text
 		col = printPlain(out, nl.item(i).getNodeValue(), margin, col, code);
 	    } else if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
 		if (nl.item(i).getLocalName().equals("code")) {
-		    out.println();
-		    out.print(margin + "    ");
-		    col = margin.length() + 4;
+		    //		    out.println();
+		    //		    out.print(margin + "    ");
+		    //		    col = margin.length() + 4;
 		    printPlain(out, (Element) nl.item(i), margin + "    ", col, true);
-		    out.println();
+		    //		    out.println();
 		    out.print(margin);
 		    col = margin.length();
 		} else if (nl.item(i).getLocalName().equals("pbreak")) {
@@ -276,6 +276,8 @@ public class Text
 		} else if (nl.item(i).getLocalName().equals("token")) {
 		    col = printPlain(out, (Element) nl.item(i), margin, col, code);
 		}
+	    } else if (nl.item(i).getNodeType() == Node.CDATA_SECTION_NODE) {
+		printPlain(out, nl.item(i).getNodeValue(), margin, col, true);
 	    }
 	}
 
@@ -287,24 +289,33 @@ public class Text
 
 	if (code) {
 	    text = stripCode(text);
+	    out.println();
 	    out.print(margin);
+	    
+	    char c = ' ';
 	    for (int i = 0; i < text.length(); i++) {
-		char c = text.charAt(i);
+		c = text.charAt(i);
 		out.print(c);
 		if (c == '\n') {
 		    out.print(margin);
 		}
 	    }
-	    return (0);
+	    
+	    if (c != '\n') {
+		out.println();
+		out.print(margin);
+	    }
+	    
+	    return (margin.length());
 	}
-
+	
 	StringTokenizer st = new StringTokenizer(text);
-
+	
 	if (col == 0) {
 	    out.print(margin);
 	    col += margin.length();
 	}
-
+	
 	while(st.hasMoreTokens()) {
 	    String s = st.nextToken();
 	    if ((col >= 0) && ((s.length() + col) > 78)) {
@@ -312,7 +323,7 @@ public class Text
 		out.print(margin);
 		col = margin.length();
 	    }
-
+	    
 	    out.print(s);
 	    out.print(" ");
 	    col = col + s.length() + 1;
@@ -320,10 +331,10 @@ public class Text
 	
 	return (col);
     }
-
-
+    
+    
     private int printHtml(PrintStream out, Element element, String margin, int col) {
-
+	
 	NodeList nl = element.getChildNodes();
 	for (int i = 0; i < nl.getLength(); i++) {
 	    if (nl.item(i).getNodeType() == Node.TEXT_NODE) {
@@ -331,8 +342,8 @@ public class Text
 	    } else if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
 		if (nl.item(i).getLocalName().equals("code")) {
 		    out.println();
-		    out.println(margin + "<pre>");
-		    out.println(margin + "     ");
+		    out.print(margin + "<pre>");
+		    //		    out.println(margin + "     ");
 		    col = margin.length() + 5;
 		    printPlain(out, (Element) nl.item(i), margin + "     ", col, true);
 		    out.println();
@@ -379,14 +390,14 @@ public class Text
 		}
 	    }
 	}
-
+	
 	return (col);
     }
-
-
+    
+    
     private int printHtml(PrintStream out, String text, String margin, int col) {
 	StringTokenizer st = new StringTokenizer(text);
-
+	
 	if (col == 0) {
 	    out.print(margin);
 	    col += margin.length();
@@ -399,7 +410,7 @@ public class Text
 		out.print(margin);
 		col = margin.length();
 	    }
-
+	    
 	    out.print(s);
 	    out.print(" ");
 	    col = col + s.length() + 1;
@@ -407,11 +418,11 @@ public class Text
 	
 	return (col);
     }
-
-
+    
+    
     private static String stripCode(final String code) {
 	String res = code;
-
+	
 	while (true) {
 	    if (res.startsWith("\n")) {
 		res = res.substring(1);
@@ -419,15 +430,15 @@ public class Text
 		break;
 	    }
 	}
-	    
+	
 	while(true) {
-	    if (res.endsWith("\n\n")) {
+	    if (res.endsWith("\n")) {
 		res = res.substring(0, res.length() - 1);
 	    } else {
 		break;
 	    }
 	}
-
+	
 	return (res);
     }
 }
