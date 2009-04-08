@@ -13883,7 +13883,7 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="registerForDeletedTerm">
+        <xosid:method xosid:name="registerForDeletedTerms">
             <xosid:description>
                 Registers for notification of deleted terms.
                 <xosid:token>TermReceiver.deletedTerm()</xosid:token>
