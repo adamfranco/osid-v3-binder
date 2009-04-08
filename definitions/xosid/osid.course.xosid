@@ -16333,7 +16333,7 @@
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="registerForDeletedTopic">
+        <xosid:method xosid:name="registerForDeletedTopics">
             <xosid:description>
                 Registers for notification of deleted topics.
                
