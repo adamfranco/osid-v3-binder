@@ -42,6 +42,16 @@ all:
 binders:
 	(cd binder; make install)
 
+java:
+	(cd definitions; make validate)
+	(cd bindings/java; make bindings)
+	(cd bindings/java; make install)
+php:
+	(cd bindings/php; make clean)
+	(cd definitions; make validate)
+	(cd bindings/php; make bindings)
+	(cd bindings/php; make install)
+
 clean:
 	(cd bindings/java; make clean)	
 	(cd bindings/php; make clean)	
