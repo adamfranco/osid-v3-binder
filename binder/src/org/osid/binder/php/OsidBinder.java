@@ -305,6 +305,19 @@ public class OsidBinder
 	out.println("     *  @param optional int $code An error code for the Exception");
 	out.println("     */");
 	out.println("    public function __construct ($msg = null, $code = 0) {");
+
+	if (name.equals("osid_UnimplementedException")) {
+	    out.println("        if (is_null($msg)) {");
+	    out.println("            $trace = $this->getTrace();");
+	    out.println("            $msg = '';");
+	    out.println("            if ($trace[0]['class'])");
+	    out.println("                $msg .= $trace[0]['class'].'::';");
+	    out.println("            $msg .= $trace[0]['function'].'() is not implemented.';");
+	    out.println("        }");
+	    out.println();
+	}
+	
+	
 	out.println("        parent::__construct($msg, $code);");
 	out.println("        return;");
 	out.println("    }");
