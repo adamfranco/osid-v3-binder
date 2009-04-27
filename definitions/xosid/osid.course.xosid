@@ -7833,6 +7833,55 @@
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>
+        
+        <xosid:method xosid:name="getCoursesByTopic">
+            <xosid:description>
+            	WARNING: This method was not in the OSID trunk as of 2009-04-27.
+                A ticket requesting the addition of this method is available at:
+                http://oki.assembla.com/spaces/osid-dev/tickets/18-osid-course---No-way-to-map-Topics-to-Courses-or-CourseOfferings-
+                
+                Gets a <xosid:token>CourseList</xosid:token>
+                corresponding to the given topic
+                <xosid:token>Id </xosid:token>. In plenary mode, the
+                returned list contains all known courses or an error
+                results. Otherwise, the returned list may contain only
+                those courses that are accessible through this session.
+                In both cases, the order of the set is not specified.
+            </xosid:description>
+            <xosid:parameter xosid:name="topicId">
+                <xosid:interfaceType xosid:type="osid.id.Id"/>
+                <xosid:description>
+                    a topic id
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.course.CourseList"/>
+                <xosid:description>
+                    the returned <xosid:token>Course list</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>courseGenusType</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
 
         <xosid:method xosid:name="getCourses">
             <xosid:description>
@@ -10121,6 +10170,115 @@
                 <xosid:description>
                     <xosid:token>termId</xosid:token> or
                     <xosid:token>courseId</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+        
+        <xosid:method xosid:name="getCourseOfferingsByTopic">
+            <xosid:description>
+            	WARNING: This method was not in the OSID trunk as of 2009-04-27.
+                A ticket requesting the addition of this method is available at:
+                http://oki.assembla.com/spaces/osid-dev/tickets/18-osid-course---No-way-to-map-Topics-to-Courses-or-CourseOfferings-
+                
+                Gets all <xosid:token>CourseOfferings
+                </xosid:token>associated with a given
+                <xosid:token>Topic.</xosid:token> In plenary mode, the
+                returned list contains all known course offerings or an
+                error results. Otherwise, the returned list may contain
+                only those course offerings that are accessible through
+                this session. In both cases, the order of the set is
+                not specified.
+            </xosid:description>
+            <xosid:parameter xosid:name="topicId">
+                <xosid:interfaceType xosid:type="osid.id.Id"/>
+                <xosid:description>
+                    a topic <xosid:token>Id</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.course.CourseOfferingList"/>
+                <xosid:description>
+                    a list of
+                    <xosid:token>CoursesOfferings</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>topicId</xosid:token> is
+                    <xosid:token>null</xosid:token>
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:error xosid:type="PERMISSION_DENIED" xosid:category="User">
+                <xosid:description>
+                    authorization failure
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+        
+        <xosid:method xosid:name="getCourseOfferingsByTermByTopic">
+            <xosid:description>
+            	WARNING: This method was not in the OSID trunk as of 2009-04-27.
+                A ticket requesting the addition of this method is available at:
+                http://oki.assembla.com/spaces/osid-dev/tickets/18-osid-course---No-way-to-map-Topics-to-Courses-or-CourseOfferings-
+                
+                Gets all <xosid:token>CourseOfferings
+                </xosid:token>associated with a given
+                <xosid:token>Term</xosid:token> and a given <xosid:token>Topic</xosid:token>. 
+                In plenary mode, the
+                returned list contains all known course offerings or an
+                error results. Otherwise, the returned list may contain
+                only those course offerings that are accessible through
+                this session. In both cases, the order of the set is
+                not specified.
+            </xosid:description>
+            <xosid:parameter xosid:name="termId">
+                <xosid:interfaceType xosid:type="osid.id.Id"/>
+                <xosid:description>
+                    a term <xosid:token>Id</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:parameter xosid:name="topicId">
+                <xosid:interfaceType xosid:type="osid.id.Id"/>
+                <xosid:description>
+                    a topic <xosid:token>Id</xosid:token>
+                </xosid:description>
+            </xosid:parameter>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.course.CourseOfferingList"/>
+                <xosid:description>
+                    a list of
+                    <xosid:token>CoursesOfferings</xosid:token>
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="NULL_ARGUMENT" xosid:category="Integration">
+                <xosid:description>
+                    <xosid:token>termId</xosid:token> or <xosid:token>topicId</xosid:token> is
                     <xosid:token>null</xosid:token>
                 </xosid:description>
             </xosid:error>
@@ -19145,6 +19303,56 @@
                 </xosid:description>
             </xosid:compliance>
         </xosid:method>
+        
+        <xosid:method xosid:name="getTopicIds">
+            <xosid:description>
+            	WARNING: This method was not in the OSID trunk as of 2009-04-27.
+                A ticket requesting the addition of this method is available at:
+                http://oki.assembla.com/spaces/osid-dev/tickets/18-osid-course---No-way-to-map-Topics-to-Courses-or-CourseOfferings-
+                
+                Gets a list of the <xosid:token>Id</xosid:token>s of the
+                <xosid:token>Topic</xosid:token>s this course is associated with.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.id.IdList"/>
+                <xosid:description>
+                    the <xosid:token>Topic</xosid:token>
+                    <xosid:token>Id</xosid:token>s
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getTopics">
+            <xosid:description>
+                WARNING: This method was not in the OSID trunk as of 2009-04-27.
+                A ticket requesting the addition of this method is available at:
+                http://oki.assembla.com/spaces/osid-dev/tickets/18-osid-course---No-way-to-map-Topics-to-Courses-or-CourseOfferings-
+                
+                Gets the <xosid:token>Topic</xosid:token>s this course 
+                is associated with.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.course.TopicList"/>
+                <xosid:description>
+                    the topics
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
 
         <xosid:method xosid:name="getCourseRecord">
             <xosid:description>
@@ -20889,6 +21097,56 @@ while (cl.hasNext()) {
                 <xosid:interfaceType xosid:type="osid.course.Term"/>
                 <xosid:description>
                     the term
+                </xosid:description>
+            </xosid:return>
+            <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
+                <xosid:description>
+                    unable to complete request
+                </xosid:description>
+            </xosid:error>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+        
+        <xosid:method xosid:name="getTopicIds">
+            <xosid:description>
+            	WARNING: This method was not in the OSID trunk as of 2009-04-27.
+                A ticket requesting the addition of this method is available at:
+                http://oki.assembla.com/spaces/osid-dev/tickets/18-osid-course---No-way-to-map-Topics-to-Courses-or-CourseOfferings-
+                
+                Gets a list of the <xosid:token>Id</xosid:token>s of the
+                <xosid:token>Topic</xosid:token>s this offering is associated with.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.id.IdList"/>
+                <xosid:description>
+                    the <xosid:token>Topic</xosid:token>
+                    <xosid:token>Id</xosid:token>s
+                </xosid:description>
+            </xosid:return>
+            <xosid:compliance xosid:type="mandatory">
+                <xosid:description>
+                    This method must be implemented.
+                </xosid:description>
+            </xosid:compliance>
+        </xosid:method>
+
+        <xosid:method xosid:name="getTopics">
+            <xosid:description>
+                WARNING: This method was not in the OSID trunk as of 2009-04-27.
+                A ticket requesting the addition of this method is available at:
+                http://oki.assembla.com/spaces/osid-dev/tickets/18-osid-course---No-way-to-map-Topics-to-Courses-or-CourseOfferings-
+                
+                Gets the <xosid:token>Topic</xosid:token>s this offering 
+                is associated with.
+            </xosid:description>
+            <xosid:return>
+                <xosid:interfaceType xosid:type="osid.course.TopicList"/>
+                <xosid:description>
+                    the topics
                 </xosid:description>
             </xosid:return>
             <xosid:error xosid:type="OPERATION_FAILED" xosid:category="Operational">
