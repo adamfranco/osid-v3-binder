@@ -23942,7 +23942,7 @@ while (cl.hasNext()) {
                 Execute this search using a previous search result.
             </xosid:description>
             <xosid:parameter xosid:name="results">
-                <xosid:interfaceType xosid:type="osid.course.CourseSearchResults"/>
+                <xosid:interfaceType xosid:type="osid.course.CourseOfferingSearchResults"/>
                 <xosid:description>
                     results from a query
                 </xosid:description>
