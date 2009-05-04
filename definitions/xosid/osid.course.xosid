@@ -23965,7 +23965,7 @@ while (cl.hasNext()) {
             </xosid:compliance>
         </xosid:method>
 
-        <xosid:method xosid:name="searchAmongCourseOffering">
+        <xosid:method xosid:name="searchAmongCourseOfferings">
             <xosid:description>
                 Execute this search among the given list of course
                 offerings.
