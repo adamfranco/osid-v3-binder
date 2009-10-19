@@ -273,6 +273,12 @@ public class OsidBinder
 		out.println("require_once(dirname(__FILE__).\"/" + org.osid.binder.php.Interface.getFileName("osid.OsidException") + ".php\");");	
 	}
 	
+// Chained Exception Handling for PHP >= 5.3
+if (error.getCategory().equals("")) {
+	out.println("// Compatability with PHP >= 5.3");
+	out.println("if (method_exists('Exception', 'getPrevious')) {");
+}
+	
 	out.print("class " + name);
 	if (error.getCategory().equals("")) {
 	    out.println();
@@ -303,8 +309,9 @@ public class OsidBinder
 	out.println("     *  ");
 	out.println("     *  @param optional string $msg the error message");
 	out.println("     *  @param optional int $code An error code for the Exception");
+	out.println("     *  @param optional Exception $previous The cause of this exception.");
 	out.println("     */");
-	out.println("    public function __construct ($msg = null, $code = 0) {");
+	out.println("    public function __construct ($msg = null, $code = 0, $previous = null) {");
 
 	if (name.equals("osid_UnimplementedException")) {
 	    out.println("        if (is_null($msg)) {");
@@ -318,11 +325,64 @@ public class OsidBinder
 	}
 	
 	
-	out.println("        parent::__construct($msg, $code);");
+	out.println("        parent::__construct($msg, $code, $previous);");
 	out.println("        return;");
 	out.println("    }");
 
 	out.println("}");
+
+	if (error.getCategory().equals("")) {
+		// Chained Exception Handling for PHP < 5.3
+		out.println("}");
+		out.println("// Compatability with PHP < 5.3");
+		out.println("else {");
+		
+		out.println("class " + name);
+		if (name.equals("osid_OsidRuntimeException")) {
+		out.println("    extends RuntimeException");
+		} else {
+		out.println("    extends Exception");
+		}
+		
+		out.println("{");	    
+	
+	
+		out.println();
+	
+		out.println("    /**");
+		out.println("     *  Constructs a <code>" + name + "</code> with the specified");
+		out.println("     *  detail message. The error message string <code>msg</code> can");
+		out.println("     *  later be retrieved by the getMessage() method of ");
+		out.println("     *  {@link Exception}.");
+		out.println("     *  ");
+		out.println("     *  @param optional string $msg the error message");
+		out.println("     *  @param optional int $code An error code for the Exception");
+		out.println("     *  @param optional Exception $previous The cause of this exception.");
+		out.println("     */");
+		out.println("    public function __construct ($msg = null, $code = 0, $previous = null) {");
+		out.println("        parent::__construct($msg, $code);");
+		out.println("        $this->previous = $previous;");
+		out.println("        return;");
+		out.println("    }");
+	
+		out.println();
+		
+		out.println("    /**");
+		out.println("     *  Returns previous Exception. (Added for backwords compatability with PHP < 5.3)");
+		out.println("     *  ");
+		out.println("     *  @return mixed Exception or NULL.");
+		out.println("     */");
+		out.println("    public function getPrevious () {");
+		out.println("        return $this->previous;");
+		out.println("        return;");
+		out.println("    }");
+	
+		out.println("}");
+		
+		
+		out.println("}");
+	}
+	
 	out.close();
     }
 
